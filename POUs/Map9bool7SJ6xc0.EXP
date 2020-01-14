@@ -17,23 +17,32 @@ END_VAR
 IF  (eState = LOCAL OR eState = DEVICE_LOCAL) AND eAction = CONTROL THEN
 	RETURN;
 ELSE
-	IF xTrigger1THENx     Output1 := xInput1;
+	IF xTrigger1 THEN
+xOutput1 := xInput1;
 END_IF
-IF xTrigger2THENx     Output2 := xInput2;
+IF xTrigger2 THEN
+xOutput2 := xInput2;
 END_IF
-IF xTrigger3THENx     Output3 := xInput3;
+IF xTrigger3 THEN
+xOutput3 := xInput3;
 END_IF
-IF xTrigger4THENx     Output4 := xInput4;
+IF xTrigger4 THEN
+xOutput4 := xInput4;
 END_IF
-IF xTrigger5THENx     Output5 := xInput5;
+IF xTrigger5 THEN
+xOutput5 := xInput5;
 END_IF
-IF xTrigger6THENx     Output6 := xInput6;
+IF xTrigger6 THEN
+xOutput6 := xInput6;
 END_IF
-IF xTrigger7THENx     Output7 := xInput7;
+IF xTrigger7 THEN
+xOutput7 := xInput7;
 END_IF
-IF xTrigger8THENx     Output8 := xInput8;
+IF xTrigger8 THEN
+xOutput8 := xInput8;
 END_IF
-IF xTrigger9THENx     Output9 := xInput9;
+IF xTrigger9 THEN
+xOutput9 := xInput9;
 END_IF
 
 END_IF

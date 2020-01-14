@@ -5,12 +5,17 @@ from django.db import models
 class Map(models.Model):
     Version = models.CharField(max_length=255)
     VariableDeclaration = models.TextField(default="")
+    InputVariable = models.CharField(max_length=255, default="")
+    TriggerVariable = models.CharField(max_length=255, default="")
+    OutputVariable = models.CharField(max_length=255, default="")
     Code = models.TextField(default="")
 
 
 class Pack(models.Model):
     Version = models.CharField(max_length=255)
     VariableDeclaration = models.TextField(default="")
+    InputVariable = models.CharField(max_length=255, default="")
+    OutputVariable = models.CharField(max_length=255, default="")
     Code = models.TextField(default="")
 
 

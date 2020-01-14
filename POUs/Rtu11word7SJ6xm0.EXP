@@ -13,27 +13,28 @@ VAR_INPUT
                                                                                            (*input signals*)
     xSave1, xSave2, xSave3, xSave4, xSave5, xSave6, xSave7, xSave8, xSave9, xSave10, xSave11 : BOOL;                                                                             (*save signals*)
     sName1, sName2, sName3, sName4, sName5, sName6, sName7, sName8, sName9, sName10, sName11 : STRING;                                                                         (*name signals*)
+                                                                                               (*trigger signals*)
                                                                                                (*status com*)
 END_VAR
 VAR_OUTPUT
-                                                                                               (*output signals*)
     wOutput1, wOutput2, wOutput3, wOutput4, wOutput5, wOutput6, wOutput7, wOutput8, wOutput9, wOutput10, wOutput11: WORD;
-                                                                                           (*select*)
+                                                                                           (*output signals*)
+                                                                                               (*select*)
                                                                                                (*execute*)
 END_VAR
 VAR
-                                                                                          (*instances*)
-    sTime: STRING;
-    aSignals : ARRAY[1..inst0Map11word7SJ6xm0 : Map11word7SJ6xm0;
+    inst0Map11word7SJ6xm0 : Map11word7SJ6xm0;
 inst0Pack11word7SJ6xm0 : Pack11word7SJ6xm0;
 inst0Pack11bool7SJ6xm0 : Pack11bool7SJ6xm0;
 inst0Pack11string7SJ6xm0 : Pack11string7SJ6xm0;
 inst0Check11word7SJ6xm0 : Check11word7SJ6xm0;
-] OF 11;                                      (*number of signals | data type*)
-    aMaskChanges : ARRAY[1..WORD] OF BOOL;                  (*number of signals*)
+                                                                                      (*instances*)
+    sTime: STRING;
+    aSignals : ARRAY[1..11] OF WORD;                                      (*number of signals | data type*)
+    aMaskChanges : ARRAY[1..11] OF BOOL;                  (*number of signals*)
     aNames : ARRAY[1..11] OF STRING;                           (*number of signals*)
     aSaves : ARRAY[1..11] OF BOOL;                                 (*number of signals*)
-    11                                                                                      (*sbo internal variables*)
+                                                                                          (*sbo internal variables*)
 END_VAR
 (* @END_DECLARATION := '0' *)
 _FBD_BODY

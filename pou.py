@@ -2,6 +2,7 @@ import os
 import shutil
 from server_parts.models import Obj35mMeTe
 from codesys.models import Map, Pack, Check, Save, Sbo, Rotate, Rtu, FbdTemplate
+from codesys.models import Device as Dev
 from devs.models import Device
 
 # These lists were previously filled with the signal names in the server instance
@@ -214,8 +215,8 @@ def _map(device_name, data_type, num_objects, purpose, server_iteration):
     code = ""
     for i in range(num_objects):
         if purpose == 'c':
-            code += "IF xTrigger{}".format(i + 1) + "THEN"
-            code += input_dictionary[data_type.upper()] + "     Output{} := ".format(i + 1) + \
+            code += "IF xTrigger{} ".format(i + 1) + "THEN\n"
+            code += input_dictionary[data_type.upper()] + "Output{} := ".format(i + 1) + \
                     input_dictionary[data_type.upper()] + "Input{};\n".format(i + 1)
             code += "END_IF\n"
         else:
@@ -888,19 +889,18 @@ xSelect1\n""")
 
 
 def _device(device_operation, device_name, io_sequence, rtu_instance_list, server_iteration):
-    # create file
-    device_ = open(path + "\\DEV" + str(device_name) + str(server_iteration) + ".EXP", "w+")
+    # Obtain instance information
+    declaration_info = Dev.objects.filter(Version="devicev0").first().VariableDeclaration
+    fbd_header_info = FbdTemplate.objects.first().Header
 
-    # private headers
-    device_.write("""(* @NESTEDCOMMENTS := 'Yes' *)
-            (* @PATH := '\/SGL_Sismored\/Sismored 4.0\/Imported' *)
-            (* @OBJECTFLAGS := '0, 8' *)
-            (* @SYMFILEFLAGS := '2048' *)""")
-    device_.write("\n")
+    # Meta-data
+    pou_name = "Dev" + str(device_name) + str(server_iteration)
+
+    # create file
+    device_ = open(path + "\\" + pou_name + ".EXP", "w+")
 
     # variable definition
     # headers
-    pou_name = "Dev" + str(device_name) + str(server_iteration)
     headers = "FUNCTION_BLOCK " + pou_name + "\n"
     device_.write(headers)
 

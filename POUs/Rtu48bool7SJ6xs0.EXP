@@ -13,27 +13,28 @@ VAR_INPUT
                                                                                            (*input signals*)
     xSave1, xSave2, xSave3, xSave4, xSave5, xSave6, xSave7, xSave8, xSave9, xSave10, xSave11, xSave12, xSave13, xSave14, xSave15, xSave16, xSave17, xSave18, xSave19, xSave20, xSave21, xSave22, xSave23, xSave24, xSave25, xSave26, xSave27, xSave28, xSave29, xSave30, xSave31, xSave32, xSave33, xSave34, xSave35, xSave36, xSave37, xSave38, xSave39, xSave40, xSave41, xSave42, xSave43, xSave44, xSave45, xSave46, xSave47, xSave48 : BOOL;                                                                             (*save signals*)
     sName1, sName2, sName3, sName4, sName5, sName6, sName7, sName8, sName9, sName10, sName11, sName12, sName13, sName14, sName15, sName16, sName17, sName18, sName19, sName20, sName21, sName22, sName23, sName24, sName25, sName26, sName27, sName28, sName29, sName30, sName31, sName32, sName33, sName34, sName35, sName36, sName37, sName38, sName39, sName40, sName41, sName42, sName43, sName44, sName45, sName46, sName47, sName48 : STRING;                                                                         (*name signals*)
+                                                                                               (*trigger signals*)
                                                                                                (*status com*)
 END_VAR
 VAR_OUTPUT
-                                                                                               (*output signals*)
     xOutput1, xOutput2, xOutput3, xOutput4, xOutput5, xOutput6, xOutput7, xOutput8, xOutput9, xOutput10, xOutput11, xOutput12, xOutput13, xOutput14, xOutput15, xOutput16, xOutput17, xOutput18, xOutput19, xOutput20, xOutput21, xOutput22, xOutput23, xOutput24, xOutput25, xOutput26, xOutput27, xOutput28, xOutput29, xOutput30, xOutput31, xOutput32, xOutput33, xOutput34, xOutput35, xOutput36, xOutput37, xOutput38, xOutput39, xOutput40, xOutput41, xOutput42, xOutput43, xOutput44, xOutput45, xOutput46, xOutput47, xOutput48: BOOL;
-                                                                                           (*select*)
+                                                                                           (*output signals*)
+                                                                                               (*select*)
                                                                                                (*execute*)
 END_VAR
 VAR
-                                                                                          (*instances*)
-    sTime: STRING;
-    aSignals : ARRAY[1..inst0Map48bool7SJ6xs0 : Map48bool7SJ6xs0;
+    inst0Map48bool7SJ6xs0 : Map48bool7SJ6xs0;
 inst0Pack48bool7SJ6xs0 : Pack48bool7SJ6xs0;
 inst0Pack48bool7SJ6xs0 : Pack48bool7SJ6xs0;
 inst0Pack48string7SJ6xs0 : Pack48string7SJ6xs0;
 inst0Check48bool7SJ6xs0 : Check48bool7SJ6xs0;
-] OF 48;                                      (*number of signals | data type*)
-    aMaskChanges : ARRAY[1..BOOL] OF BOOL;                  (*number of signals*)
+                                                                                      (*instances*)
+    sTime: STRING;
+    aSignals : ARRAY[1..48] OF BOOL;                                      (*number of signals | data type*)
+    aMaskChanges : ARRAY[1..48] OF BOOL;                  (*number of signals*)
     aNames : ARRAY[1..48] OF STRING;                           (*number of signals*)
     aSaves : ARRAY[1..48] OF BOOL;                                 (*number of signals*)
-    48                                                                                      (*sbo internal variables*)
+                                                                                          (*sbo internal variables*)
 END_VAR
 (* @END_DECLARATION := '0' *)
 _FBD_BODY
