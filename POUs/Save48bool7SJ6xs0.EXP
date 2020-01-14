@@ -1,0 +1,81 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/Imported' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTION Save48bool7SJ6xs0 : BOOL                                                 (*pou name*)
+VAR_INPUT
+        xFirstCycle : BOOL;
+        iSequenceOrder : INT;
+        iNumSignals : INT;
+        sProtocol : STRING;
+        sTime: STRING;
+        aSignals : ARRAY[1..48] OF BOOL;                          (*number of signals | data type*)
+        aNames : ARRAY[1..48] OF STRING;               (*number of signals*)
+        aMaskChanges : ARRAY[1..48] OF BOOL;      (*number of signals*)
+        aSaves : ARRAY[1..48] OF BOOL;                     (*number of signals*)
+END_VAR
+VAR
+        iOffset : INT;
+        iN : INT;
+        (*Strings for datalogging*)
+        sPowerOnPrefix : STRING :=  '#';
+        sPrefixUnderline : STRING :=  '_';
+        sDelimiter : STRING := '$T';
+        sObjectvalue : STRING;
+        sPrefix : STRING;
+        (*File management variables*)
+        dwFile : DWORD;
+        Closed : BOOL;
+        wNewLine : WORD:= 2573;                              (*16#0A0D*)
+                                                                                   (*hysteresis definition*)
+                                                                                   (*last values array for hysteresis purpose*)
+END_VAR
+(* @END_DECLARATION := '0' *)
+dwFile:= SysFileOpen(sPathMeasureLog,'a');
+
+iOffset := iSequenceOrder * iNumSignals;
+sProtocol := CONCAT(sProtocol, sPrefixUnderline);
+sPrefix := CONCAT(sProtocol,  INT_TO_STRING(iSequenceOrder));
+
+IF xFirstCycle THEN
+    FOR iN := 1 TO iNumSignals BY 1 DO
+        IF aSaves[iN] THEN
+                                                                                                                                    (*save last value*)
+            sObjectvalue := BOOL_TO_STRING(aSignals[iN]);                                           (*data type*)
+            (*Write to datalogger*)
+            SysFileWrite(dwFile,ADR(sTime),LEN(sTime));
+            SysFileWrite(dwFile,ADR(sDelimiter),LEN(sDelimiter));
+            SysFileWrite(dwFile,ADR(sPrefix),LEN(sPrefix));
+            SysFileWrite(dwFile,ADR(sDelimiter),LEN(sDelimiter));
+            SysFileWrite(dwFile,ADR(sPowerOnPrefix),LEN(sPowerOnPrefix));
+            SysFileWrite(dwFile,ADR(aNames[iN]),LEN(aNames[iN]));
+            SysFileWrite(dwFile,ADR(sDelimiter),LEN(sDelimiter));
+            SysFileWrite(dwFile,ADR(sObjectvalue),LEN(sObjectvalue));
+            SysFileWrite(dwFile,ADR(wNewLine),SIZEOF(wNewLine));
+        END_IF
+    END_FOR
+ELSE
+    FOR iN := 1 TO iNumSignals BY 1 DO
+        IF aSaves[iN] THEN
+            IF aMaskChanges[iN] = 1 THEN
+                                                                                                                                    (*hyteresis definition*)
+                    sObjectvalue := WORD_TO_STRING(aSignals[iN]);
+                    (*Write to datalogger*)
+                    SysFileWrite(dwFile,ADR(sTime),LEN(sTime));
+                    SysFileWrite(dwFile,ADR(sDelimiter),LEN(sDelimiter));
+                    SysFileWrite(dwFile,ADR(sPrefix),LEN(sPrefix));
+                    SysFileWrite(dwFile,ADR(sDelimiter),LEN(sDelimiter));
+                    SysFileWrite(dwFile,ADR(aNames[iN]),LEN(aNames[iN]));
+                    SysFileWrite(dwFile,ADR(sDelimiter),LEN(sDelimiter));
+                    SysFileWrite(dwFile,ADR(sDelimiter),LEN(sDelimiter));
+                    SysFileWrite(dwFile,ADR(sObjectvalue),LEN(sObjectvalue));
+                    SysFileWrite(dwFile,ADR(wNewLine),SIZEOF(wNewLine));
+                                                                                                                                    (*hysteresis definition*)
+            END_IF
+        END_IF
+    END_FOR
+END_IF
+
+Closed := SysFileClose(dwFile);
+Save48bool7SJ6xs0 := TRUE;                                                                                                                    (*pou name*)
+END_FUNCTION_BLOCK

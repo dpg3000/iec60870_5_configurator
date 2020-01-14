@@ -1,0 +1,141 @@
+{% extends 'admin/base.html'%}
+{% load static %}
+{% load i18n static %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block extrahead %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static "devs/configuration.js" %}"></script>
+{% endblock %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "devs/configuration.css" %}">
+{% endblock %}
+
+
+
+{% block branding %}
+    <div>
+        <h1>XML Configurator</h1>
+    </div>
+{% endblock %}
+
+{% block content_title %}
+    <h1>Site configuration</h1>
+{% endblock %}
+
+{% block content %}
+    <form id="form-data" action="submit/" method="POST" id="form">
+        {% csrf_token %}
+        <div id="content-main">
+            <div class="app-centers module">
+                <table>
+                    <caption>
+                        <a href="" class="section">CENTERS</a>
+                    </caption>
+                    <tbody>
+                        <tr class="model-center">
+                            <th scope="row">
+                                <a href="">Centers</a>
+                            </th>
+                            <td>
+                                <button type="button" id="add-center-btn" class="addlink btn" disabled="disabled">Add</button>
+                            </td>
+                            <td>
+                                <button type="button" id="remove-center-btn" class="changelink btn" disabled="disabled">Remove</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="module">
+                <div id="repeat-center-1" class="repeat-center">
+                    <table id="table-cards">
+                        <tbody id="body-cards">
+                            <tr id="row-center">
+                                <th scope="row">
+                                    <a href="">Center name</a>
+                                </th>
+                                <td id="cell-center-name">
+                                    <input type="text" name="center_name" id="center-name">
+                                </td>
+                            </tr>
+                            <tr id="row-cards">
+                                <th scope="row">
+                                    <a href="">Cards</a>
+                                </th>
+                                <td></td>
+                                <td id="cell-cards">
+                                    <input type="checkbox" class="enable-cards" name="cards" value="isCards">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="enable-cards-section">
+                        <div id="repeat-card-1" class="repeat-card">
+                            <br>
+                            <select class="selector-card" name="card[]">
+                                <option value="Please Select {exclude}" disabled="disabled">--Select--</option>
+                                    {% for item in cards %}
+                                        <option value="{{item.Name}}">{{item.Name}}</option>
+                                    {% endfor %}
+                            </select>
+                            <input class="selector-num-card" type="number" name="card_quantity[]" value="1" min="1">
+                            <input type="checkbox" id="add-card-server" name="add_card_server" value="isServer" checked>
+                            <span id="text-add-card-server">Server</span>
+                            <input type="checkbox" id="add-card-io" name="add_card_io" value="isIO" checked>
+                            <span id="text-add-card-io">I/O</span>
+                        </div>
+                        <button type="button" id="add-card-btn" class="addlink btn adders">Add</button>
+                        <button type="button" id="remove-card-btn" class="changelink btn removers" disabled="disabled">Remove</button>
+                    </div>
+                    <table id="table-devices">
+                        <tbody id="body-devices">
+                            <tr id="row-devices">
+                                <th scope="row">
+                                    <a href="">Devices</a>
+                                </th>
+                                <td id="cell-devices">
+                                    <input type="checkbox" class="enable-devices" name="devices" value="isDevices">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="enable-devices-section">
+                        <div id="repeat-device-1" class="repeat-device">
+                            <br>
+                            <select class="selector-device" name="device[]">
+                                <option value="Please Select {exclude}" disabled="disabled">--Select--</option>
+                                {% for item in devices %}
+                                    <option value="{{item.Name}}">{{item.Name}}</option>
+                                {% endfor %}
+                            </select>
+                            <select class="selector-operation" name="operation[]">
+                                <option value="Please Select {exclude}" disabled="disabled">--Select--</option>
+                                <option value="DO">DO</option>
+                                <option value="SBO">SBO</option>
+                            </select>
+                            <input class="selector-num-device" type="number" name="device_quantity[]" value="1" min="1">
+                            <input type="checkbox" id="add-device-server" name="add_device_server" value="isServer" checked>
+                            <span id="text-add-device-server">Server</span>
+                            <input type="checkbox" id="add-device-client" name="add_device_client" value="isClient">
+                            <span id="text-add-device-client">Client</span>
+                        </div>
+                        <button type="button" id="add-device-btn" class="addlink btn adders">Add</button>
+                        <button type="button" id="remove-device-btn" class="changelink btn removers" disabled="disabled">Remove</button>
+                    </div>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="hidden-devices-num" name="devices_num" value="{{devices_num}}">
+        <input type="hidden" id="hidden-cards-num" name="cards_num" value="{{cards_num}}">
+        <input type="hidden" id="hidden-request-data" name="request-data" value="">
+        <input type="submit" id="generate" value="Generate" disabled>
+    </form>
+{% endblock %}

@@ -1,0 +1,1135 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+                (* @PATH := '\/SGL_Sismored\/Sismored 4.0\/Imported' *)
+                (* @OBJECTFLAGS := '0, 8' *)
+                (* @SYMFILEFLAGS := '2048' *)
+PROGRAM USER_PRG
+VAR
+inst0Dev7SJ6x0: Dev7SJ6x0;
+END_VAR
+(* @END_DECLARATION := '0' *)
+_FBD_BODY
+_NETWORKS : 1
+_NETWORK
+            _COMMENT
+            ''
+            _END_COMMENT
+            _ASSIGN
+            _FUNCTIONBLOCK
+inst0Dev7SJ6x0
+_BOX_EXPR : 209
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IR'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IS'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IT'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'I0'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'VRS'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'VST'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'VTR'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'P'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'Q'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'Frec'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'CosPhi'
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'MandoLocalRemotoDispositivo0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'MandoLocalRemotoDispositivo1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DeviceOK0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DeviceOK1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'BloqREDispositivo0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'BloqREDispositivo1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ActiveRE0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ActiveRE1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'NotReadyRE0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'NotReadyRE1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'InProgressRE0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'InProgressRE1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DispFinRE0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DispFinRE1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPickup0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPickup1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralTrip0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'TempPhaseTrip0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'TempPhaseTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'InstPhaseTrip1_0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'InstPhaseTrip1_1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'InstPhaseTrip2_0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'InstPhaseTrip2_1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'TempGndTrip0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'TempGndTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'InstGndTrip1_0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'InstGndTrip1_1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'InstGndTrip2_0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'InstGndTrip2_1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ActiveDirPhaseTrip0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ActiveDirPhaseTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DirPhaseTrip1_0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DirPhaseTrip1_1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DirPhaseTrip2_0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DirPhaseTrip2_1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ActiveDirGndTrip0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ActiveDirGndTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DirGndTrip1_0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DirGndTrip1_1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DirGndTrip2_0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DirGndTrip2_1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'SensGndForwardPickup0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'SensGndForwardPickup1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'SensGndReversePickup0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'SensGndReversePickup1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'SensGndUndefPickup0'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'SensGndUndefPickup1'
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_OpenCell_0_7SJ
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_CloseCell_0_7SJ
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_ExecuteCellSwitch_0_7SJ
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_RemoteDesbloqREDispositivo_0_7SJ
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_RemoteBloqREDispositivo_0_7SJ
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_ExecuteRemoteBloqREDispositivo_0_7SJ
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_OpenGndSwitch_0_7SJ
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_CloseGndSwitch_0_7SJ
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_ExecuteGndSwitch_0_7SJ
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'OpenCell'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'CloseCell'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'ExecuteCellSwitch'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'RemoteDesbloqREDispositivo'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'RemoteBloqREDispositivo'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'ExecuteRemoteBloqREDispositivo'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'OpenGndSwitch'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'CloseGndSwitch'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'ExecuteGndSwitch'
+_EXPRESSION
+            _POSITIV
+Dev7SJ6x0
+_OUTPUTS : 67
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_IS_0_7SJ
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_IT_0_7SJ
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_I0_0_7SJ
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_VRS_0_7SJ
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_VST_0_7SJ
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_VTR_0_7SJ
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_P_0_7SJ
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_Q_0_7SJ
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_Frec_0_7SJ
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_CosPhi_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_MandoLocalRemotoDispositivo0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_MandoLocalRemotoDispositivo1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_DeviceOK0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_DeviceOK1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_BloqREDispositivo0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_BloqREDispositivo1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ActiveRE0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ActiveRE1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_NotReadyRE0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_NotReadyRE1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_InProgressRE0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_InProgressRE1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_DispFinRE0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_DispFinRE1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralPickup0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralPickup1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralTrip0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralTrip1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_TempPhaseTrip0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_TempPhaseTrip1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_InstPhaseTrip1_0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_InstPhaseTrip1_1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_InstPhaseTrip2_0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_InstPhaseTrip2_1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_TempGndTrip0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_TempGndTrip1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_InstGndTrip1_0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_InstGndTrip1_1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_InstGndTrip2_0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_InstGndTrip2_1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ActiveDirPhaseTrip0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ActiveDirPhaseTrip1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_DirPhaseTrip1_0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_DirPhaseTrip1_1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_DirPhaseTrip2_0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_DirPhaseTrip2_1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ActiveDirGndTrip0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ActiveDirGndTrip1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_DirGndTrip1_0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_DirGndTrip1_1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_DirGndTrip2_0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_DirGndTrip2_1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_SensGndForwardPickup0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_SensGndForwardPickup1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_SensGndReversePickup0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_SensGndReversePickup1_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_SensGndUndefPickup0_0_7SJ
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_SensGndUndefPickup1_0_7SJ
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_EXPRESSION
+            _POSITIV
+            _OUTPUTS : 1
+            _OUTPUT
+            _POSITIV
+            _NO_SET
+sgl104_S0_IR_0_7SJ
+END_FUNCTION_BLOCK

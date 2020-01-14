@@ -1,0 +1,29 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/Imported' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTION_BLOCK Check11word7SJ6xm0
+VAR_INPUT
+	aValues : ARRAY [1..11] OF WORD;
+END_VAR
+VAR_OUTPUT
+	aMaskValues : ARRAY [1..11] OF BOOL;
+	sTime: STRING;
+END_VAR
+VAR
+	iN : INT;
+	aLastValues : ARRAY[1..11] OF WORD;
+END_VAR
+(* @END_DECLARATION := '0' *)
+sTime := TimeAsString();
+
+FOR iN := 1 TO 11 BY 1 DO
+	IF aValues[iN] <> aLastValues[iN] THEN
+		aMaskValues[iN] := TRUE;
+	ELSE
+		aMaskValues[iN] := FALSE;
+	END_IF
+END_FOR
+
+aLastValues := aValues;
+END_FUNCTION_BLOCK

@@ -1,0 +1,45 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/Imported' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTION_BLOCK Map11word7SJ6xm0
+VAR_INPUT
+	xFirstCycle : BOOL;
+	eAction		:	eActions;
+	eState		:	eStates;
+	wInput1, wInput2, wInput3, wInput4, wInput5, wInput6, wInput7, wInput8, wInput9, wInput10, wInput11: WORD;
+END_VAR
+VAR_OUTPUT
+	wOutput1, wOutput2, wOutput3, wOutput4, wOutput5, wOutput6, wOutput7, wOutput8, wOutput9, wOutput10, wOutput11: WORD;
+END_VAR
+(* @END_DECLARATION := '0' *)
+IF xFirstCycle THEN
+	wOutput1 := wInput1;
+wOutput2 := wInput2;
+wOutput3 := wInput3;
+wOutput4 := wInput4;
+wOutput5 := wInput5;
+wOutput6 := wInput6;
+wOutput7 := wInput7;
+wOutput8 := wInput8;
+wOutput9 := wInput9;
+wOutput10 := wInput10;
+wOutput11 := wInput11;
+
+ELSIF  (eState = LOCAL OR eState = DEVICE_LOCAL) AND eAction = CONTROL THEN
+	RETURN;
+ELSE
+	wOutput1 := wInput1;
+wOutput2 := wInput2;
+wOutput3 := wInput3;
+wOutput4 := wInput4;
+wOutput5 := wInput5;
+wOutput6 := wInput6;
+wOutput7 := wInput7;
+wOutput8 := wInput8;
+wOutput9 := wInput9;
+wOutput10 := wInput10;
+wOutput11 := wInput11;
+
+END_IF
+END_FUNCTION_BLOCK

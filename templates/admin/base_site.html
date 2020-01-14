@@ -1,0 +1,13 @@
+{% extends 'admin/base.html'%}
+
+{% block branding %}
+    <div>
+        <h1>Django administration</h1>
+    </div>
+{% endblock %}
+
+{% block userlinks %}
+    {{block.super}}
+    / <a href="/configurator">Configurator</a>
+{% endblock %}
+

@@ -1,0 +1,384 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/Imported' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTION_BLOCK Rtu9bool7SJ6xc0
+VAR_INPUT
+    xFirstCycle : BOOL;
+    iSequenceOrder: INT;
+    sProtocol: STRING;
+    eState: eStates;
+    eAction: eActions;
+    xInput1, xInput2, xInput3, xInput4, xInput5, xInput6, xInput7, xInput8, xInput9: BOOL;
+                                                                                           (*input signals*)
+    xSave1, xSave2, xSave3, xSave4, xSave5, xSave6, xSave7, xSave8, xSave9 : BOOL;                                                                             (*save signals*)
+    sName1, sName2, sName3, sName4, sName5, sName6, sName7, sName8, sName9 : STRING;                                                                         (*name signals*)
+                                                                                               (*status com*)
+END_VAR
+VAR_OUTPUT
+    xOutput1, xOutput2, xOutput3, xOutput4, xOutput5, xOutput6, xOutput7, xOutput8, xOutput9: BOOL;
+                                                                                           (*output signals*)
+                                                                                               (*select*)
+                                                                                               (*execute*)
+END_VAR
+VAR
+    inst0Map9bool7SJ6xc0 : Map9bool7SJ6xc0;
+inst0Pack9bool7SJ6xc0 : Pack9bool7SJ6xc0;
+inst0Pack9bool7SJ6xc0 : Pack9bool7SJ6xc0;
+inst0Pack9string7SJ6xc0 : Pack9string7SJ6xc0;
+inst0Check9bool7SJ6xc0 : Check9bool7SJ6xc0;
+                                                                                      (*instances*)
+    sTime: STRING;
+    aSignals : ARRAY[1..9] OF BOOL;                                      (*number of signals | data type*)
+    aMaskChanges : ARRAY[1..9] OF BOOL;                  (*number of signals*)
+    aNames : ARRAY[1..9] OF STRING;                           (*number of signals*)
+    aSaves : ARRAY[1..9] OF BOOL;                                 (*number of signals*)
+                                                                                          (*sbo internal variables*)
+END_VAR
+(* @END_DECLARATION := '0' *)
+_FBD_BODY
+_NETWORKS : 6
+_NETWORK
+_COMMENT
+''
+_END_COMMENT
+_ASSIGN
+_FUNCTIONBLOCK
+inst0Map9bool7SJ6xc0
+_BOX_EXPR : 12
+_OPERAND
+_EXPRESSION
+_POSITIV
+xFirstCycle
+_OPERAND
+_EXPRESSION
+_POSITIV
+eAction
+_OPERAND
+_EXPRESSION
+_POSITIV
+eState
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput1
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput2
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput3
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput4
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput5
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput6
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput7
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput8
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput9
+_EXPRESSION
+_POSITIV
+Map9bool7SJ6xc0
+_OUTPUTS : 8
+_OUTPUT
+_POSITIV
+_NO_SET
+xOutput2
+_OUTPUT
+_POSITIV
+_NO_SET
+xOutput3
+_OUTPUT
+_POSITIV
+_NO_SET
+xOutput4
+_OUTPUT
+_POSITIV
+_NO_SET
+xOutput5
+_OUTPUT
+_POSITIV
+_NO_SET
+xOutput6
+_OUTPUT
+_POSITIV
+_NO_SET
+xOutput7
+_OUTPUT
+_POSITIV
+_NO_SET
+xOutput8
+_OUTPUT
+_POSITIV
+_NO_SET
+xOutput9
+_EXPRESSION
+_POSITIV
+_OUTPUTS : 1
+_OUTPUT
+_POSITIV
+_NO_SET
+xOutput1
+_NETWORK
+_COMMENT
+''
+_END_COMMENT
+_ASSIGN
+_FUNCTIONBLOCK
+inst0Pack9bool7SJ6xc0
+_BOX_EXPR : 9
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput1
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput2
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput3
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput4
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput5
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput6
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput7
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput8
+_OPERAND
+_EXPRESSION
+_POSITIV
+xInput9
+
+_EXPRESSION
+_POSITIV
+Pack9bool7SJ6xc0
+_OUTPUTS : 0
+_EXPRESSION
+_POSITIV
+
+_OUTPUTS : 1
+OUTPUT
+_POSITIV
+_NO_SET
+aSignals
+_NETWORK
+_COMMENT
+''
+_END_COMMENT
+_ASSIGN
+_FUNCTIONBLOCK
+inst0Pack9bool7SJ6xc0
+_BOX_EXPR : 9
+_OPERAND
+_EXPRESSION
+_POSITIV
+xSave1
+_OPERAND
+_EXPRESSION
+_POSITIV
+xSave2
+_OPERAND
+_EXPRESSION
+_POSITIV
+xSave3
+_OPERAND
+_EXPRESSION
+_POSITIV
+xSave4
+_OPERAND
+_EXPRESSION
+_POSITIV
+xSave5
+_OPERAND
+_EXPRESSION
+_POSITIV
+xSave6
+_OPERAND
+_EXPRESSION
+_POSITIV
+xSave7
+_OPERAND
+_EXPRESSION
+_POSITIV
+xSave8
+_OPERAND
+_EXPRESSION
+_POSITIV
+xSave9
+
+_EXPRESSION
+_POSITIV
+Pack9bool7SJ6xc0
+_OUTPUTS : 0
+_EXPRESSION
+_POSITIV
+
+_OUTPUTS : 1
+OUTPUT
+_POSITIV
+_NO_SET
+aSaves
+_NETWORK
+_COMMENT
+''
+_END_COMMENT
+_ASSIGN
+_FUNCTIONBLOCK
+inst0Pack9string7SJ6xc0
+_BOX_EXPR : 9
+_OPERAND
+_EXPRESSION
+_POSITIV
+sName1
+_OPERAND
+_EXPRESSION
+_POSITIV
+sName2
+_OPERAND
+_EXPRESSION
+_POSITIV
+sName3
+_OPERAND
+_EXPRESSION
+_POSITIV
+sName4
+_OPERAND
+_EXPRESSION
+_POSITIV
+sName5
+_OPERAND
+_EXPRESSION
+_POSITIV
+sName6
+_OPERAND
+_EXPRESSION
+_POSITIV
+sName7
+_OPERAND
+_EXPRESSION
+_POSITIV
+sName8
+_OPERAND
+_EXPRESSION
+_POSITIV
+sName9
+
+_EXPRESSION
+_POSITIV
+Pack9string7SJ6xc0
+_OUTPUTS : 0
+_EXPRESSION
+_POSITIV
+
+_OUTPUTS : 1
+OUTPUT
+_POSITIV
+_NO_SET
+aNames
+_NETWORK
+_COMMENT
+''
+_END_COMMENT
+_ASSIGN
+_FUNCTIONBLOCK
+inst0Check9bool7SJ6xc0
+_BOX_EXPR : 1
+_OPERAND
+_EXPRESSION
+_POSITIV
+aSignals
+_EXPRESSION
+_POSITIV
+Check9bool7SJ6xc0
+_OUTPUTS : 1
+_OUTPUT
+_POSITIV
+_NO_SET
+sTime
+_EXPRESSION
+_POSITIV
+_OUTPUTS : 1
+_OUTPUT
+_POSITIV
+_NO_SET
+aMaskChanges
+_NETWORK
+
+_COMMENT
+''
+_END_COMMENT
+_FUNCTION
+_BOX_EXPR : 9
+_OPERAND
+_EXPRESSION
+_POSITIV
+xFirstCycle
+_OPERAND
+_EXPRESSION
+_POSITIV
+iSequenceOrder
+_OPERAND
+_EXPRESSION
+_POSITIV
+9
+_OPERAND
+_EXPRESSION
+_POSITIV
+sProtocol
+_OPERAND
+_EXPRESSION
+_POSITIV
+sTime
+_OPERAND
+_EXPRESSION
+_POSITIV
+aSignals
+_OPERAND
+_EXPRESSION
+_POSITIV
+aNames
+_OPERAND
+_EXPRESSION
+_POSITIV
+aMaskChanges
+_OPERAND
+_EXPRESSION
+_POSITIV
+aSaves
+_EXPRESSION
+_POSITIV
+Save9bool7SJ6xc0
+END_FUNCTION_BLOCK

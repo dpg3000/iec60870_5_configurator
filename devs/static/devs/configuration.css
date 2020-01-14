@@ -1,0 +1,105 @@
+.btn {
+    border: none;
+    color: #447e9b;
+    text-decoration: none;
+}
+
+.btn:focus, .btn:hover {
+    color: #036;
+    outline:0;
+}
+
+.btn:focus {
+    text-decoration: underline;
+}
+
+.enable-cards-section {
+    display: none;
+}
+
+.enable-devices-section {
+    display: none;
+}
+
+.adders {
+    position: relative;
+    left: 460px;
+    bottom: 27px;
+}
+
+.removers {
+    position: relative;
+    left: 475px;
+    bottom: 27px;
+}
+
+#center-name {
+    position: relative;
+    left: 30px;
+}
+
+.repeat-card {
+    position: relative;
+    left: 15px;
+}
+
+.repeat-device {
+    position: relative;
+    left: 15px;
+}
+
+.selector-operation {
+    position: relative;
+    left: 10px;
+    width: 65px;
+}
+
+input[type="number"] {
+    position: relative;
+    left: 20px;
+    width: 50px;
+}
+
+select {
+    width: 130px;
+}
+
+#add-card-server {
+    position: relative;
+    left: 40px;
+}
+
+#add-card-io {
+    position: relative;
+    left: 60px;
+}
+
+#add-device-server {
+    position: relative;
+    left: 33px;
+}
+
+#add-device-client {
+    position: relative;
+    left: 44px;
+}
+
+#text-add-card-server {
+    position: relative;
+    left: 40px;
+}
+
+#text-add-card-io {
+    position: relative;
+    left: 60px;
+}
+
+#text-add-device-server {
+    position: relative;
+    left: 33px;
+}
+
+#text-add-device-client {
+    position: relative;
+    left: 44px;
+}
