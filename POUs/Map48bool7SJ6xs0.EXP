@@ -8,62 +8,13 @@ VAR_INPUT
 	eAction		:	eActions;
 	eState		:	eStates;
 	xInput1, xInput2, xInput3, xInput4, xInput5, xInput6, xInput7, xInput8, xInput9, xInput10, xInput11, xInput12, xInput13, xInput14, xInput15, xInput16, xInput17, xInput18, xInput19, xInput20, xInput21, xInput22, xInput23, xInput24, xInput25, xInput26, xInput27, xInput28, xInput29, xInput30, xInput31, xInput32, xInput33, xInput34, xInput35, xInput36, xInput37, xInput38, xInput39, xInput40, xInput41, xInput42, xInput43, xInput44, xInput45, xInput46, xInput47, xInput48: BOOL;
+        
 END_VAR
 VAR_OUTPUT
 	xOutput1, xOutput2, xOutput3, xOutput4, xOutput5, xOutput6, xOutput7, xOutput8, xOutput9, xOutput10, xOutput11, xOutput12, xOutput13, xOutput14, xOutput15, xOutput16, xOutput17, xOutput18, xOutput19, xOutput20, xOutput21, xOutput22, xOutput23, xOutput24, xOutput25, xOutput26, xOutput27, xOutput28, xOutput29, xOutput30, xOutput31, xOutput32, xOutput33, xOutput34, xOutput35, xOutput36, xOutput37, xOutput38, xOutput39, xOutput40, xOutput41, xOutput42, xOutput43, xOutput44, xOutput45, xOutput46, xOutput47, xOutput48: BOOL;
 END_VAR
 (* @END_DECLARATION := '0' *)
-IF xFirstCycle THEN
-	xOutput1 := xInput1;
-xOutput2 := xInput2;
-xOutput3 := xInput3;
-xOutput4 := xInput4;
-xOutput5 := xInput5;
-xOutput6 := xInput6;
-xOutput7 := xInput7;
-xOutput8 := xInput8;
-xOutput9 := xInput9;
-xOutput10 := xInput10;
-xOutput11 := xInput11;
-xOutput12 := xInput12;
-xOutput13 := xInput13;
-xOutput14 := xInput14;
-xOutput15 := xInput15;
-xOutput16 := xInput16;
-xOutput17 := xInput17;
-xOutput18 := xInput18;
-xOutput19 := xInput19;
-xOutput20 := xInput20;
-xOutput21 := xInput21;
-xOutput22 := xInput22;
-xOutput23 := xInput23;
-xOutput24 := xInput24;
-xOutput25 := xInput25;
-xOutput26 := xInput26;
-xOutput27 := xInput27;
-xOutput28 := xInput28;
-xOutput29 := xInput29;
-xOutput30 := xInput30;
-xOutput31 := xInput31;
-xOutput32 := xInput32;
-xOutput33 := xInput33;
-xOutput34 := xInput34;
-xOutput35 := xInput35;
-xOutput36 := xInput36;
-xOutput37 := xInput37;
-xOutput38 := xInput38;
-xOutput39 := xInput39;
-xOutput40 := xInput40;
-xOutput41 := xInput41;
-xOutput42 := xInput42;
-xOutput43 := xInput43;
-xOutput44 := xInput44;
-xOutput45 := xInput45;
-xOutput46 := xInput46;
-xOutput47 := xInput47;
-xOutput48 := xInput48;
-
-ELSIF  (eState = LOCAL OR eState = DEVICE_LOCAL) AND eAction = CONTROL THEN
+IF  (eState = LOCAL OR eState = DEVICE_LOCAL) AND eAction = CONTROL THEN
 	RETURN;
 ELSE
 	xOutput1 := xInput1;

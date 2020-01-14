@@ -16,142 +16,156 @@ VAR_INPUT
                                                                                                (*status com*)
 END_VAR
 VAR_OUTPUT
+                                                                                               (*output signals*)
     wOutput1, wOutput2, wOutput3, wOutput4, wOutput5, wOutput6, wOutput7, wOutput8, wOutput9, wOutput10, wOutput11: WORD;
-                                                                                           (*output signals*)
-                                                                                               (*select*)
+                                                                                           (*select*)
                                                                                                (*execute*)
 END_VAR
 VAR
-    inst0Map11word7SJ6xm0 : Map11word7SJ6xm0;
+                                                                                          (*instances*)
+    sTime: STRING;
+    aSignals : ARRAY[1..inst0Map11word7SJ6xm0 : Map11word7SJ6xm0;
 inst0Pack11word7SJ6xm0 : Pack11word7SJ6xm0;
 inst0Pack11bool7SJ6xm0 : Pack11bool7SJ6xm0;
 inst0Pack11string7SJ6xm0 : Pack11string7SJ6xm0;
 inst0Check11word7SJ6xm0 : Check11word7SJ6xm0;
-                                                                                      (*instances*)
-    sTime: STRING;
-    aSignals : ARRAY[1..11] OF WORD;                                      (*number of signals | data type*)
-    aMaskChanges : ARRAY[1..11] OF BOOL;                  (*number of signals*)
+] OF 11;                                      (*number of signals | data type*)
+    aMaskChanges : ARRAY[1..WORD] OF BOOL;                  (*number of signals*)
     aNames : ARRAY[1..11] OF STRING;                           (*number of signals*)
     aSaves : ARRAY[1..11] OF BOOL;                                 (*number of signals*)
-                                                                                          (*sbo internal variables*)
+    11                                                                                      (*sbo internal variables*)
 END_VAR
 (* @END_DECLARATION := '0' *)
 _FBD_BODY
 _NETWORKS : 6
-_NETWORK
-_COMMENT
-''
-_END_COMMENT
-_ASSIGN
-_FUNCTIONBLOCK
-inst0Map11word7SJ6xm0
+_NETWORK
+_COMMENT
+''
+_END_COMMENT
+_ASSIGN
+_FUNCTIONBLOCK
+inst0Map11word7SJ6xm0
 _BOX_EXPR : 14
-_OPERAND
-_EXPRESSION
-_POSITIV
+_OPERAND
+_EXPRESSION
+_POSITIV
 xFirstCycle
-_OPERAND
-_EXPRESSION
-_POSITIV
+_OPERAND
+_EXPRESSION
+_POSITIV
 eAction
-_OPERAND
-_EXPRESSION
-_POSITIV
+_OPERAND
+_EXPRESSION
+_POSITIV
 eState
-_OPERAND
-_EXPRESSION
-_POSITIV
+_OPERAND
+_EXPRESSION
+_POSITIV
 wInput1
-_OPERAND
-_EXPRESSION
-_POSITIV
+
+_OPERAND
+_EXPRESSION
+_POSITIV
 wInput2
-_OPERAND
-_EXPRESSION
-_POSITIV
+
+_OPERAND
+_EXPRESSION
+_POSITIV
 wInput3
-_OPERAND
-_EXPRESSION
-_POSITIV
+
+_OPERAND
+_EXPRESSION
+_POSITIV
 wInput4
-_OPERAND
-_EXPRESSION
-_POSITIV
+
+_OPERAND
+_EXPRESSION
+_POSITIV
 wInput5
-_OPERAND
-_EXPRESSION
-_POSITIV
+
+_OPERAND
+_EXPRESSION
+_POSITIV
 wInput6
-_OPERAND
-_EXPRESSION
-_POSITIV
+
+_OPERAND
+_EXPRESSION
+_POSITIV
 wInput7
-_OPERAND
-_EXPRESSION
-_POSITIV
+
+_OPERAND
+_EXPRESSION
+_POSITIV
 wInput8
-_OPERAND
-_EXPRESSION
-_POSITIV
+
+_OPERAND
+_EXPRESSION
+_POSITIV
 wInput9
-_OPERAND
-_EXPRESSION
-_POSITIV
+
+_OPERAND
+_EXPRESSION
+_POSITIV
 wInput10
-_OPERAND
-_EXPRESSION
-_POSITIV
+
+_OPERAND
+_EXPRESSION
+_POSITIV
 wInput11
-_EXPRESSION
-_POSITIV
-Map11word7SJ6xm0
+
+
+_EXPRESSION
+_POSITIV
+Map11word7SJ6xm0
 _OUTPUTS : 10
-_OUTPUT
-_POSITIV
-_NO_SET
+OUTPUT
+_POSITIV
+_NO_SET
 wOutput2
-_OUTPUT
-_POSITIV
-_NO_SET
+OUTPUT
+_POSITIV
+_NO_SET
 wOutput3
-_OUTPUT
-_POSITIV
-_NO_SET
+OUTPUT
+_POSITIV
+_NO_SET
 wOutput4
-_OUTPUT
-_POSITIV
-_NO_SET
+OUTPUT
+_POSITIV
+_NO_SET
 wOutput5
-_OUTPUT
-_POSITIV
-_NO_SET
+OUTPUT
+_POSITIV
+_NO_SET
 wOutput6
-_OUTPUT
-_POSITIV
-_NO_SET
+OUTPUT
+_POSITIV
+_NO_SET
 wOutput7
-_OUTPUT
-_POSITIV
-_NO_SET
+OUTPUT
+_POSITIV
+_NO_SET
 wOutput8
-_OUTPUT
-_POSITIV
-_NO_SET
+OUTPUT
+_POSITIV
+_NO_SET
 wOutput9
-_OUTPUT
-_POSITIV
-_NO_SET
+OUTPUT
+_POSITIV
+_NO_SET
 wOutput10
-_OUTPUT
-_POSITIV
-_NO_SET
+OUTPUT
+_POSITIV
+_NO_SET
 wOutput11
-_EXPRESSION
-_POSITIV
+
+_EXPRESSION
+_POSITIV
+
 _OUTPUTS : 1
-_OUTPUT
-_POSITIV
-_NO_SET
+OUTPUT
+_POSITIV
+_NO_SET
 wOutput1
 _NETWORK
 _COMMENT

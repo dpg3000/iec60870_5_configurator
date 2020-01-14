@@ -189,6 +189,14 @@ def _map(device_name, data_type, num_objects, purpose, server_iteration):
     input_str = input_str[:-2]
     input_str += ": " + data_type.upper() + ";"
 
+    # Input triggers
+    trigger_str = ""
+    if purpose == 'c':
+        trigger_str = ["xTrigger{}, ".format(i + 1) for i in range(num_objects)]
+        trigger_str = ''.join(trigger_str)
+        trigger_str = trigger_str[:-2]
+        trigger_str += ": " + data_type.upper() + ";"
+
     # Outputs
     output_str = [input_dictionary[data_type.upper()] + "Output{}, ".format(i + 1) for i in range(num_objects)]
     output_str = ''.join(output_str)
@@ -198,23 +206,24 @@ def _map(device_name, data_type, num_objects, purpose, server_iteration):
     declaration_info = declaration_info.format(
         pou_name,
         input_str,
+        trigger_str,
         output_str
     )
 
     # ST Code block
-    condition_code = ""
+    code = ""
     for i in range(num_objects):
-        condition_code += input_dictionary[data_type.upper()] + "Output{} := ".format(i + 1) + \
-                          input_dictionary[data_type.upper()] + "Input{};\n".format(i + 1)
-
-    default_code = ""
-    for i in range(num_objects):
-        default_code += input_dictionary[data_type.upper()] + "Output{} := ".format(i + 1) + \
-                        input_dictionary[data_type.upper()] + "Input{};\n".format(i + 1)
+        if purpose == 'c':
+            code += "IF xTrigger{}".format(i + 1) + "THEN"
+            code += input_dictionary[data_type.upper()] + "     Output{} := ".format(i + 1) + \
+                    input_dictionary[data_type.upper()] + "Input{};\n".format(i + 1)
+            code += "END_IF\n"
+        else:
+            code += input_dictionary[data_type.upper()] + "Output{} := ".format(i + 1) + \
+                    input_dictionary[data_type.upper()] + "Input{};\n".format(i + 1)
 
     st_code_info = st_code_info.format(
-        condition_code,
-        default_code
+        code
     )
 
     map_.write(
@@ -490,6 +499,13 @@ def _rtu(device_name, device_operation, data_type, num_objects, purpose, instanc
     name_str = ''.join(name_str)
     name_str = name_str[:-2]
 
+    trigger_str = ""
+    if purpose == 'c':
+        trigger_str = ["xTrigger{}, ".format(i + 1) for i in range(num_objects)]
+        trigger_str = ''.join(trigger_str)
+        trigger_str = trigger_str[:-2]
+        trigger_str += ": BOOL;" + "\n"
+
     status_str = ""
     if device_operation == "SBO" and purpose == 'c':
         status_str = ["Status{}, ".format(i + 1) for i in range(int(num_objects / 2))]
@@ -531,6 +547,7 @@ def _rtu(device_name, device_operation, data_type, num_objects, purpose, instanc
         input_str,
         save_str,
         name_str,
+        trigger_str,
         status_str,
         output_str,
         select_str,
@@ -564,7 +581,7 @@ def _rtu(device_name, device_operation, data_type, num_objects, purpose, instanc
 
     if device_operation == "SBO" and purpose == 'c':
         _jump_fbd('xJumpSelectAndExecute', 'SBO', rtu_)
-    _map_fbd(instance_list[0], num_objects, data_type, rtu_)
+    _map_fbd(instance_list[0], num_objects, data_type, purpose, rtu_)
     pack_out_0 = _pack_fbd(instance_list[1], num_objects, data_type, 'Input', rtu_)
     pack_out_1 = _pack_fbd(instance_list[2], num_objects, 'bool', 'Save', rtu_)
     pack_out_2 = _pack_fbd(instance_list[3], num_objects, 'string', 'Name', rtu_)
@@ -596,54 +613,74 @@ def _jump_fbd(signal, step, file):
     )
 
 
-def _map_fbd(item, num_objects, case, file):
-    file.write("""_NETWORK
-_COMMENT
-''
-_END_COMMENT
-_ASSIGN
-_FUNCTIONBLOCK\n""")
-    file.write(item[0] + item[1] + "\n")
-    file.write("_BOX_EXPR : " + str(num_objects + 3) + "\n")
+def _map_fbd(item, num_objects, case, purpose, file):
+    fbd_input_header_info = FbdTemplate.objects.first().InputHeader
+    fbd_input_unit_info = FbdTemplate.objects.first().InputUnit
+    fbd_output_header_info = FbdTemplate.objects.first().OutputHeader
+    fbd_output_unit_info = FbdTemplate.objects.first().OutputUnit
+
+    if purpose == 'c':
+        box_expressions = 2 * num_objects
+    else:
+        box_expressions = num_objects
+
+    fbd_input_header_info = fbd_input_header_info.format(
+        item[0] + item[1],
+        str(box_expressions + 3)
+    )
 
     # Input unit
-    file.write("""_OPERAND
-_EXPRESSION
-_POSITIV
-xFirstCycle
-_OPERAND
-_EXPRESSION
-_POSITIV
-eAction
-_OPERAND
-_EXPRESSION
-_POSITIV
-eState""" + "\n")
+    fbd_input_unit_info_formatted = ""
+
+    fbd_input_unit_info_formatted += fbd_input_unit_info.format("xFirstCycle\n")
+    fbd_input_unit_info_formatted += fbd_input_unit_info.format("eAction\n")
+    fbd_input_unit_info_formatted += fbd_input_unit_info.format("eState\n")
+
     for i in range(num_objects):
-        file.write("""_OPERAND
-_EXPRESSION
-_POSITIV""" + "\n")
-        file.write(input_dictionary[case.upper()] + "Input{}".format(i + 1) + "\n")
+        instruction = input_dictionary[case.upper()] + "Input{}".format(i + 1) + "\n"
+        fbd_input_unit_info_formatted += fbd_input_unit_info.format(
+            instruction + "\n"
+        )
 
-    file.write("""_EXPRESSION
-_POSITIV""" + "\n")
-    file.write(item[1] + "\n")
-    file.write("_OUTPUTS : " + str(num_objects - 1) + "\n")
+    if purpose == 'c':
+        for i in range(num_objects):
+            instruction = input_dictionary[case.upper()] + "Trigger{}".format(i + 1) + "\n"
+            fbd_input_unit_info_formatted += fbd_input_unit_info.format(
+                instruction + "\n"
+            )
 
-    # Output unit
+    # Output header 1
+    fbd_output_header_info_1 = fbd_output_header_info.format(
+        item[1],
+        str(num_objects - 1)
+    )
+
+    # Output unit 1
+    fbd_output_unit_info_1 = ""
     for i in range(num_objects - 1):
-        file.write("""_OUTPUT
-_POSITIV
-_NO_SET""" + "\n")
-        file.write(input_dictionary[case.upper()] + "Output{}".format(i + 2) + "\n")
+        fbd_output_unit_info_1 += fbd_output_unit_info.format(
+            input_dictionary[case.upper()] + "Output{}".format(i + 2) + "\n"
+        )
 
-    file.write("""_EXPRESSION
-_POSITIV
-_OUTPUTS : 1
-_OUTPUT
-_POSITIV
-_NO_SET""" + "\n")
-    file.write(input_dictionary[case.upper()] + "Output1" + "\n")
+    # Output header 2
+    fbd_output_header_info_2 = fbd_output_header_info.format(
+        "",
+        str(1)
+    )
+
+    # Output unit 2
+    fbd_output_unit_info_2 = fbd_output_unit_info.format(
+        input_dictionary[case.upper()] + "Output1" + "\n"
+    )
+
+    file.write(
+        fbd_input_header_info + "\n" +
+        fbd_input_unit_info_formatted + "\n" +
+        fbd_output_header_info_1 + "\n" +
+        fbd_output_unit_info_1 + "\n" +
+        fbd_output_header_info_2 + "\n" +
+        fbd_output_unit_info_2
+    )
 
 
 def _pack_fbd(item, num_objects, case, signal, file):

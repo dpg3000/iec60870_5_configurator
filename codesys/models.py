@@ -53,3 +53,9 @@ class FbdTemplate(models.Model):
     OutputHeader = models.TextField(default="")
     OutputUnit = models.TextField(default="")
     Jump = models.TextField(default="")
+
+
+class Device(models.Model):
+    Version = models.CharField(max_length=255)
+    VariableDeclaration = models.TextField(default="")
+    Code = models.TextField(default="")
