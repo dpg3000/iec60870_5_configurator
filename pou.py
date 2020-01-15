@@ -1,3 +1,6 @@
+#  IF (aSignals[iN] > (aSignalsInternal[iN] + ((aHysteresis[iN] / 100) * aSignalsInternal[iN]))) OR (aSignals[iN] < (aSignalsInternal[iN] - ((aHysteresis[iN] / 100) * aSignalsInternal[iN]))) THEN
+
+
 import os
 import shutil
 from server_parts.models import Obj35mMeTe
@@ -50,12 +53,12 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
     instance_list = []
     for rtu in device_rtu_sequence:
         # model generation
-        map0 = _map(device_name, rtu[0], rtu[1], rtu[2], server_iteration)
-        pack0 = _pack(device_name, rtu[0], rtu[1], rtu[2], server_iteration)
-        pack1 = _pack(device_name, 'bool', rtu[1], rtu[2], server_iteration)
-        pack2 = _pack(device_name, 'string', rtu[1], rtu[2], server_iteration)
-        check0 = _check(device_name, rtu[0], rtu[1], rtu[2], server_iteration)
-        save0 = _save(device_name, rtu[0], rtu[1], rtu[2], server_iteration)
+        map0 = _map(device_name, rtu[0], rtu[1], rtu[2], 'mapv0', server_iteration)
+        pack0 = _pack(device_name, rtu[0], rtu[1], rtu[2], 'packv0', server_iteration)
+        pack1 = _pack(device_name, 'bool', rtu[1], rtu[2], 'packv0', server_iteration)
+        pack2 = _pack(device_name, 'string', rtu[1], rtu[2], 'packv0', server_iteration)
+        check0 = _check(device_name, rtu[0], rtu[1], rtu[2], 'checkv0', server_iteration)
+        save0 = _save(device_name, rtu[0], rtu[1], rtu[2], 'savev0', server_iteration)
 
         # rtu instances
         instance_list.append(('inst0', map0))
@@ -76,7 +79,7 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
                 if control_list_len % 2:
                     return "Error - Device: " + device_name + ". The list of commands in the database should be even " \
                                                               "to use SBO "
-                sbo0 = _sbo(device_name, rtu[0], control_list_len, rtu[2], server_iteration)
+                sbo0 = _sbo(device_name, rtu[0], control_list_len, rtu[2], 'sbov0', server_iteration)
                 instance_list.append(('inst0', sbo0))
         else:
             if rtu[2] == 'c':
@@ -88,7 +91,7 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
         # Rotate capabilities (103 protocol data frame contain useless metadata)
         if Device.objects.filter(Name=device_name).first().Protocol == "103":
             if rtu[2] == 'm':
-                _rotate(device_name, rtu[0], rtu[1], rtu[2], server_iteration)
+                _rotate(device_name, rtu[0], rtu[1], rtu[2], 'rotatev0', server_iteration)
 
         # rtu
         rtu0 = _rtu(device_name, device_operation, rtu[0], rtu[1], rtu[2], instance_list, server_iteration)
@@ -120,10 +123,10 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
     return False
 
 
-def _rotate(device_name, data_type, num_objects, purpose, server_iteration):
+def _rotate(device_name, data_type, num_objects, purpose, pou_version, server_iteration):
     # Obtain instance information
-    declaration_info = Rotate.objects.filter(Version="rotatev0").first().VariableDeclaration
-    st_code_info = Rotate.objects.filter(Version="rotatev0").first().Code
+    declaration_info = Rotate.objects.filter(Version=pou_version).first().VariableDeclaration
+    st_code_info = Rotate.objects.filter(Version=pou_version).first().Code
 
     # Meta-data
     pou_name = "Rotate" + str(num_objects) + data_type + str(device_name) + purpose + str(server_iteration)
@@ -172,10 +175,10 @@ def _rotate(device_name, data_type, num_objects, purpose, server_iteration):
     return pou_name
 
 
-def _map(device_name, data_type, num_objects, purpose, server_iteration):
+def _map(device_name, data_type, num_objects, purpose, pou_version, server_iteration):
     # Obtain instance information
-    declaration_info = Map.objects.filter(Version="mapv0").first().VariableDeclaration
-    st_code_info = Map.objects.filter(Version="mapv0").first().Code
+    declaration_info = Map.objects.filter(Version=pou_version).first().VariableDeclaration
+    st_code_info = Map.objects.filter(Version=pou_version).first().Code
 
     # Meta-data
     pou_name = "Map" + str(num_objects) + data_type + str(device_name) + purpose + str(server_iteration)
@@ -185,21 +188,24 @@ def _map(device_name, data_type, num_objects, purpose, server_iteration):
 
     # variable definition
     # Inputs
-    input_str = [input_dictionary[data_type.upper()] + "Input{}, ".format(i + 1) for i in range(num_objects)]
+    input_variable = Map.objects.filter(Version=pou_version).first().InputVariable
+    input_str = [input_dictionary[data_type.upper()] + input_variable.format(i + 1) + ", " for i in range(num_objects)]
     input_str = ''.join(input_str)
     input_str = input_str[:-2]
     input_str += ": " + data_type.upper() + ";"
 
     # Input triggers
     trigger_str = ""
+    trigger_variable = Map.objects.filter(Version=pou_version).first().TriggerVariable
     if purpose == 'c':
-        trigger_str = ["xTrigger{}, ".format(i + 1) for i in range(num_objects)]
+        trigger_str = ["x" + trigger_variable.format(i + 1) + ", " for i in range(num_objects)]
         trigger_str = ''.join(trigger_str)
         trigger_str = trigger_str[:-2]
         trigger_str += ": " + data_type.upper() + ";"
 
     # Outputs
-    output_str = [input_dictionary[data_type.upper()] + "Output{}, ".format(i + 1) for i in range(num_objects)]
+    output_variable = Map.objects.filter(Version=pou_version).first().OutputVariable
+    output_str = [input_dictionary[data_type.upper()] + output_variable.format(i + 1) + ", " for i in range(num_objects)]
     output_str = ''.join(output_str)
     output_str = output_str[:-2]
     output_str += ": " + data_type.upper() + ";"
@@ -215,13 +221,13 @@ def _map(device_name, data_type, num_objects, purpose, server_iteration):
     code = ""
     for i in range(num_objects):
         if purpose == 'c':
-            code += "IF xTrigger{} ".format(i + 1) + "THEN\n"
-            code += input_dictionary[data_type.upper()] + "Output{} := ".format(i + 1) + \
-                    input_dictionary[data_type.upper()] + "Input{};\n".format(i + 1)
+            code += "IF" + trigger_variable.format(i + 1) + " THEN\n"
+            code += input_dictionary[data_type.upper()] + output_variable.format(i + 1) + " := " + \
+                input_dictionary[data_type.upper()] + input_variable.format(i + 1) + ";\n"
             code += "END_IF\n"
         else:
-            code += input_dictionary[data_type.upper()] + "Output{} := ".format(i + 1) + \
-                    input_dictionary[data_type.upper()] + "Input{};\n".format(i + 1)
+            code += input_dictionary[data_type.upper()] + output_variable.format(i + 1) + " := " + \
+                input_dictionary[data_type.upper()] + input_variable.format(i + 1) + ";\n"
 
     st_code_info = st_code_info.format(
         code
@@ -239,10 +245,10 @@ def _map(device_name, data_type, num_objects, purpose, server_iteration):
     return pou_name
 
 
-def _pack(device_name, data_type, num_objects, purpose, server_iteration):
+def _pack(device_name, data_type, num_objects, purpose, pou_version, server_iteration):
     # Obtain instance information
-    declaration_info = Pack.objects.filter(Version="packv0").first().VariableDeclaration
-    st_code_info = Pack.objects.filter(Version="packv0").first().Code
+    declaration_info = Pack.objects.filter(Version=pou_version).first().VariableDeclaration
+    st_code_info = Pack.objects.filter(Version=pou_version).first().Code
 
     # Meta-data
     pou_name = "Pack" + str(num_objects) + data_type + str(device_name) + purpose + str(server_iteration)
@@ -252,21 +258,26 @@ def _pack(device_name, data_type, num_objects, purpose, server_iteration):
 
     # variable definition
     # Inputs
-    input_str = [input_dictionary[data_type.upper()] + "Input{}, ".format(i + 1) for i in range(num_objects)]
+    input_variable = Pack.objects.filter(Version=pou_version).first().InputVariable
+    input_str = [input_dictionary[data_type.upper()] + input_variable.format(i + 1) + ", " for i in range(num_objects)]
     input_str = ''.join(input_str)
     input_str = input_str[:-2]
     input_str += ": " + data_type.upper() + ";"
 
+    # Outputs
+    output_variable = Pack.objects.filter(Version=pou_version).first().OutputVariable
+
     declaration_info = declaration_info.format(
         pou_name,
         input_str,
-        num_objects, data_type.upper()
+        output_variable.format(""), num_objects, data_type.upper()
     )
 
     # ST Code block
     code = ""
     for i in range(num_objects):
-        code += "aOutput[{}] := ".format(i + 1) + input_dictionary[data_type.upper()] + "Input{};\n".format(i + 1)
+        code += output_variable.format("[{}]".format(i + 1)) + " := " + input_dictionary[data_type.upper()] + \
+                input_variable.format(i + 1) + ";\n"
 
     st_code_info = st_code_info.format(
         code
@@ -284,10 +295,10 @@ def _pack(device_name, data_type, num_objects, purpose, server_iteration):
     return pou_name
 
 
-def _check(device_name, data_type, num_objects, purpose, server_iteration):
+def _check(device_name, data_type, num_objects, purpose, pou_version, server_iteration):
     # Obtain instance information
-    declaration_info = Check.objects.filter(Version="checkv0").first().VariableDeclaration
-    st_code_info = Check.objects.filter(Version="checkv0").first().Code
+    declaration_info = Check.objects.filter(Version=pou_version).first().VariableDeclaration
+    st_code_info = Check.objects.filter(Version=pou_version).first().Code
 
     # Meta-data
     pou_name = "Check" + str(num_objects) + data_type + str(device_name) + purpose + str(server_iteration)
@@ -319,10 +330,10 @@ def _check(device_name, data_type, num_objects, purpose, server_iteration):
     return pou_name
 
 
-def _save(device_name, data_type, num_objects, purpose, server_iteration):
+def _save(device_name, data_type, num_objects, purpose, pou_version, server_iteration):
     # Obtain instance information
-    declaration_info = Save.objects.filter(Version="savev0").first().VariableDeclaration
-    st_code_info = Save.objects.filter(Version="savev0").first().Code
+    declaration_info = Save.objects.filter(Version=pou_version).first().VariableDeclaration
+    st_code_info = Save.objects.filter(Version=pou_version).first().Code
 
     # Meta-data
     pou_name = "Save" + str(num_objects) + data_type + str(device_name) + purpose + str(server_iteration)
@@ -330,39 +341,65 @@ def _save(device_name, data_type, num_objects, purpose, server_iteration):
     # create file
     save_ = open(path + "\\" + pou_name + ".EXP", "w+")
 
+    # Variable definition
+    # Inputs
+    input_variable = Save.objects.filter(Version=pou_version).first().InputVariable
+
+    # Internal variables
+    iterator_variable = Save.objects.filter(Version=pou_version).first().IteratorVariable
+    hysteresis_variable = Save.objects.filter(Version=pou_version).first().HysteresisVariable
+    internal_input_variable = Save.objects.filter(Version=pou_version).first().InternalInputVariable
+
     # Obtaining hysteresis derivatives
     hysteresis = ""
     hysteresis_definition = ""
-    hyst_cdtn = ""
-    last_values_array_definition = ""
-    last_values_array_code = ""
+    hysteresis_condition = ""
+    internal_input_definition = ""
+    internal_input_code = ""
     hysteresis_code_end_tag = ""
     if data_type.upper() == "WORD":
         hysteresis = Obj35mMeTe.objects.filter(DeviceName=device_name).first().Hysteresis
     if hysteresis:
-        hysteresis_definition = ("aHysteresis : ARRAY[1..{}] OF INT := " + "[" + hysteresis + "];").format(num_objects)
-        hyst_cdtn = "IF (aSignals[iN] > (aSignalsInternal[iN] + ((aHysteresis[iN] / 100) * aSignalsInternal[iN]))) " + \
-                    "OR (aSignals[iN] < (aSignalsInternal[iN] - ((aHysteresis[iN] / 100) * aSignalsInternal[iN]))) THEN"
-        last_values_array_definition = "aSignalsInternal : ARRAY[1..{}] OF {};".format(num_objects, data_type.upper())
-        last_values_array_code = "aSignalsInternal[iN] := aSignals[iN];"
+        hysteresis_definition = hysteresis_variable.format('') + \
+            " : ARRAY[1..{}] OF INT := ".format(num_objects) + "[" + hysteresis + "];"
+        internal_input_definition = internal_input_variable.format('') + \
+            " : ARRAY[1..{}] OF {};".format(num_objects, data_type.upper())
+        hysteresis_condition = "IF (" + input_variable.format("[{}]".format(iterator_variable)) + " > (" + \
+                               internal_input_variable.format("[{}]".format(iterator_variable)) + " + ((" + \
+                               hysteresis_variable.format("[{}]".format(iterator_variable)) + " / 100) * " + \
+                               internal_input_variable.format("[{}]".format(iterator_variable)) + "))) " + "OR (" + \
+                               input_variable.format("[{}]".format(iterator_variable)) + " < (" + \
+                               internal_input_variable.format("[{}]".format(iterator_variable)) + " - ((" + \
+                               hysteresis_variable.format("[{}]".format(iterator_variable)) + " / 100) * " + \
+                               internal_input_variable.format("[{}]".format(iterator_variable)) + "))) THEN"
+        internal_input_code = internal_input_variable.format("[{}]".format(iterator_variable)) + " := " +\
+            input_variable.format("[{}]".format(iterator_variable)) + ";"
         hysteresis_code_end_tag = "END_IF"
 
-    # variable definition
     declaration_info = declaration_info.format(
         pou_name,
-        num_objects, data_type.upper(),
+        input_variable.format(''), num_objects, data_type.upper(),
         num_objects,
         num_objects,
         num_objects,
+        iterator_variable,
         hysteresis_definition,
-        last_values_array_definition
+        internal_input_definition
     )
 
     # ST Code block
     st_code_info = st_code_info.format(
-        last_values_array_code,
-        data_type.upper(),
-        hyst_cdtn,
+        iterator_variable,
+        iterator_variable,
+        internal_input_code,
+        data_type.upper(), input_variable.format(''), iterator_variable,
+        iterator_variable, iterator_variable,
+        iterator_variable,
+        iterator_variable,
+        hysteresis_condition,
+        internal_input_code,
+        data_type.upper(), input_variable.format(''), iterator_variable,
+        iterator_variable, iterator_variable,
         hysteresis_code_end_tag,
         pou_name
     )
@@ -380,12 +417,12 @@ def _save(device_name, data_type, num_objects, purpose, server_iteration):
     return pou_name
 
 
-def _sbo(device_name, data_type, num_objects, purpose, server_iteration):
+def _sbo(device_name, data_type, num_objects, purpose, pou_version, server_iteration):
     # Obtain instance information
-    declaration_info = Sbo.objects.filter(Version="sbov0").first().VariableDeclaration
-    body_info = Sbo.objects.filter(Version="sbov0").first().Body
-    core_info = Sbo.objects.filter(Version="sbov0").first().Core
-    final_check_info = Sbo.objects.filter(Version="sbov0").first().FinalCheck
+    declaration_info = Sbo.objects.filter(Version=pou_version).first().VariableDeclaration
+    body_info = Sbo.objects.filter(Version=pou_version).first().Body
+    core_info = Sbo.objects.filter(Version=pou_version).first().Core
+    final_check_info = Sbo.objects.filter(Version=pou_version).first().FinalCheck
 
     # Meta-data
     pou_name = "Sbo" + str(num_objects) + data_type + str(device_name) + purpose + str(server_iteration)
@@ -394,25 +431,30 @@ def _sbo(device_name, data_type, num_objects, purpose, server_iteration):
     sbo_ = open(path + "\\" + pou_name + ".EXP", "w+")
 
     # Inputs
-    input_str = ["xInput{}, ".format(i + 1) for i in range(num_objects)]
+    input_variable = Sbo.objects.filter(Version=pou_version).first().InputVariable
+    input_str = [input_variable.format(i + 1) + ", " for i in range(num_objects)]
     input_str = ''.join(input_str)
     input_str = input_str[:-2]
 
-    status_str = ["Status{}, ".format(i + 1) for i in range(int(num_objects / 2))]
+    status_variable = Sbo.objects.filter(Version=pou_version).first().StatusVariable
+    status_str = [status_variable.format(i + 1) + ", " for i in range(int(num_objects / 2))]
     status_str = ''.join(status_str)
     status_str = status_str[:-2]
 
     # Outputs
-    select_str = ["xSelect{}, ".format(i + 1) for i in range(int(num_objects / 2))]
+    select_variable = Sbo.objects.filter(Version=pou_version).first().SelectVariable
+    select_str = [select_variable.format(i + 1) + ", " for i in range(int(num_objects / 2))]
     select_str = ''.join(select_str)
     select_str = select_str[:-2]
 
-    execute_str = ["xExecute{}, ".format(i + 1) for i in range(int(num_objects / 2))]
+    execute_variable = Sbo.objects.filter(Version=pou_version).first().ExecuteVariable
+    execute_str = [execute_variable.format(i + 1) + ", " for i in range(int(num_objects / 2))]
     execute_str = ''.join(execute_str)
     execute_str = execute_str[:-2]
 
     # Internal variables
-    internal_str = ["xFlag{}, ".format(i + 1) for i in range(int(num_objects / 2))]
+    internal_variable = Sbo.objects.filter(Version=pou_version).first().FlagVariable
+    internal_str = [internal_variable.format(i + 1) + ", " for i in range(int(num_objects / 2))]
     internal_str = ''.join(internal_str)
     internal_str = internal_str[:-2]
 
@@ -449,7 +491,7 @@ def _sbo(device_name, data_type, num_objects, purpose, server_iteration):
         ) + "\n\n"
 
     # End jumper evaluation
-    final_str = ["xFlag{} OR ".format(i + 1) for i in range(int(num_objects / 2))]
+    final_str = [internal_variable.format(i + 1) + " OR " for i in range(int(num_objects / 2))]
     final_str = ''.join(final_str)
     final_str = final_str[:-4]
 

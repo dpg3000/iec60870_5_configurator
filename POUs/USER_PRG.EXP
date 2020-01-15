@@ -4,7 +4,7 @@
                 (* @SYMFILEFLAGS := '2048' *)
 PROGRAM USER_PRG
 VAR
-inst0Dev7SJ6x0: Dev7SJ6x0;
+inst0DevEkor0: DevEkor0;
 END_VAR
 (* @END_DECLARATION := '0' *)
 _FBD_BODY
@@ -15,8 +15,8 @@ _NETWORK
             _END_COMMENT
             _ASSIGN
             _FUNCTIONBLOCK
-inst0Dev7SJ6x0
-_BOX_EXPR : 209
+inst0DevEkor0
+_BOX_EXPR : 246
 _OPERAND
                 _EXPRESSION
                 _POSITIV
@@ -81,6 +81,54 @@ _OPERAND
                 _EXPRESSION
                 _POSITIV
 ???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
 _OPERAND
                             _EXPRESSION
                             _POSITIV
@@ -144,15 +192,11 @@ _OPERAND
 _OPERAND
                                         _EXPRESSION
                                         _POSITIV
-'VRS'
+'Iavg'
 _OPERAND
                                         _EXPRESSION
                                         _POSITIV
-'VST'
-_OPERAND
-                                        _EXPRESSION
-                                        _POSITIV
-'VTR'
+'Vavg'
 _OPERAND
                                         _EXPRESSION
                                         _POSITIV
@@ -164,11 +208,39 @@ _OPERAND
 _OPERAND
                                         _EXPRESSION
                                         _POSITIV
-'Frec'
+'VR'
 _OPERAND
                                         _EXPRESSION
                                         _POSITIV
-'CosPhi'
+'VS'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'VT'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'PR'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'PS'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'PT'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'QR'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'QS'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'QT'
 _OPERAND
                     _EXPRESSION
                     _POSITIV
@@ -361,6 +433,54 @@ _OPERAND
                     _EXPRESSION
                     _POSITIV
 ???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
@@ -556,103 +676,155 @@ TRUE
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'MandoLocalRemotoDispositivo0'
+'CircuitBreakerTrip'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'MandoLocalRemotoDispositivo1'
+'CircuitBreakerRectifierTrip'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'DeviceOK0'
+'CircuitBreakerMotorTrip'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'DeviceOK1'
+'Undervoltage1'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'BloqREDispositivo0'
+'OvervoltageRelay1'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'BloqREDispositivo1'
+'ProtFrequency1'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'ActiveRE0'
+'CircuitBreakerTransformerTrip'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'ActiveRE1'
+'CoilError'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'NotReadyRE0'
+'SpringsError'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'NotReadyRE1'
+'AntipumpingError'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'InProgressRE0'
+'SignallingError'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'InProgressRE1'
+'CommError'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'DispFinRE0'
+'ClosedDoor'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'DispFinRE1'
+'UrgentAlarm'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'GeneralPickup0'
+'NotUrgentAlarm'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'GeneralPickup1'
+'BatteryLowLevel'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'GeneralTrip0'
+'FireAlarm'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'GeneralTrip1'
+'SSAANoTension'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'TempPhaseTrip0'
+'RectificatorError'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'TempPhaseTrip1'
+'Watchdog'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'InstPhaseTrip1_0'
+'SeccActuation'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'InstPhaseTrip1_1'
+'LocalRemote'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'InstPhaseTrip2_0'
+'TensionPresence'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'InstPhaseTrip2_1'
+'TensionPresenceR'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'TempGndTrip0'
+'TensionPresenceS'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'TensionPresenceT'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ResetAlarms'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ActiveRE'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'InProgressRE'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DispFinRE'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPickup'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'PhasePickup'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GndPickup'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralTrip'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPhaseTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralGndTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'InstGndTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'InstPhaseTrip1'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
@@ -660,127 +832,95 @@ _OPERAND
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'InstGndTrip1_0'
+'TempPhaseTrip1'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'InstGndTrip1_1'
+'DirPhaseTrip1'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'InstGndTrip2_0'
+'DirPhaseInvTrip1'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'InstGndTrip2_1'
+'DirGndTrip1'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'ActiveDirPhaseTrip0'
+'DirGndInvTrip1'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'ActiveDirPhaseTrip1'
+'BreakerFailure'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'DirPhaseTrip1_0'
+'ActiveSecc'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'DirPhaseTrip1_1'
+'ClosedFuse'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'DirPhaseTrip2_0'
+'ClosedInt'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'DirPhaseTrip2_1'
+'ClosedSecc'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'ActiveDirGndTrip0'
+'GndState'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'ActiveDirGndTrip1'
+'ClosedSeccProtCell'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'DirGndTrip1_0'
+'ClosedCell'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'DirGndTrip1_1'
+'Simple'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'DirGndTrip2_0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'DirGndTrip2_1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'SensGndForwardPickup0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'SensGndForwardPickup1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'SensGndReversePickup0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'SensGndReversePickup1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'SensGndUndefPickup0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'SensGndUndefPickup1'
+'ExternalTripCause'
 _OPERAND
                     _EXPRESSION
                     _POSITIV
-sgl104_S0_OpenCell_0_7SJ
+sgl104_S0_TrippingInt_0_Ekor
 _OPERAND
                     _EXPRESSION
                     _POSITIV
-sgl104_S0_CloseCell_0_7SJ
+sgl104_S0_ClosingInt_0_Ekor
 _OPERAND
                     _EXPRESSION
                     _POSITIV
-sgl104_S0_ExecuteCellSwitch_0_7SJ
+sgl104_S0_Tripping_0_Ekor
 _OPERAND
                     _EXPRESSION
                     _POSITIV
-sgl104_S0_RemoteDesbloqREDispositivo_0_7SJ
+sgl104_S0_ClosingSecc_0_Ekor
 _OPERAND
                     _EXPRESSION
                     _POSITIV
-sgl104_S0_RemoteBloqREDispositivo_0_7SJ
+sgl104_S0_AlarmsResetCommand0_0_Ekor
 _OPERAND
                     _EXPRESSION
                     _POSITIV
-sgl104_S0_ExecuteRemoteBloqREDispositivo_0_7SJ
+sgl104_S0_AlarmsResetCommand1_0_Ekor
 _OPERAND
                     _EXPRESSION
                     _POSITIV
-sgl104_S0_OpenGndSwitch_0_7SJ
+sgl104_S0_EnableRecloser_0_Ekor
 _OPERAND
                     _EXPRESSION
                     _POSITIV
-sgl104_S0_CloseGndSwitch_0_7SJ
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-sgl104_S0_ExecuteGndSwitch_0_7SJ
+sgl104_S0_DisableRecloser_0_Ekor
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
@@ -816,279 +956,335 @@ TRUE
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
-TRUE
+'TrippingInt'
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
-'OpenCell'
+'ClosingInt'
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
-'CloseCell'
+'Tripping'
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
-'ExecuteCellSwitch'
+'ClosingSecc'
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
-'RemoteDesbloqREDispositivo'
+'AlarmsResetCommand0'
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
-'RemoteBloqREDispositivo'
+'AlarmsResetCommand1'
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
-'ExecuteRemoteBloqREDispositivo'
+'EnableRecloser'
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
-'OpenGndSwitch'
+'DisableRecloser'
 _OPERAND
-                                _EXPRESSION
-                                _POSITIV
-'CloseGndSwitch'
+                                    _EXPRESSION
+                                    _POSITIV
+                                    ???
 _OPERAND
-                                _EXPRESSION
-                                _POSITIV
-'ExecuteGndSwitch'
+                                    _EXPRESSION
+                                    _POSITIV
+                                    ???
+_OPERAND
+                                    _EXPRESSION
+                                    _POSITIV
+                                    ???
+_OPERAND
+                                    _EXPRESSION
+                                    _POSITIV
+                                    ???
 _EXPRESSION
             _POSITIV
-Dev7SJ6x0
-_OUTPUTS : 67
+DevEkor0
+_OUTPUTS : 86
 _OUTPUT
                     _POSITIV
                     _NO_SET
-sgl104_S0_IS_0_7SJ
+sgl104_S0_IS_0_Ekor
 _OUTPUT
                     _POSITIV
                     _NO_SET
-sgl104_S0_IT_0_7SJ
+sgl104_S0_IT_0_Ekor
 _OUTPUT
                     _POSITIV
                     _NO_SET
-sgl104_S0_I0_0_7SJ
+sgl104_S0_I0_0_Ekor
 _OUTPUT
                     _POSITIV
                     _NO_SET
-sgl104_S0_VRS_0_7SJ
+sgl104_S0_Iavg_0_Ekor
 _OUTPUT
                     _POSITIV
                     _NO_SET
-sgl104_S0_VST_0_7SJ
+sgl104_S0_Vavg_0_Ekor
 _OUTPUT
                     _POSITIV
                     _NO_SET
-sgl104_S0_VTR_0_7SJ
+sgl104_S0_P_0_Ekor
 _OUTPUT
                     _POSITIV
                     _NO_SET
-sgl104_S0_P_0_7SJ
+sgl104_S0_Q_0_Ekor
 _OUTPUT
                     _POSITIV
                     _NO_SET
-sgl104_S0_Q_0_7SJ
+sgl104_S0_VR_0_Ekor
 _OUTPUT
                     _POSITIV
                     _NO_SET
-sgl104_S0_Frec_0_7SJ
+sgl104_S0_VS_0_Ekor
 _OUTPUT
                     _POSITIV
                     _NO_SET
-sgl104_S0_CosPhi_0_7SJ
+sgl104_S0_VT_0_Ekor
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_PR_0_Ekor
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_PS_0_Ekor
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_PT_0_Ekor
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_QR_0_Ekor
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_QS_0_Ekor
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_QT_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_MandoLocalRemotoDispositivo0_0_7SJ
+sgl104_S0_CircuitBreakerTrip_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_MandoLocalRemotoDispositivo1_0_7SJ
+sgl104_S0_CircuitBreakerRectifierTrip_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_DeviceOK0_0_7SJ
+sgl104_S0_CircuitBreakerMotorTrip_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_DeviceOK1_0_7SJ
+sgl104_S0_Undervoltage1_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_BloqREDispositivo0_0_7SJ
+sgl104_S0_OvervoltageRelay1_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_BloqREDispositivo1_0_7SJ
+sgl104_S0_ProtFrequency1_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_ActiveRE0_0_7SJ
+sgl104_S0_CircuitBreakerTransformerTrip_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_ActiveRE1_0_7SJ
+sgl104_S0_CoilError_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_NotReadyRE0_0_7SJ
+sgl104_S0_SpringsError_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_NotReadyRE1_0_7SJ
+sgl104_S0_AntipumpingError_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_InProgressRE0_0_7SJ
+sgl104_S0_SignallingError_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_InProgressRE1_0_7SJ
+sgl104_S0_CommError_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_DispFinRE0_0_7SJ
+sgl104_S0_ClosedDoor_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_DispFinRE1_0_7SJ
+sgl104_S0_UrgentAlarm_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_GeneralPickup0_0_7SJ
+sgl104_S0_NotUrgentAlarm_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_GeneralPickup1_0_7SJ
+sgl104_S0_BatteryLowLevel_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_GeneralTrip0_0_7SJ
+sgl104_S0_FireAlarm_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_GeneralTrip1_0_7SJ
+sgl104_S0_SSAANoTension_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_TempPhaseTrip0_0_7SJ
+sgl104_S0_RectificatorError_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_TempPhaseTrip1_0_7SJ
+sgl104_S0_Watchdog_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_InstPhaseTrip1_0_0_7SJ
+sgl104_S0_SeccActuation_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_InstPhaseTrip1_1_0_7SJ
+sgl104_S0_LocalRemote_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_InstPhaseTrip2_0_0_7SJ
+sgl104_S0_TensionPresence_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_InstPhaseTrip2_1_0_7SJ
+sgl104_S0_TensionPresenceR_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_TempGndTrip0_0_7SJ
+sgl104_S0_TensionPresenceS_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_TempGndTrip1_0_7SJ
+sgl104_S0_TensionPresenceT_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_InstGndTrip1_0_0_7SJ
+sgl104_S0_ResetAlarms_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_InstGndTrip1_1_0_7SJ
+sgl104_S0_ActiveRE_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_InstGndTrip2_0_0_7SJ
+sgl104_S0_InProgressRE_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_InstGndTrip2_1_0_7SJ
+sgl104_S0_DispFinRE_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_ActiveDirPhaseTrip0_0_7SJ
+sgl104_S0_GeneralPickup_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_ActiveDirPhaseTrip1_0_7SJ
+sgl104_S0_PhasePickup_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_DirPhaseTrip1_0_0_7SJ
+sgl104_S0_GndPickup_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_DirPhaseTrip1_1_0_7SJ
+sgl104_S0_GeneralTrip_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_DirPhaseTrip2_0_0_7SJ
+sgl104_S0_GeneralPhaseTrip1_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_DirPhaseTrip2_1_0_7SJ
+sgl104_S0_GeneralGndTrip1_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_ActiveDirGndTrip0_0_7SJ
+sgl104_S0_InstGndTrip1_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_ActiveDirGndTrip1_0_7SJ
+sgl104_S0_InstPhaseTrip1_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_DirGndTrip1_0_0_7SJ
+sgl104_S0_TempGndTrip1_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_DirGndTrip1_1_0_7SJ
+sgl104_S0_TempPhaseTrip1_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_DirGndTrip2_0_0_7SJ
+sgl104_S0_DirPhaseTrip1_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_DirGndTrip2_1_0_7SJ
+sgl104_S0_DirPhaseInvTrip1_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_SensGndForwardPickup0_0_7SJ
+sgl104_S0_DirGndTrip1_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_SensGndForwardPickup1_0_7SJ
+sgl104_S0_DirGndInvTrip1_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_SensGndReversePickup0_0_7SJ
+sgl104_S0_BreakerFailure_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_SensGndReversePickup1_0_7SJ
+sgl104_S0_ActiveSecc_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_SensGndUndefPickup0_0_7SJ
+sgl104_S0_ClosedFuse_0_Ekor
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_SensGndUndefPickup1_0_7SJ
+sgl104_S0_ClosedInt_0_Ekor
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ClosedSecc_0_Ekor
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GndState_0_Ekor
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ClosedSeccProtCell_0_Ekor
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ClosedCell_0_Ekor
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_Simple_0_Ekor
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ExternalTripCause_0_Ekor
 _OUTPUT
                     _POSITIV
                     _NO_SET
@@ -1122,8 +1318,36 @@ _OUTPUT
                     _NO_SET
 ???
 _OUTPUT
-                    _POSITIV
-                    _NO_SET
+                                    _POSITIV
+                                    _NO_SET
+???
+_OUTPUT
+                                    _POSITIV
+                                    _NO_SET
+???
+_OUTPUT
+                                    _POSITIV
+                                    _NO_SET
+???
+_OUTPUT
+                                    _POSITIV
+                                    _NO_SET
+???
+_OUTPUT
+                                    _POSITIV
+                                    _NO_SET
+???
+_OUTPUT
+                                    _POSITIV
+                                    _NO_SET
+???
+_OUTPUT
+                                    _POSITIV
+                                    _NO_SET
+???
+_OUTPUT
+                                    _POSITIV
+                                    _NO_SET
 ???
 _EXPRESSION
             _POSITIV
@@ -1131,5 +1355,5 @@ _EXPRESSION
             _OUTPUT
             _POSITIV
             _NO_SET
-sgl104_S0_IR_0_7SJ
+sgl104_S0_IR_0_Ekor
 END_FUNCTION_BLOCK
