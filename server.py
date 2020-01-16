@@ -120,17 +120,29 @@ class ServerDevice:
     def _obj_58c_sc_ta(self, obj_info, scs, file):
         address = ioa_to_address(self.internal_control_ioa)
         object_names = []
+        object_triggers = []
         for i in range(len(scs)):
+            command_id = scs[i].format(self.server_iteration, self.device_count).strip()
+            command_id_splitted = command_id.split("_")
+            trigger = ""
+            try:
+                if command_id_splitted[5]:
+                    trigger = command_id_splitted[2] + "_" + command_id_splitted[3]
+            except:
+                trigger = command_id_splitted[2]
+
             xml_obj = obj_info.format(address[0], address[1], address[2], self.internal_control_ioa,
-                                      scs[i].format(self.server_iteration, self.device_count).strip(), address[2],
+                                      command_id, address[2],
                                       address[1], address[0],
-                                      scs[i].format(self.server_iteration, self.device_count).strip())
+                                      command_id, trigger)
 
             self.internal_control_ioa += 1
             address = update_address(address)
             file.write(xml_obj)
-            object_names.append(scs[i].format(self.server_iteration, self.device_count).strip())
+            object_names.append(command_id)
+            object_triggers.append(trigger)
         pou.single_commands_list.append(object_names)
+        pou.iec_new_message_list.append(object_triggers)
 
     def _obj_59c_dc_ta(self, obj_info, dcs, file):
         address = ioa_to_address(self.internal_control_ioa)
@@ -210,7 +222,8 @@ class ServerCard:
             xml_obj = obj_info.format(address[0], address[1], address[2], self.internal_control_ioa,
                                       scs[i].format(self.server_iteration, (16 * self.card_count) + (i + 1)).strip(),
                                       address[2], address[1], address[0],
-                                      scs[i].format(self.server_iteration, (16 * self.card_count) + (i + 1)).strip())
+                                      scs[i].format(self.server_iteration, (16 * self.card_count) + (i + 1)).strip(),
+                                      "")
 
             self.internal_control_ioa += 1
             address = update_address(address)

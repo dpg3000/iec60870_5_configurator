@@ -1,6 +1,3 @@
-#  IF (aSignals[iN] > (aSignalsInternal[iN] + ((aHysteresis[iN] / 100) * aSignalsInternal[iN]))) OR (aSignals[iN] < (aSignalsInternal[iN] - ((aHysteresis[iN] / 100) * aSignalsInternal[iN]))) THEN
-
-
 import os
 import shutil
 from server_parts.models import Obj35mMeTe
@@ -13,6 +10,7 @@ measurements_list = []
 states_list = []
 single_commands_list = []
 double_commands_list = []
+iec_new_message_list = []
 
 device_list = []
 
@@ -94,7 +92,7 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
                 _rotate(device_name, rtu[0], rtu[1], rtu[2], 'rotatev0', server_iteration)
 
         # rtu
-        rtu0 = _rtu(device_name, device_operation, rtu[0], rtu[1], rtu[2], instance_list, server_iteration)
+        rtu0 = _rtu(device_name, device_operation, rtu[0], rtu[1], rtu[2], instance_list, 'rtuv0', server_iteration)
         rtu_instance_list.append(('inst0', rtu0))
 
         # After creating the rtu for previous purpose, clearing the instance related names
@@ -107,11 +105,13 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
 
     measurements = measurements_list.copy()
     states = states_list.copy()
-    commands = single_commands_list.copy()
+    single_commands = single_commands_list.copy()
+    double_commands = double_commands_list.copy()           # Not used for now
+    iec_new_message = iec_new_message_list.copy()
 
     device_list.append(
         (_device(device_operation, device_name, io_sequence, rtu_instance_list, server_iteration), device_quantity,
-         measurements, states, commands, device_operation)
+         measurements, states, single_commands, device_operation, iec_new_message)
     )
 
     # Clearing lists related to a particular device to leave room for next device
@@ -119,6 +119,7 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
     states_list.clear()
     single_commands_list.clear()
     double_commands_list.clear()
+    iec_new_message_list.clear()
 
     return False
 
@@ -221,7 +222,7 @@ def _map(device_name, data_type, num_objects, purpose, pou_version, server_itera
     code = ""
     for i in range(num_objects):
         if purpose == 'c':
-            code += "IF" + trigger_variable.format(i + 1) + " THEN\n"
+            code += "IF " + input_dictionary[data_type.upper()] + trigger_variable.format(i + 1) + " THEN\n"
             code += input_dictionary[data_type.upper()] + output_variable.format(i + 1) + " := " + \
                 input_dictionary[data_type.upper()] + input_variable.format(i + 1) + ";\n"
             code += "END_IF\n"
@@ -515,10 +516,9 @@ def _sbo(device_name, data_type, num_objects, purpose, pou_version, server_itera
     return pou_name
 
 
-def _rtu(device_name, device_operation, data_type, num_objects, purpose, instance_list, server_iteration):
+def _rtu(device_name, device_operation, data_type, num_objects, purpose, instance_list, pou_version, server_iteration):
     # Obtain instance information
-    declaration_info = Rtu.objects.filter(Version="rtuv0").first().VariableDeclaration
-    sbo_variables_info = Rtu.objects.filter(Version="rtuv0").first().SboVariables
+    declaration_info = Rtu.objects.filter(Version=pou_version).first().VariableDeclaration
     fbd_header_info = FbdTemplate.objects.first().Header
 
     # Meta-data
@@ -529,34 +529,40 @@ def _rtu(device_name, device_operation, data_type, num_objects, purpose, instanc
 
     # variable definition
     # Inputs
-    input_str = [input_dictionary[data_type.upper()] + "Input{}, ".format(i + 1) for i in range(num_objects)]
+    input_variable = Rtu.objects.filter(Version=pou_version).first().InputVariable
+    input_str = [input_dictionary[data_type.upper()] + input_variable + "{}, ".format(i + 1) for i in range(num_objects)]
     input_str = ''.join(input_str)
     input_str = input_str[:-2]
     input_str += ": " + data_type.upper() + ";" + "\n"
 
-    save_str = ["xSave{}, ".format(i + 1) for i in range(num_objects)]
+    save_variable = Rtu.objects.filter(Version=pou_version).first().SaveVariable
+    save_str = ["x" + save_variable + "{}, ".format(i + 1) for i in range(num_objects)]
     save_str = ''.join(save_str)
     save_str = save_str[:-2]
 
-    name_str = ["sName{}, ".format(i + 1) for i in range(num_objects)]
+    name_variable = Rtu.objects.filter(Version=pou_version).first().NameVariable
+    name_str = ["s" + name_variable + "{}, ".format(i + 1) for i in range(num_objects)]
     name_str = ''.join(name_str)
     name_str = name_str[:-2]
 
     trigger_str = ""
     if purpose == 'c':
-        trigger_str = ["xTrigger{}, ".format(i + 1) for i in range(num_objects)]
+        trigger_variable = Rtu.objects.filter(Version=pou_version).first().TriggerVariable
+        trigger_str = ["x" + trigger_variable + "{}, ".format(i + 1) for i in range(num_objects)]
         trigger_str = ''.join(trigger_str)
         trigger_str = trigger_str[:-2]
-        trigger_str += ": BOOL;" + "\n"
+        trigger_str += " : BOOL;\n"
 
     status_str = ""
     if device_operation == "SBO" and purpose == 'c':
-        status_str = ["Status{}, ".format(i + 1) for i in range(int(num_objects / 2))]
+        status_variable = Rtu.objects.filter(Version=pou_version).first().StatusVariable
+        status_str = [status_variable + "{}, ".format(i + 1) for i in range(int(num_objects / 2))]
         status_str = ''.join(status_str)
         status_str = status_str[:-2]
-        status_str += ": ENUM870_CLIENT_COMMAND;" + "\n"
+        status_str += " : ENUM870_CLIENT_COMMAND;\n"
 
     # Outputs
+    output_variable = Rtu.objects.filter(Version=pou_version).first().OutputVariable
     output_str = [input_dictionary[data_type.upper()] + "Output{}, ".format(i + 1) for i in range(num_objects)]
     output_str = ''.join(output_str)
     output_str = output_str[:-2]
@@ -565,15 +571,17 @@ def _rtu(device_name, device_operation, data_type, num_objects, purpose, instanc
     select_str = ""
     execute_str = ""
     if device_operation == "SBO" and purpose == 'c':
-        select_str = ["xSelect{}, ".format(i + 1) for i in range(int(num_objects / 2))]
+        select_variable = Rtu.objects.filter(Version=pou_version).first().SelectVariable
+        select_str = ["x" + select_variable + "{}, ".format(i + 1) for i in range(int(num_objects / 2))]
         select_str = ''.join(select_str)
         select_str = select_str[:-2]
-        select_str += ": " + data_type.upper() + ";" + "\n"
+        select_str += " : BOOL;\n"
 
-        execute_str = ["xExecute{}, ".format(i + 1) for i in range(int(num_objects / 2))]
+        execute_variable = Rtu.objects.filter(Version=pou_version).first().ExecuteVariable
+        execute_str = ["x" + execute_variable + "{}, ".format(i + 1) for i in range(int(num_objects / 2))]
         execute_str = ''.join(execute_str)
         execute_str = execute_str[:-2]
-        execute_str += ": " + data_type.upper() + ";" + "\n"
+        execute_str += " : BOOL;\n"
 
     # Internal variables
     instance_block = ""
@@ -581,9 +589,13 @@ def _rtu(device_name, device_operation, data_type, num_objects, purpose, instanc
         if 'Save' not in item[1]:
             instance_block += item[0] + item[1] + " : " + item[1] + ";" + "\n"
 
-    sbo_internal_variables = ""
+    sbo_error_str = ""
+    sbo_jump_str = ""
     if device_operation == "SBO" and purpose == 'c':
-        sbo_internal_variables = sbo_variables_info
+        sbo_error_variable = Rtu.objects.filter(Version=pou_version).first().SBOErrorVariable
+        sbo_jump_variable = Rtu.objects.filter(Version=pou_version).first().SBOJumpVariable
+        sbo_error_str = "e" + sbo_error_variable + " : " + "eErrorCodes" + "\n"
+        sbo_jump_str = "x" + sbo_jump_variable + " : " + "BOOL;" + "\n"
 
     declaration_info = declaration_info.format(
         pou_name,
@@ -600,7 +612,8 @@ def _rtu(device_name, device_operation, data_type, num_objects, purpose, instanc
         num_objects,
         num_objects,
         num_objects,
-        sbo_internal_variables
+        sbo_error_str,
+        sbo_jump_str
     )
 
     rtu_.write(declaration_info + "\n")
@@ -614,14 +627,7 @@ def _rtu(device_name, device_operation, data_type, num_objects, purpose, instanc
     fbd_header_info = fbd_header_info.format(str(body_networks) + "\n")
     rtu_.write(fbd_header_info)
 
-    # Instantiation
-    # la idea es que toda la información necesaria ya esté integrada en una lista de variables, de forma que el proceso
-    # se automatice
-    # for instance in instance_list:
-    #     if 'Sbo' in instance[1] and purpose == 'c':
-    #         _jump_fbd('xJumpSelectAndExecute', 'SBO', rtu_)
-    #     elif ''
-
+    # RTU hub
     if device_operation == "SBO" and purpose == 'c':
         _jump_fbd('xJumpSelectAndExecute', 'SBO', rtu_)
     _map_fbd(instance_list[0], num_objects, data_type, purpose, rtu_)
@@ -632,7 +638,6 @@ def _rtu(device_name, device_operation, data_type, num_objects, purpose, instanc
     _save_fbd(instance_list[5], num_objects, pack_out_0, pack_out_2, check_out_0[0], pack_out_1, check_out_0[1], rtu_)
     if device_operation == "SBO" and purpose == 'c':
         _sbo_fbd(instance_list[6], num_objects, 'SBO', check_out_0[0], rtu_)
-        _jump_fbd('xJumpRetry', 'SBO', rtu_)
 
     # Final tag
     rtu_.write("END_FUNCTION_BLOCK" + "\n")
@@ -972,12 +977,20 @@ def _device(device_operation, device_name, io_sequence, rtu_instance_list, serve
         input_str += ": STRING;" + "\n"
         device_.write(input_str)
 
+        if item[0] == "Command":
+            input_str = ['xTrigger' + item[0] + "{}, ".format(i + 1) for i in range(item[1])]
+            input_str = ''.join(input_str)
+            input_str = input_str[:-2]
+            input_str += ": BOOL;" + "\n"
+            device_.write(input_str)
+
         if device_operation == "SBO" and item[0] == "Command":
             input_str = ["Status{}, ".format(i + 1) for i in range(int(item[1] / 2))]
             input_str = ''.join(input_str)
             input_str = input_str[:-2]
             input_str += ": ENUM870_CLIENT_COMMAND;" + "\n"
             device_.write(input_str)
+
     device_.write("END_VAR" + "\n")
 
     # Outputs
@@ -1039,8 +1052,12 @@ def _rtu_fbd(device_operation, item, io_sequence, file):
     _ASSIGN
     _FUNCTIONBLOCK\n""")
     file.write(item[0] + item[1] + "\n")
-    if device_operation == 'SBO' and io_sequence[0] == 'Command':
-        file.write("_BOX_EXPR : " + str((io_sequence[1] * 3) + int(io_sequence[1] / 2) + 5) + "\n")
+
+    if io_sequence[0] == 'Command':
+        if device_operation == 'SBO':
+            file.write("_BOX_EXPR : " + str((io_sequence[1] * 4) + int(io_sequence[1] / 2) + 5) + "\n")
+        else:
+            file.write("_BOX_EXPR : " + str((io_sequence[1] * 4) + 5) + "\n")
     else:
         file.write("_BOX_EXPR : " + str((io_sequence[1] * 3) + 5) + "\n")
 
@@ -1081,6 +1098,14 @@ def _rtu_fbd(device_operation, item, io_sequence, file):
     _EXPRESSION
     _POSITIV""" + "\n")
         file.write("sName" + io_sequence[0] + "{}".format(i + 1) + "\n")
+
+    # New IEC message trigger
+    if io_sequence[0] == 'Command':
+        for i in range(io_sequence[1]):
+            file.write("""_OPERAND
+                _EXPRESSION
+                _POSITIV""" + "\n")
+            file.write("xTrigger" + io_sequence[0] + "{}".format(i + 1) + "\n")
 
     # SBO status
     if device_operation == 'SBO' and io_sequence[0] == 'Command':
@@ -1181,10 +1206,10 @@ def _device_fbd(device, file):
             _FUNCTIONBLOCK\n""")
         file.write("inst" + str(i) + device[0] + "\n")
         if device[5] == "SBO":
-            file.write("_BOX_EXPR : " + str(len(device[2][i]) * 3 + len(device[3][i]) * 3 + len(device[4][i]) * 3 +
+            file.write("_BOX_EXPR : " + str(len(device[2][i]) * 3 + len(device[3][i]) * 3 + len(device[4][i]) * 4 +
                                             int(len(device[4][i]) / 2) + 5) + "\n")
         else:
-            file.write("_BOX_EXPR : " + str(len(device[2][i]) * 3 + len(device[3][i]) * 3 + len(device[4][i]) * 3 + 5) +
+            file.write("_BOX_EXPR : " + str(len(device[2][i]) * 3 + len(device[3][i]) * 3 + len(device[4][i]) * 4 + 5) +
                        "\n")
 
         # Inputs
@@ -1291,6 +1316,13 @@ def _device_fbd(device, file):
                 identification = name[2]
 
             file.write("'{}'\n".format(identification))
+
+        # iec new message triggers
+        for trigger in device[6][i]:
+            file.write("""_OPERAND
+                                _EXPRESSION
+                                _POSITIV""" + "\n")
+            file.write(trigger + "\n")
 
         # Select And Execute
         if device[5] == 'SBO':

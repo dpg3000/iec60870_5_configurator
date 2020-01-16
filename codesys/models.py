@@ -56,8 +56,17 @@ class Rotate(models.Model):
 
 class Rtu(models.Model):
     Version = models.CharField(max_length=255)
+    InputVariable = models.CharField(max_length=255, default="")
+    SaveVariable = models.CharField(max_length=255, default="")
+    NameVariable = models.CharField(max_length=255, default="")
+    TriggerVariable = models.CharField(max_length=255, default="")
+    StatusVariable = models.CharField(max_length=255, default="")
+    OutputVariable = models.CharField(max_length=255, default="")
+    SelectVariable = models.CharField(max_length=255, default="")
+    ExecuteVariable = models.CharField(max_length=255, default="")
+    SBOErrorVariable = models.CharField(max_length=255, default="")
+    SBOJumpVariable = models.CharField(max_length=255, default="")
     VariableDeclaration = models.TextField(default="")
-    SboVariables = models.TextField(default="")
 
 
 class FbdTemplate(models.Model):
