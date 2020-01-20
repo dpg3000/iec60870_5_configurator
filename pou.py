@@ -86,11 +86,6 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
                         return "Error - Device: " + device_name + ". The list of commands in the database should be " \
                                                                   "even to allow DO/SBO compatibility "
 
-        # Rotate capabilities (103 protocol data frame contain useless metadata)
-        if Device.objects.filter(Name=device_name).first().Protocol == "103":
-            if rtu[2] == 'm':
-                _rotate(device_name, rtu[0], rtu[1], rtu[2], 'rotatev0', server_iteration)
-
         # rtu
         rtu0 = _rtu(device_name, device_operation, rtu[0], rtu[1], rtu[2], instance_list, 'rtuv0', server_iteration)
         rtu_instance_list.append(('inst0', rtu0))
@@ -122,58 +117,6 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
     iec_new_message_list.clear()
 
     return False
-
-
-def _rotate(device_name, data_type, num_objects, purpose, pou_version, server_iteration):
-    # Obtain instance information
-    declaration_info = Rotate.objects.filter(Version=pou_version).first().VariableDeclaration
-    st_code_info = Rotate.objects.filter(Version=pou_version).first().Code
-
-    # Meta-data
-    pou_name = "Rotate" + str(num_objects) + data_type + str(device_name) + purpose + str(server_iteration)
-
-    # create file
-    rotate_ = open(path + "\\" + pou_name + ".EXP", "w+")
-
-    # variable definition
-    # inputs
-    input_str = ["wInput{}, ".format(i + 1) for i in range(num_objects)]
-    input_str = ''.join(input_str)
-    input_str = input_str[:-2]
-
-    # outputs
-    output_str = ["wOutput{}, ".format(i + 1) for i in range(num_objects)]
-    output_str = ''.join(output_str)
-    output_str = output_str[:-2]
-
-    declaration_info = declaration_info.format(
-        pou_name,
-        input_str,
-        output_str
-    )
-
-    # ST Code block
-    internal_code = ""
-    default_code = ""
-    for i in range(num_objects):
-        internal_code += ("wOutput{} := SHR(wInput{}, iNumberOfRotations);\n".format(i + 1, i + 1))
-    for i in range(num_objects):
-        default_code += ("wOutput{} := SHL(wInput{}, iNumberOfRotations);\n".format(i + 1, i + 1))
-
-    st_code_info = st_code_info.format(
-        internal_code,
-        default_code
-    )
-
-    rotate_.write(
-        declaration_info +
-        "\n" +
-        st_code_info
-    )
-
-    rotate_.close()
-
-    return pou_name
 
 
 def _map(device_name, data_type, num_objects, purpose, pou_version, server_iteration):
