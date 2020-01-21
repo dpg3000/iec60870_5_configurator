@@ -44,9 +44,12 @@ def delete_pous():
 
 
 def create_pou(device_name, device_quantity, device_operation, server_iteration):
-    device_rtu_sequence = [('word', len(measurements_list[0]), 'm'),
-                           ('bool', len(states_list[0]), 's'),
-                           ('bool', len(single_commands_list[0]), 'c')]
+    device_rtu_sequence = [
+        ('word', len(measurements_list[0]), 'm'),
+        ('bool', len(states_list[0]), 's'),
+        ('bool', len(single_commands_list[0]), 'c')
+    ]
+
     rtu_instance_list = []
     instance_list = []
     for rtu in device_rtu_sequence:

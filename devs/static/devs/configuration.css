@@ -55,9 +55,17 @@
 }
 
 input[type="number"] {
+    width: 50px;
+}
+
+.selector-num-card {
+    position: relative;
+    left: 10px;
+}
+
+.selector-num-device {
     position: relative;
     left: 20px;
-    width: 50px;
 }
 
 select {
@@ -66,40 +74,48 @@ select {
 
 #add-card-server {
     position: relative;
-    left: 40px;
+    bottom : 9px;
+    left: 25px;
 }
 
 #add-card-io {
     position: relative;
-    left: 60px;
+    top: 8px;
+    right: 35px;
 }
 
 #add-device-server {
     position: relative;
+    bottom: 9px;
     left: 33px;
 }
 
 #add-device-client {
     position: relative;
-    left: 44px;
+    top: 8px;
+    right: 28px;
 }
 
 #text-add-card-server {
     position: relative;
-    left: 40px;
+    bottom: 9px;
+    left: 25px;
 }
 
 #text-add-card-io {
     position: relative;
-    left: 60px;
+    top: 8px;
+    right: 35px;
 }
 
 #text-add-device-server {
     position: relative;
+    bottom: 9px;
     left: 33px;
 }
 
 #text-add-device-client {
     position: relative;
-    left: 44px;
+    top: 8px;
+    right: 28px;
 }

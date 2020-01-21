@@ -13,6 +13,10 @@ $(document).ready(function(){
         previousDom.children('#table-devices').children('#body-devices').children('#row-devices').children('#cell-'+    // disable the add card checkbox
         'devices').children('.enable-devices').prop("disabled", true);
 
+        previousDom.css("background", "#dfd url(../static/admin/img/icon-yes.svg) 100px 11px no-repeat");
+        previousDom.children('#table-cards').children('#body-cards').children('#row-center').children('#cell-center-'+
+        'name').children('#center-name').css("background", "#edffed");
+
         /*Cleaning add center status*/
         $(this).attr('disabled', true);
 

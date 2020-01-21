@@ -30,7 +30,7 @@
 {% endblock %}
 
 {% block content %}
-    <form id="form-data" action="submit/" method="POST" id="form">
+    <form id="form-data" action="submit/" method="POST">
         {% csrf_token %}
         <div id="content-main">
             <div class="app-centers module">
@@ -138,4 +138,19 @@
         <input type="hidden" id="hidden-request-data" name="request-data" value="">
         <input type="submit" id="generate" value="Generate" disabled>
     </form>
+
+    <!--<table style="background: #dfd url(../static/admin/img/icon-yes.svg) 100px 11px no-repeat;">
+        <tbody>
+            <tr>
+                <th scope="row">
+                    <a href="">Center name</a>
+                </th>
+                <td width="54%"></td>
+                <td>
+                    <input type="text" style="background: #edffed">
+                </td>
+            </tr>
+        </tbody>
+    </table>-->
+
 {% endblock %}

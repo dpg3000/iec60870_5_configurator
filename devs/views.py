@@ -102,7 +102,8 @@ def submit(request):
             if device.attrib['client'] == 'yes':
                 client_ins = Client(device.text)
                 client_ins.create_client(int(device.attrib['number']))
-            error_message = pou.create_pou(device.text, int(device.attrib['number']), device.attrib['operation'], server_iteration)
+            error_message = pou.create_pou(device.text, int(device.attrib['number']), device.attrib['operation'],
+                                           server_iteration)
             if error_message:
                 return HttpResponse("<h1>" + error_message + "</h1>")
         server_iteration += 1
