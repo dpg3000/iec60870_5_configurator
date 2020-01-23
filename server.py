@@ -127,9 +127,11 @@ class ServerDevice:
             trigger = ""
             try:
                 if command_id_splitted[5]:
-                    trigger = command_id_splitted[2] + "_" + command_id_splitted[3]
+                    trigger = command_id_splitted[1] + "_" + command_id_splitted[2] + "_" + command_id_splitted[3] + \
+                              "_" + command_id_splitted[4] + "_" + command_id_splitted[5]
             except:
-                trigger = command_id_splitted[2]
+                trigger = command_id_splitted[1] + "_" + command_id_splitted[2] + "_" + command_id_splitted[3] + \
+                              "_" + command_id_splitted[4]
 
             xml_obj = obj_info.format(address[0], address[1], address[2], self.internal_control_ioa,
                                       command_id, address[2],

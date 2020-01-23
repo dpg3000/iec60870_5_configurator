@@ -65,6 +65,9 @@ $(document).ready(function(){
 
         newElem.children('.enable-devices-section').children('#remove-devices-btn').attr('disabled', true);             //Disable remove button
 
+        //Add line-break after previous dom
+        previousDom.children('#line-break')
+
         previousDom.after(newElem);                                                                                     // Adding the new element after the previous
         jQuery('#remove-center-btn').attr('disabled', false);                                                           // Enabling 'remove center' possibility
     });

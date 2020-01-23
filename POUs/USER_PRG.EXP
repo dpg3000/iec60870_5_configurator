@@ -4,19 +4,24 @@
                 (* @SYMFILEFLAGS := '2048' *)
 PROGRAM USER_PRG
 VAR
-inst0Dev7SJ6x0: Dev7SJ6x0;
+inst0DevTGPlus0: DevTGPlus0;
+inst1DevTGPlus0: DevTGPlus0;
+inst2DevTGPlus0: DevTGPlus0;
+inst3DevTGPlus0: DevTGPlus0;
+inst4DevTGPlus0: DevTGPlus0;
+inst5DevTGPlus0: DevTGPlus0;
 END_VAR
 (* @END_DECLARATION := '0' *)
 _FBD_BODY
-_NETWORKS : 1
+_NETWORKS : 6
 _NETWORK
             _COMMENT
             ''
             _END_COMMENT
             _ASSIGN
             _FUNCTIONBLOCK
-inst0Dev7SJ6x0
-_BOX_EXPR : 218
+inst0DevTGPlus0
+_BOX_EXPR : 99
 _OPERAND
                 _EXPRESSION
                 _POSITIV
@@ -65,38 +70,6 @@ _OPERAND
                 _EXPRESSION
                 _POSITIV
 ???
-_OPERAND
-                _EXPRESSION
-                _POSITIV
-???
-_OPERAND
-                _EXPRESSION
-                _POSITIV
-???
-_OPERAND
-                _EXPRESSION
-                _POSITIV
-???
-_OPERAND
-                _EXPRESSION
-                _POSITIV
-???
-_OPERAND
-                            _EXPRESSION
-                            _POSITIV
-FALSE
-_OPERAND
-                            _EXPRESSION
-                            _POSITIV
-FALSE
-_OPERAND
-                            _EXPRESSION
-                            _POSITIV
-FALSE
-_OPERAND
-                            _EXPRESSION
-                            _POSITIV
-FALSE
 _OPERAND
                             _EXPRESSION
                             _POSITIV
@@ -140,151 +113,19 @@ _OPERAND
 _OPERAND
                                         _EXPRESSION
                                         _POSITIV
-'I0'
+'BatteryVoltage'
 _OPERAND
                                         _EXPRESSION
                                         _POSITIV
-'VRS'
+'DCVoltage'
 _OPERAND
                                         _EXPRESSION
                                         _POSITIV
-'VST'
+'AN1Voltage'
 _OPERAND
                                         _EXPRESSION
                                         _POSITIV
-'VTR'
-_OPERAND
-                                        _EXPRESSION
-                                        _POSITIV
-'P'
-_OPERAND
-                                        _EXPRESSION
-                                        _POSITIV
-'Q'
-_OPERAND
-                                        _EXPRESSION
-                                        _POSITIV
-'Frec'
-_OPERAND
-                                        _EXPRESSION
-                                        _POSITIV
-'CosPhi'
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-???
+'AN2Voltage'
 _OPERAND
                     _EXPRESSION
                     _POSITIV
@@ -438,349 +279,97 @@ _OPERAND
                                 _POSITIV
 TRUE
 _OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-TRUE
+                                            _EXPRESSION
+                                            _POSITIV
+'LocalRemote'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'MandoLocalRemotoDispositivo0'
+'CircuitBreakerTrip'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'MandoLocalRemotoDispositivo1'
+'UsingBatteries'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'DeviceOK0'
+'BatteryLowLevel'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'DeviceOK1'
+'DeviceOK'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'BloqREDispositivo0'
+'RectificatorError'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'BloqREDispositivo1'
+'PowerUpReset'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'ActiveRE0'
+'BatteriesAlarm'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'ActiveRE1'
+'GeneralPhaseRTrip1'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'NotReadyRE0'
+'GeneralPhaseSTrip1'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'NotReadyRE1'
+'GeneralPhaseTTrip1'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'InProgressRE0'
+'ClosedInt1'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'InProgressRE1'
+'ClosedInt2'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'DispFinRE0'
+'GndState1'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'DispFinRE1'
+'GndState2'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'GeneralPickup0'
+'IN1'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'GeneralPickup1'
+'IN2'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'GeneralTrip0'
+'IN3'
 _OPERAND
                                             _EXPRESSION
                                             _POSITIV
-'GeneralTrip1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'TempPhaseTrip0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'TempPhaseTrip1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'InstPhaseTrip1_0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'InstPhaseTrip1_1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'InstPhaseTrip2_0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'InstPhaseTrip2_1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'TempGndTrip0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'TempGndTrip1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'InstGndTrip1_0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'InstGndTrip1_1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'InstGndTrip2_0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'InstGndTrip2_1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'ActiveDirPhaseTrip0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'ActiveDirPhaseTrip1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'DirPhaseTrip1_0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'DirPhaseTrip1_1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'DirPhaseTrip2_0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'DirPhaseTrip2_1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'ActiveDirGndTrip0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'ActiveDirGndTrip1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'DirGndTrip1_0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'DirGndTrip1_1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'DirGndTrip2_0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'DirGndTrip2_1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'SensGndForwardPickup0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'SensGndForwardPickup1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'SensGndReversePickup0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'SensGndReversePickup1'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'SensGndUndefPickup0'
-_OPERAND
-                                            _EXPRESSION
-                                            _POSITIV
-'SensGndUndefPickup1'
+'IN4'
 _OPERAND
                     _EXPRESSION
                     _POSITIV
-sgl104_S0_OpenCell_0_7SJ
+sgl104_S0_Relay1_0_TGPlus
 _OPERAND
                     _EXPRESSION
                     _POSITIV
-sgl104_S0_CloseCell_0_7SJ
+sgl104_S0_Relay2_0_TGPlus
 _OPERAND
                     _EXPRESSION
                     _POSITIV
-sgl104_S0_ExecuteCellSwitch_0_7SJ
+sgl104_S0_Relay3_0_TGPlus
 _OPERAND
                     _EXPRESSION
                     _POSITIV
-sgl104_S0_RemoteDesbloqREDispositivo_0_7SJ
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-sgl104_S0_RemoteBloqREDispositivo_0_7SJ
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-sgl104_S0_ExecuteRemoteBloqREDispositivo_0_7SJ
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-sgl104_S0_OpenGndSwitch_0_7SJ
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-sgl104_S0_CloseGndSwitch_0_7SJ
-_OPERAND
-                    _EXPRESSION
-                    _POSITIV
-sgl104_S0_ExecuteGndSwitch_0_7SJ
+sgl104_S0_Relay4_0_TGPlus
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
@@ -800,351 +389,139 @@ TRUE
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
-TRUE
+'Relay1'
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
-TRUE
+'Relay2'
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
-TRUE
+'Relay3'
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
-TRUE
+'Relay4'
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
-TRUE
+S0_Relay1_0_TGPlus
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
-'OpenCell'
+S0_Relay2_0_TGPlus
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
-'CloseCell'
+S0_Relay3_0_TGPlus
 _OPERAND
                                 _EXPRESSION
                                 _POSITIV
-'ExecuteCellSwitch'
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-'RemoteDesbloqREDispositivo'
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-'RemoteBloqREDispositivo'
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-'ExecuteRemoteBloqREDispositivo'
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-'OpenGndSwitch'
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-'CloseGndSwitch'
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-'ExecuteGndSwitch'
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-OpenCell
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-CloseCell
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-ExecuteCellSwitch
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-RemoteDesbloqREDispositivo
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-RemoteBloqREDispositivo
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-ExecuteRemoteBloqREDispositivo
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-OpenGndSwitch
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-CloseGndSwitch
-_OPERAND
-                                _EXPRESSION
-                                _POSITIV
-ExecuteGndSwitch
+S0_Relay4_0_TGPlus
 _EXPRESSION
             _POSITIV
-Dev7SJ6x0
-_OUTPUTS : 67
+DevTGPlus0
+_OUTPUTS : 29
 _OUTPUT
                     _POSITIV
                     _NO_SET
-sgl104_S0_IS_0_7SJ
+sgl104_S0_IS_0_TGPlus
 _OUTPUT
                     _POSITIV
                     _NO_SET
-sgl104_S0_IT_0_7SJ
+sgl104_S0_IT_0_TGPlus
 _OUTPUT
                     _POSITIV
                     _NO_SET
-sgl104_S0_I0_0_7SJ
+sgl104_S0_BatteryVoltage_0_TGPlus
 _OUTPUT
                     _POSITIV
                     _NO_SET
-sgl104_S0_VRS_0_7SJ
+sgl104_S0_DCVoltage_0_TGPlus
 _OUTPUT
                     _POSITIV
                     _NO_SET
-sgl104_S0_VST_0_7SJ
+sgl104_S0_AN1Voltage_0_TGPlus
 _OUTPUT
                     _POSITIV
                     _NO_SET
-sgl104_S0_VTR_0_7SJ
-_OUTPUT
-                    _POSITIV
-                    _NO_SET
-sgl104_S0_P_0_7SJ
-_OUTPUT
-                    _POSITIV
-                    _NO_SET
-sgl104_S0_Q_0_7SJ
-_OUTPUT
-                    _POSITIV
-                    _NO_SET
-sgl104_S0_Frec_0_7SJ
-_OUTPUT
-                    _POSITIV
-                    _NO_SET
-sgl104_S0_CosPhi_0_7SJ
+sgl104_S0_AN2Voltage_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_MandoLocalRemotoDispositivo0_0_7SJ
+sgl104_S0_LocalRemote_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_MandoLocalRemotoDispositivo1_0_7SJ
+sgl104_S0_CircuitBreakerTrip_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_DeviceOK0_0_7SJ
+sgl104_S0_UsingBatteries_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_DeviceOK1_0_7SJ
+sgl104_S0_BatteryLowLevel_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_BloqREDispositivo0_0_7SJ
+sgl104_S0_DeviceOK_0_TG-Plus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_BloqREDispositivo1_0_7SJ
+sgl104_S0_RectificatorError_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_ActiveRE0_0_7SJ
+sgl104_S0_PowerUpReset_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_ActiveRE1_0_7SJ
+sgl104_S0_BatteriesAlarm_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_NotReadyRE0_0_7SJ
+sgl104_S0_GeneralPhaseRTrip1_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_NotReadyRE1_0_7SJ
+sgl104_S0_GeneralPhaseSTrip1_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_InProgressRE0_0_7SJ
+sgl104_S0_GeneralPhaseTTrip1_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_InProgressRE1_0_7SJ
+sgl104_S0_ClosedInt1_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_DispFinRE0_0_7SJ
+sgl104_S0_ClosedInt2_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_DispFinRE1_0_7SJ
+sgl104_S0_GndState1_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_GeneralPickup0_0_7SJ
+sgl104_S0_GndState2_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_GeneralPickup1_0_7SJ
+sgl104_S0_IN1_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_GeneralTrip0_0_7SJ
+sgl104_S0_IN2_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_GeneralTrip1_0_7SJ
+sgl104_S0_IN3_0_TGPlus
 _OUTPUT
                                 _POSITIV
                                 _NO_SET
-sgl104_S0_TempPhaseTrip0_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_TempPhaseTrip1_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_InstPhaseTrip1_0_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_InstPhaseTrip1_1_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_InstPhaseTrip2_0_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_InstPhaseTrip2_1_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_TempGndTrip0_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_TempGndTrip1_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_InstGndTrip1_0_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_InstGndTrip1_1_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_InstGndTrip2_0_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_InstGndTrip2_1_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_ActiveDirPhaseTrip0_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_ActiveDirPhaseTrip1_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_DirPhaseTrip1_0_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_DirPhaseTrip1_1_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_DirPhaseTrip2_0_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_DirPhaseTrip2_1_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_ActiveDirGndTrip0_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_ActiveDirGndTrip1_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_DirGndTrip1_0_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_DirGndTrip1_1_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_DirGndTrip2_0_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_DirGndTrip2_1_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_SensGndForwardPickup0_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_SensGndForwardPickup1_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_SensGndReversePickup0_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_SensGndReversePickup1_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_SensGndUndefPickup0_0_7SJ
-_OUTPUT
-                                _POSITIV
-                                _NO_SET
-sgl104_S0_SensGndUndefPickup1_0_7SJ
-_OUTPUT
-                    _POSITIV
-                    _NO_SET
-???
-_OUTPUT
-                    _POSITIV
-                    _NO_SET
-???
-_OUTPUT
-                    _POSITIV
-                    _NO_SET
-???
-_OUTPUT
-                    _POSITIV
-                    _NO_SET
-???
-_OUTPUT
-                    _POSITIV
-                    _NO_SET
-???
+sgl104_S0_IN4_0_TGPlus
 _OUTPUT
                     _POSITIV
                     _NO_SET
@@ -1167,5 +544,2660 @@ _EXPRESSION
             _OUTPUT
             _POSITIV
             _NO_SET
-sgl104_S0_IR_0_7SJ
+sgl104_S0_IR_0_TGPlus
+_NETWORK
+            _COMMENT
+            ''
+            _END_COMMENT
+            _ASSIGN
+            _FUNCTIONBLOCK
+inst1DevTGPlus0
+_BOX_EXPR : 99
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IR'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IS'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IT'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'BatteryVoltage'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'DCVoltage'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'AN1Voltage'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'AN2Voltage'
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'LocalRemote'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'CircuitBreakerTrip'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'UsingBatteries'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'BatteryLowLevel'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DeviceOK'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'RectificatorError'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'PowerUpReset'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'BatteriesAlarm'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPhaseRTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPhaseSTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPhaseTTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ClosedInt1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ClosedInt2'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GndState1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GndState2'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN2'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN3'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN4'
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay1_1_TGPlus
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay2_1_TGPlus
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay3_1_TGPlus
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay4_1_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay1'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay2'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay3'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay4'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay1_1_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay2_1_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay3_1_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay4_1_TGPlus
+_EXPRESSION
+            _POSITIV
+DevTGPlus0
+_OUTPUTS : 29
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_IS_1_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_IT_1_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_BatteryVoltage_1_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_DCVoltage_1_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_AN1Voltage_1_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_AN2Voltage_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_LocalRemote_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_CircuitBreakerTrip_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_UsingBatteries_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_BatteryLowLevel_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_DeviceOK_1_TG-Plus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_RectificatorError_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_PowerUpReset_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_BatteriesAlarm_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralPhaseRTrip1_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralPhaseSTrip1_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralPhaseTTrip1_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ClosedInt1_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ClosedInt2_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GndState1_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GndState2_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN1_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN2_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN3_1_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN4_1_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_EXPRESSION
+            _POSITIV
+            _OUTPUTS : 1
+            _OUTPUT
+            _POSITIV
+            _NO_SET
+sgl104_S0_IR_1_TGPlus
+_NETWORK
+            _COMMENT
+            ''
+            _END_COMMENT
+            _ASSIGN
+            _FUNCTIONBLOCK
+inst2DevTGPlus0
+_BOX_EXPR : 99
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IR'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IS'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IT'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'BatteryVoltage'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'DCVoltage'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'AN1Voltage'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'AN2Voltage'
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'LocalRemote'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'CircuitBreakerTrip'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'UsingBatteries'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'BatteryLowLevel'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DeviceOK'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'RectificatorError'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'PowerUpReset'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'BatteriesAlarm'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPhaseRTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPhaseSTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPhaseTTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ClosedInt1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ClosedInt2'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GndState1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GndState2'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN2'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN3'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN4'
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay1_2_TGPlus
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay2_2_TGPlus
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay3_2_TGPlus
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay4_2_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay1'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay2'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay3'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay4'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay1_2_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay2_2_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay3_2_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay4_2_TGPlus
+_EXPRESSION
+            _POSITIV
+DevTGPlus0
+_OUTPUTS : 29
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_IS_2_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_IT_2_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_BatteryVoltage_2_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_DCVoltage_2_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_AN1Voltage_2_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_AN2Voltage_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_LocalRemote_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_CircuitBreakerTrip_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_UsingBatteries_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_BatteryLowLevel_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_DeviceOK_2_TG-Plus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_RectificatorError_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_PowerUpReset_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_BatteriesAlarm_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralPhaseRTrip1_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralPhaseSTrip1_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralPhaseTTrip1_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ClosedInt1_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ClosedInt2_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GndState1_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GndState2_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN1_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN2_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN3_2_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN4_2_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_EXPRESSION
+            _POSITIV
+            _OUTPUTS : 1
+            _OUTPUT
+            _POSITIV
+            _NO_SET
+sgl104_S0_IR_2_TGPlus
+_NETWORK
+            _COMMENT
+            ''
+            _END_COMMENT
+            _ASSIGN
+            _FUNCTIONBLOCK
+inst3DevTGPlus0
+_BOX_EXPR : 99
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IR'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IS'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IT'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'BatteryVoltage'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'DCVoltage'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'AN1Voltage'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'AN2Voltage'
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'LocalRemote'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'CircuitBreakerTrip'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'UsingBatteries'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'BatteryLowLevel'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DeviceOK'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'RectificatorError'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'PowerUpReset'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'BatteriesAlarm'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPhaseRTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPhaseSTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPhaseTTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ClosedInt1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ClosedInt2'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GndState1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GndState2'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN2'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN3'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN4'
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay1_3_TGPlus
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay2_3_TGPlus
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay3_3_TGPlus
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay4_3_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay1'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay2'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay3'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay4'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay1_3_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay2_3_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay3_3_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay4_3_TGPlus
+_EXPRESSION
+            _POSITIV
+DevTGPlus0
+_OUTPUTS : 29
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_IS_3_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_IT_3_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_BatteryVoltage_3_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_DCVoltage_3_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_AN1Voltage_3_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_AN2Voltage_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_LocalRemote_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_CircuitBreakerTrip_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_UsingBatteries_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_BatteryLowLevel_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_DeviceOK_3_TG-Plus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_RectificatorError_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_PowerUpReset_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_BatteriesAlarm_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralPhaseRTrip1_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralPhaseSTrip1_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralPhaseTTrip1_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ClosedInt1_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ClosedInt2_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GndState1_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GndState2_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN1_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN2_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN3_3_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN4_3_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_EXPRESSION
+            _POSITIV
+            _OUTPUTS : 1
+            _OUTPUT
+            _POSITIV
+            _NO_SET
+sgl104_S0_IR_3_TGPlus
+_NETWORK
+            _COMMENT
+            ''
+            _END_COMMENT
+            _ASSIGN
+            _FUNCTIONBLOCK
+inst4DevTGPlus0
+_BOX_EXPR : 99
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IR'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IS'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IT'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'BatteryVoltage'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'DCVoltage'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'AN1Voltage'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'AN2Voltage'
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'LocalRemote'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'CircuitBreakerTrip'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'UsingBatteries'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'BatteryLowLevel'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DeviceOK'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'RectificatorError'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'PowerUpReset'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'BatteriesAlarm'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPhaseRTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPhaseSTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPhaseTTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ClosedInt1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ClosedInt2'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GndState1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GndState2'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN2'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN3'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN4'
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay1_4_TGPlus
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay2_4_TGPlus
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay3_4_TGPlus
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay4_4_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay1'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay2'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay3'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay4'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay1_4_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay2_4_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay3_4_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay4_4_TGPlus
+_EXPRESSION
+            _POSITIV
+DevTGPlus0
+_OUTPUTS : 29
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_IS_4_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_IT_4_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_BatteryVoltage_4_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_DCVoltage_4_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_AN1Voltage_4_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_AN2Voltage_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_LocalRemote_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_CircuitBreakerTrip_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_UsingBatteries_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_BatteryLowLevel_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_DeviceOK_4_TG-Plus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_RectificatorError_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_PowerUpReset_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_BatteriesAlarm_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralPhaseRTrip1_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralPhaseSTrip1_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralPhaseTTrip1_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ClosedInt1_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ClosedInt2_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GndState1_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GndState2_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN1_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN2_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN3_4_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN4_4_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_EXPRESSION
+            _POSITIV
+            _OUTPUTS : 1
+            _OUTPUT
+            _POSITIV
+            _NO_SET
+sgl104_S0_IR_4_TGPlus
+_NETWORK
+            _COMMENT
+            ''
+            _END_COMMENT
+            _ASSIGN
+            _FUNCTIONBLOCK
+inst5DevTGPlus0
+_BOX_EXPR : 99
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+                _OPERAND
+                _EXPRESSION
+                _POSITIV
+                ???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                _EXPRESSION
+                _POSITIV
+???
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                            _EXPRESSION
+                            _POSITIV
+FALSE
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IR'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IS'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'IT'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'BatteryVoltage'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'DCVoltage'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'AN1Voltage'
+_OPERAND
+                                        _EXPRESSION
+                                        _POSITIV
+'AN2Voltage'
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+???
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'LocalRemote'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'CircuitBreakerTrip'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'UsingBatteries'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'BatteryLowLevel'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'DeviceOK'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'RectificatorError'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'PowerUpReset'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'BatteriesAlarm'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPhaseRTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPhaseSTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GeneralPhaseTTrip1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ClosedInt1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'ClosedInt2'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GndState1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'GndState2'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN1'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN2'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN3'
+_OPERAND
+                                            _EXPRESSION
+                                            _POSITIV
+'IN4'
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay1_5_TGPlus
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay2_5_TGPlus
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay3_5_TGPlus
+_OPERAND
+                    _EXPRESSION
+                    _POSITIV
+sgl104_S0_Relay4_5_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+TRUE
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay1'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay2'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay3'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+'Relay4'
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay1_5_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay2_5_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay3_5_TGPlus
+_OPERAND
+                                _EXPRESSION
+                                _POSITIV
+S0_Relay4_5_TGPlus
+_EXPRESSION
+            _POSITIV
+DevTGPlus0
+_OUTPUTS : 29
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_IS_5_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_IT_5_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_BatteryVoltage_5_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_DCVoltage_5_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_AN1Voltage_5_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+sgl104_S0_AN2Voltage_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_LocalRemote_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_CircuitBreakerTrip_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_UsingBatteries_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_BatteryLowLevel_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_DeviceOK_5_TG-Plus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_RectificatorError_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_PowerUpReset_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_BatteriesAlarm_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralPhaseRTrip1_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralPhaseSTrip1_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GeneralPhaseTTrip1_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ClosedInt1_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_ClosedInt2_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GndState1_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_GndState2_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN1_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN2_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN3_5_TGPlus
+_OUTPUT
+                                _POSITIV
+                                _NO_SET
+sgl104_S0_IN4_5_TGPlus
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_OUTPUT
+                    _POSITIV
+                    _NO_SET
+???
+_EXPRESSION
+            _POSITIV
+            _OUTPUTS : 1
+            _OUTPUT
+            _POSITIV
+            _NO_SET
+sgl104_S0_IR_5_TGPlus
 END_FUNCTION_BLOCK
