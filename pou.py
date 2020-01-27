@@ -2,7 +2,7 @@ import os
 import shutil
 import support_functions
 from server_parts.models import Obj35mMeTe
-from codesys.models import Map, Pack, Check, Save, Sbo, Rotate, Rtu, FbdTemplate
+from codesys.models import Map, Pack, Check, Save, Sbo, Rotate, Rtu, FbdTemplate, RiseToTrigger
 from codesys.models import Device as Dev
 from devs.models import Device
 
@@ -26,6 +26,7 @@ data_type_dictionary = {
     'SAVE': 'x',
     'NAME': 's',
     'STRING': 's',
+    'BYTE': 'by'
 }
 
 output_dictionary = {
@@ -69,7 +70,7 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
 
         if rtu[2] == 'Measure':
             pack4 = _pack(device_name, 'byte', rtu[1], rtu[2], 'packv0', server_iteration)
-            rise0 = _rise(device_name, rtu[1], rtu[2], 'rise0', server_iteration)
+            rise0 = _rise(device_name, rtu[1], rtu[2], 'risev0', server_iteration)
             rtu_pou_instance_list.append(pack4)
             rtu_pou_instance_list.append(rise0)
 
@@ -115,7 +116,7 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
         rtu_instance_list.append(rtu)
 
         # After creating the rtu for previous purpose, clearing the instance related names
-        rtu_instance_list.clear()
+        rtu_pou_instance_list.clear()
 
     # Copying source lists to avoid reference related clearing
     measurements = measurements_list.copy()
@@ -148,13 +149,13 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
     return False
 
 
-def _rise(device_name, data_type, num_objects, purpose, pou_version, server_iteration):
+def _rise(device_name, num_objects, purpose, pou_version, server_iteration):
     # Obtain instance information
-    declaration_info = Map.objects.filter(Version=pou_version).first().VariableDeclaration
-    st_code_info = Map.objects.filter(Version=pou_version).first().Code
+    declaration_info = RiseToTrigger.objects.filter(Version=pou_version).first().VariableDeclaration
+    st_code_info = RiseToTrigger.objects.filter(Version=pou_version).first().Code
 
     # Instance data
-    pou_name = "RiseToTrigger" + str(num_objects) + data_type + str(device_name) + purpose + str(server_iteration)
+    pou_name = "RiseToTrigger" + str(num_objects) + str(device_name) + purpose + str(server_iteration)
 
     # create file
     rise_object = open(path + "\\" + pou_name + ".EXP", "w+")
@@ -216,12 +217,15 @@ def _map(device_name, data_type, num_objects, purpose, pou_version, server_itera
     if purpose != 'Measure':
         trigger_variable = Map.objects.filter(Version=pou_version).first().TriggerVariable
         trigger_str = support_functions.variable_to_declaration('x' + trigger_variable, num_objects, data_type)
+        check_variable = Map.objects.filter(Version=pou_version).first().CheckVariable
+        check_str = support_functions.variable_to_declaration('x' + check_variable, num_objects, data_type)
 
     # Formatting declaration section
     declaration_info = declaration_info.format(
         pou_name,
         input_str,
         trigger_str,
+        check_str,
         output_str
     )
 
@@ -229,14 +233,13 @@ def _map(device_name, data_type, num_objects, purpose, pou_version, server_itera
     code = ""
     if purpose == 'Measure':
         for i in range(num_objects):
-            code += data_type_dictionary[data_type.upper()] + output_variable + str(i + 1) + " := " + \
-                    data_type_dictionary[data_type.upper()] + input_variable + str(i + 1) + ";\n"
+            code += f"{data_type_dictionary[data_type.upper()]}{output_variable}{i + 1} := " \
+                    f"{data_type_dictionary[data_type.upper()]}{input_variable}{i + 1};\n"
     else:
         for i in range(num_objects):
-            code += "IF " + 'x' + trigger_variable + str(i + 1) + " THEN\n" + \
-                    data_type_dictionary[data_type.upper()] + output_variable + str(i + 1) + " := " + \
-                    data_type_dictionary[data_type.upper()] + input_variable + str(i + 1) + ";\n" + \
-                    "END_IF\n"
+            code += f"IF x{trigger_variable}{i + 1} OR x{check_variable}{i + 1} THEN\n " \
+                    f"{data_type_dictionary[data_type.upper()]}{output_variable}{i + 1} := " \
+                    f"{data_type_dictionary[data_type.upper()]}{input_variable}{i + 1};\n END_IF\n"
 
     # formatting code
     st_code_info = st_code_info.format(
@@ -555,16 +558,13 @@ def _rtu(device_name, device_operation, data_type, num_objects, purpose, instanc
     # Internal variables
     instance_block = ""
     for item in instance_list:
-        if 'Save' not in item[1]:
-            instance_block += item[0] + item[1] + " : " + item[1] + ";" + "\n"
+        if 'Save' not in item:
+            instance_block += f"inst0{item} : {item};\n"
 
     sbo_error_str = ""
-    sbo_jump_str = ""
-    if device_operation == "SBO" and purpose == 'c':
+    if device_operation == "SBO" and purpose == 'Command':
         sbo_error_variable = Rtu.objects.filter(Version=pou_version).first().SBOErrorVariable
-        sbo_jump_variable = Rtu.objects.filter(Version=pou_version).first().SBOJumpVariable
         sbo_error_str = "e" + sbo_error_variable + " : " + "eErrorCodes" + "\n"
-        sbo_jump_str = "x" + sbo_jump_variable + " : " + "BOOL;" + "\n"
 
     declaration_info = declaration_info.format(
         pou_name,
@@ -581,16 +581,15 @@ def _rtu(device_name, device_operation, data_type, num_objects, purpose, instanc
         num_objects,
         num_objects,
         num_objects,
-        sbo_error_str,
-        sbo_jump_str
+        sbo_error_str
     )
 
     rtu_object.write(declaration_info + "\n")
 
     # FBD Code
     # Select body networks
-    if device_operation == "SBO" and purpose == 'c':
-        body_networks = 9
+    if device_operation == "SBO" and purpose == 'Command':
+        body_networks = 8
     else:
         body_networks = 6
     fbd_header_info = fbd_header_info.format(str(body_networks) + "\n")
