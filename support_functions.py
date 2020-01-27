@@ -48,3 +48,14 @@ def update_address_2(address):
 
 def asdu_to_ioa(asdu):
     return asdu[1] * 256 + asdu[2]
+
+
+def variable_to_declaration(signal, num_objects, data_type=""):
+    input_str = [signal + str(i + 1) + ', ' for i in range(num_objects)]
+    input_str = ''.join(input_str)
+    input_str = input_str[:-2]
+    if data_type:
+        input_str += ": " + data_type.upper() + ";"
+
+    return input_str
+

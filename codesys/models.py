@@ -6,6 +6,7 @@ class Map(models.Model):
     Version = models.CharField(max_length=255)
     InputVariable = models.CharField(max_length=255, default="")
     TriggerVariable = models.CharField(max_length=255, default="")
+    CheckVariable = models.CharField(max_length=255, default="")
     OutputVariable = models.CharField(max_length=255, default="")
     VariableDeclaration = models.TextField(default="")
     Code = models.TextField(default="")
@@ -65,7 +66,6 @@ class Rtu(models.Model):
     SelectVariable = models.CharField(max_length=255, default="")
     ExecuteVariable = models.CharField(max_length=255, default="")
     SBOErrorVariable = models.CharField(max_length=255, default="")
-    SBOJumpVariable = models.CharField(max_length=255, default="")
     VariableDeclaration = models.TextField(default="")
 
 
@@ -79,6 +79,12 @@ class FbdTemplate(models.Model):
 
 
 class Device(models.Model):
+    Version = models.CharField(max_length=255)
+    VariableDeclaration = models.TextField(default="")
+    Code = models.TextField(default="")
+
+
+class RiseToTrigger(models.Model):
     Version = models.CharField(max_length=255)
     VariableDeclaration = models.TextField(default="")
     Code = models.TextField(default="")

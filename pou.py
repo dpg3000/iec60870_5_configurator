@@ -1,9 +1,12 @@
 import os
 import shutil
+import support_functions
 from server_parts.models import Obj35mMeTe
 from codesys.models import Map, Pack, Check, Save, Sbo, Rotate, Rtu, FbdTemplate
 from codesys.models import Device as Dev
 from devs.models import Device
+
+path = os.path.dirname(os.path.abspath(__file__)) + '\\POUs'
 
 # These lists were previously filled with the signal names in the server instance
 measurements_list = []
@@ -12,21 +15,29 @@ single_commands_list = []
 double_commands_list = []
 iec_new_message_list = []
 
+# Execution time related lists
+rtu_pou_instance_list = []
+rtu_instance_list = []
 device_list = []
 
-path = os.path.dirname(os.path.abspath(__file__)) + '\\POUs'
-
-input_dictionary = {
+data_type_dictionary = {
     'WORD': 'w',
     'BOOL': 'x',
     'SAVE': 'x',
     'NAME': 's',
     'STRING': 's',
 }
+
 output_dictionary = {
     'INPUT': 'aSignals',
     'SAVE': 'aSaves',
     'NAME': 'aNames'
+}
+
+purpose_dictionary = {
+    'Measure': 'm',
+    'State': 's',
+    'Command': 'c'
 }
 
 
@@ -44,34 +55,43 @@ def delete_pous():
 
 
 def create_pou(device_name, device_quantity, device_operation, server_iteration):
+    # Main purposes sequence list
     device_rtu_sequence = [
-        ('word', len(measurements_list[0]), 'm'),
-        ('bool', len(states_list[0]), 's'),
-        ('bool', len(single_commands_list[0]), 'c')
+        ('word', len(measurements_list[0]), 'Measure'),
+        ('bool', len(states_list[0]), 'State'),
+        ('bool', len(single_commands_list[0]), 'Command')
     ]
 
-    rtu_instance_list = []
-    instance_list = []
     for rtu in device_rtu_sequence:
-        # model generation
-        map0 = _map(device_name, rtu[0], rtu[1], rtu[2], 'mapv0', server_iteration)
+        if rtu[2] == 'Command':
+            pack3 = _pack(device_name, rtu[0], rtu[1], rtu[2], 'packv0', server_iteration)
+            rtu_pou_instance_list.append(pack3)
+
+        if rtu[2] == 'Measure':
+            pack4 = _pack(device_name, 'byte', rtu[1], rtu[2], 'packv0', server_iteration)
+            rise0 = _rise(device_name, rtu[1], rtu[2], 'rise0', server_iteration)
+            rtu_pou_instance_list.append(pack4)
+            rtu_pou_instance_list.append(rise0)
+
+        # Common ground between RTUs
         pack0 = _pack(device_name, rtu[0], rtu[1], rtu[2], 'packv0', server_iteration)
+        check0 = _check(device_name, rtu[0], rtu[1], rtu[2], 'checkv0', server_iteration)
+        map0 = _map(device_name, rtu[0], rtu[1], rtu[2], 'mapv0', server_iteration)
         pack1 = _pack(device_name, 'bool', rtu[1], rtu[2], 'packv0', server_iteration)
         pack2 = _pack(device_name, 'string', rtu[1], rtu[2], 'packv0', server_iteration)
-        check0 = _check(device_name, rtu[0], rtu[1], rtu[2], 'checkv0', server_iteration)
         save0 = _save(device_name, rtu[0], rtu[1], rtu[2], 'savev0', server_iteration)
 
         # rtu instances
-        instance_list.append(('inst0', map0))
-        instance_list.append(('inst0', pack0))
-        instance_list.append(('inst0', pack1))
-        instance_list.append(('inst0', pack2))
-        instance_list.append(('inst0', check0))
-        instance_list.append(('inst0', save0))
+        rtu_pou_instance_list.append(map0)
+        rtu_pou_instance_list.append(pack0)
+        rtu_pou_instance_list.append(pack1)
+        rtu_pou_instance_list.append(pack2)
+        rtu_pou_instance_list.append(check0)
+        rtu_pou_instance_list.append(save0)
 
         # SBO capabilities
         if device_operation == "SBO":
-            if rtu[2] == 'c':
+            if rtu[2] == 'Command':
                 control_list_len = 0
                 if single_commands_list:
                     control_list_len += len(single_commands_list[0])
@@ -80,36 +100,42 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
                 if control_list_len % 2:
                     return "Error - Device: " + device_name + ". The list of commands in the database should be even " \
                                                               "to use SBO "
-                sbo0 = _sbo(device_name, rtu[0], control_list_len, rtu[2], 'sbov0', server_iteration)
-                instance_list.append(('inst0', sbo0))
+                else:
+                    sbo0 = _sbo(device_name, rtu[0], control_list_len, rtu[2], 'sbov0', server_iteration)
+                    rtu_pou_instance_list.append(sbo0)
         else:
-            if rtu[2] == 'c':
+            if rtu[2] == 'Command':
                 if Device.objects.filter(Name=device_name).first().SBO:
                     if len(single_commands_list[0]) % 2:
                         return "Error - Device: " + device_name + ". The list of commands in the database should be " \
                                                                   "even to allow DO/SBO compatibility "
 
         # rtu
-        rtu0 = _rtu(device_name, device_operation, rtu[0], rtu[1], rtu[2], instance_list, 'rtuv0', server_iteration)
-        rtu_instance_list.append(('inst0', rtu0))
+        rtu = _rtu(device_name, device_operation, rtu[0], rtu[1], rtu[2], rtu_pou_instance_list, 'rtuv0', server_iteration)
+        rtu_instance_list.append(rtu)
 
         # After creating the rtu for previous purpose, clearing the instance related names
-        instance_list.clear()
+        rtu_instance_list.clear()
 
-    # shaping the device from previous rtus
-    io_sequence = [('Measure', len(measurements_list[0]), 'word'),
-                   ('State', len(states_list[0]), 'bool'),
-                   ('Command', len(single_commands_list[0]), 'bool')]
-
+    # Copying source lists to avoid reference related clearing
     measurements = measurements_list.copy()
     states = states_list.copy()
     single_commands = single_commands_list.copy()
     double_commands = double_commands_list.copy()           # Not used for now
     iec_new_message = iec_new_message_list.copy()
 
+    # Configuring device
+    device = _device(device_operation, device_name, device_rtu_sequence, rtu_instance_list, server_iteration)
     device_list.append(
-        (_device(device_operation, device_name, io_sequence, rtu_instance_list, server_iteration), device_quantity,
-         measurements, states, single_commands, device_operation, iec_new_message)
+        (
+            device,
+            device_quantity,
+            measurements,
+            states,
+            single_commands,
+            device_operation,
+            iec_new_message
+        )
     )
 
     # Clearing lists related to a particular device to leave room for next device
@@ -122,41 +148,76 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
     return False
 
 
+def _rise(device_name, data_type, num_objects, purpose, pou_version, server_iteration):
+    # Obtain instance information
+    declaration_info = Map.objects.filter(Version=pou_version).first().VariableDeclaration
+    st_code_info = Map.objects.filter(Version=pou_version).first().Code
+
+    # Instance data
+    pou_name = "RiseToTrigger" + str(num_objects) + data_type + str(device_name) + purpose + str(server_iteration)
+
+    # create file
+    rise_object = open(path + "\\" + pou_name + ".EXP", "w+")
+
+    # variable definition
+    declaration_info = declaration_info.format(
+        pou_name,
+        num_objects,
+        num_objects,
+        num_objects
+    )
+
+    # ST code
+    st_code_info = st_code_info.format(
+        num_objects
+    )
+
+    rise_object.write(declaration_info + "\n" + st_code_info)
+
+    # Closing file
+    rise_object.close()
+
+    return pou_name
+
+
 def _map(device_name, data_type, num_objects, purpose, pou_version, server_iteration):
     # Obtain instance information
     declaration_info = Map.objects.filter(Version=pou_version).first().VariableDeclaration
     st_code_info = Map.objects.filter(Version=pou_version).first().Code
 
-    # Meta-data
+    # Instance data
     pou_name = "Map" + str(num_objects) + data_type + str(device_name) + purpose + str(server_iteration)
 
     # create file
-    map_ = open(path + "\\" + pou_name + ".EXP", "w+")
+    map_object = open(path + "\\" + pou_name + ".EXP", "w+")
 
-    # variable definition
+    # Variable declaration
     # Inputs
     input_variable = Map.objects.filter(Version=pou_version).first().InputVariable
-    input_str = [input_dictionary[data_type.upper()] + input_variable.format(i + 1) + ", " for i in range(num_objects)]
-    input_str = ''.join(input_str)
-    input_str = input_str[:-2]
-    input_str += ": " + data_type.upper() + ";"
-
-    # Input triggers
-    trigger_str = ""
-    trigger_variable = Map.objects.filter(Version=pou_version).first().TriggerVariable
-    if purpose == 'c':
-        trigger_str = ["x" + trigger_variable.format(i + 1) + ", " for i in range(num_objects)]
-        trigger_str = ''.join(trigger_str)
-        trigger_str = trigger_str[:-2]
-        trigger_str += ": " + data_type.upper() + ";"
+    input_str = support_functions.variable_to_declaration(
+        data_type_dictionary[data_type.upper()] + input_variable,
+        num_objects,
+        data_type
+    )
 
     # Outputs
     output_variable = Map.objects.filter(Version=pou_version).first().OutputVariable
-    output_str = [input_dictionary[data_type.upper()] + output_variable.format(i + 1) + ", " for i in range(num_objects)]
-    output_str = ''.join(output_str)
-    output_str = output_str[:-2]
-    output_str += ": " + data_type.upper() + ";"
+    output_str = support_functions.variable_to_declaration(
+        data_type_dictionary[data_type.upper()] + output_variable,
+        num_objects,
+        data_type
+    )
 
+    # Trigger and check declaration
+    trigger_str = ""
+    trigger_variable = ""
+    check_str = ""
+    check_variable = ""
+    if purpose != 'Measure':
+        trigger_variable = Map.objects.filter(Version=pou_version).first().TriggerVariable
+        trigger_str = support_functions.variable_to_declaration('x' + trigger_variable, num_objects, data_type)
+
+    # Formatting declaration section
     declaration_info = declaration_info.format(
         pou_name,
         input_str,
@@ -166,28 +227,27 @@ def _map(device_name, data_type, num_objects, purpose, pou_version, server_itera
 
     # ST Code block
     code = ""
-    for i in range(num_objects):
-        if purpose == 'c':
-            code += "IF " + input_dictionary[data_type.upper()] + trigger_variable.format(i + 1) + " THEN\n"
-            code += input_dictionary[data_type.upper()] + output_variable.format(i + 1) + " := " + \
-                input_dictionary[data_type.upper()] + input_variable.format(i + 1) + ";\n"
-            code += "END_IF\n"
-        else:
-            code += input_dictionary[data_type.upper()] + output_variable.format(i + 1) + " := " + \
-                input_dictionary[data_type.upper()] + input_variable.format(i + 1) + ";\n"
+    if purpose == 'Measure':
+        for i in range(num_objects):
+            code += data_type_dictionary[data_type.upper()] + output_variable + str(i + 1) + " := " + \
+                    data_type_dictionary[data_type.upper()] + input_variable + str(i + 1) + ";\n"
+    else:
+        for i in range(num_objects):
+            code += "IF " + 'x' + trigger_variable + str(i + 1) + " THEN\n" + \
+                    data_type_dictionary[data_type.upper()] + output_variable + str(i + 1) + " := " + \
+                    data_type_dictionary[data_type.upper()] + input_variable + str(i + 1) + ";\n" + \
+                    "END_IF\n"
 
+    # formatting code
     st_code_info = st_code_info.format(
         code
     )
 
-    map_.write(
-        declaration_info +
-        "\n" +
-        st_code_info
-    )
+    # formatting the main groups
+    map_object.write(declaration_info + "\n" + st_code_info)
 
     # Closing file
-    map_.close()
+    map_object.close()
 
     return pou_name
 
@@ -197,19 +257,20 @@ def _pack(device_name, data_type, num_objects, purpose, pou_version, server_iter
     declaration_info = Pack.objects.filter(Version=pou_version).first().VariableDeclaration
     st_code_info = Pack.objects.filter(Version=pou_version).first().Code
 
-    # Meta-data
+    # Instance data
     pou_name = "Pack" + str(num_objects) + data_type + str(device_name) + purpose + str(server_iteration)
 
     # create file
-    pack_ = open(path + "\\" + pou_name + ".EXP", "w+")
+    pack_object = open(path + "\\" + pou_name + ".EXP", "w+")
 
     # variable definition
     # Inputs
     input_variable = Pack.objects.filter(Version=pou_version).first().InputVariable
-    input_str = [input_dictionary[data_type.upper()] + input_variable.format(i + 1) + ", " for i in range(num_objects)]
-    input_str = ''.join(input_str)
-    input_str = input_str[:-2]
-    input_str += ": " + data_type.upper() + ";"
+    input_str = support_functions.variable_to_declaration(
+        data_type_dictionary[data_type.upper()] + input_variable,
+        num_objects,
+        data_type
+    )
 
     # Outputs
     output_variable = Pack.objects.filter(Version=pou_version).first().OutputVariable
@@ -217,27 +278,22 @@ def _pack(device_name, data_type, num_objects, purpose, pou_version, server_iter
     declaration_info = declaration_info.format(
         pou_name,
         input_str,
-        output_variable.format(""), num_objects, data_type.upper()
+        output_variable, num_objects, data_type.upper()
     )
 
     # ST Code block
     code = ""
     for i in range(num_objects):
-        code += output_variable.format("[{}]".format(i + 1)) + " := " + input_dictionary[data_type.upper()] + \
-                input_variable.format(i + 1) + ";\n"
+        code += f"{output_variable}[{i + 1}] := {data_type_dictionary[data_type.upper()]}{input_variable}{i + 1};\n"
 
     st_code_info = st_code_info.format(
         code
     )
 
-    pack_.write(
-        declaration_info +
-        "\n" +
-        st_code_info
-    )
+    pack_object.write(declaration_info + "\n" + st_code_info)
 
     # closing file
-    pack_.close()
+    pack_object.close()
 
     return pou_name
 
@@ -247,11 +303,11 @@ def _check(device_name, data_type, num_objects, purpose, pou_version, server_ite
     declaration_info = Check.objects.filter(Version=pou_version).first().VariableDeclaration
     st_code_info = Check.objects.filter(Version=pou_version).first().Code
 
-    # Meta-data
+    # Instance data
     pou_name = "Check" + str(num_objects) + data_type + str(device_name) + purpose + str(server_iteration)
 
     # create file
-    check_ = open(path + "\\" + pou_name + ".EXP", "w+")
+    check_object = open(path + "\\" + pou_name + ".EXP", "w+")
 
     # variable definition
     declaration_info = declaration_info.format(
@@ -265,14 +321,14 @@ def _check(device_name, data_type, num_objects, purpose, pou_version, server_ite
     st_code_info = st_code_info.format(
         num_objects
     )
-    check_.write(
+    check_object.write(
         declaration_info +
         "\n" +
         st_code_info
     )
 
     # Closing file
-    check_.close()
+    check_object.close()
 
     return pou_name
 
@@ -282,11 +338,11 @@ def _save(device_name, data_type, num_objects, purpose, pou_version, server_iter
     declaration_info = Save.objects.filter(Version=pou_version).first().VariableDeclaration
     st_code_info = Save.objects.filter(Version=pou_version).first().Code
 
-    # Meta-data
+    # Instance data
     pou_name = "Save" + str(num_objects) + data_type + str(device_name) + purpose + str(server_iteration)
 
     # create file
-    save_ = open(path + "\\" + pou_name + ".EXP", "w+")
+    save_object = open(path + "\\" + pou_name + ".EXP", "w+")
 
     # Variable definition
     # Inputs
@@ -307,25 +363,20 @@ def _save(device_name, data_type, num_objects, purpose, pou_version, server_iter
     if data_type.upper() == "WORD":
         hysteresis = Obj35mMeTe.objects.filter(DeviceName=device_name).first().Hysteresis
     if hysteresis:
-        hysteresis_definition = hysteresis_variable.format('') + \
-            " : ARRAY[1..{}] OF INT := ".format(num_objects) + "[" + hysteresis + "];"
-        internal_input_definition = internal_input_variable.format('') + \
-            " : ARRAY[1..{}] OF {};".format(num_objects, data_type.upper())
-        hysteresis_condition = "IF (" + input_variable.format("[{}]".format(iterator_variable)) + " > (" + \
-                               internal_input_variable.format("[{}]".format(iterator_variable)) + " + ((" + \
-                               hysteresis_variable.format("[{}]".format(iterator_variable)) + " / 100) * " + \
-                               internal_input_variable.format("[{}]".format(iterator_variable)) + "))) " + "OR (" + \
-                               input_variable.format("[{}]".format(iterator_variable)) + " < (" + \
-                               internal_input_variable.format("[{}]".format(iterator_variable)) + " - ((" + \
-                               hysteresis_variable.format("[{}]".format(iterator_variable)) + " / 100) * " + \
-                               internal_input_variable.format("[{}]".format(iterator_variable)) + "))) THEN"
-        internal_input_code = internal_input_variable.format("[{}]".format(iterator_variable)) + " := " +\
-            input_variable.format("[{}]".format(iterator_variable)) + ";"
+        hysteresis_definition = hysteresis_variable + f" : ARRAY[1..{num_objects}] OF INT := [{hysteresis}];"
+        internal_input_definition = internal_input_variable + f" : ARRAY[1..{num_objects}] OF {data_type.upper()};"
+        hysteresis_condition = f"IF ({input_variable}[{iterator_variable}] > ({internal_input_variable}" \
+                               f"[{iterator_variable}] + (({hysteresis_variable}[{iterator_variable}] / 100) * " \
+                               f"{internal_input_variable}[{iterator_variable}] ))) OR ({input_variable}" \
+                               f"[{iterator_variable}] < ({internal_input_variable}[{iterator_variable}] - " \
+                               f"(({hysteresis_variable}[{iterator_variable}] / 100) * {internal_input_variable}" \
+                               f"[{iterator_variable}]))) THEN"
+        internal_input_code = f"{internal_input_variable}[{iterator_variable}] := {input_variable}[{iterator_variable}];"
         hysteresis_code_end_tag = "END_IF"
 
     declaration_info = declaration_info.format(
         pou_name,
-        input_variable.format(''), num_objects, data_type.upper(),
+        input_variable, num_objects, data_type.upper(),
         num_objects,
         num_objects,
         num_objects,
@@ -339,27 +390,23 @@ def _save(device_name, data_type, num_objects, purpose, pou_version, server_iter
         iterator_variable,
         iterator_variable,
         internal_input_code,
-        data_type.upper(), input_variable.format(''), iterator_variable,
+        data_type.upper(), input_variable, iterator_variable,
         iterator_variable, iterator_variable,
         iterator_variable,
         iterator_variable,
         hysteresis_condition,
         internal_input_code,
-        data_type.upper(), input_variable.format(''), iterator_variable,
+        data_type.upper(), input_variable, iterator_variable,
         iterator_variable, iterator_variable,
         hysteresis_code_end_tag,
         pou_name
     )
 
     # Write data stream
-    save_.write(
-        declaration_info +
-        "\n" +
-        st_code_info
-    )
+    save_object.write(declaration_info + "\n" + st_code_info)
 
     # Closing file
-    save_.close()
+    save_object.close()
 
     return pou_name
 
@@ -371,39 +418,29 @@ def _sbo(device_name, data_type, num_objects, purpose, pou_version, server_itera
     core_info = Sbo.objects.filter(Version=pou_version).first().Core
     final_check_info = Sbo.objects.filter(Version=pou_version).first().FinalCheck
 
-    # Meta-data
+    # Instance data
     pou_name = "Sbo" + str(num_objects) + data_type + str(device_name) + purpose + str(server_iteration)
 
     # create file
-    sbo_ = open(path + "\\" + pou_name + ".EXP", "w+")
+    sbo_object = open(path + "\\" + pou_name + ".EXP", "w+")
 
     # Inputs
     input_variable = Sbo.objects.filter(Version=pou_version).first().InputVariable
-    input_str = [input_variable.format(i + 1) + ", " for i in range(num_objects)]
-    input_str = ''.join(input_str)
-    input_str = input_str[:-2]
+    input_str = support_functions.variable_to_declaration(input_variable, num_objects)
 
     status_variable = Sbo.objects.filter(Version=pou_version).first().StatusVariable
-    status_str = [status_variable.format(i + 1) + ", " for i in range(int(num_objects / 2))]
-    status_str = ''.join(status_str)
-    status_str = status_str[:-2]
+    status_str = support_functions.variable_to_declaration(status_variable, num_objects / 2)
 
     # Outputs
     select_variable = Sbo.objects.filter(Version=pou_version).first().SelectVariable
-    select_str = [select_variable.format(i + 1) + ", " for i in range(int(num_objects / 2))]
-    select_str = ''.join(select_str)
-    select_str = select_str[:-2]
+    select_str = support_functions.variable_to_declaration(select_variable, num_objects / 2)
 
     execute_variable = Sbo.objects.filter(Version=pou_version).first().ExecuteVariable
-    execute_str = [execute_variable.format(i + 1) + ", " for i in range(int(num_objects / 2))]
-    execute_str = ''.join(execute_str)
-    execute_str = execute_str[:-2]
+    execute_str = support_functions.variable_to_declaration(execute_variable, num_objects / 2)
 
     # Internal variables
     internal_variable = Sbo.objects.filter(Version=pou_version).first().FlagVariable
-    internal_str = [internal_variable.format(i + 1) + ", " for i in range(int(num_objects / 2))]
-    internal_str = ''.join(internal_str)
-    internal_str = internal_str[:-2]
+    internal_str = support_functions.variable_to_declaration(internal_variable, num_objects / 2)
 
     declaration_info = declaration_info.format(
         pou_name,
@@ -420,7 +457,7 @@ def _sbo(device_name, data_type, num_objects, purpose, pou_version, server_itera
     for s in range(int(num_objects / 2)):
         core_info_formatted += core_info.format(
             s + 1,
-            (s * 2) + 1, (s * 2) + 2,
+            (2 * s) + 1, (2 * s) + 2,
             s + 1,
             s + 1,
             s + 1,
@@ -451,13 +488,13 @@ def _sbo(device_name, data_type, num_objects, purpose, pou_version, server_itera
     body_info = body_info.format(core_info_formatted)
 
     # Write data stream
-    sbo_.write(
+    sbo_object.write(
         declaration_info +
         "\n" +
         body_info
     )
 
-    sbo_.close()
+    sbo_object.close()
 
     return pou_name
 
@@ -467,67 +504,53 @@ def _rtu(device_name, device_operation, data_type, num_objects, purpose, instanc
     declaration_info = Rtu.objects.filter(Version=pou_version).first().VariableDeclaration
     fbd_header_info = FbdTemplate.objects.first().Header
 
-    # Meta-data
+    # Instance data
     pou_name = "Rtu" + str(num_objects) + data_type + str(device_name) + purpose + str(server_iteration)
 
     # create file
-    rtu_ = open(path + "\\" + pou_name + ".EXP", "w+")
+    rtu_object = open(path + "\\" + pou_name + ".EXP", "w+")
 
     # variable definition
     # Inputs
     input_variable = Rtu.objects.filter(Version=pou_version).first().InputVariable
-    input_str = [input_dictionary[data_type.upper()] + input_variable + "{}, ".format(i + 1) for i in range(num_objects)]
-    input_str = ''.join(input_str)
-    input_str = input_str[:-2]
-    input_str += ": " + data_type.upper() + ";" + "\n"
+    input_str = support_functions.variable_to_declaration(
+        data_type_dictionary[data_type.upper()] + input_variable,
+        num_objects,
+        data_type
+    )
 
     save_variable = Rtu.objects.filter(Version=pou_version).first().SaveVariable
-    save_str = ["x" + save_variable + "{}, ".format(i + 1) for i in range(num_objects)]
-    save_str = ''.join(save_str)
-    save_str = save_str[:-2]
+    save_str = support_functions.variable_to_declaration("x" + save_variable, num_objects)
 
     name_variable = Rtu.objects.filter(Version=pou_version).first().NameVariable
-    name_str = ["s" + name_variable + "{}, ".format(i + 1) for i in range(num_objects)]
-    name_str = ''.join(name_str)
-    name_str = name_str[:-2]
+    name_str = support_functions.variable_to_declaration("s" + name_variable, num_objects)
 
     trigger_str = ""
-    if purpose == 'c':
+    if purpose != 'Measure':
         trigger_variable = Rtu.objects.filter(Version=pou_version).first().TriggerVariable
-        trigger_str = ["x" + trigger_variable + "{}, ".format(i + 1) for i in range(num_objects)]
-        trigger_str = ''.join(trigger_str)
-        trigger_str = trigger_str[:-2]
-        trigger_str += " : BOOL;\n"
+        trigger_str = support_functions.variable_to_declaration("x" + trigger_variable, num_objects, data_type)
 
     status_str = ""
-    if device_operation == "SBO" and purpose == 'c':
+    if device_operation == "SBO" and purpose == 'Command':
         status_variable = Rtu.objects.filter(Version=pou_version).first().StatusVariable
-        status_str = [status_variable + "{}, ".format(i + 1) for i in range(int(num_objects / 2))]
-        status_str = ''.join(status_str)
-        status_str = status_str[:-2]
-        status_str += " : ENUM870_CLIENT_COMMAND;\n"
+        status_str = support_functions.variable_to_declaration(status_variable, num_objects / 2, 'ENUM870_CLIENT_COMMAND')
 
     # Outputs
     output_variable = Rtu.objects.filter(Version=pou_version).first().OutputVariable
-    output_str = [input_dictionary[data_type.upper()] + "Output{}, ".format(i + 1) for i in range(num_objects)]
-    output_str = ''.join(output_str)
-    output_str = output_str[:-2]
-    output_str += ": " + data_type.upper() + ";" + "\n"
+    output_str = support_functions.variable_to_declaration(
+        data_type_dictionary[data_type.upper()] + output_variable,
+        num_objects,
+        data_type
+    )
 
     select_str = ""
     execute_str = ""
-    if device_operation == "SBO" and purpose == 'c':
+    if device_operation == "SBO" and purpose == 'Command':
         select_variable = Rtu.objects.filter(Version=pou_version).first().SelectVariable
-        select_str = ["x" + select_variable + "{}, ".format(i + 1) for i in range(int(num_objects / 2))]
-        select_str = ''.join(select_str)
-        select_str = select_str[:-2]
-        select_str += " : BOOL;\n"
+        select_str = support_functions.variable_to_declaration("x" + select_variable, num_objects / 2, data_type)
 
         execute_variable = Rtu.objects.filter(Version=pou_version).first().ExecuteVariable
-        execute_str = ["x" + execute_variable + "{}, ".format(i + 1) for i in range(int(num_objects / 2))]
-        execute_str = ''.join(execute_str)
-        execute_str = execute_str[:-2]
-        execute_str += " : BOOL;\n"
+        execute_str = support_functions.variable_to_declaration("x" + execute_variable, num_objects / 2, data_type)
 
     # Internal variables
     instance_block = ""
@@ -562,7 +585,7 @@ def _rtu(device_name, device_operation, data_type, num_objects, purpose, instanc
         sbo_jump_str
     )
 
-    rtu_.write(declaration_info + "\n")
+    rtu_object.write(declaration_info + "\n")
 
     # FBD Code
     # Select body networks
@@ -571,40 +594,23 @@ def _rtu(device_name, device_operation, data_type, num_objects, purpose, instanc
     else:
         body_networks = 6
     fbd_header_info = fbd_header_info.format(str(body_networks) + "\n")
-    rtu_.write(fbd_header_info)
+    rtu_object.write(fbd_header_info)
 
     # RTU hub
+    _map_fbd(instance_list[0], num_objects, data_type, purpose, rtu_object)
+    pack_out_0 = _pack_fbd(instance_list[1], num_objects, data_type, 'Input', rtu_object)
+    pack_out_1 = _pack_fbd(instance_list[2], num_objects, 'bool', 'Save', rtu_object)
+    pack_out_2 = _pack_fbd(instance_list[3], num_objects, 'string', 'Name', rtu_object)
+    check_out_0 = _check_fbd(instance_list[4], pack_out_0, rtu_object)
+    _save_fbd(instance_list[5], num_objects, pack_out_0, pack_out_2, check_out_0[0], pack_out_1, check_out_0[1], rtu_object)
     if device_operation == "SBO" and purpose == 'c':
-        _jump_fbd('xJumpSelectAndExecute', 'SBO', rtu_)
-    _map_fbd(instance_list[0], num_objects, data_type, purpose, rtu_)
-    pack_out_0 = _pack_fbd(instance_list[1], num_objects, data_type, 'Input', rtu_)
-    pack_out_1 = _pack_fbd(instance_list[2], num_objects, 'bool', 'Save', rtu_)
-    pack_out_2 = _pack_fbd(instance_list[3], num_objects, 'string', 'Name', rtu_)
-    check_out_0 = _check_fbd(instance_list[4], pack_out_0, rtu_)
-    _save_fbd(instance_list[5], num_objects, pack_out_0, pack_out_2, check_out_0[0], pack_out_1, check_out_0[1], rtu_)
-    if device_operation == "SBO" and purpose == 'c':
-        _sbo_fbd(instance_list[6], num_objects, 'SBO', check_out_0[0], rtu_)
+        _sbo_fbd(instance_list[6], num_objects, 'SBO', check_out_0[0], rtu_object)
 
     # Final tag
-    rtu_.write("END_FUNCTION_BLOCK" + "\n")
-    rtu_.close()
+    rtu_object.write("END_FUNCTION_BLOCK" + "\n")
+    rtu_object.close()
 
     return pou_name
-
-
-def _jump_fbd(signal, step, file):
-    fbd_jump_info = FbdTemplate.objects.first().Jump
-    fbd_jump_info = fbd_jump_info.format(step)
-
-    fbd_input_unit_info = FbdTemplate.objects.first().InputUnit
-    fbd_input_unit_info = fbd_input_unit_info.format(signal)
-
-    file.write(
-        fbd_jump_info +
-        "\n" +
-        fbd_input_unit_info +
-        "\n"
-    )
 
 
 def _map_fbd(item, num_objects, case, purpose, file):
@@ -1325,3 +1331,4 @@ def _device_fbd(device, file):
             _POSITIV
             _NO_SET""" + "\n")
         file.write(device[2][i][0] + "\n")
+
