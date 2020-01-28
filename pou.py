@@ -2,7 +2,7 @@ import os
 import shutil
 import support_functions
 from server_parts.models import Obj35mMeTe
-from codesys.models import Map, Pack, Check, Save, Sbo, Rotate, Rtu, FbdTemplate, RiseToTrigger
+from codesys.models import Map, Pack, Check, Save, Sbo, Rtu, FbdTemplate, RiseToTrigger
 from codesys.models import Device as Dev
 from devs.models import Device
 
@@ -126,7 +126,7 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
     iec_new_message = iec_new_message_list.copy()
 
     # Configuring device
-    device = _device(device_operation, device_name, device_rtu_sequence, rtu_instance_list, server_iteration)
+    device = _device(device_operation, device_name, device_rtu_sequence, server_iteration)
     device_list.append(
         (
             device,
@@ -891,7 +891,7 @@ _NO_SET
 xSelect1\n""")
 
 
-def _device(device_operation, device_name, io_sequence, rtu_instance_list, server_iteration):
+def _device(device_operation, device_name, io_sequence, server_iteration):
     # Obtain instance information
     declaration_info = Dev.objects.filter(Version="devicev0").first().VariableDeclaration
     fbd_header_info = FbdTemplate.objects.first().Header

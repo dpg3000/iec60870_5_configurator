@@ -27,11 +27,11 @@ class ServerDevice:
         self.server_iteration = server_iteration
         self.monitor_ioa = Device.objects.filter(Name=name).first().MonitorIoa
         self.monitor_ioa_jump = Device.objects.filter(Name=name).first().MonitorIoaJump
-        self.monitor_obj_list = Device.objects.filter(Name=name).first().MonitorObjectList.split(",")
+        self.monitor_obj_list = str(Device.objects.filter(Name=name).first().MonitorObjectList).split(",")
         self.monitor_obj_list = [i.strip() for i in self.monitor_obj_list]
         self.control_ioa = Device.objects.filter(Name=name).first().ControlIoa
         self.control_ioa_jump = Device.objects.filter(Name=name).first().ControlIoaJump
-        self.control_obj_list = Device.objects.filter(Name=name).first().ControlObjectList.split(",")
+        self.control_obj_list = str(Device.objects.filter(Name=name).first().ControlObjectList).split(",")
         self.control_obj_list = [i.strip() for i in self.control_obj_list]
         self.internal_monitor_ioa = self.monitor_ioa
         self.internal_control_ioa = self.control_ioa

@@ -4,20 +4,18 @@ from django.db import models
 # Create your models here.
 class Rtu(models.Model):
     Version = models.CharField(max_length=255)
-    InputVariable = models.CharField(max_length=255, default="")
-    OutputVariable = models.CharField(max_length=255, default="")
-    OutputPackVariable = models.CharField(max_length=255, default="")
-    SaveInputVariable = models.CharField(max_length=255, default="")
-    SaveOutputVariable = models.CharField(max_length=255, default="")
-    NameInputVariable = models.CharField(max_length=255, default="")
-    NameOutputVariable = models.CharField(max_length=255, default="")
-    TriggerInputVariable = models.CharField(max_length=255, default="")
-    TriggerOutputVariable = models.CharField(max_length=255, default="")
-    StatusVariable = models.CharField(max_length=255, default="")
-    SelectVariable = models.CharField(max_length=255, default="")
-    ExecuteVariable = models.CharField(max_length=255, default="")
-    SBOErrorVariable = models.CharField(max_length=255, default="")
-    VariableDeclaration = models.TextField(default="")
+    RiseChanges = models.CharField(max_length=255, default="")
+    RiseChangesDataType = models.CharField(max_length=255, default="")
+    TriggerChanges = models.CharField(max_length=255, default="")
+    TriggerChangesDataType = models.CharField(max_length=255, default="")
+    Signals = models.CharField(max_length=255, default="")
+    SignalsDataType = models.CharField(max_length=255, default="")
+    CheckChanges = models.CharField(max_length=255, default="")
+    CheckChangesDataType = models.CharField(max_length=255, default="")
+    Names = models.CharField(max_length=255, default="")
+    NamesDataType = models.CharField(max_length=255, default="")
+    Saves = models.CharField(max_length=255, default="")
+    SavesDataType = models.CharField(max_length=255, default="")
 
     def __str__(self):
         return self.Version
@@ -31,7 +29,6 @@ class Map(models.Model):
     OutputVariable = models.CharField(max_length=255, default="")
     VariableDeclaration = models.TextField(default="")
     Code = models.TextField(default="")
-    rtu = models.ForeignKey(Rtu, default=1, verbose_name="parent", on_delete=models.SET_DEFAULT)
 
     def __str__(self):
         return self.Version
@@ -105,9 +102,54 @@ class FbdTemplate(models.Model):
 
 
 class Device(models.Model):
-    Version = models.CharField(max_length=255)
-    VariableDeclaration = models.TextField(default="")
-    Code = models.TextField(default="")
+    Version = models.CharField(max_length=255, default="")
+    FirstCycle = models.CharField(max_length=255, default="")
+    FirstCycleDataType = models.CharField(max_length=255, default="")
+    SequenceOrder = models.CharField(max_length=255, default="")
+    SequenceOrderDataType = models.CharField(max_length=255, default="")
+    Protocol = models.CharField(max_length=255, default="")
+    ProtocolDataType = models.CharField(max_length=255, default="")
+    StateLR = models.CharField(max_length=255, default="")
+    StateLRDataType = models.CharField(max_length=255, default="")
+    Action = models.CharField(max_length=255, default="")
+    ActionDataType = models.CharField(max_length=255, default="")
+
+    Measure = models.CharField(max_length=255, default="")
+    MeasureDataType = models.CharField(max_length=255, default="")
+    MeasureOutput = models.CharField(max_length=255, default="")
+    MeasureOutputDataType = models.CharField(max_length=255, default="")
+    SaveMeasure = models.CharField(max_length=255, default="")
+    SaveMeasureDataType = models.CharField(max_length=255, default="")
+    NameMeasure = models.CharField(max_length=255, default="")
+    NameMeasureDataType = models.CharField(max_length=255, default="")
+
+    State = models.CharField(max_length=255, default="")
+    StateDataType = models.CharField(max_length=255, default="")
+    StateOutput = models.CharField(max_length=255, default="")
+    StateOutputDataType = models.CharField(max_length=255, default="")
+    SaveState = models.CharField(max_length=255, default="")
+    SaveStateDataType = models.CharField(max_length=255, default="")
+    NameState = models.CharField(max_length=255, default="")
+    NameStateDataType = models.CharField(max_length=255, default="")
+    TriggerState = models.CharField(max_length=255, default="")
+    TriggerStateDataType = models.CharField(max_length=255, default="")
+
+    Command = models.CharField(max_length=255, default="")
+    CommandDataType = models.CharField(max_length=255, default="")
+    CommandOutput = models.CharField(max_length=255, default="")
+    CommandOutputDataType = models.CharField(max_length=255, default="")
+    SaveCommand = models.CharField(max_length=255, default="")
+    SaveCommandDataType = models.CharField(max_length=255, default="")
+    NameCommand = models.CharField(max_length=255, default="")
+    NameCommandDataType = models.CharField(max_length=255, default="")
+    TriggerCommand = models.CharField(max_length=255, default="")
+    TriggerCommandDataType = models.CharField(max_length=255, default="")
+    Status = models.CharField(max_length=255, default="")
+    StatusDataType = models.CharField(max_length=255, default="")
+    Select = models.CharField(max_length=255, default="")
+    SelectDataType = models.CharField(max_length=255, default="")
+    Execute = models.CharField(max_length=255, default="")
+    ExecuteDataType = models.CharField(max_length=255, default="")
 
     def __str__(self):
         return self.Version

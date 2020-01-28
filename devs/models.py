@@ -37,7 +37,7 @@ class Device(models.Model):
     Protocol = models.CharField(max_length=255, choices=PROTOCOL_CHOICES, default="104")
     MonitorIoa = models.IntegerField(default=1000)
     MonitorIoaJump = models.IntegerField(default=100)
-    MonitorObjectList1 = MultiSelectField(choices=MONITOR_OBJ_CHOICES, blank=True)
+    MonitorObjectList = MultiSelectField(choices=MONITOR_OBJ_CHOICES, blank=True)
     ControlIoa = models.IntegerField(default=1000)
     ControlIoaJump = models.IntegerField(default=100)
     ControlObjectList = MultiSelectField(choices=CONTROL_OBJ_CHOICES, blank=True)
