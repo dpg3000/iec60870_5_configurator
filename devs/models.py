@@ -1,4 +1,16 @@
 from django.db import models
+from multiselectfield import MultiSelectField
+from server_parts.models import ObjsInfo
+
+
+MONITOR_OBJ_CHOICES = ()
+CONTROL_OBJ_CHOICES = ()
+
+for m in ObjsInfo.objects.all():
+    if m.ObjType == 'MONITOR':
+        MONITOR_OBJ_CHOICES = MONITOR_OBJ_CHOICES + ((m.ObjCode, m.ObjCode),)
+    if m.ObjType == 'CONTROL':
+        CONTROL_OBJ_CHOICES = CONTROL_OBJ_CHOICES + ((m.ObjCode, m.ObjCode),)
 
 CLIENT_CHOICES = (
     ('yes', 'yes'),
@@ -25,9 +37,12 @@ class Device(models.Model):
     Protocol = models.CharField(max_length=255, choices=PROTOCOL_CHOICES, default="104")
     MonitorIoa = models.IntegerField(default=1000)
     MonitorIoaJump = models.IntegerField(default=100)
-    MonitorObjectList = models.CharField(blank=True, max_length=255)
+    MonitorObjectList1 = MultiSelectField(choices=MONITOR_OBJ_CHOICES, blank=True)
     ControlIoa = models.IntegerField(default=1000)
     ControlIoaJump = models.IntegerField(default=100)
-    ControlObjectList = models.CharField(blank=True, max_length=255)
+    ControlObjectList = MultiSelectField(choices=CONTROL_OBJ_CHOICES, blank=True)
     ClientObjs = models.TextField(blank=True)
     ClientSignals = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.Name

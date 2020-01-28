@@ -7,3 +7,5 @@ class Client(models.Model):
     Headers = models.TextField(default="")
     ConnectionHeaders = models.TextField(default="")
     ClosingTag = models.TextField(default="")
+
+

@@ -2,6 +2,27 @@ from django.db import models
 
 
 # Create your models here.
+class Rtu(models.Model):
+    Version = models.CharField(max_length=255)
+    InputVariable = models.CharField(max_length=255, default="")
+    OutputVariable = models.CharField(max_length=255, default="")
+    OutputPackVariable = models.CharField(max_length=255, default="")
+    SaveInputVariable = models.CharField(max_length=255, default="")
+    SaveOutputVariable = models.CharField(max_length=255, default="")
+    NameInputVariable = models.CharField(max_length=255, default="")
+    NameOutputVariable = models.CharField(max_length=255, default="")
+    TriggerInputVariable = models.CharField(max_length=255, default="")
+    TriggerOutputVariable = models.CharField(max_length=255, default="")
+    StatusVariable = models.CharField(max_length=255, default="")
+    SelectVariable = models.CharField(max_length=255, default="")
+    ExecuteVariable = models.CharField(max_length=255, default="")
+    SBOErrorVariable = models.CharField(max_length=255, default="")
+    VariableDeclaration = models.TextField(default="")
+
+    def __str__(self):
+        return self.Version
+
+
 class Map(models.Model):
     Version = models.CharField(max_length=255)
     InputVariable = models.CharField(max_length=255, default="")
@@ -10,6 +31,10 @@ class Map(models.Model):
     OutputVariable = models.CharField(max_length=255, default="")
     VariableDeclaration = models.TextField(default="")
     Code = models.TextField(default="")
+    rtu = models.ForeignKey(Rtu, default=1, verbose_name="parent", on_delete=models.SET_DEFAULT)
+
+    def __str__(self):
+        return self.Version
 
 
 class Pack(models.Model):
@@ -19,11 +44,17 @@ class Pack(models.Model):
     VariableDeclaration = models.TextField(default="")
     Code = models.TextField(default="")
 
+    def __str__(self):
+        return self.Version
+
 
 class Check(models.Model):
     Version = models.CharField(max_length=255)
     VariableDeclaration = models.TextField(default="")
     Code = models.TextField(default="")
+
+    def __str__(self):
+        return self.Version
 
 
 class Save(models.Model):
@@ -34,6 +65,9 @@ class Save(models.Model):
     IteratorVariable = models.CharField(max_length=255, default="")
     VariableDeclaration = models.TextField(default="")
     Code = models.TextField(default="")
+
+    def __str__(self):
+        return self.Version
 
 
 class Sbo(models.Model):
@@ -48,25 +82,17 @@ class Sbo(models.Model):
     Core = models.TextField(default="")
     FinalCheck = models.TextField(default="")
 
+    def __str__(self):
+        return self.Version
+
 
 class Rotate(models.Model):
     Version = models.CharField(max_length=255)
     VariableDeclaration = models.TextField(default="")
     Code = models.TextField(default="")
 
-
-class Rtu(models.Model):
-    Version = models.CharField(max_length=255)
-    InputVariable = models.CharField(max_length=255, default="")
-    SaveVariable = models.CharField(max_length=255, default="")
-    NameVariable = models.CharField(max_length=255, default="")
-    TriggerVariable = models.CharField(max_length=255, default="")
-    StatusVariable = models.CharField(max_length=255, default="")
-    OutputVariable = models.CharField(max_length=255, default="")
-    SelectVariable = models.CharField(max_length=255, default="")
-    ExecuteVariable = models.CharField(max_length=255, default="")
-    SBOErrorVariable = models.CharField(max_length=255, default="")
-    VariableDeclaration = models.TextField(default="")
+    def __str__(self):
+        return self.Version
 
 
 class FbdTemplate(models.Model):
@@ -83,8 +109,14 @@ class Device(models.Model):
     VariableDeclaration = models.TextField(default="")
     Code = models.TextField(default="")
 
+    def __str__(self):
+        return self.Version
+
 
 class RiseToTrigger(models.Model):
     Version = models.CharField(max_length=255)
     VariableDeclaration = models.TextField(default="")
     Code = models.TextField(default="")
+
+    def __str__(self):
+        return self.Version

@@ -12,6 +12,9 @@ class Card(models.Model):
     ControlObjectList = models.TextField(blank=True)
     KbusInfo = models.TextField(default="")
 
+    def __str__(self):
+        return self.Name
+
 
 class Kbus(models.Model):
     Headers = models.TextField(default="")

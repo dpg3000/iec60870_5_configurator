@@ -98,7 +98,9 @@ def submit(request):
         for device in center.iter('device'):
             if device.attrib['server'] == 'yes':
                 device_ins = ServerDevice(device.text, server_iteration)
-                device_ins.create_device(int(device.attrib['number']), iec60870_5_config)
+                error_message = device_ins.create_device(int(device.attrib['number']), iec60870_5_config)
+                if error_message:
+                    return HttpResponse("<h1>" + error_message + "</h1>")
             if device.attrib['client'] == 'yes':
                 client_ins = Client(device.text)
                 client_ins.create_client(int(device.attrib['number']))

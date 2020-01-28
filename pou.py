@@ -68,7 +68,7 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
             pack3 = _pack(device_name, rtu[0], rtu[1], rtu[2], 'packv0', server_iteration)
             rtu_pou_instance_list.append(pack3)
 
-        if rtu[2] == 'Measure':
+        if rtu[2] == 'State':
             pack4 = _pack(device_name, 'byte', rtu[1], rtu[2], 'packv0', server_iteration)
             rise0 = _rise(device_name, rtu[1], rtu[2], 'risev0', server_iteration)
             rtu_pou_instance_list.append(pack4)
@@ -99,8 +99,8 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
                 if double_commands_list:
                     control_list_len += len(double_commands_list[0])
                 if control_list_len % 2:
-                    return "Error - Device: " + device_name + ". The list of commands in the database should be even " \
-                                                              "to use SBO "
+                    return f"Error - Device: {device_name}. The list of commands in the database should be even to " \
+                           f"use SBO "
                 else:
                     sbo0 = _sbo(device_name, rtu[0], control_list_len, rtu[2], 'sbov0', server_iteration)
                     rtu_pou_instance_list.append(sbo0)
@@ -108,8 +108,8 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
             if rtu[2] == 'Command':
                 if Device.objects.filter(Name=device_name).first().SBO:
                     if len(single_commands_list[0]) % 2:
-                        return "Error - Device: " + device_name + ". The list of commands in the database should be " \
-                                                                  "even to allow DO/SBO compatibility "
+                        return f"Error - Device: {device_name}. The list of commands in the database should be even " \
+                               f"to allow DO/SBO compatibility "
 
         # rtu
         rtu = _rtu(device_name, device_operation, rtu[0], rtu[1], rtu[2], rtu_pou_instance_list, 'rtuv0', server_iteration)
@@ -529,6 +529,7 @@ def _rtu(device_name, device_operation, data_type, num_objects, purpose, instanc
     name_str = support_functions.variable_to_declaration("s" + name_variable, num_objects)
 
     trigger_str = ""
+    trigger_variable = ""
     if purpose != 'Measure':
         trigger_variable = Rtu.objects.filter(Version=pou_version).first().TriggerVariable
         trigger_str = support_functions.variable_to_declaration("x" + trigger_variable, num_objects, data_type)
@@ -564,7 +565,7 @@ def _rtu(device_name, device_operation, data_type, num_objects, purpose, instanc
     sbo_error_str = ""
     if device_operation == "SBO" and purpose == 'Command':
         sbo_error_variable = Rtu.objects.filter(Version=pou_version).first().SBOErrorVariable
-        sbo_error_str = "e" + sbo_error_variable + " : " + "eErrorCodes" + "\n"
+        sbo_error_str = f"e{sbo_error_variable} : eErrorCodes\n"
 
     declaration_info = declaration_info.format(
         pou_name,
@@ -588,22 +589,28 @@ def _rtu(device_name, device_operation, data_type, num_objects, purpose, instanc
 
     # FBD Code
     # Select body networks
-    if device_operation == "SBO" and purpose == 'Command':
-        body_networks = 8
-    else:
+    if purpose == 'Measure':
         body_networks = 6
+    else:
+        if purpose == 'Command' and device_operation == 'SBO':
+            body_networks = 7
+        else:
+            body_networks = 8
+
     fbd_header_info = fbd_header_info.format(str(body_networks) + "\n")
     rtu_object.write(fbd_header_info)
 
     # RTU hub
-    _map_fbd(instance_list[0], num_objects, data_type, purpose, rtu_object)
-    pack_out_0 = _pack_fbd(instance_list[1], num_objects, data_type, 'Input', rtu_object)
-    pack_out_1 = _pack_fbd(instance_list[2], num_objects, 'bool', 'Save', rtu_object)
-    pack_out_2 = _pack_fbd(instance_list[3], num_objects, 'string', 'Name', rtu_object)
-    check_out_0 = _check_fbd(instance_list[4], pack_out_0, rtu_object)
-    _save_fbd(instance_list[5], num_objects, pack_out_0, pack_out_2, check_out_0[0], pack_out_1, check_out_0[1], rtu_object)
-    if device_operation == "SBO" and purpose == 'c':
-        _sbo_fbd(instance_list[6], num_objects, 'SBO', check_out_0[0], rtu_object)
+    if purpose == 'Command':
+        _pack_fbd(instance_list[0], num_objects, 'bool', trigger_variable, rtu_object)
+        _pack_fbd(instance_list[1], num_objects, data_type, input_variable, rtu_object)
+        _check_fbd(instance_list[2], 'aSignals', rtu_object)
+        _map_fbd(instance_list[3], num_objects, data_type, purpose, rtu_object)
+        _pack_fbd(instance_list[4], num_objects, 'bool', save_variable, rtu_object)
+        _pack_fbd(instance_list[5], num_objects, 'string', name_variable, rtu_object)
+        # _save_fbd(instance_list[6], num_objects, pack_out_0, pack_out_2, check_out_0[0], pack_out_1, check_out_0[1], rtu_object)
+        # if device_operation == "SBO"
+        #     _sbo_fbd(instance_list[7], num_objects, 'SBO', check_out_0[0], rtu_object)
 
     # Final tag
     rtu_object.write("END_FUNCTION_BLOCK" + "\n")
@@ -726,8 +733,6 @@ def _pack_fbd(item, num_objects, case, signal, file):
         fbd_output_header_info_2 + "\n" +
         fbd_output_unit_info
     )
-
-    return output_dictionary[signal.upper()]
 
 
 def _check_fbd(item, to_check, file):
