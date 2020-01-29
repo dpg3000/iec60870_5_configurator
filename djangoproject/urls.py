@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from devs.views import configurator_view, submit, validate_parameters
 
 urlpatterns = [
@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('configurator/submit/', submit),
     path('ajax/validate_parameters/', validate_parameters),
+    path('tinymce/', include('tinymce.urls'))
 ]

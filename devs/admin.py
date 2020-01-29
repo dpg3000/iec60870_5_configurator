@@ -1,4 +1,15 @@
 from django.contrib import admin
 from .models import Device
 
-admin.site.register(Device)
+
+class DeviceAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ("INFO", {"fields": ["Name", "Protocol"]}),
+        ("OPERATION", {"fields": ["DO", "SBO"]}),
+        ("MONITOR", {"fields": ["MonitorIoa", "MonitorIoaJump", "MonitorObjectList"]}),
+        ("CONTROL", {"fields": ["ControlIoa", "ControlIoaJump", "ControlObjectList"]}),
+        ("CLIENT", {"fields": ["ClientObjs", "ClientSignals"]})
+    ]
+
+
+admin.site.register(Device, DeviceAdmin)

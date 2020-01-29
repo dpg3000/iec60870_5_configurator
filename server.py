@@ -151,16 +151,15 @@ class ServerDevice:
             trigger = ""
             try:
                 if command_id_splitted[5]:
-                    trigger = command_id_splitted[1] + "_" + command_id_splitted[2] + "_" + command_id_splitted[3] + \
-                              "_" + command_id_splitted[4] + "_" + command_id_splitted[5]
+                    trigger = command_id_splitted[0] + "_" + command_id_splitted[1] + "_" +\
+                              command_id_splitted[2] + "_" + command_id_splitted[3] + "_" + \
+                              command_id_splitted[4] + "_Trigger_" + command_id_splitted[5]
             except:
-                trigger = command_id_splitted[1] + "_" + command_id_splitted[2] + "_" + command_id_splitted[3] + \
-                          "_" + command_id_splitted[4]
+                trigger = command_id_splitted[0] + "_" + command_id_splitted[1] + "_" + command_id_splitted[2] + "_" +\
+                          command_id_splitted[3] + "_Trigger_" + command_id_splitted[4]
 
             xml_obj = obj_info.format(address[0], address[1], address[2], self.internal_control_ioa,
-                                      command_id, address[2],
-                                      address[1], address[0],
-                                      command_id, trigger)
+                                      command_id, address[2], address[1], address[0], command_id, trigger)
 
             self.internal_control_ioa += 1
             address = update_address(address)
@@ -174,6 +173,9 @@ class ServerDevice:
         address = ioa_to_address(self.internal_control_ioa)
         object_names = []
         for i in range(len(dcs)):
+            ######################################
+            # Faltaría añadir el trigger para DC #
+            ######################################
             xml_obj = obj_info.format(address[0], address[1], address[2], self.internal_control_ioa,
                                       dcs[i].format(self.server_iteration, 0, self.device_count).strip() + " / " +
                                       dcs[i].format(self.server_iteration, 1, self.device_count).strip(), address[2],
