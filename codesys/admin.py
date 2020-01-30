@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.db import models
-from .models import Map, Check, Save, Sbo, FbdTemplate, Device, RiseToTrigger, Rtu, UserPrg, STTemplate
-from tinymce.widgets import TinyMCE
+from .models import Map, Check, Save, Sbo, FBDTemplate, Device, RiseToTrigger, Rtu, UserPrg, FBTemplate
 
 
 # Register your models here.
@@ -50,13 +49,6 @@ class CheckAdmin(admin.ModelAdmin):
                                              ("LastValues", "LastValuesDataType")]}),
         ("CODE", {"fields": ["ST"]})
     ]
-
-    # Overrides the TextField by adding text editor capabilities to the field
-    # problem -> the acceded data from DB comes formatted as HTML (i.e. tabulations = <p style="padding-left: 40px;>")
-    # so a translation function is needed in order to use the text editor widget
-    # formfield_overrides = {
-    #     models.TextField: {'widget': TinyMCE()}
-    # }
 
 
 class MapAdmin(admin.ModelAdmin):
@@ -120,7 +112,9 @@ class SboAdmin(admin.ModelAdmin):
 class UserPrgAdmin(admin.ModelAdmin):
     fieldsets = [
         ("INFO", {"fields": ["Version"]}),
-        ("VARIABLE DECLARATION", {"fields": [("FirstCycle", "FirstCycleDataType")]})
+        ("VARIABLE DECLARATION", {"fields": [("FirstCycle", "FirstCycleDataType"),
+                                             ("MaskLocRem", "MaskLocRemDataType"),
+                                             ("LocRemState", "LocRemStateDataType")]})
     ]
 
 
@@ -129,8 +123,8 @@ admin.site.register(Check, CheckAdmin)
 admin.site.register(Save, SaveAdmin)
 admin.site.register(Sbo, SboAdmin)
 admin.site.register(Rtu, RtuAdmin)
-admin.site.register(FbdTemplate)
+admin.site.register(FBDTemplate)
 admin.site.register(Device, DeviceAdmin)
 admin.site.register(RiseToTrigger, RiseAdmin)
 admin.site.register(UserPrg, UserPrgAdmin)
-admin.site.register(STTemplate)
+admin.site.register(FBTemplate)

@@ -14,13 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from devs.views import configurator_view, submit, validate_parameters
+from codesys import models
 
 urlpatterns = [
     path('configurator/', configurator_view),
     path('admin/', admin.site.urls),
     path('configurator/submit/', submit),
     path('ajax/validate_parameters/', validate_parameters),
-    path('tinymce/', include('tinymce.urls'))
 ]
+
+# Filling interface for pou management at runserver
+# pou.fb_repository = pou.FunctionBlockModel()
+# pou.fbd_repository = pou.FunctionBlockDiagramModel()
+# pou.device_repository = pou.DeviceModel(version='devicev0')
+models.fbd_model = models.FunctionBlockDiagramModel()
+models.fb_model = models.FunctionBlockModel()
+models.user_prg_model = models.UserPrgModel(models.fbd_model, models.user_prg_version)
+models.device_model = models.DeviceModel(models.fbd_model, models.user_prg_model, models.device_version)
+models.rtu_model = models.RtuModel(models.device_model, models.fbd_model, models.rtu_version)
+

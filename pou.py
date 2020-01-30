@@ -2,11 +2,17 @@ import os
 import shutil
 import support_functions
 from server_parts.models import Obj35mMeTe
-from codesys.models import Map, Check, Save, Sbo, Rtu, FbdTemplate, RiseToTrigger, STTemplate
-from codesys.models import Device as Dev
+# from codesys.models import Map, Check, Save, Sbo, Rtu, FbdTemplate, RiseToTrigger, STTemplate
+# from codesys.models import Device as Dev
 from devs.models import Device
 
 path = os.path.dirname(os.path.abspath(__file__)) + '\\POUs'
+
+# Repository interface objects for management purposes
+fb_repository = None
+fbd_repository = None
+device_repository = None
+rtu_repository = None
 
 # These lists were previously filled with the signal names in the server instance
 measurements_list = []
@@ -56,18 +62,13 @@ def delete_pous():
 
 
 def create_pou(device_name, device_quantity, device_operation, server_iteration):
+    print(fbd_repository.header)
     # Main purposes sequence list
     device_rtu_sequence = [
         ('word', len(measurements_list[0]), 'Measure'),
         ('bool', len(states_list[0]), 'State'),
         ('bool', len(single_commands_list[0]), 'Command')
     ]
-
-    # Repository classes
-    function_block = FunctionBlock()
-    function_block_diagram = FunctionBlockDiagram()
-
-    device_model = DeviceModel(version='devicev0')
 
     for rtu in device_rtu_sequence:
         if rtu[2] == 'Command':
@@ -153,74 +154,6 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
     iec_new_message_list.clear()
 
     return False
-
-
-class FunctionBlock:
-    def __init__(self):
-        self.function_block_template = STTemplate.objects.first()
-        self.declaration_attribute = self.function_block_template.DeclarationAttributes
-        self.declaration_fb_header = self.function_block_template.DeclarationFBHeader
-        self.declaration_f_header = self.function_block_template.DeclarationFHeader
-        self.declaration_input = self.function_block_template.DeclarationInput
-        self.declaration_output = self.function_block_template.DeclarationOutput
-        self.declaration_internal = self.function_block_template.DeclarationInternal
-        self.declaration_end_tag = self.function_block_template.DeclarationEndTag
-        self.code_end_tag = self.function_block_template.CodeEndTag
-
-
-class FunctionBlockDiagram:
-    def __init__(self):
-        self.function_block_diagram_template = FbdTemplate.objects.first()
-        self.header = self.function_block_diagram_template.Header
-        self.input_header = self.function_block_diagram_template.InputHeader
-        self.input_unit = self.function_block_diagram_template.InputUnit
-        self.output_header = self.function_block_diagram_template.OutputHeader
-        self.output_unit = self.function_block_diagram_template.OutputUnit
-
-
-class DeviceModel:
-    def __init__(self, version):
-        self.device_model = Dev.objects.filter(Version=version).first()
-        self.sequence_order = self.device_model.SequenceOrder
-        self.sequence_order_data_type = self.device_model.SequenceOrderDataType
-        self.protocol = self.device_model.Protocol
-        self.protocol_data_type = self.device_model.ProtocolDataType
-        self.state_loc_rem = self.device_model.StateLocRem
-        self.state_loc_rem_data_type = self.device_model.StateLocRemDataType
-        self.measure = self.device_model.Measure
-        self.measure_data_type = self.device_model.MeasureDataType
-        self.measure_output = self.device_model.MeasureOutput
-        self.measure_output_data_type = self.device_model.MeasureOutputDataType
-        self.save_measure = self.device_model.SaveMeasure
-        self.save_measure_data_type = self.device_model.SaveMeasureDataType
-        self.name_measure = self.device_model.NameMeasure
-        self.name_measure_data_type = self.device_model.NameMeasureDataType
-        self.state = self.device_model.State
-        self.state_data_type = self.device_model.StateDataType
-        self.state_output = self.device_model.StateOutput
-        self.state_output_data_type = self.device_model.StateOutputDataType
-        self.save_state = self.device_model.SaveState
-        self.save_state_data_type = self.device_model.SaveStateDataType
-        self.name_state = self.device_model.NameState
-        self.name_state_data_type = self.device_model.NameStateDataType
-        self.trigger_state = self.device_model.TriggerState
-        self.trigger_state_data_type = self.device_model.TriggerStateDataType
-        self.command = self.device_model.Command
-        self.command_data_type = self.device_model.CommandDataType
-        self.command_output = self.device_model.CommandOutput
-        self.command_output_data_type = self.device_model.CommandOutputDataType
-        self.save_command = self.device_model.SaveCommand
-        self.save_command_data_type = self.device_model.SaveCommandDataType
-        self.name_command = self.device_model.NameCommand
-        self.name_command_data_type = self.device_model.NameCommandDataType
-        self.trigger_command = self.device_model.TriggerCommand
-        self.trigger_command_data_type = self.device_model.TriggerCommandDataType
-        self.status = self.device_model.Status
-        self.status_data_type = self.device_model.StatusDataType
-        self.select = self.device_model.Select
-        self.select_data_type = self.device_model.Select
-        self.execute = self.device_model.Execute
-        self.execute_data_type = self.device_model.ExecuteDataType
 
 
 def _rise(device_name, num_objects, purpose, pou_version, server_iteration):
@@ -1409,4 +1342,9 @@ def _device_fbd(device, file):
             _POSITIV
             _NO_SET""" + "\n")
         file.write(device[2][i][0] + "\n")
+
+
+
+
+
 
