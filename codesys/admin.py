@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db import models
 from .models import Map, Check, Save, Sbo, FBDTemplate, Device, RiseToTrigger, Rtu, UserPrg, FBTemplate
 
-
+# prueba tonta
 # Register your models here.
 # Another way to iterate the meta fields of the models, but if the structure varies, tends to get messy
 # class DeviceAdmin(admin.ModelAdmin):
