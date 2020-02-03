@@ -1,8 +1,7 @@
 from django.contrib import admin
 from django.db import models
-from .models import Map, Check, Save, Sbo, FBDTemplate, Device, RiseToTrigger, Rtu, UserPrg, FBTemplate
+from .models import Map, Check, Save, Sbo, FBDTemplate, Device, RiseToTrigger, Rtu, UserPrg, FBTemplate, Pack
 
-# prueba tonta
 # Register your models here.
 # Another way to iterate the meta fields of the models, but if the structure varies, tends to get messy
 # class DeviceAdmin(admin.ModelAdmin):
@@ -15,6 +14,7 @@ from .models import Map, Check, Save, Sbo, FBDTemplate, Device, RiseToTrigger, R
 #         field_name = str(field_list[(2 * index) + 2]).split('.')[2]
 #         field_name_next = str(field_list[(2 * index) + 3]).split('.')[2]
 #         fields = fields + ((field_name, field_name_next),)
+
 
 class DeviceAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -30,7 +30,7 @@ class DeviceAdmin(admin.ModelAdmin):
                                              ("StateOutput", "StateOutputDataType"),
                                              ("SaveState", "SaveStateDataType"),
                                              ("NameState", "NameStateDataType"),
-                                             ("TriggerState", "TriggerStateDataType"),
+                                             ("RiseState", "RiseStateDataType"),
                                              ("Command", "CommandDataType"),
                                              ("CommandOutput", "CommandOutputDataType"),
                                              ("SaveCommand", "SaveCommandDataType"),
@@ -39,6 +39,13 @@ class DeviceAdmin(admin.ModelAdmin):
                                              ("Status", "StatusDataType"),
                                              ("Select", "SelectDataType"),
                                              ("Execute", "ExecuteDataType")]})
+    ]
+
+
+class PackAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ("INFO", {"fields": ["Version"]}),
+        ("CODE", {"fields": ["ST"]})
     ]
 
 
@@ -83,7 +90,8 @@ class RtuAdmin(admin.ModelAdmin):
 class SaveAdmin(admin.ModelAdmin):
     fieldsets = [
         ("INFO", {"fields": ["Version"]}),
-        ("VARIABLE DECLARATION", {"fields": [("Time", "TimeDataType"),
+        ("VARIABLE DECLARATION", {"fields": [("Reason", "ReasonDataType", "ReasonInitVal"),
+                                             ("Time", "TimeDataType"),
                                              ("Offset", "OffsetDataType"),
                                              ("Iterator", "IteratorDataType"),
                                              ("PowerOnPrefix", "PowerOnPrefixDataType", "PowerOnPrefixInitVal"),
@@ -119,6 +127,7 @@ class UserPrgAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Map, MapAdmin)
+admin.site.register(Pack, PackAdmin)
 admin.site.register(Check, CheckAdmin)
 admin.site.register(Save, SaveAdmin)
 admin.site.register(Sbo, SboAdmin)

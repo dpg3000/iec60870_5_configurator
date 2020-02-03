@@ -1,10 +1,19 @@
 from django.db import models
 import copy
+from support_functions import variable_to_declaration
+from server_parts.models import Obj35mMeTe
 
 # Pou versions menu
 user_prg_version = 'userprgv0'
 device_version = 'devicev0'
 rtu_version = 'rtuv0'
+pack_version = 'packv0'
+check_version = 'checkv0'
+map_version = 'mapv0'
+rise_version = 'risev0'
+save_version = 'savev0'
+sbo_version = 'sbov0'
+
 
 # Data object repository for pou interface management
 fbd_model = None
@@ -13,15 +22,103 @@ user_prg_model = None
 device_model = None
 rtu_model = None
 pack_model = None
+check_model = None
 map_model = None
 rise_model = None
-check_model = None
 save_model = None
+sbo_model = None
 
 
 # Create your models here.
+class FBDTemplate(models.Model):
+    Header = models.TextField(default="")
+    InputHeader = models.TextField(default="")
+    InputUnit = models.TextField(default="")
+    OutputHeader = models.TextField(default="")
+    OutputUnit = models.TextField(default="")
+
+
+class FBTemplate(models.Model):
+    DeclarationAttributes = models.TextField(default="")
+    DeclarationFBHeader = models.CharField(max_length=255, default="")
+    DeclarationFHeader = models.CharField(max_length=255, default="")
+    DeclarationInput = models.TextField(default="")
+    DeclarationOutput = models.TextField(default="")
+    DeclarationInternal = models.TextField(default="")
+    DeclarationEndTag = models.CharField(max_length=255, default="")
+    CodeEndTag = models.CharField(max_length=255, default="")
+
+
+class UserPrg(models.Model):
+    Version = models.CharField(max_length=255, default="")
+    FirstCycle = models.CharField(max_length=255, default="")
+    FirstCycleDataType = models.CharField(max_length=255, default="")
+    MaskLocRem = models.CharField(max_length=255, default="")
+    MaskLocRemDataType = models.CharField(max_length=255, default="")
+    LocRemState = models.CharField(max_length=255, default="")
+    LocRemStateDataType = models.CharField(max_length=255, default="")
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super(UserPrg, self).save()
+        models.user_prg_model = UserPrgModel(fbd_model, user_prg_version)
+
+    def __str__(self):
+        return self.Version
+
+
+class Device(models.Model):
+    Version = models.CharField(max_length=255, default="")
+    SequenceOrder = models.CharField(max_length=255, default="")
+    SequenceOrderDataType = models.CharField(max_length=255, default="")
+    Protocol = models.CharField(max_length=255, default="")
+    ProtocolDataType = models.CharField(max_length=255, default="")
+    StateLocRem = models.CharField(max_length=255, default="")
+    StateLocRemDataType = models.CharField(max_length=255, default="")
+    Measure = models.CharField(max_length=255, default="")
+    MeasureDataType = models.CharField(max_length=255, default="")
+    MeasureOutput = models.CharField(max_length=255, default="")
+    MeasureOutputDataType = models.CharField(max_length=255, default="")
+    SaveMeasure = models.CharField(max_length=255, default="")
+    SaveMeasureDataType = models.CharField(max_length=255, default="")
+    NameMeasure = models.CharField(max_length=255, default="")
+    NameMeasureDataType = models.CharField(max_length=255, default="")
+    State = models.CharField(max_length=255, default="")
+    StateDataType = models.CharField(max_length=255, default="")
+    StateOutput = models.CharField(max_length=255, default="")
+    StateOutputDataType = models.CharField(max_length=255, default="")
+    SaveState = models.CharField(max_length=255, default="")
+    SaveStateDataType = models.CharField(max_length=255, default="")
+    NameState = models.CharField(max_length=255, default="")
+    NameStateDataType = models.CharField(max_length=255, default="")
+    RiseState = models.CharField(max_length=255, default="")
+    RiseStateDataType = models.CharField(max_length=255, default="")
+    Command = models.CharField(max_length=255, default="")
+    CommandDataType = models.CharField(max_length=255, default="")
+    CommandOutput = models.CharField(max_length=255, default="")
+    CommandOutputDataType = models.CharField(max_length=255, default="")
+    SaveCommand = models.CharField(max_length=255, default="")
+    SaveCommandDataType = models.CharField(max_length=255, default="")
+    NameCommand = models.CharField(max_length=255, default="")
+    NameCommandDataType = models.CharField(max_length=255, default="")
+    TriggerCommand = models.CharField(max_length=255, default="")
+    TriggerCommandDataType = models.CharField(max_length=255, default="")
+    Status = models.CharField(max_length=255, default="")
+    StatusDataType = models.CharField(max_length=255, default="")
+    Select = models.CharField(max_length=255, default="")
+    SelectDataType = models.CharField(max_length=255, default="")
+    Execute = models.CharField(max_length=255, default="")
+    ExecuteDataType = models.CharField(max_length=255, default="")
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super(Device, self).save()
+        models.device_model = DeviceModel(user_prg_model, device_version)
+
+    def __str__(self):
+        return self.Version
+
+
 class Rtu(models.Model):
-    Version = models.CharField(max_length=255)
+    Version = models.CharField(max_length=255, default="")
     Action = models.CharField(max_length=255, default="")
     ActionDataType = models.CharField(max_length=255, default="")
     RiseChanges = models.CharField(max_length=255, default="")
@@ -39,15 +136,19 @@ class Rtu(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(Rtu, self).save()
-        models.rtu_model = RtuModel(device_model, fbd_model, rtu_version)
+        models.rtu_model = RtuModel(device_model, rtu_version)
 
     def __str__(self):
         return self.Version
 
 
-class Map(models.Model):
+class Pack(models.Model):
     Version = models.CharField(max_length=255)
     ST = models.TextField(default="")
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super(Pack, self).save()
+        models.pack_model = PackModel(rtu_model, fb_model, pack_version)
 
     def __str__(self):
         return self.Version
@@ -61,12 +162,47 @@ class Check(models.Model):
     LastValuesDataType = models.CharField(max_length=255, default="")
     ST = models.TextField()
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super(Check, self).save()
+        models.check_model = CheckModel(rtu_model, fb_model, check_version)
+
+    def __str__(self):
+        return self.Version
+
+
+class Map(models.Model):
+    Version = models.CharField(max_length=255)
+    ST = models.TextField(default="")
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super(Map, self).save()
+        models.pack_model = PackModel(rtu_model, fb_model, map_version)
+
+    def __str__(self):
+        return self.Version
+
+
+class RiseToTrigger(models.Model):
+    Version = models.CharField(max_length=255)
+    LastRise = models.CharField(max_length=255, default="")
+    LastRiseDataType = models.CharField(max_length=255, default="")
+    Iterator = models.CharField(max_length=255, default="")
+    IteratorDataType = models.CharField(max_length=255, default="")
+    ST = models.TextField(default="")
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super(RiseToTrigger, self).save()
+        models.rise_model = RiseModel(rtu_model, fb_model, rise_version)
+
     def __str__(self):
         return self.Version
 
 
 class Save(models.Model):
     Version = models.CharField(max_length=255)
+    Reason = models.CharField(max_length=255, default="")
+    ReasonDataType = models.CharField(max_length=255, default="")
+    ReasonInitVal = models.CharField(max_length=255, default="")
     Time = models.CharField(max_length=255, default="")
     TimeDataType = models.CharField(max_length=255, default="")
     Offset = models.CharField(max_length=255, default="")
@@ -99,6 +235,10 @@ class Save(models.Model):
     LastValuesDataType = models.CharField(max_length=255, default="")
     ST = models.TextField(default="")
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super(Save, self).save()
+        models.save_model = SaveModel(rtu_model, fb_model, save_version)
+
     def __str__(self):
         return self.Version
 
@@ -116,105 +256,6 @@ class Sbo(models.Model):
         return self.Version
 
 
-class FBDTemplate(models.Model):
-    Header = models.TextField(default="")
-    InputHeader = models.TextField(default="")
-    InputUnit = models.TextField(default="")
-    OutputHeader = models.TextField(default="")
-    OutputUnit = models.TextField(default="")
-
-
-class Device(models.Model):
-    Version = models.CharField(max_length=255, default="")
-    SequenceOrder = models.CharField(max_length=255, default="")
-    SequenceOrderDataType = models.CharField(max_length=255, default="")
-    Protocol = models.CharField(max_length=255, default="")
-    ProtocolDataType = models.CharField(max_length=255, default="")
-    StateLocRem = models.CharField(max_length=255, default="")
-    StateLocRemDataType = models.CharField(max_length=255, default="")
-    Measure = models.CharField(max_length=255, default="")
-    MeasureDataType = models.CharField(max_length=255, default="")
-    MeasureOutput = models.CharField(max_length=255, default="")
-    MeasureOutputDataType = models.CharField(max_length=255, default="")
-    SaveMeasure = models.CharField(max_length=255, default="")
-    SaveMeasureDataType = models.CharField(max_length=255, default="")
-    NameMeasure = models.CharField(max_length=255, default="")
-    NameMeasureDataType = models.CharField(max_length=255, default="")
-    State = models.CharField(max_length=255, default="")
-    StateDataType = models.CharField(max_length=255, default="")
-    StateOutput = models.CharField(max_length=255, default="")
-    StateOutputDataType = models.CharField(max_length=255, default="")
-    SaveState = models.CharField(max_length=255, default="")
-    SaveStateDataType = models.CharField(max_length=255, default="")
-    NameState = models.CharField(max_length=255, default="")
-    NameStateDataType = models.CharField(max_length=255, default="")
-    TriggerState = models.CharField(max_length=255, default="")
-    TriggerStateDataType = models.CharField(max_length=255, default="")
-    Command = models.CharField(max_length=255, default="")
-    CommandDataType = models.CharField(max_length=255, default="")
-    CommandOutput = models.CharField(max_length=255, default="")
-    CommandOutputDataType = models.CharField(max_length=255, default="")
-    SaveCommand = models.CharField(max_length=255, default="")
-    SaveCommandDataType = models.CharField(max_length=255, default="")
-    NameCommand = models.CharField(max_length=255, default="")
-    NameCommandDataType = models.CharField(max_length=255, default="")
-    TriggerCommand = models.CharField(max_length=255, default="")
-    TriggerCommandDataType = models.CharField(max_length=255, default="")
-    Status = models.CharField(max_length=255, default="")
-    StatusDataType = models.CharField(max_length=255, default="")
-    Select = models.CharField(max_length=255, default="")
-    SelectDataType = models.CharField(max_length=255, default="")
-    Execute = models.CharField(max_length=255, default="")
-    ExecuteDataType = models.CharField(max_length=255, default="")
-
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        super(Device, self).save()
-        models.device_model = DeviceModel(fbd_model, user_prg_model, device_version)
-
-    def __str__(self):
-        return self.Version
-
-
-class RiseToTrigger(models.Model):
-    Version = models.CharField(max_length=255)
-    LastRise = models.CharField(max_length=255, default="")
-    LastRiseDataType = models.CharField(max_length=255, default="")
-    Iterator = models.CharField(max_length=255, default="")
-    IteratorDataType = models.CharField(max_length=255, default="")
-    ST = models.TextField(default="")
-
-    def __str__(self):
-        return self.Version
-
-
-class UserPrg(models.Model):
-    Version = models.CharField(max_length=255)
-    FirstCycle = models.CharField(max_length=255, default="")
-    FirstCycleDataType = models.CharField(max_length=255, default="")
-    MaskLocRem = models.CharField(max_length=255, default="")
-    MaskLocRemDataType = models.CharField(max_length=255, default="")
-    LocRemState = models.CharField(max_length=255, default="")
-    LocRemStateDataType = models.CharField(max_length=255, default="")
-
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        super(UserPrg, self).save()
-        models.user_prg_model = UserPrgModel(fbd_model, user_prg_version)
-
-    def __str__(self):
-        return self.Version
-
-
-class FBTemplate(models.Model):
-    DeclarationAttributes = models.TextField(default="")
-    DeclarationFBHeader = models.CharField(max_length=255, default="")
-    DeclarationFHeader = models.CharField(max_length=255, default="")
-    DeclarationInput = models.TextField(default="")
-    DeclarationOutput = models.TextField(default="")
-    DeclarationInternal = models.TextField(default="")
-    DeclarationEndTag = models.CharField(max_length=255, default="")
-    CodeEndTag = models.CharField(max_length=255, default="")
-
-
 class FunctionBlockDiagramModel:
     def __init__(self):
         self.function_block_diagram_template = FBDTemplate.objects.first()
@@ -228,7 +269,7 @@ class FunctionBlockDiagramModel:
 class FunctionBlockModel:
     def __init__(self):
         self.function_block_template = FBTemplate.objects.first()
-        self.declaration_attribute = self.function_block_template.DeclarationAttributes
+        self.declaration_attributes = self.function_block_template.DeclarationAttributes
         self.declaration_fb_header = self.function_block_template.DeclarationFBHeader
         self.declaration_f_header = self.function_block_template.DeclarationFHeader
         self.declaration_input = self.function_block_template.DeclarationInput
@@ -246,23 +287,18 @@ class UserPrgModel(FunctionBlockDiagramModel):
         else:
             FunctionBlockDiagramModel.__init__(self)
 
-        self.user_prg_model = UserPrg.objects(Version=version).first()
-        self.first_cycle = user_prg_model.FirstCycle
-        self.first_cycle_data_type = user_prg_model.FirstCycleDataType
-        self.mask_loc_rem = user_prg_model.MaskLocRem
-        self.mask_loc_rem_data_type = user_prg_model.MaskLocRemDataType
-        self.loc_rem_state = user_prg_model.LocRemState
-        self.loc_rem_state_data_type = user_prg_model.LocRemStateDataType
+        self.user_prg_model = UserPrg.objects.filter(Version=version).first()
+        self.first_cycle = self.user_prg_model.FirstCycle
+        self.first_cycle_data_type = self.user_prg_model.FirstCycleDataType
+        self.mask_loc_rem = self.user_prg_model.MaskLocRem
+        self.mask_loc_rem_data_type = self.user_prg_model.MaskLocRemDataType
+        self.loc_rem_state = self.user_prg_model.LocRemState
+        self.loc_rem_state_data_type = self.user_prg_model.LocRemStateDataType
 
 
-class DeviceModel(FunctionBlockDiagramModel, UserPrgModel):
+class DeviceModel(UserPrgModel):
     # Copy constructor implementation
-    def __init__(self, fbd, user_prg, version):
-        if fbd:
-            self.__dict__ = copy.deepcopy(fbd.__dict__)
-        else:
-            FunctionBlockDiagramModel.__init__(self)
-
+    def __init__(self, user_prg, version):
         if user_prg:
             self.__dict__ = copy.deepcopy(user_prg.__dict__)
         else:
@@ -291,8 +327,8 @@ class DeviceModel(FunctionBlockDiagramModel, UserPrgModel):
         self.save_state_data_type = self.device_model.SaveStateDataType
         self.name_state = self.device_model.NameState
         self.name_state_data_type = self.device_model.NameStateDataType
-        self.trigger_state = self.device_model.TriggerState
-        self.trigger_state_data_type = self.device_model.TriggerStateDataType
+        self.rise_state = self.device_model.RiseState
+        self.rise_state_data_type = self.device_model.RiseStateDataType
         self.command = self.device_model.Command
         self.command_data_type = self.device_model.CommandDataType
         self.command_output = self.device_model.CommandOutput
@@ -311,18 +347,13 @@ class DeviceModel(FunctionBlockDiagramModel, UserPrgModel):
         self.execute_data_type = self.device_model.ExecuteDataType
 
 
-class RtuModel(DeviceModel, FunctionBlockDiagramModel):
+class RtuModel(DeviceModel):
     # Copy constructor implementation
-    def __init__(self, device, fbd, version):
+    def __init__(self, device, version):
         if device:
             self.__dict__ = copy.deepcopy(device.__dict__)
         else:
-            DeviceModel.__init__(self, None, None, None)
-
-        if fbd:
-            self.__dict__ = copy.deepcopy(fbd.__dict__)
-        else:
-            FunctionBlockDiagramModel.__init__(self)
+            DeviceModel.__init__(self, None, None)
 
         self.rtu_model = Rtu.objects.filter(Version=version).first()
         self.action = self.rtu_model.Action
@@ -339,3 +370,638 @@ class RtuModel(DeviceModel, FunctionBlockDiagramModel):
         self.names_data_type = self.rtu_model.NamesDataType
         self.saves = self.rtu_model.Saves
         self.saves_data_type = self.rtu_model.SavesDataType
+
+
+class PackModel(RtuModel, FunctionBlockModel):
+    def __init__(self, rtu, fb, version):
+        if rtu:
+            self.__dict__ = copy.deepcopy(rtu.__dict__)
+        else:
+            RtuModel.__init__(self, None, None)
+
+        if fb:
+            self.__dict__ = copy.deepcopy(fb.__dict__)
+        else:
+            FunctionBlockModel.__init__(self)
+
+        self.pack_model = Pack.objects.filter(Version=version).first()
+        self.st = self.pack_model.ST
+
+    def pack(self, device_name, num_objects, rtu_purpose, internal_purpose, server_iteration, path):
+        # Obtaining data
+        pack_information = self.pack_decision_tree(rtu_purpose, internal_purpose)
+        input_data = pack_information[0]
+        input_data_type = pack_information[1]
+        output_data = pack_information[2]
+        output_data_type = pack_information[3]
+
+        # Instance data
+        pou_name = "Pack" + str(num_objects) + input_data_type + str(device_name) + rtu_purpose + str(server_iteration)
+
+        # create file
+        pack_object = open(path + "\\" + pou_name + ".EXP", "w+")
+
+        # variable definition
+        # Inputs
+        input_str = variable_to_declaration(signal=input_data, num_objects=num_objects, data_type=input_data_type)
+        var_input = self.declaration_input.format(input_str)
+
+        # Outputs
+        output_str = f"{output_data} : ARRAY [1..{num_objects}] OF {output_data_type};"
+        var_output = self.declaration_output.format(output_str)
+
+        # Declaration construction
+        declaration = self.declaration_attributes + '\n'
+        declaration += self.declaration_fb_header.format(pou_name) + '\n'
+        declaration += var_input + '\n'
+        declaration += var_output + '\n'
+        declaration += self.declaration_end_tag + '\n'
+
+        # Code construction
+        code = ''
+        for i in range(num_objects):
+            code += self.st.format(output_data, i + 1, input_data) + '\n'
+        code += self.code_end_tag
+
+        # Writing the pou
+        pack_object.write(declaration + code)
+
+        # closing file
+        pack_object.close()
+
+        return pou_name
+
+    def pack_decision_tree(self, rtu_purpose, internal_purpose):
+        input_data = ''
+        output_data = ''
+        input_data_type = ''
+        output_data_type = ''
+        if internal_purpose == 'trigger':
+            if rtu_purpose == 'command':
+                input_data = self.trigger_command
+                output_data = self.trigger_changes
+                input_data_type = self.trigger_command_data_type
+                output_data_type = self.trigger_changes_data_type
+            elif rtu_purpose == 'state':
+                input_data = self.rise_state
+                output_data = self.rise_changes
+                input_data_type = self.rise_state_data_type
+                output_data_type = self.rise_changes_data_type
+        elif internal_purpose == 'label':
+            if rtu_purpose == 'command':
+                input_data = self.name_command
+                input_data_type = self.name_command_data_type
+            elif rtu_purpose == 'state':
+                input_data = self.name_state
+                input_data_type = self.name_state_data_type
+            elif rtu_purpose == 'measure':
+                input_data = self.name_measure
+                input_data_type = self.name_measure_data_type
+            output_data = self.names
+            output_data_type = self.names_data_type
+        elif internal_purpose == 'save':
+            if rtu_purpose == 'command':
+                input_data = self.save_command
+                input_data_type = self.save_command_data_type
+            elif rtu_purpose == 'state':
+                input_data = self.save_state
+                input_data_type = self.save_state_data_type
+            elif rtu_purpose == 'measure':
+                input_data = self.save_measure
+                input_data_type = self.save_measure_data_type
+            output_data = self.saves
+            output_data_type = self.saves_data_type
+        elif internal_purpose == 'values':
+            if rtu_purpose == 'command':
+                input_data = self.measure
+                input_data_type = self.measure_data_type
+            elif rtu_purpose == 'state':
+                input_data = self.state
+                input_data_type = self.state_data_type
+            elif rtu_purpose == 'measure':
+                input_data = self.measure
+                input_data_type = self.measure_data_type
+            output_data = self.signals
+            output_data_type = self.signals_data_type
+        else:
+            "gestionar errores"
+
+        return input_data, input_data_type, output_data, output_data_type
+
+
+class CheckModel(RtuModel, FunctionBlockModel):
+    def __init__(self, rtu, fb, version):
+        if rtu:
+            self.__dict__ = copy.deepcopy(rtu.__dict__)
+        else:
+            RtuModel.__init__(self, None, None)
+
+        if fb:
+            self.__dict__ = copy.deepcopy(fb.__dict__)
+        else:
+            FunctionBlockModel.__init__(self)
+
+        self.check_model = Check.objects.filter(Version=version).first()
+        self.iterator = self.check_model.Iterator
+        self.iterator_data_type = self.check_model.IteratorDataType
+        self.last_values = self.check_model.LastValues
+        self.last_values_data_type = self.check_model.LastValuesDataType
+        self.st = self.check_model.ST
+
+    def check(self, device_name, num_objects, purpose, server_iteration, path):
+        input_data = self.signals
+        input_data_type = self.signals_data_type
+        output_data = self.check_changes
+        output_data_type = self.check_changes_data_type
+
+        # Instance data
+        pou_name = "Check" + str(num_objects) + input_data_type + str(device_name) + purpose + str(server_iteration)
+
+        # create file
+        check_object = open(path + "\\" + pou_name + ".EXP", "w+")
+
+        # variable definition
+        # Inputs
+        input_str = f"{input_data} : ARRAY [1..{num_objects}] OF {input_data_type};" + '\n'
+        input_str += f"{self.first_cycle} : {self.first_cycle_data_type};"
+        var_input = self.declaration_input.format(input_str)
+
+        # Outputs
+        output_str = f"{output_data} : ARRAY [1..{num_objects}] OF {output_data_type};"
+        var_output = self.declaration_output.format(output_str)
+
+        # Internals
+        internal_str = f"{self.iterator} : {self.iterator_data_type};" + '\n'
+        internal_str += f"{self.last_values} : ARRAY [1..{num_objects}] OF {self.last_values_data_type};"
+        var_internal = self.declaration_internal.format(internal_str)
+
+        # Declaration construction
+        declaration = self.declaration_attributes + '\n'
+        declaration += self.declaration_fb_header.format(pou_name) + '\n'
+        declaration += var_input + '\n'
+        declaration += var_output + '\n'
+        declaration += var_internal + '\n'
+        declaration += self.declaration_end_tag
+
+        # Code construction
+        code = self.st.format(
+            self.iterator, num_objects,
+            self.first_cycle,
+            self.last_values, self.iterator, input_data, self.iterator,
+            input_data, self.iterator, self.last_values, self.iterator,
+            output_data, self.iterator,
+            output_data, self.iterator,
+            output_data, input_data
+        )
+        code += '\n' + self.code_end_tag
+
+        # Writing the pou
+        check_object.write(declaration + code)
+
+        # Closing file
+        check_object.close()
+
+        return pou_name
+
+
+class MapModel(RtuModel, FunctionBlockModel):
+    def __init__(self, rtu, fb, version):
+        if rtu:
+            self.__dict__ = copy.deepcopy(rtu.__dict__)
+        else:
+            RtuModel.__init__(self, None, None)
+
+        if fb:
+            self.__dict__ = copy.deepcopy(fb.__dict__)
+        else:
+            FunctionBlockModel.__init__(self)
+
+        self.map_model = Map.objects.filter(Version=version).first()
+        self.st = self.map_model.ST
+
+    def map(self, device_name, num_objects, purpose, server_iteration, path):
+        # Obtaining data
+        map_information = self.map_decision_tree(purpose)
+        input_data = map_information[0]
+        input_data_type = map_information[1]
+        output_data = map_information[2]
+        output_data_type = map_information[3]
+
+        # Instance data
+        pou_name = "Map" + str(num_objects) + input_data_type + str(device_name) + purpose + str(server_iteration)
+
+        # create file
+        map_object = open(path + "\\" + pou_name + ".EXP", "w+")
+
+        # Variable declaration
+        # Inputs
+        input_str = f"{self.action} : {self.action_data_type};" + '\n'
+        input_str += f"{self.state_loc_rem} : {self.loc_rem_state_data_type};" + '\n'
+        input_str += variable_to_declaration(signal=input_data, num_objects=num_objects, data_type=input_data_type) + '\n'
+        input_str += variable_to_declaration(signal=self.trigger_changes, num_objects=num_objects, data_type=self.trigger_changes_data_type) + '\n'
+        input_str += variable_to_declaration(signal=self.check_changes, num_objects=num_objects, data_type=self.check_changes_data_type)
+        var_input = self.declaration_input.format(input_str)
+
+        # Outputs
+        output_str = variable_to_declaration(signal=output_data, num_objects=num_objects, data_type=output_data_type)
+        var_output = self.declaration_output.format(output_str)
+
+        # Declaration construction
+        declaration = self.declaration_attributes + '\n'
+        declaration += self.declaration_fb_header + '\n'
+        declaration += var_input + '\n'
+        declaration += var_output + '\n'
+        declaration += self.declaration_end_tag + '\n'
+
+        # Code construction
+        code = ""
+        if purpose == 'measure':
+            for i in range(num_objects):
+                code += f"{output_data}{i + 1} := {input_data}{i + 1};" + '\n'
+        else:
+            for i in range(num_objects):
+                code += f"IF {self.trigger_changes}{i + 1} OR {self.check_changes}{i + 1} THEN" + '\n'
+                code += f"{output_data}{i + 1} := {input_data}{i + 1};" + '\n'
+                code += "END_IF"
+        code = self.st.format(code)
+        code += self.code_end_tag
+
+        # Writing the pou
+        map_object.write(declaration + code)
+
+        # Closing file
+        map_object.close()
+
+        return pou_name
+
+    def map_decision_tree(self, purpose):
+        input_data = ''
+        input_data_type = ''
+        output_data = ''
+        output_data_type = ''
+        if purpose == 'command':
+            input_data = self.command
+            input_data_type = self.command_data_type
+            output_data = self.command_output
+            output_data_type = self.command_output_data_type
+        elif purpose == 'state':
+            input_data = self.state
+            input_data_type = self.state_data_type
+            output_data = self.state_output
+            output_data_type = self.state_output_data_type
+        elif purpose == 'measure':
+            input_data = self.measure
+            input_data_type = self.measure_data_type
+            output_data = self.measure_output
+            output_data_type = self.measure_output_data_type
+
+        return input_data, input_data_type, output_data, output_data_type
+
+
+class RiseModel(RtuModel, FunctionBlockModel):
+    def __init__(self, rtu, fb, version):
+        if rtu:
+            self.__dict__ = copy.deepcopy(rtu.__dict__)
+        else:
+            RtuModel.__init__(self, None, None)
+
+        if fb:
+            self.__dict__ = copy.deepcopy(fb.__dict__)
+        else:
+            FunctionBlockModel.__init__(self)
+
+        self.rise_model = RiseToTrigger.objects.filter(Version=version).first()
+        self.last_rise = self.rise_model.LastRise
+        self.last_rise_data_type = self.rise_model.LastRiseDataType
+        self.iterator = self.rise_model.Iterator
+        self.iterator_data_type = self.rise_model.IteratorDataType
+        self.st = self.rise_model.ST
+
+    def rise(self, device_name, num_objects, purpose, server_iteration, path):
+        # Obtaining data
+        input_data = self.rise_changes
+        input_data_type = self.rise_changes_data_type
+        output_data = self.trigger_changes
+        output_data_type = self.trigger_changes_data_type
+
+        # Instance data
+        pou_name = "Rise" + str(num_objects) + input_data_type + str(device_name) + purpose + str(server_iteration)
+
+        # create file
+        rise_object = open(path + "\\" + pou_name + ".EXP", "w+")
+
+        # variable definition
+        # Inputs
+        input_str = f"{input_data} : ARRAY [1..{num_objects}] OF {input_data_type}"
+        var_input = self.declaration_input.format(input_str)
+
+        # Outputs
+        output_str = f"{output_data} : ARRAY [1..{num_objects}] OF {output_data_type};"
+        var_output = self.declaration_output.format(output_str)
+
+        # Internals
+        internal_str = f"{self.last_rise} : ARRAY [1..{num_objects}] OF {self.last_rise_data_type};" + '\n'
+        internal_str += f"{self.iterator} : {self.iterator_data_type};"
+        var_internal = self.declaration_internal.format(internal_str)
+
+        # Declaration construction
+        declaration = ''
+        declaration += self.declaration_attributes + '\n'
+        declaration += self.declaration_fb_header.format(pou_name) + '\n'
+        declaration += var_input + '\n'
+        declaration += var_output + '\n'
+        declaration += var_internal + '\n'
+        declaration += self.declaration_end_tag + '\n'
+
+        # Code construction
+        code = self.st.format(
+            self.iterator, num_objects,
+            input_data, self.iterator, self.last_rise, self.iterator,
+            output_data, self.iterator,
+            self.last_rise, self.iterator, input_data, self.iterator,
+            output_data, self.iterator
+        )
+        code += '\n' + self.code_end_tag
+
+        # Writing the pou
+        rise_object.write(declaration + code)
+
+        # Closing file
+        rise_object.close()
+
+        return pou_name
+
+
+class SaveModel(RtuModel, FunctionBlockModel):
+    def __init__(self, rtu, fb, version):
+        if rtu:
+            self.__dict__ = copy.deepcopy(rtu.__dict__)
+        else:
+            RtuModel.__init__(self, None, None)
+
+        if fb:
+            self.__dict__ = copy.deepcopy(fb.__dict__)
+        else:
+            FunctionBlockModel.__init__(self)
+
+        self.save_model = Save.objects.filter(Version=version).first()
+        self.reason = self.save_model.Reason
+        self.reason_data_type = self.save_model.ReasonDataType
+        self.reason_init_val = self.save_model.ReasonInitVal
+        self.time = self.save_model.Time
+        self.time_data_type = self.save_model.TimeDataType
+        self.offset = self.save_model.Offset
+        self.offset_data_type = self.save_model.OffsetDataType
+        self.iterator = self.save_model.Iterator
+        self.iterator_data_type = self.save_model.IteratorDataType
+        self.power_on_prefix = self.save_model.PowerOnPrefix
+        self.power_on_prefix_data_type = self.save_model.PowerOnPrefixDataType
+        self.power_on_prefix_init_val = self.save_model.PowerOnPrefixInitVal
+        self.prefix_under_line = self.save_model.PrefixUnderLine
+        self.prefix_under_line_data_type = self.save_model.PrefixUnderLineDataType
+        self.prefix_under_line_init_val = self.save_model.PrefixUnderLineInitVal
+        self.delimiter = self.save_model.Delimiter
+        self.delimiter_data_type = self.save_model.DelimiterDataType
+        self.delimiter_init_val = self.save_model.DelimiterInitVal
+        self.object_value = self.save_model.ObjectValue
+        self.object_value_data_type = self.save_model.ObjectValueDataType
+        self.prefix = self.save_model.Prefix
+        self.prefix_data_type = self.save_model.PrefixDataType
+        self.file = self.save_model.File
+        self.file_data_type = self.save_model.FileDataType
+        self.close = self.save_model.Close
+        self.close_data_type = self.save_model.CloseDataType
+        self.new_line = self.save_model.NewLine
+        self.new_line_data_type = self.save_model.NewLineDataType
+        self.new_line_init_val = self.save_model.NewLineInitVal
+        self.hysteresis = self.save_model.Hysteresis
+        self.hysteresis_data_type = self.save_model.HysteresisDataType
+        self.last_values = self.save_model.LastValues
+        self.last_values_data_type = self.save_model.LastValuesDataType
+        self.st = self.save_model.ST
+
+    def save(self, device_name, num_objects, purpose, server_iteration, path):
+        # Obtaining data
+        input_data = self.signals
+        input_data_type = self.signals_data_type
+
+        # Instance data
+        pou_name = "Save" + str(num_objects) + input_data_type + str(device_name) + purpose + str(server_iteration)
+
+        # create file
+        save_object = open(path + "\\" + pou_name + ".EXP", "w+")
+
+        # Variable definition
+        # Inputs
+        input_str = f"{self.first_cycle} : {self.first_cycle_data_type};" + '\n'
+        input_str += f"{self.sequence_order} : {self.sequence_order_data_type};" + '\n'
+        input_str += f"{self.protocol} : {self.protocol_data_type};" + '\n'
+        input_str += f"{self.state_loc_rem} : {self.state_loc_rem_data_type};" + '\n'
+        input_str += f"{self.action} : {self.action_data_type};" + '\n'
+        input_str += f"{input_data} : ARRAY [1..{num_objects}] OF {input_data_type};" + '\n'
+        input_str += f"{self.names} : ARRAY [1..{num_objects}] OF {self.names_data_type};" + '\n'
+        input_str += f"{self.check_changes} : ARRAY [1..{num_objects}] OF {self.check_changes_data_type};" + '\n'
+        input_str += f"{self.saves} : ARRAY [1..{num_objects}] OF {self.saves_data_type};" + '\n'
+        var_input = self.declaration_input.format(input_str)
+
+        # Internals
+        internal_str = f"{self.reason} : {self.reason_data_type} := {self.reason_init_val};" + '\n'
+        internal_str += f"{self.time} : {self.time_data_type};" + '\n'
+        internal_str += f"{self.offset} : {self.offset_data_type};" + '\n'
+        internal_str += f"{self.iterator} : {self.iterator_data_type};" + '\n'
+        internal_str += f"{self.power_on_prefix} : {self.power_on_prefix_data_type} := {self.power_on_prefix_init_val};" + '\n'
+        internal_str += f"{self.prefix_under_line} : {self.prefix_under_line_data_type} := {self.prefix_under_line_init_val};" + '\n'
+        internal_str += f"{self.delimiter} : {self.delimiter_data_type} := {self.delimiter_init_val};" + '\n'
+        internal_str += f"{self.object_value} : {self.object_value_data_type};" + '\n'
+        internal_str += f"{self.prefix} : {self.prefix_data_type};" + '\n'
+        internal_str += f"{self.file} : {self.file_data_type};" + '\n'
+        internal_str += f"{self.close} : {self.close_data_type};" + '\n'
+        internal_str += f"{self.new_line} : {self.new_line_data_type} := {self.new_line_init_val};" + '\n'
+
+        # Obtaining hysteresis derivatives
+        hysteresis = ""
+        hysteresis_condition = ""
+        internal_input_code = ""
+        hysteresis_code_end_tag = ""
+        if input_data_type == "WORD":
+            hysteresis = Obj35mMeTe.objects.filter(DeviceName=device_name).first().Hysteresis
+            if hysteresis:
+                internal_str += f"{self.hysteresis} : ARRAY[1..{num_objects}] OF {self.hysteresis_data_type} := [{hysteresis}];"
+                internal_str += f"{self.last_values} : ARRAY[1..{num_objects}] OF {self.last_values_data_type};"
+                hysteresis_condition = f"IF ({input_data}[{self.iterator}] > ({self.last_values}" \
+                                       f"[{self.iterator}] + (({self.hysteresis}[{self.iterator}] / 100) * " \
+                                       f"{self.last_values}[{self.iterator}] ))) OR ({input_data}" \
+                                       f"[{self.iterator}] < ({self.last_values}[{self.iterator}] - " \
+                                       f"(({self.hysteresis}[{self.iterator}] / 100) * {self.last_values}" \
+                                       f"[{self.iterator}]))) THEN"
+                internal_input_code = f"{input_data}[{self.iterator}] := {input_data}[{self.iterator}];"
+                hysteresis_code_end_tag = "END_IF"
+
+        # Writing internals in their module
+        var_internal = self.declaration_internal.format(internal_str)
+
+        # Declaration construction
+        declaration = self.declaration_attributes + '\n'
+        declaration += self.declaration_f_header.format(pou_name) + '\n'
+        declaration += var_input + '\n'
+        declaration += var_internal + '\n'
+        declaration += self.declaration_end_tag + '\n'
+
+        # Code construction
+        code = self.st.format(
+            self.file,
+            self.time,
+            self.offset, self.sequence_order, num_objects,
+            self.protocol, self.protocol, self.prefix_under_line,
+            self.prefix, self.protocol, self.sequence_order_data_type, self.sequence_order,
+            self.first_cycle,
+            self.iterator, num_objects,
+            self.saves, self.iterator,
+            internal_input_code,
+            input_data_type, input_data, self.iterator,
+            self.file, self.time, self.time,
+            self.file, self.delimiter, self.delimiter,
+            self.file, self.prefix, self.prefix,
+            self.file, self.delimiter, self.delimiter,
+            self.file, self.power_on_prefix, self.power_on_prefix,
+            self.file, self.names, self.iterator, self.names, self.iterator,
+            self.file, self.delimiter, self.delimiter,
+            self.file, self.object_value, self.object_value,
+            self.file, self.new_line, self.new_line,
+            self.iterator, num_objects,
+            self.saves, self.iterator,
+            self.check_changes, self.iterator,
+            hysteresis_condition,
+            internal_input_code,
+            input_data_type, input_data, self.iterator,
+            self.file, self.time, self.time,
+            self.file, self.delimiter, self.delimiter,
+            self.file, self.prefix, self.prefix,
+            self.file, self.delimiter, self.delimiter,
+            self.file, self.power_on_prefix, self.power_on_prefix,
+            self.file, self.names, self.iterator, self.names, self.iterator,
+            self.file, self.delimiter, self.delimiter,
+            self.file, self.object_value, self.object_value,
+            self.file, self.new_line, self.new_line,
+            hysteresis_code_end_tag,
+            self.close, self.file,
+            pou_name
+        )
+
+        code += '\n' + self.code_end_tag
+
+        # Writing the pou
+        save_object.write(declaration + code)
+
+        # Closing file
+        save_object.close()
+
+        return pou_name
+
+
+class SboModel(RtuModel, FunctionBlockModel):
+    def __init__(self, rtu, fb, version):
+        if rtu:
+            self.__dict__ = copy.deepcopy(rtu.__dict__)
+        else:
+            RtuModel.__init__(self, None, None)
+
+        if fb:
+            self.__dict__ = copy.deepcopy(fb.__dict__)
+        else:
+            FunctionBlockModel.__init__(self)
+
+        self.sbo_model = Sbo.objects.filter(Version=version).first()
+        self.error_stat_internal = self.sbo_model.ErrorStatInternal
+        self.error_stat_internal_data_type = self.sbo_model.ErrorStatInternalDataType
+        self.flag = self.sbo_model.Flag
+        self.flag_data_type = self.sbo_model.FlagDataType
+        self.st_body = self.sbo_model.STBody
+        self.st_core = self.sbo_model.STCore
+
+    def sbo(self, device_name, num_objects, purpose, server_iteration, path):
+        # Obtain instance information
+        declaration_info = Sbo.objects.filter(Version=pou_version).first().VariableDeclaration
+        body_info = Sbo.objects.filter(Version=pou_version).first().Body
+        core_info = Sbo.objects.filter(Version=pou_version).first().Core
+        final_check_info = Sbo.objects.filter(Version=pou_version).first().FinalCheck
+
+        # Instance data
+        pou_name = "Sbo" + str(num_objects) + data_type + str(device_name) + purpose + str(server_iteration)
+
+        # create file
+        sbo_object = open(path + "\\" + pou_name + ".EXP", "w+")
+
+        # Inputs
+        input_variable = Sbo.objects.filter(Version=pou_version).first().InputVariable
+        input_str = support_functions.variable_to_declaration(input_variable, num_objects)
+
+        status_variable = Sbo.objects.filter(Version=pou_version).first().StatusVariable
+        status_str = support_functions.variable_to_declaration(status_variable, num_objects / 2)
+
+        # Outputs
+        select_variable = Sbo.objects.filter(Version=pou_version).first().SelectVariable
+        select_str = support_functions.variable_to_declaration(select_variable, num_objects / 2)
+
+        execute_variable = Sbo.objects.filter(Version=pou_version).first().ExecuteVariable
+        execute_str = support_functions.variable_to_declaration(execute_variable, num_objects / 2)
+
+        # Internal variables
+        internal_variable = Sbo.objects.filter(Version=pou_version).first().FlagVariable
+        internal_str = support_functions.variable_to_declaration(internal_variable, num_objects / 2)
+
+        declaration_info = declaration_info.format(
+            pou_name,
+            input_str,
+            status_str,
+            select_str,
+            execute_str,
+            internal_str
+        )
+
+        # ST Code block
+        # COM state machine
+        core_info_formatted = ""
+        for s in range(int(num_objects / 2)):
+            core_info_formatted += core_info.format(
+                s + 1,
+                (2 * s) + 1, (2 * s) + 2,
+                s + 1,
+                s + 1,
+                s + 1,
+                s + 1,
+                s + 1,
+                s + 1,
+                s + 1,
+                s + 1,
+                s + 1,
+                s + 1,
+                s + 1,
+                s + 1,
+                s + 1,
+                s + 1
+            ) + "\n\n"
+
+        # End jumper evaluation
+        final_str = [internal_variable.format(i + 1) + " OR " for i in range(int(num_objects / 2))]
+        final_str = ''.join(final_str)
+        final_str = final_str[:-4]
+
+        final_check_info = final_check_info.format(
+            final_str
+        )
+
+        # Assemble body content
+        core_info_formatted += final_check_info
+        body_info = body_info.format(core_info_formatted)
+
+        # Write data stream
+        sbo_object.write(
+            declaration_info +
+            "\n" +
+            body_info
+        )
+
+        sbo_object.close()
+
+        return pou_name
