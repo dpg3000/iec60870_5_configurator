@@ -20,7 +20,7 @@ class Server(models.Model):
 class ObjsInfo(models.Model):
     ObjCode = models.CharField(max_length=255)
     ObjInfo = models.TextField()
-    ObjType = models.CharField(max_length=255, choices=OBJ_TYPE_CHOICES, default=1)
+    ObjType = models.CharField(max_length=255, choices=OBJ_TYPE_CHOICES)
 
     class Meta:
         verbose_name_plural = "objInfo"

@@ -27,15 +27,14 @@ urlpatterns = [
 
 # Filling interface for pou management at runserver
 models.fbd_model = models.FunctionBlockDiagramModel()
-models.fb_model = models.FunctionBlockModel()
 models.user_prg_model = models.UserPrgModel(models.fbd_model, models.user_prg_version)
 models.device_model = models.DeviceModel(models.user_prg_model, models.device_version)
 models.rtu_model = models.RtuModel(models.device_model, models.rtu_version)
-models.pack_model = models.PackModel(models.rtu_model, models.fb_model, models.pack_version)
-models.check_model = models.CheckModel(models.rtu_model, models.fb_model, models.check_version)
-models.map_model = models.MapModel(models.rtu_model, models.fb_model, models.map_version)
-models.rise_model = models.RiseModel(models.rtu_model, models.fb_model, models.rise_version)
-models.save_model = models.SaveModel(models.rtu_model, models.fb_model, models.save_version)
-
+models.pack_model = models.PackModel(models.rtu_model, models.pack_version)
+models.check_model = models.CheckModel(models.rtu_model, models.check_version)
+models.map_model = models.MapModel(models.rtu_model, models.map_version)
+models.rise_model = models.RiseModel(models.rtu_model, models.rise_version)
+models.save_model = models.SaveModel(models.rtu_model, models.save_version)
+models.handler_model = models.HandlerModel(models.rtu_model, models.handler_version)
 
 

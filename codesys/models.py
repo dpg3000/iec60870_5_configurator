@@ -13,11 +13,10 @@ map_version = 'mapv0'
 rise_version = 'risev0'
 save_version = 'savev0'
 sbo_version = 'sbov0'
-
+handler_version = 'handlerv0'
 
 # Data object repository for pou interface management
 fbd_model = None
-fb_model = None
 user_prg_model = None
 device_model = None
 rtu_model = None
@@ -27,18 +26,11 @@ map_model = None
 rise_model = None
 save_model = None
 sbo_model = None
+handler_model = None
 
 
 # Create your models here.
 class FBDTemplate(models.Model):
-    Header = models.TextField(default="")
-    InputHeader = models.TextField(default="")
-    InputUnit = models.TextField(default="")
-    OutputHeader = models.TextField(default="")
-    OutputUnit = models.TextField(default="")
-
-
-class FBTemplate(models.Model):
     DeclarationAttributes = models.TextField(default="")
     DeclarationFBHeader = models.CharField(max_length=255, default="")
     DeclarationFHeader = models.CharField(max_length=255, default="")
@@ -46,6 +38,12 @@ class FBTemplate(models.Model):
     DeclarationOutput = models.TextField(default="")
     DeclarationInternal = models.TextField(default="")
     DeclarationEndTag = models.CharField(max_length=255, default="")
+    Header = models.TextField(default="")
+    InputHeader = models.TextField(default="")
+    InputUnit = models.TextField(default="")
+    OutputHeader = models.TextField(default="")
+    FunctionOutputHeader = models.TextField(default="")
+    OutputUnit = models.TextField(default="")
     CodeEndTag = models.CharField(max_length=255, default="")
 
 
@@ -133,6 +131,8 @@ class Rtu(models.Model):
     NamesDataType = models.CharField(max_length=255, default="")
     Saves = models.CharField(max_length=255, default="")
     SavesDataType = models.CharField(max_length=255, default="")
+    Error = models.CharField(max_length=255, default="")
+    ErrorDataType = models.CharField(max_length=255, default="")
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(Rtu, self).save()
@@ -148,7 +148,7 @@ class Pack(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(Pack, self).save()
-        models.pack_model = PackModel(rtu_model, fb_model, pack_version)
+        models.pack_model = PackModel(rtu_model, pack_version)
 
     def __str__(self):
         return self.Version
@@ -164,7 +164,7 @@ class Check(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(Check, self).save()
-        models.check_model = CheckModel(rtu_model, fb_model, check_version)
+        models.check_model = CheckModel(rtu_model, check_version)
 
     def __str__(self):
         return self.Version
@@ -176,7 +176,7 @@ class Map(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(Map, self).save()
-        models.pack_model = PackModel(rtu_model, fb_model, map_version)
+        models.pack_model = PackModel(rtu_model, map_version)
 
     def __str__(self):
         return self.Version
@@ -192,7 +192,7 @@ class RiseToTrigger(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(RiseToTrigger, self).save()
-        models.rise_model = RiseModel(rtu_model, fb_model, rise_version)
+        models.rise_model = RiseModel(rtu_model, rise_version)
 
     def __str__(self):
         return self.Version
@@ -237,7 +237,7 @@ class Save(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(Save, self).save()
-        models.save_model = SaveModel(rtu_model, fb_model, save_version)
+        models.save_model = SaveModel(rtu_model, save_version)
 
     def __str__(self):
         return self.Version
@@ -252,6 +252,24 @@ class Sbo(models.Model):
     STBody = models.TextField(default="")
     STCore = models.TextField(default="")
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super(Sbo, self).save()
+        models.sbo_model = SboModel(rtu_model, sbo_version)
+
+    def __str__(self):
+        return self.Version
+
+
+class Handler(models.Model):
+    Version = models.CharField(max_length=255)
+    ErrorDescription = models.CharField(max_length=255, default="")
+    ErrorDescriptionDataType = models.CharField(max_length=255, default="")
+    ST = models.TextField(default="")
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super(Handler, self).save()
+        models.handler_model = HandlerModel(rtu_model, handler_version)
+
     def __str__(self):
         return self.Version
 
@@ -259,24 +277,20 @@ class Sbo(models.Model):
 class FunctionBlockDiagramModel:
     def __init__(self):
         self.function_block_diagram_template = FBDTemplate.objects.first()
+        self.declaration_attributes = self.function_block_diagram_template.DeclarationAttributes
+        self.declaration_fb_header = self.function_block_diagram_template.DeclarationFBHeader
+        self.declaration_f_header = self.function_block_diagram_template.DeclarationFHeader
+        self.declaration_input = self.function_block_diagram_template.DeclarationInput
+        self.declaration_output = self.function_block_diagram_template.DeclarationOutput
+        self.declaration_internal = self.function_block_diagram_template.DeclarationInternal
+        self.declaration_end_tag = self.function_block_diagram_template.DeclarationEndTag
         self.header = self.function_block_diagram_template.Header
         self.input_header = self.function_block_diagram_template.InputHeader
         self.input_unit = self.function_block_diagram_template.InputUnit
         self.output_header = self.function_block_diagram_template.OutputHeader
+        self.function_output_header = self.function_block_diagram_template.FunctionOutputHeader
         self.output_unit = self.function_block_diagram_template.OutputUnit
-
-
-class FunctionBlockModel:
-    def __init__(self):
-        self.function_block_template = FBTemplate.objects.first()
-        self.declaration_attributes = self.function_block_template.DeclarationAttributes
-        self.declaration_fb_header = self.function_block_template.DeclarationFBHeader
-        self.declaration_f_header = self.function_block_template.DeclarationFHeader
-        self.declaration_input = self.function_block_template.DeclarationInput
-        self.declaration_output = self.function_block_template.DeclarationOutput
-        self.declaration_internal = self.function_block_template.DeclarationInternal
-        self.declaration_end_tag = self.function_block_template.DeclarationEndTag
-        self.code_end_tag = self.function_block_template.CodeEndTag
+        self.code_end_tag = self.function_block_diagram_template.CodeEndTag
 
 
 class UserPrgModel(FunctionBlockDiagramModel):
@@ -346,6 +360,217 @@ class DeviceModel(UserPrgModel):
         self.execute = self.device_model.Execute
         self.execute_data_type = self.device_model.ExecuteDataType
 
+    def device(self, device_name, device_operation, rtu_instance_list, rtu, server_iteration, path):
+        # Meta-data
+        pou_name = "Dev" + str(device_name) + str(server_iteration)
+
+        # create file
+        device = open(path + "\\" + pou_name + ".EXP", "w+")
+
+        # variable definition
+        # inputs
+        # control inputs
+        input_str = f"{self.sequence_order} : {self.sequence_order_data_type}" + '\n'
+        input_str += f"{self.protocol} : {self.protocol_data_type}" + '\n'
+        input_str += f"{self.state_loc_rem} : {self.state_loc_rem_data_type}" + '\n'
+
+        # measures
+        input_str += variable_to_declaration(self.measure, rtu[0][0], self.measure_data_type) + '\n'
+        input_str += variable_to_declaration(self.save_measure, rtu[0][0], self.save_measure_data_type) + '\n'
+        input_str += variable_to_declaration(self.name_measure, rtu[0][0], self.name_measure_data_type) + '\n'
+
+        # states
+        input_str += variable_to_declaration(self.state, rtu[1][0], self.state_data_type) + '\n'
+        input_str += variable_to_declaration(self.save_state, rtu[1][0], self.save_state_data_type) + '\n'
+        input_str += variable_to_declaration(self.name_state, rtu[1][0], self.name_state_data_type) + '\n'
+        input_str += variable_to_declaration(self.rise_state, rtu[1][0], self.rise_state_data_type) + '\n'
+
+        # commands
+        input_str += variable_to_declaration(self.command, rtu[2][0], self.command_data_type) + '\n'
+        input_str += variable_to_declaration(self.save_command, rtu[2][0], self.save_command_data_type) + '\n'
+        input_str += variable_to_declaration(self.name_command, rtu[2][0], self.name_command_data_type) + '\n'
+        input_str += variable_to_declaration(self.trigger_command, rtu[2][0], self.trigger_command_data_type) + '\n'
+
+        # inputs sbo
+        if device_operation == "SBO":
+            input_str += variable_to_declaration(self.status, int(rtu[2][0] / 2),  self.status_data_type) + '\n'
+
+        # Outputs
+        # measures
+        output_str = variable_to_declaration(self.measure_output, rtu[0][0], self.measure_output_data_type) + '\n'
+
+        # states
+        output_str += variable_to_declaration(self.state_output, rtu[1][0], self.state_output_data_type) + '\n'
+
+        # commands
+        output_str += variable_to_declaration(self.command_output, rtu[2][0], self.command_output_data_type) + '\n'
+
+        # outputs sbo
+        if device_operation == "SBO":
+            output_str += variable_to_declaration(self.select, int(rtu[2][0] / 2), self.select_data_type) + '\n'
+            output_str += variable_to_declaration(self.execute, int(rtu[2][0] / 2), self.execute_data_type) + '\n'
+
+        # Internals
+        internal_str = ''
+        for instance in rtu_instance_list:
+            internal_str += f"inst0{instance} : {instance};" + '\n'
+
+        # Declaration construction
+        declaration = self.declaration_attributes + '\n'
+        declaration += self.declaration_fb_header.format(pou_name) + '\n'
+        declaration += self.declaration_input.format(input_str) + '\n'
+        declaration += self.declaration_output.format(output_str) + '\n'
+        declaration += self.declaration_internal.format(internal_str) + '\n'
+        declaration += self.declaration_end_tag + '\n'
+
+        # Code construction
+        device.write(self.header.format(str(len(rtu))) + '\n')
+
+        # Instantiation
+        for i in range(len(rtu)):
+            self._rtu_fbd(device_operation, rtu[i], device)
+
+        # Final tag
+        device.write(self.code_end_tag + '\n')
+
+        # Closing file
+        device.close()
+
+        return pou_name
+
+    def _rtu_fbd(self, device_operation, instance, sequence, file):
+        # Obtaining data
+        num_objects = sequence[0]
+        purpose = sequence[1]
+
+        rtu_information = self.rtu_decision_tree(purpose)
+        input_data = rtu_information['input_data']
+        output_data = rtu_information['output_data']
+        save_data = rtu_information['save_data']
+        name_data = rtu_information['name_data']
+        trigger_data = rtu_information['trigger_data']
+
+        # Number of inputs
+        num_inputs = 0
+        if purpose == 'measure':
+            num_inputs = (3 * num_objects) + 5
+        elif purpose == 'state':
+            num_inputs = (4 * num_objects) + 5
+        elif purpose == 'command':
+            if device_operation == 'SBO':
+                num_inputs = (4 * num_objects) + (num_objects / 2) + 5
+            else:
+                num_inputs = (4 * num_objects) + 5
+
+        # Input header
+        fbd_str = self.input_header.format(f"inst0{instance}", f"{num_inputs}") + '\n'
+
+        # Inputs
+        # header
+        fbd_str += self.input_unit.format(f"{self.first_cycle}") + '\n'
+        fbd_str += self.input_unit.format(f"{self.sequence_order}") + '\n'
+        fbd_str += self.input_unit.format(f"{self.protocol}") + '\n'
+        if purpose == 'command':
+            fbd_str += self.input_unit.format("CONTROL") + '\n'
+        else:
+            fbd_str += self.input_unit.format("MONITOR") + '\n'
+
+        # input data
+        for i in range(num_objects):
+            fbd_str += self.input_unit.format(f"{input_data}{i + 1}") + '\n'
+
+        # saves
+        for i in range(num_objects):
+            fbd_str += self.input_unit.format(f"{save_data}{i + 1}") + '\n'
+
+        # names
+        for i in range(num_objects):
+            fbd_str += self.input_unit.format(f"{name_data}{i + 1}") + '\n'
+
+        # trigger and status
+        if purpose != 'measure':
+            for i in range(num_objects):
+                fbd_str += self.input_unit.format(f"{trigger_data}{i + 1}") + '\n'
+            if purpose == 'command' and device_operation == 'SBO':
+                for i in range(num_objects / 2):
+                    fbd_str += self.input_unit.format(f"{self.status}{i + 1}") + '\n'
+
+        # Number of outputs
+        num_outputs = 0
+        if purpose == 'command' and device_operation == 'SBO':
+            num_outputs = (2 * num_objects) - 1
+        else:
+            num_outputs = num_objects - 1
+
+        # output header 1
+        fbd_str += self.output_header.format(f"{instance}", f"{num_outputs}") + '\n'
+
+        # output unit 1
+        for i in range(num_objects - 1):
+            fbd_str += self.output_unit.format(f"{output_data}{i + 2}") + '\n'
+
+        if purpose == 'command' and device_operation == 'SBO':
+            for i in range(num_objects / 2):
+                fbd_str += self.output_unit.format(f"{self.select}{i + 1}") + '\n'
+            for i in range(num_objects / 2):
+                fbd_str += self.output_unit.format(f"{self.execute}{i + 1}") + '\n'
+
+        # Output header 2
+        fbd_str += self.output_header.format("", "1") + '\n'
+
+        # output unit 2
+        fbd_str += self.output_unit.format(f"{output_data}1") + '\n'
+
+        # Writing the fbd
+        file.write(fbd_str)
+
+    def rtu_decision_tree(self, purpose):
+        response = {
+            'input_data': '',
+            'input_data_type': '',
+            'output_data': '',
+            'output_data_type': '',
+            'save_data': '',
+            'save_data_type': '',
+            'name_data': '',
+            'name_data_type': '',
+            'trigger_data': '',
+            'trigger_data_type': ''
+        }
+        if purpose == 'command':
+            response['input_data'] = self.command
+            response['input_data_type'] = self.command_data_type
+            response['output_data'] = self.command_output
+            response['output_data_type'] = self.command_output_data_type
+            response['save_data'] = self.save_command
+            response['save_data_type'] = self.save_command_data_type
+            response['name_data'] = self.name_command
+            response['name_data_type'] = self.name_command_data_type
+            response['trigger_data'] = self.trigger_command
+            response['trigger_data_type'] = self.trigger_command_data_type
+        elif purpose == 'state':
+            response['input_data'] = self.state
+            response['input_data_type'] = self.state_data_type
+            response['output_data'] = self.state_output
+            response['output_data_type'] = self.state_output_data_type
+            response['save_data'] = self.save_state
+            response['save_data_type'] = self.save_state_data_type
+            response['name_data'] = self.name_state
+            response['name_data_type'] = self.name_state_data_type
+            response['trigger_data'] = self.rise_state
+            response['trigger_data_type'] = self.rise_state_data_type
+        elif purpose == 'measure':
+            response['input_data'] = self.measure
+            response['input_data_type'] = self.measure_data_type
+            response['output_data'] = self.measure_output
+            response['output_data_type'] = self.measure_output_data_type
+            response['save_data'] = self.save_measure
+            response['save_data_type'] = self.save_measure_data_type
+            response['name_data'] = self.name_measure
+            response['name_data_type'] = self.name_measure_data_type
+
+        return response
+
 
 class RtuModel(DeviceModel):
     # Copy constructor implementation
@@ -370,66 +595,307 @@ class RtuModel(DeviceModel):
         self.names_data_type = self.rtu_model.NamesDataType
         self.saves = self.rtu_model.Saves
         self.saves_data_type = self.rtu_model.SavesDataType
+        self.error = self.rtu_model.Error
+        self.error_data_type = self.rtu_model.ErrorDataType
 
-
-class PackModel(RtuModel, FunctionBlockModel):
-    def __init__(self, rtu, fb, version):
-        if rtu:
-            self.__dict__ = copy.deepcopy(rtu.__dict__)
-        else:
-            RtuModel.__init__(self, None, None)
-
-        if fb:
-            self.__dict__ = copy.deepcopy(fb.__dict__)
-        else:
-            FunctionBlockModel.__init__(self)
-
-        self.pack_model = Pack.objects.filter(Version=version).first()
-        self.st = self.pack_model.ST
-
-    def pack(self, device_name, num_objects, rtu_purpose, internal_purpose, server_iteration, path):
+    def rtu(self, device_name, device_operation, num_objects, purpose, instance_list, server_iteration, path):
         # Obtaining data
-        pack_information = self.pack_decision_tree(rtu_purpose, internal_purpose)
-        input_data = pack_information[0]
-        input_data_type = pack_information[1]
-        output_data = pack_information[2]
-        output_data_type = pack_information[3]
+        rtu_information = self.rtu_decision_tree(purpose)
+        input_data = rtu_information['input_data']
+        input_data_type = rtu_information['input_data_type']
+        output_data = rtu_information['output_data']
+        output_data_type = rtu_information['output_data_type']
+        save_data = rtu_information['save_data']
+        save_data_type = rtu_information['save_data_type']
+        name_data = rtu_information['name_data']
+        name_data_type = rtu_information['name_data_type']
+        trigger_data = rtu_information['trigger_data']
+        trigger_data_type = rtu_information['trigger_data_type']
 
         # Instance data
-        pou_name = "Pack" + str(num_objects) + input_data_type + str(device_name) + rtu_purpose + str(server_iteration)
+        pou_name = "Rtu" + str(num_objects) + str(device_name) + purpose + str(server_iteration)
 
         # create file
-        pack_object = open(path + "\\" + pou_name + ".EXP", "w+")
+        rtu_object = open(path + "\\" + pou_name + ".EXP", "w+")
 
         # variable definition
         # Inputs
-        input_str = variable_to_declaration(signal=input_data, num_objects=num_objects, data_type=input_data_type)
-        var_input = self.declaration_input.format(input_str)
+        input_str = f"{self.first_cycle} : {self.first_cycle_data_type};" + '\n'
+        input_str += f"{self.sequence_order} : {self.sequence_order};" + '\n'
+        input_str += f"{self.protocol} : {self.protocol_data_type};" + '\n'
+        input_str += f"{self.state_loc_rem} : {self.state_loc_rem_data_type};" + '\n'
+        input_str += variable_to_declaration(signal=input_data, num_objects=num_objects, data_type=input_data_type) + '\n'
+        input_str += variable_to_declaration(signal=save_data, num_objects=num_objects, data_type=save_data_type) + '\n'
+        input_str += variable_to_declaration(signal=name_data, num_objects=num_objects, data_type=name_data_type) + '\n'
+
+        if purpose != 'measure':
+            input_str += variable_to_declaration(signal=trigger_data, num_objects=num_objects, data_type=trigger_data_type) + '\n'
+
+        if device_operation == "SBO" and purpose == 'command':
+            input_str += variable_to_declaration(signal=self.status, num_objects=num_objects / 2, data_type=self.status_data_type) + '\n'
 
         # Outputs
-        output_str = f"{output_data} : ARRAY [1..{num_objects}] OF {output_data_type};"
-        var_output = self.declaration_output.format(output_str)
+        output_str = variable_to_declaration(signal=output_data, num_objects=num_objects, data_type=output_data_type) + '\n'
+
+        if device_operation == "SBO" and purpose == 'command':
+            output_str += variable_to_declaration(signal=self.select, num_objects=num_objects, data_type=self.select) + '\n'
+            output_str += variable_to_declaration(signal=self.execute, num_objects=num_objects, data_type=self.execute) + '\n'
+
+        # Internals
+        internal_str = f"{self.action} : {self.action_data_type};" + '\n'
+        internal_str += f"{self.signals} : ARRAY [1..{num_objects}] OF {self.signals_data_type};" + '\n'
+        internal_str += f"{self.check_changes} : ARRAY [1..{num_objects}] OF {self.check_changes_data_type};" + '\n'
+        internal_str += f"{self.names} : ARRAY [1..{num_objects}] OF {self.names_data_type}" + '\n'
+        internal_str += f"{self.saves} : ARRAY [1..{num_objects}] OF {self.saves_data_type}" + '\n'
+        internal_str += f"{self.error} : ARRAY [1..{num_objects}] OF {self.error_data_type}" + '\n'
+
+        if purpose != 'measure':
+            internal_str += f"{self.trigger_changes} : ARRAY [1..{num_objects}] OF {self.trigger_changes_data_type}" + '\n'
+            if purpose == 'state':
+                internal_str += f"{self.rise_changes} : ARRAY [1..{num_objects}] OF {self.rise_changes_data_type}" + '\n'
+
+        for item in instance_list:
+            if 'Save' not in item:
+                internal_str += f"inst0{item} : {item};" + '\n'
 
         # Declaration construction
         declaration = self.declaration_attributes + '\n'
         declaration += self.declaration_fb_header.format(pou_name) + '\n'
-        declaration += var_input + '\n'
-        declaration += var_output + '\n'
+        declaration += self.declaration_input.format(input_str) + '\n'
+        declaration += self.declaration_output.format(output_str) + '\n'
+        declaration += self.declaration_internal.format(internal_str) + '\n'
         declaration += self.declaration_end_tag + '\n'
 
-        # Code construction
-        code = ''
-        for i in range(num_objects):
-            code += self.st.format(output_data, i + 1, input_data) + '\n'
-        code += self.code_end_tag
+        # FBD Code
+        # Select body networks
+        if purpose == 'Measure':
+            body_networks = 6
+        else:
+            if purpose == 'Command':
+                if device_operation == 'SBO':
+                    body_networks = 9
+                else:
+                    body_networks = 7
+            else:
+                body_networks = 8
 
-        # Writing the pou
-        pack_object.write(declaration + code)
+        # Writing body networks
+        networks = self.header.format(body_networks)
+        rtu_object.write(networks)
 
-        # closing file
-        pack_object.close()
+        # RTU hub
+        if purpose == 'command':
+            self._pack_fbd(instance_list[0], num_objects, purpose, 'trigger', rtu_object)
+            self._pack_fbd(instance_list[1], num_objects, purpose, 'values', rtu_object)
+            self._check_fbd(instance_list[2], rtu_object)
+            self._map_fbd(instance_list[3], num_objects, purpose, rtu_object)
+            self._pack_fbd(instance_list[4], num_objects, purpose, 'save', rtu_object)
+            self._pack_fbd(instance_list[5], num_objects, purpose, 'label', rtu_object)
+            self._save_fbd(instance_list[6], rtu_object)
+            if device_operation == 'SBO':
+                self._sbo_fbd(instance_list[7], num_objects, rtu_object)
+                self._handler_fbd(instance_list[8], rtu_object)
+        elif purpose == 'state':
+            self._pack_fbd(instance_list[0], num_objects, purpose, 'trigger', rtu_object)
+            self._rise_fbd(instance_list[1], rtu_object)
+            self._pack_fbd(instance_list[2], num_objects, purpose, 'values', rtu_object)
+            self._check_fbd(instance_list[3], rtu_object)
+            self._map_fbd(instance_list[4], num_objects, purpose, rtu_object)
+            self._pack_fbd(instance_list[5], num_objects, purpose, 'save', rtu_object)
+            self._pack_fbd(instance_list[6], num_objects, purpose, 'label', rtu_object)
+            self._save_fbd(instance_list[7], rtu_object)
+        elif purpose == 'measure':
+            self._pack_fbd(instance_list[0], num_objects, purpose, 'values', rtu_object)
+            self._check_fbd(instance_list[1], rtu_object)
+            self._map_fbd(instance_list[2], num_objects, purpose, rtu_object)
+            self._pack_fbd(instance_list[3], num_objects, purpose, 'save', rtu_object)
+            self._pack_fbd(instance_list[4], num_objects, purpose, 'label', rtu_object)
+            self._save_fbd(instance_list[5], rtu_object)
+
+        # Final tag
+        rtu_object.write(self.code_end_tag + '\n')
+        rtu_object.close()
 
         return pou_name
+
+    def _pack_fbd(self, instance, num_objects, purpose, internal_purpose, file):
+        # Obtaining data
+        pack_information = self.pack_decision_tree(purpose, internal_purpose)
+        input_data = pack_information[0]
+        output_data = pack_information[2]
+
+        # Input header
+        fbd_str = self.input_header.format(f"inst0{instance}", str(num_objects)) + '\n'
+
+        # Input unit
+        for i in range(num_objects):
+            fbd_str += self.input_unit.format(f"{input_data}{i + 1}") + '\n'
+
+        # Output header 1
+        fbd_str += self.output_header.format(f"{instance}", "0") + '\n'
+
+        # Output header 2
+        fbd_str += self.output_header.format("", "1") + '\n'
+
+        # Output unit
+        fbd_str += self.output_unit.format(output_data) + '\n'
+
+        # Writing the fbd
+        file.write(fbd_str)
+
+    def _rise_fbd(self, instance, file):
+        # Input header
+        fbd_str = self.input_header.format(f"inst0{instance}", "1") + '\n'
+
+        # Input unit
+        fbd_str += self.input_unit.format(f"{self.rise_changes}") + '\n'
+
+        # Output header 1
+        fbd_str += self.output_header.format(f"{instance}", "0") + '\n'
+
+        # Output header 2
+        fbd_str += self.output_header.format("", "1") + '\n'
+
+        # Output unit
+        fbd_str += self.output_unit.format(self.trigger_changes) + '\n'
+
+        # Writing the fbd
+        file.write(fbd_str)
+
+    def _check_fbd(self, instance, file):
+        # Input header
+        fbd_str = self.input_header.format(f"inst0{instance}", "2") + '\n'
+
+        # Input unit
+        fbd_str += self.input_unit.format(f"{self.signals}") + '\n'
+        fbd_str += self.input_unit.format(f"{self.first_cycle}") + '\n'
+
+        # Output header 1
+        fbd_str += self.output_header.format(f"{instance}", "0") + '\n'
+
+        # Output header 2
+        fbd_str += self.output_header.format("", "1") + '\n'
+
+        # Output unit
+        fbd_str += self.output_unit.format(self.check_changes) + '\n'
+
+        # Writing the fbd
+        file.write(fbd_str)
+
+    def _map_fbd(self, instance, num_objects, purpose, file):
+        # Obtaining data
+        map_information = self.map_decision_tree(purpose)
+        input_data = map_information[0]
+        output_data = map_information[2]
+
+        if purpose == 'measure':
+            inputs = num_objects + 2
+        else:
+            inputs = (3 * num_objects) + 2
+
+        # Input header
+        fbd_str = self.input_header.format(f"inst0{instance}", f"{inputs}") + '\n'
+
+        # Input unit
+        fbd_str += self.input_unit.format(f"{self.action}") + '\n'
+        fbd_str += self.input_unit.format(f"{self.loc_rem_state}") + '\n'
+
+        # inputs
+        for i in range(num_objects):
+            fbd_str += self.input_unit.format(f"{input_data}{i + 1}") + '\n'
+
+        # triggers
+        for i in range(num_objects):
+            fbd_str += self.input_unit.format(f"{self.trigger_changes}[{i + 1}]") + '\n'
+
+        # checks
+        for i in range(num_objects):
+            fbd_str += self.input_unit.format(f"{self.check_changes}[{i + 1}]") + '\n'
+
+        # Output header 1
+        fbd_str += self.output_header.format(f"{instance}", f"{num_objects - 1}") + '\n'
+
+        # Output unit 1
+        for i in range(num_objects - 1):
+            fbd_str += self.output_unit.format(f"{output_data}{i + 2}") + '\n'
+
+        # Output header 2
+        fbd_str += self.output_header.format("", "1") + '\n'
+
+        # Output unit 2
+        fbd_str += self.output_unit.format(f"{output_data}1") + '\n'
+
+        # Writing fbd
+        file.write(fbd_str)
+
+    def _save_fbd(self, instance, file):
+        # Input header
+        fbd_str = self.input_header.format(f"inst0{instance}", "9") + '\n'
+
+        # Input unit
+        fbd_str += self.input_unit.format(f"{self.first_cycle}") + '\n'
+        fbd_str += self.input_unit.format(f"{self.sequence_order}") + '\n'
+        fbd_str += self.input_unit.format(f"{self.protocol}") + '\n'
+        fbd_str += self.input_unit.format(f"{self.signals}") + '\n'
+        fbd_str += self.input_unit.format(f"{self.names}") + '\n'
+        fbd_str += self.input_unit.format(f"{self.trigger_changes}") + '\n'
+        fbd_str += self.input_unit.format(f"{self.state_loc_rem}") + '\n'
+        fbd_str += self.input_unit.format(f"{self.action}") + '\n'
+        fbd_str += self.input_unit.format(f"{self.saves}") + '\n'
+
+        # Output header
+        fbd_str += self.function_output_header.format(f"{instance}") + '\n'
+
+        # Writing the fbd
+        file.write(fbd_str)
+
+    def _sbo_fbd(self, instance, num_objects, file):
+        # Input header
+        fbd_str = self.input_header.format(f"inst0{instance}", f"{num_objects + (num_objects / 2) + 1}") + '\n'
+
+        # Input unit
+        fbd_str += self.input_unit.format(f"{self.state_loc_rem}") + '\n'
+
+        # Triggers
+        for i in range(num_objects):
+            fbd_str += self.input_unit.format(f"{self.trigger_changes}[{i + 1}]") + '\n'
+
+        # Status
+        for i in range(int(num_objects / 2)):
+            fbd_str += self.input_unit.format(f"{self.status}{i + 1}") + '\n'
+
+        # Output header 1
+        fbd_str += self.output_header.format(f"{instance}", f"{(num_objects + 1) - 1}") + '\n'
+
+        # Selects
+        for i in range(int(num_objects / 2)):
+            fbd_str += self.output_unit.format(f"{self.select}{i + 1}") + '\n'
+
+        # Executes
+        for i in range(int(num_objects / 2)):
+            fbd_str += self.output_unit.format(f"{self.execute}{i + 1}") + '\n'
+
+        # Output header 2
+        fbd_str += self.output_header.format("", "1") + '\n'
+
+        # Output unit
+        fbd_str += self.output_unit.format(f"{self.error}") + '\n'
+
+        # Writing the fbd
+        file.write(fbd_str)
+
+    def _handler_fbd(self, instance, file):
+        # Input header
+        fbd_str = self.input_header.format(f"inst0{instance}", "1") + '\n'
+
+        # Input unit
+        fbd_str += self.input_unit.format(f"{self.error}") + '\n'
+
+        # Function output header
+        fbd_str += self.function_output_header.format(f"{instance}") + '\n'
+
+        # Writing the fbd
+        file.write(fbd_str)
 
     def pack_decision_tree(self, rtu_purpose, internal_purpose):
         input_data = ''
@@ -488,18 +954,104 @@ class PackModel(RtuModel, FunctionBlockModel):
 
         return input_data, input_data_type, output_data, output_data_type
 
+    def map_decision_tree(self, purpose):
+        input_data = ''
+        input_data_type = ''
+        output_data = ''
+        output_data_type = ''
+        if purpose == 'command':
+            input_data = self.command
+            input_data_type = self.command_data_type
+            output_data = self.command_output
+            output_data_type = self.command_output_data_type
+        elif purpose == 'state':
+            input_data = self.state
+            input_data_type = self.state_data_type
+            output_data = self.state_output
+            output_data_type = self.state_output_data_type
+        elif purpose == 'measure':
+            input_data = self.measure
+            input_data_type = self.measure_data_type
+            output_data = self.measure_output
+            output_data_type = self.measure_output_data_type
 
-class CheckModel(RtuModel, FunctionBlockModel):
-    def __init__(self, rtu, fb, version):
+        return input_data, input_data_type, output_data, output_data_type
+
+    def save_decision_tree(self, purpose):
+        response = {
+            'input_data_type': ''
+        }
+        if purpose == 'command':
+            response['input_data_type'] = self.command_data_type
+        elif purpose == 'state':
+            response['input_data_type'] = self.state_data_type
+        elif purpose == 'measure':
+            response['input_data_type'] = self.measure_data_type
+
+        return response
+
+
+class PackModel(RtuModel):
+    def __init__(self, rtu, version):
         if rtu:
             self.__dict__ = copy.deepcopy(rtu.__dict__)
         else:
             RtuModel.__init__(self, None, None)
 
-        if fb:
-            self.__dict__ = copy.deepcopy(fb.__dict__)
+        self.pack_model = Pack.objects.filter(Version=version).first()
+        self.st = self.pack_model.ST
+
+    def pack(self, device_name, num_objects, rtu_purpose, internal_purpose, server_iteration, path):
+        # Obtaining data
+        pack_information = self.pack_decision_tree(rtu_purpose, internal_purpose)
+        input_data = pack_information[0]
+        input_data_type = pack_information[1]
+        output_data = pack_information[2]
+        output_data_type = pack_information[3]
+
+        # Instance data
+        pou_name = "Pack" + str(num_objects) + input_data_type + str(device_name) + rtu_purpose + str(server_iteration)
+
+        # create file
+        pack_object = open(path + "\\" + pou_name + ".EXP", "w+")
+
+        # variable definition
+        # Inputs
+        input_str = variable_to_declaration(signal=input_data, num_objects=num_objects, data_type=input_data_type)
+        var_input = self.declaration_input.format(input_str)
+
+        # Outputs
+        output_str = f"{output_data} : ARRAY [1..{num_objects}] OF {output_data_type};"
+        var_output = self.declaration_output.format(output_str)
+
+        # Declaration construction
+        declaration = self.declaration_attributes + '\n'
+        declaration += self.declaration_fb_header.format(pou_name) + '\n'
+        declaration += var_input + '\n'
+        declaration += var_output + '\n'
+        declaration += self.declaration_end_tag + '\n'
+
+        # Code construction
+        code = ''
+        for i in range(num_objects):
+            code += self.st.format(output_data, i + 1, input_data) + '\n'
+        code += self.code_end_tag
+
+        # Writing the pou
+        pack_object.write(declaration + code)
+
+        # closing file
+        pack_object.close()
+
+        return pou_name
+
+
+class CheckModel(RtuModel):
+    def __init__(self, rtu, version):
+        if rtu:
+            self.__dict__ = copy.deepcopy(rtu.__dict__)
         else:
-            FunctionBlockModel.__init__(self)
+            RtuModel.__init__(self, None, None)
 
         self.check_model = Check.objects.filter(Version=version).first()
         self.iterator = self.check_model.Iterator
@@ -564,17 +1116,12 @@ class CheckModel(RtuModel, FunctionBlockModel):
         return pou_name
 
 
-class MapModel(RtuModel, FunctionBlockModel):
-    def __init__(self, rtu, fb, version):
+class MapModel(RtuModel):
+    def __init__(self, rtu, version):
         if rtu:
             self.__dict__ = copy.deepcopy(rtu.__dict__)
         else:
             RtuModel.__init__(self, None, None)
-
-        if fb:
-            self.__dict__ = copy.deepcopy(fb.__dict__)
-        else:
-            FunctionBlockModel.__init__(self)
 
         self.map_model = Map.objects.filter(Version=version).first()
         self.st = self.map_model.ST
@@ -634,41 +1181,13 @@ class MapModel(RtuModel, FunctionBlockModel):
 
         return pou_name
 
-    def map_decision_tree(self, purpose):
-        input_data = ''
-        input_data_type = ''
-        output_data = ''
-        output_data_type = ''
-        if purpose == 'command':
-            input_data = self.command
-            input_data_type = self.command_data_type
-            output_data = self.command_output
-            output_data_type = self.command_output_data_type
-        elif purpose == 'state':
-            input_data = self.state
-            input_data_type = self.state_data_type
-            output_data = self.state_output
-            output_data_type = self.state_output_data_type
-        elif purpose == 'measure':
-            input_data = self.measure
-            input_data_type = self.measure_data_type
-            output_data = self.measure_output
-            output_data_type = self.measure_output_data_type
 
-        return input_data, input_data_type, output_data, output_data_type
-
-
-class RiseModel(RtuModel, FunctionBlockModel):
-    def __init__(self, rtu, fb, version):
+class RiseModel(RtuModel):
+    def __init__(self, rtu, version):
         if rtu:
             self.__dict__ = copy.deepcopy(rtu.__dict__)
         else:
             RtuModel.__init__(self, None, None)
-
-        if fb:
-            self.__dict__ = copy.deepcopy(fb.__dict__)
-        else:
-            FunctionBlockModel.__init__(self)
 
         self.rise_model = RiseToTrigger.objects.filter(Version=version).first()
         self.last_rise = self.rise_model.LastRise
@@ -732,17 +1251,12 @@ class RiseModel(RtuModel, FunctionBlockModel):
         return pou_name
 
 
-class SaveModel(RtuModel, FunctionBlockModel):
-    def __init__(self, rtu, fb, version):
+class SaveModel(RtuModel):
+    def __init__(self, rtu, version):
         if rtu:
             self.__dict__ = copy.deepcopy(rtu.__dict__)
         else:
             RtuModel.__init__(self, None, None)
-
-        if fb:
-            self.__dict__ = copy.deepcopy(fb.__dict__)
-        else:
-            FunctionBlockModel.__init__(self)
 
         self.save_model = Save.objects.filter(Version=version).first()
         self.reason = self.save_model.Reason
@@ -782,8 +1296,9 @@ class SaveModel(RtuModel, FunctionBlockModel):
 
     def save(self, device_name, num_objects, purpose, server_iteration, path):
         # Obtaining data
+        save_information = self.save_decision_tree(purpose)
         input_data = self.signals
-        input_data_type = self.signals_data_type
+        input_data_type = save_information['input_data_type']
 
         # Instance data
         pou_name = "Save" + str(num_objects) + input_data_type + str(device_name) + purpose + str(server_iteration)
@@ -899,17 +1414,12 @@ class SaveModel(RtuModel, FunctionBlockModel):
         return pou_name
 
 
-class SboModel(RtuModel, FunctionBlockModel):
-    def __init__(self, rtu, fb, version):
+class SboModel(RtuModel):
+    def __init__(self, rtu, version):
         if rtu:
             self.__dict__ = copy.deepcopy(rtu.__dict__)
         else:
             RtuModel.__init__(self, None, None)
-
-        if fb:
-            self.__dict__ = copy.deepcopy(fb.__dict__)
-        else:
-            FunctionBlockModel.__init__(self)
 
         self.sbo_model = Sbo.objects.filter(Version=version).first()
         self.error_stat_internal = self.sbo_model.ErrorStatInternal
@@ -920,88 +1430,132 @@ class SboModel(RtuModel, FunctionBlockModel):
         self.st_core = self.sbo_model.STCore
 
     def sbo(self, device_name, num_objects, purpose, server_iteration, path):
-        # Obtain instance information
-        declaration_info = Sbo.objects.filter(Version=pou_version).first().VariableDeclaration
-        body_info = Sbo.objects.filter(Version=pou_version).first().Body
-        core_info = Sbo.objects.filter(Version=pou_version).first().Core
-        final_check_info = Sbo.objects.filter(Version=pou_version).first().FinalCheck
+        # Obtaining data
+        input_data_type = self.check_changes_data_type
 
         # Instance data
-        pou_name = "Sbo" + str(num_objects) + data_type + str(device_name) + purpose + str(server_iteration)
+        pou_name = "Sbo" + str(num_objects) + input_data_type + str(device_name) + purpose + str(server_iteration)
 
         # create file
         sbo_object = open(path + "\\" + pou_name + ".EXP", "w+")
 
+        # Variable declaration
         # Inputs
-        input_variable = Sbo.objects.filter(Version=pou_version).first().InputVariable
-        input_str = support_functions.variable_to_declaration(input_variable, num_objects)
-
-        status_variable = Sbo.objects.filter(Version=pou_version).first().StatusVariable
-        status_str = support_functions.variable_to_declaration(status_variable, num_objects / 2)
+        input_str = f"{self.state_loc_rem} : {self.state_loc_rem_data_type};" + '\n'
+        input_str += variable_to_declaration(signal=self.trigger_changes, num_objects=num_objects, data_type=self.trigger_changes_data_type) + '\n'
+        input_str += variable_to_declaration(signal=self.status, num_objects=num_objects / 2, data_type=self.status_data_type) + '\n'
+        var_input = self.declaration_input.format(input_str)
 
         # Outputs
-        select_variable = Sbo.objects.filter(Version=pou_version).first().SelectVariable
-        select_str = support_functions.variable_to_declaration(select_variable, num_objects / 2)
+        output_str = variable_to_declaration(signal=self.select, num_objects=num_objects / 2, data_type=self.select_data_type) + '\n'
+        output_str += variable_to_declaration(signal=self.execute, num_objects=num_objects / 2, data_type=self.execute_data_type) + '\n'
+        output_str += f"{self.error} : {self.error_data_type};"
+        var_output = self.declaration_output.format(output_str)
 
-        execute_variable = Sbo.objects.filter(Version=pou_version).first().ExecuteVariable
-        execute_str = support_functions.variable_to_declaration(execute_variable, num_objects / 2)
+        # Internals
+        internal_str = f"{self.error_stat_internal} : {self.error_stat_internal_data_type};"
+        internal_str += variable_to_declaration(signal=self.flag, num_objects=num_objects / 2, data_type=self.flag_data_type) + '\n'
+        var_internal = self.declaration_internal.format(internal_str)
 
-        # Internal variables
-        internal_variable = Sbo.objects.filter(Version=pou_version).first().FlagVariable
-        internal_str = support_functions.variable_to_declaration(internal_variable, num_objects / 2)
+        # Declaration construction
+        declaration = self.declaration_attributes + '\n'
+        declaration += self.declaration_fb_header.format(pou_name) + '\n'
+        declaration += var_input + '\n'
+        declaration += var_output + '\n'
+        declaration += var_internal + '\n'
+        declaration += self.declaration_end_tag + '\n'
 
-        declaration_info = declaration_info.format(
-            pou_name,
-            input_str,
-            status_str,
-            select_str,
-            execute_str,
-            internal_str
-        )
-
-        # ST Code block
-        # COM state machine
-        core_info_formatted = ""
+        # Code construction
+        code_core = ''
         for s in range(int(num_objects / 2)):
-            core_info_formatted += core_info.format(
-                s + 1,
-                (2 * s) + 1, (2 * s) + 2,
-                s + 1,
-                s + 1,
-                s + 1,
-                s + 1,
-                s + 1,
-                s + 1,
-                s + 1,
-                s + 1,
-                s + 1,
-                s + 1,
-                s + 1,
-                s + 1,
-                s + 1,
-                s + 1
+            code_core += self.st_core.format(
+                f"{self.flag}{s + 1}",
+                f"{self.trigger_changes}{(2 * s) + 1}", f"{self.trigger_changes}{(2 * s) + 2}",
+                f"{self.select}{s + 1}",
+                f"{self.flag}{s + 1}",
+                f"{self.flag}{s + 1}",
+                f"{self.status}{s + 1}",
+                f"{self.select}{s + 1}",
+                f"{self.select}{s + 1}",
+                f"{self.execute}{s + 1}",
+                f"{self.execute}{s + 1}",
+                f"{self.flag}{s + 1}",
+                self.error_stat_internal,
+                f"{self.execute}{s + 1}",
+                f"{self.select}{s + 1}",
+                f"{self.flag}{s + 1}",
+                self.error_stat_internal,
+                f"{self.execute}{s + 1}",
+                f"{self.select}{s + 1}",
+                f"{self.flag}{s + 1}",
+                self.error_stat_internal,
             ) + "\n\n"
 
-        # End jumper evaluation
-        final_str = [internal_variable.format(i + 1) + " OR " for i in range(int(num_objects / 2))]
-        final_str = ''.join(final_str)
-        final_str = final_str[:-4]
-
-        final_check_info = final_check_info.format(
-            final_str
+        code = self.st_body.format(
+            self.error_stat_internal,
+            self.state_loc_rem,
+            self.error, self.error_stat_internal,
+            code_core,
+            self.error, self.error_stat_internal
         )
+        code += '\n' + self.code_end_tag
 
-        # Assemble body content
-        core_info_formatted += final_check_info
-        body_info = body_info.format(core_info_formatted)
+        # Writing the pou
+        sbo_object.write(declaration + code)
 
-        # Write data stream
-        sbo_object.write(
-            declaration_info +
-            "\n" +
-            body_info
-        )
-
+        # Closing file
         sbo_object.close()
 
         return pou_name
+
+
+class HandlerModel(RtuModel):
+    def __init__(self, rtu, version):
+        if rtu:
+            self.__dict__ = copy.deepcopy(rtu.__dict__)
+        else:
+            RtuModel.__init__(self, None, None)
+
+        self.handler_model = Handler.objects.filter(Version=version).first()
+        self.error_description = self.handler_model.ErrorDescription
+        self.error_description_data_type = self.handler_model.ErrorDescriptionDataType
+        self.st = self.handler_model.ST
+
+    def handler(self, device_name, server_iteration, path):
+        # Instance data
+        pou_name = "Handler" + str(device_name) + str(server_iteration)
+
+        # create file
+        handler_object = open(path + "\\" + pou_name + ".EXP", "w+")
+
+        # Variable declaration
+        # Inputs
+        input_str = f"{self.error} : {self.error_data_type};" + '\n'
+
+        # Internals
+        internal_str = f"{self.error_description} : {self.error_description};" + '\n'
+
+        # Declaration construction
+        declaration = self.declaration_attributes + '\n'
+        declaration += self.declaration_f_header.format(pou_name) + '\n'
+        declaration += self.declaration_input.format(input_str) + '\n'
+        declaration += self.declaration_internal.format(internal_str) + '\n'
+        declaration += self.declaration_end_tag + '\n'
+
+        # Code construction
+        code = self.st.format(
+            self.error,
+            self.error,
+            self.error_description,
+            self.error_description,
+            self.error_description,
+            self.error_description,
+            self.error_description,
+            pou_name
+        )
+        code += '\n' + self.code_end_tag
+
+        # Writing the pou
+        handler_object.write(code)
+
+

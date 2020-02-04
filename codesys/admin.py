@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.db import models
-from .models import Map, Check, Save, Sbo, FBDTemplate, Device, RiseToTrigger, Rtu, UserPrg, FBTemplate, Pack
+from .models import Map, Check, Save, Sbo, FBDTemplate, Device, RiseToTrigger, Rtu, UserPrg, Pack, Handler
+
 
 # Register your models here.
 # Another way to iterate the meta fields of the models, but if the structure varies, tends to get messy
@@ -83,7 +84,8 @@ class RtuAdmin(admin.ModelAdmin):
                                              ("Signals", "SignalsDataType"),
                                              ("CheckChanges", "CheckChangesDataType"),
                                              ("Names", "NamesDataType"),
-                                             ("Saves", "SavesDataType")]})
+                                             ("Saves", "SavesDataType"),
+                                             ("Error", "ErrorDataType")]})
     ]
 
 
@@ -126,6 +128,14 @@ class UserPrgAdmin(admin.ModelAdmin):
     ]
 
 
+class HandlerAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ("INFO", {"fields": ["Version"]}),
+        ("VARIABLE DECLARATION", {"fields": [("ErrorDescription", "ErrorDescriptionDataType")]}),
+        ("CODE", {"fields": ["ST"]})
+    ]
+
+
 admin.site.register(Map, MapAdmin)
 admin.site.register(Pack, PackAdmin)
 admin.site.register(Check, CheckAdmin)
@@ -136,4 +146,4 @@ admin.site.register(FBDTemplate)
 admin.site.register(Device, DeviceAdmin)
 admin.site.register(RiseToTrigger, RiseAdmin)
 admin.site.register(UserPrg, UserPrgAdmin)
-admin.site.register(FBTemplate)
+admin.site.register(Handler, HandlerAdmin)

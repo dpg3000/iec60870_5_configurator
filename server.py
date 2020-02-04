@@ -91,6 +91,7 @@ class ServerDevice:
                         return f"There is no {control_object} for the device {self.name}. You have to add it to the " \
                                f"server_parts section in the DB "
                 else:
+                    print(self.control_obj_list)
                     return f"There is no logic to process the {control_object}"
 
     def _obj_35m_me_te(self, obj_info, hysteresis, sva, file):
