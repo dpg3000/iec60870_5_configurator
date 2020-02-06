@@ -1,0 +1,5 @@
+NOTAS:
+
+- En el módulo map, se toma como entrada y salida, aVariableEntradaN y aVariableSalidaN. Habría que quitar el 'a' inicial y substituirla por la terminología húngara correspondiente a la entrada
+- FunctionBlockOutputHeader sobresale en la web, recortar el nombre y aplicar también a FunctionOutputHeader
+- Nombres de las vainas en device(), ahora mismo es un puto cristo
