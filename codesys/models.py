@@ -1467,13 +1467,13 @@ class SboModel(RtuModel):
         var_input = self.declaration_input.format(input_str)
 
         # Outputs
-        output_str = variable_to_declaration(signal=self.select, num_objects=int(num_objects / 2), data_type=self.select_data_type) + '\n'
+        output_str = f"{self.error} : {self.error_data_type};" + '\n'
+        output_str += variable_to_declaration(signal=self.select, num_objects=int(num_objects / 2), data_type=self.select_data_type) + '\n'
         output_str += variable_to_declaration(signal=self.execute, num_objects=int(num_objects / 2), data_type=self.execute_data_type) + '\n'
-        output_str += f"{self.error} : {self.error_data_type};"
         var_output = self.declaration_output.format(output_str)
 
         # Internals
-        internal_str = f"{self.error_stat_internal} : {self.error_stat_internal_data_type};"
+        internal_str = f"{self.error_stat_internal} : {self.error_stat_internal_data_type};" + '\n'
         internal_str += variable_to_declaration(signal=self.flag, num_objects=int(num_objects / 2), data_type=self.flag_data_type) + '\n'
         var_internal = self.declaration_internal.format(internal_str)
 
