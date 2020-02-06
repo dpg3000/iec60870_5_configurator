@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from devs.views import configurator_view, submit, validate_parameters
+import pou
 from codesys import models
 
 urlpatterns = [
@@ -26,15 +27,16 @@ urlpatterns = [
 ]
 
 # Filling interface for pou management at runserver
-models.fbd_model = models.FunctionBlockDiagramModel()
-models.user_prg_model = models.UserPrgModel(models.fbd_model, models.user_prg_version)
-models.device_model = models.DeviceModel(models.user_prg_model, models.device_version)
-models.rtu_model = models.RtuModel(models.device_model, models.rtu_version)
-models.pack_model = models.PackModel(models.rtu_model, models.pack_version)
-models.check_model = models.CheckModel(models.rtu_model, models.check_version)
-models.map_model = models.MapModel(models.rtu_model, models.map_version)
-models.rise_model = models.RiseModel(models.rtu_model, models.rise_version)
-models.save_model = models.SaveModel(models.rtu_model, models.save_version)
-models.handler_model = models.HandlerModel(models.rtu_model, models.handler_version)
+pou.fbd_model = models.FunctionBlockDiagramModel()
+pou.user_prg_model = models.UserPrgModel(pou.fbd_model, models.user_prg_version)
+pou.device_model = models.DeviceModel(pou.user_prg_model, models.device_version)
+pou.rtu_model = models.RtuModel(pou.device_model, models.rtu_version)
+pou.pack_model = models.PackModel(pou.rtu_model, models.pack_version)
+pou.check_model = models.CheckModel(pou.rtu_model, models.check_version)
+pou.map_model = models.MapModel(pou.rtu_model, models.map_version)
+pou.rise_model = models.RiseModel(pou.rtu_model, models.rise_version)
+pou.save_model = models.SaveModel(pou.rtu_model, models.save_version)
+pou.sbo_model = models.SboModel(pou.sbo_model, models.sbo_version)
+pou.handler_model = models.HandlerModel(pou.rtu_model, models.handler_version)
 
 

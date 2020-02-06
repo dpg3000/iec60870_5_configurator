@@ -2,6 +2,8 @@ from django.db import models
 import copy
 from support_functions import variable_to_declaration
 from server_parts.models import Obj35mMeTe
+import pou
+import re
 
 # Pou versions menu
 user_prg_version = 'userprgv0'
@@ -15,19 +17,6 @@ save_version = 'savev0'
 sbo_version = 'sbov0'
 handler_version = 'handlerv0'
 
-# Data object repository for pou interface management
-fbd_model = None
-user_prg_model = None
-device_model = None
-rtu_model = None
-pack_model = None
-check_model = None
-map_model = None
-rise_model = None
-save_model = None
-sbo_model = None
-handler_model = None
-
 
 # Create your models here.
 class FBDTemplate(models.Model):
@@ -39,12 +28,17 @@ class FBDTemplate(models.Model):
     DeclarationInternal = models.TextField(default="")
     DeclarationEndTag = models.CharField(max_length=255, default="")
     Header = models.TextField(default="")
-    InputHeader = models.TextField(default="")
+    FunctionBlockInputHeader = models.TextField(default="")
+    FunctionInputHeader = models.TextField(default="")
     InputUnit = models.TextField(default="")
-    OutputHeader = models.TextField(default="")
+    FunctionBlockOutputHeader = models.TextField(default="")
     FunctionOutputHeader = models.TextField(default="")
     OutputUnit = models.TextField(default="")
     CodeEndTag = models.CharField(max_length=255, default="")
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super(FBDTemplate, self).save()
+        pou.fbd_model = FunctionBlockDiagramModel()
 
 
 class UserPrg(models.Model):
@@ -58,7 +52,7 @@ class UserPrg(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(UserPrg, self).save()
-        models.user_prg_model = UserPrgModel(fbd_model, user_prg_version)
+        pou.user_prg_model = UserPrgModel(pou.fbd_model, user_prg_version)
 
     def __str__(self):
         return self.Version
@@ -109,7 +103,7 @@ class Device(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(Device, self).save()
-        models.device_model = DeviceModel(user_prg_model, device_version)
+        pou.device_model = DeviceModel(pou.user_prg_model, device_version)
 
     def __str__(self):
         return self.Version
@@ -136,7 +130,7 @@ class Rtu(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(Rtu, self).save()
-        models.rtu_model = RtuModel(device_model, rtu_version)
+        pou.rtu_model = RtuModel(pou.device_model, rtu_version)
 
     def __str__(self):
         return self.Version
@@ -148,7 +142,7 @@ class Pack(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(Pack, self).save()
-        models.pack_model = PackModel(rtu_model, pack_version)
+        pou.pack_model = PackModel(pou.rtu_model, pack_version)
 
     def __str__(self):
         return self.Version
@@ -164,7 +158,7 @@ class Check(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(Check, self).save()
-        models.check_model = CheckModel(rtu_model, check_version)
+        pou.check_model = CheckModel(pou.rtu_model, check_version)
 
     def __str__(self):
         return self.Version
@@ -176,7 +170,7 @@ class Map(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(Map, self).save()
-        models.pack_model = PackModel(rtu_model, map_version)
+        pou.pack_model = PackModel(pou.rtu_model, map_version)
 
     def __str__(self):
         return self.Version
@@ -192,7 +186,7 @@ class RiseToTrigger(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(RiseToTrigger, self).save()
-        models.rise_model = RiseModel(rtu_model, rise_version)
+        pou.rise_model = RiseModel(pou.rtu_model, rise_version)
 
     def __str__(self):
         return self.Version
@@ -237,7 +231,7 @@ class Save(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(Save, self).save()
-        models.save_model = SaveModel(rtu_model, save_version)
+        pou.save_model = SaveModel(pou.rtu_model, save_version)
 
     def __str__(self):
         return self.Version
@@ -254,7 +248,7 @@ class Sbo(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(Sbo, self).save()
-        models.sbo_model = SboModel(rtu_model, sbo_version)
+        pou.sbo_model = SboModel(pou.rtu_model, sbo_version)
 
     def __str__(self):
         return self.Version
@@ -268,7 +262,7 @@ class Handler(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(Handler, self).save()
-        models.handler_model = HandlerModel(rtu_model, handler_version)
+        pou.handler_model = HandlerModel(pou.rtu_model, handler_version)
 
     def __str__(self):
         return self.Version
@@ -278,18 +272,19 @@ class FunctionBlockDiagramModel:
     def __init__(self):
         self.function_block_diagram_template = FBDTemplate.objects.first()
         self.declaration_attributes = self.function_block_diagram_template.DeclarationAttributes
-        self.declaration_fb_header = self.function_block_diagram_template.DeclarationFBHeader
-        self.declaration_f_header = self.function_block_diagram_template.DeclarationFHeader
-        self.declaration_input = self.function_block_diagram_template.DeclarationInput
-        self.declaration_output = self.function_block_diagram_template.DeclarationOutput
-        self.declaration_internal = self.function_block_diagram_template.DeclarationInternal
+        self.declaration_fb_header = re.sub(r'(?<={).+?(?=})', '', self.function_block_diagram_template.DeclarationFBHeader)
+        self.declaration_f_header = re.sub(r'(?<={).+?(?=})', '', self.function_block_diagram_template.DeclarationFHeader)
+        self.declaration_input = re.sub(r'(?<={).+?(?=})', '', self.function_block_diagram_template.DeclarationInput)
+        self.declaration_output = re.sub(r'(?<={).+?(?=})', '', self.function_block_diagram_template.DeclarationOutput)
+        self.declaration_internal = re.sub(r'(?<={).+?(?=})', '', self.function_block_diagram_template.DeclarationInternal)
         self.declaration_end_tag = self.function_block_diagram_template.DeclarationEndTag
-        self.header = self.function_block_diagram_template.Header
-        self.input_header = self.function_block_diagram_template.InputHeader
-        self.input_unit = self.function_block_diagram_template.InputUnit
-        self.output_header = self.function_block_diagram_template.OutputHeader
-        self.function_output_header = self.function_block_diagram_template.FunctionOutputHeader
-        self.output_unit = self.function_block_diagram_template.OutputUnit
+        self.header = re.sub(r'(?<={).+?(?=})', '', self.function_block_diagram_template.Header)
+        self.function_block_input_header = re.sub(r'(?<={).+?(?=})', '', self.function_block_diagram_template.FunctionBlockInputHeader)
+        self.function_input_header = re.sub(r'(?<={).+?(?=})', '', self.function_block_diagram_template.FunctionInputHeader)
+        self.input_unit = re.sub(r'(?<={).+?(?=})', '', self.function_block_diagram_template.InputUnit)
+        self.function_block_output_header = re.sub(r'(?<={).+?(?=})', '', self.function_block_diagram_template.FunctionBlockOutputHeader)
+        self.function_output_header = re.sub(r'(?<={).+?(?=})', '', self.function_block_diagram_template.FunctionOutputHeader)
+        self.output_unit = re.sub(r'(?<={).+?(?=})', '', self.function_block_diagram_template.OutputUnit)
         self.code_end_tag = self.function_block_diagram_template.CodeEndTag
 
 
@@ -365,7 +360,7 @@ class DeviceModel(UserPrgModel):
         pou_name = "Dev" + str(device_name) + str(server_iteration)
 
         # create file
-        device = open(path + "\\" + pou_name + ".EXP", "w+")
+        device_object = open(path + "\\" + pou_name + ".EXP", "w+")
 
         # variable definition
         # inputs
@@ -422,19 +417,20 @@ class DeviceModel(UserPrgModel):
         declaration += self.declaration_output.format(output_str) + '\n'
         declaration += self.declaration_internal.format(internal_str) + '\n'
         declaration += self.declaration_end_tag + '\n'
+        device_object.write(declaration)
 
         # Code construction
-        device.write(self.header.format(str(len(rtu))) + '\n')
+        device_object.write(self.header.format(str(len(rtu))) + '\n')
 
         # Instantiation
         for i in range(len(rtu)):
-            self._rtu_fbd(device_operation, rtu[i], device)
+            self._rtu_fbd(device_operation, rtu_instance_list[i], rtu[i], device_object)
 
         # Final tag
-        device.write(self.code_end_tag + '\n')
+        device_object.write(self.code_end_tag + '\n')
 
         # Closing file
-        device.close()
+        device_object.close()
 
         return pou_name
 
@@ -463,13 +459,14 @@ class DeviceModel(UserPrgModel):
                 num_inputs = (4 * num_objects) + 5
 
         # Input header
-        fbd_str = self.input_header.format(f"inst0{instance}", f"{num_inputs}") + '\n'
+        fbd_str = self.function_block_input_header.format(f"inst0{instance}", f"{num_inputs}") + '\n'
 
         # Inputs
         # header
         fbd_str += self.input_unit.format(f"{self.first_cycle}") + '\n'
         fbd_str += self.input_unit.format(f"{self.sequence_order}") + '\n'
         fbd_str += self.input_unit.format(f"{self.protocol}") + '\n'
+        fbd_str += self.input_unit.format(f"{self.state_loc_rem}") + '\n'
         if purpose == 'command':
             fbd_str += self.input_unit.format("CONTROL") + '\n'
         else:
@@ -503,7 +500,7 @@ class DeviceModel(UserPrgModel):
             num_outputs = num_objects - 1
 
         # output header 1
-        fbd_str += self.output_header.format(f"{instance}", f"{num_outputs}") + '\n'
+        fbd_str += self.function_block_output_header.format(f"{instance}", f"{num_outputs}") + '\n'
 
         # output unit 1
         for i in range(num_objects - 1):
@@ -516,7 +513,7 @@ class DeviceModel(UserPrgModel):
                 fbd_str += self.output_unit.format(f"{self.execute}{i + 1}") + '\n'
 
         # Output header 2
-        fbd_str += self.output_header.format("", "1") + '\n'
+        fbd_str += self.function_block_output_header.format("", "1") + '\n'
 
         # output unit 2
         fbd_str += self.output_unit.format(f"{output_data}1") + '\n'
@@ -591,7 +588,7 @@ class RtuModel(DeviceModel):
         self.signals_data_type = self.rtu_model.SignalsDataType
         self.check_changes = self.rtu_model.CheckChanges
         self.check_changes_data_type = self.rtu_model.CheckChangesDataType
-        self.names = self.rtu_model.NamesDataType
+        self.names = self.rtu_model.Names
         self.names_data_type = self.rtu_model.NamesDataType
         self.saves = self.rtu_model.Saves
         self.saves_data_type = self.rtu_model.SavesDataType
@@ -624,6 +621,7 @@ class RtuModel(DeviceModel):
         input_str += f"{self.sequence_order} : {self.sequence_order};" + '\n'
         input_str += f"{self.protocol} : {self.protocol_data_type};" + '\n'
         input_str += f"{self.state_loc_rem} : {self.state_loc_rem_data_type};" + '\n'
+        input_str += f"{self.action} : {self.action_data_type};" + '\n'
         input_str += variable_to_declaration(signal=input_data, num_objects=num_objects, data_type=input_data_type) + '\n'
         input_str += variable_to_declaration(signal=save_data, num_objects=num_objects, data_type=save_data_type) + '\n'
         input_str += variable_to_declaration(signal=name_data, num_objects=num_objects, data_type=name_data_type) + '\n'
@@ -643,7 +641,7 @@ class RtuModel(DeviceModel):
 
         # Internals
         internal_str = f"{self.action} : {self.action_data_type};" + '\n'
-        internal_str += f"{self.signals} : ARRAY [1..{num_objects}] OF {self.signals_data_type};" + '\n'
+        internal_str += f"{self.signals} : ARRAY [1..{num_objects}] OF {input_data_type};" + '\n'
         internal_str += f"{self.check_changes} : ARRAY [1..{num_objects}] OF {self.check_changes_data_type};" + '\n'
         internal_str += f"{self.names} : ARRAY [1..{num_objects}] OF {self.names_data_type}" + '\n'
         internal_str += f"{self.saves} : ARRAY [1..{num_objects}] OF {self.saves_data_type}" + '\n'
@@ -665,13 +663,14 @@ class RtuModel(DeviceModel):
         declaration += self.declaration_output.format(output_str) + '\n'
         declaration += self.declaration_internal.format(internal_str) + '\n'
         declaration += self.declaration_end_tag + '\n'
+        rtu_object.write(declaration)
 
         # FBD Code
         # Select body networks
-        if purpose == 'Measure':
+        if purpose == 'measure':
             body_networks = 6
         else:
-            if purpose == 'Command':
+            if purpose == 'command':
                 if device_operation == 'SBO':
                     body_networks = 9
                 else:
@@ -681,7 +680,7 @@ class RtuModel(DeviceModel):
 
         # Writing body networks
         networks = self.header.format(body_networks)
-        rtu_object.write(networks)
+        rtu_object.write(networks + '\n')
 
         # RTU hub
         if purpose == 'command':
@@ -725,17 +724,17 @@ class RtuModel(DeviceModel):
         output_data = pack_information[2]
 
         # Input header
-        fbd_str = self.input_header.format(f"inst0{instance}", str(num_objects)) + '\n'
+        fbd_str = self.function_block_input_header.format(f"inst0{instance}", str(num_objects)) + '\n'
 
         # Input unit
         for i in range(num_objects):
             fbd_str += self.input_unit.format(f"{input_data}{i + 1}") + '\n'
 
         # Output header 1
-        fbd_str += self.output_header.format(f"{instance}", "0") + '\n'
+        fbd_str += self.function_block_output_header.format(f"{instance}", "0") + '\n'
 
         # Output header 2
-        fbd_str += self.output_header.format("", "1") + '\n'
+        fbd_str += self.function_block_output_header.format("", "1") + '\n'
 
         # Output unit
         fbd_str += self.output_unit.format(output_data) + '\n'
@@ -745,16 +744,16 @@ class RtuModel(DeviceModel):
 
     def _rise_fbd(self, instance, file):
         # Input header
-        fbd_str = self.input_header.format(f"inst0{instance}", "1") + '\n'
+        fbd_str = self.function_block_input_header.format(f"inst0{instance}", "1") + '\n'
 
         # Input unit
         fbd_str += self.input_unit.format(f"{self.rise_changes}") + '\n'
 
         # Output header 1
-        fbd_str += self.output_header.format(f"{instance}", "0") + '\n'
+        fbd_str += self.function_block_output_header.format(f"{instance}", "0") + '\n'
 
         # Output header 2
-        fbd_str += self.output_header.format("", "1") + '\n'
+        fbd_str += self.function_block_output_header.format("", "1") + '\n'
 
         # Output unit
         fbd_str += self.output_unit.format(self.trigger_changes) + '\n'
@@ -764,17 +763,17 @@ class RtuModel(DeviceModel):
 
     def _check_fbd(self, instance, file):
         # Input header
-        fbd_str = self.input_header.format(f"inst0{instance}", "2") + '\n'
+        fbd_str = self.function_block_input_header.format(f"inst0{instance}", "2") + '\n'
 
         # Input unit
         fbd_str += self.input_unit.format(f"{self.signals}") + '\n'
         fbd_str += self.input_unit.format(f"{self.first_cycle}") + '\n'
 
         # Output header 1
-        fbd_str += self.output_header.format(f"{instance}", "0") + '\n'
+        fbd_str += self.function_block_output_header.format(f"{instance}", "0") + '\n'
 
         # Output header 2
-        fbd_str += self.output_header.format("", "1") + '\n'
+        fbd_str += self.function_block_output_header.format("", "1") + '\n'
 
         # Output unit
         fbd_str += self.output_unit.format(self.check_changes) + '\n'
@@ -794,7 +793,7 @@ class RtuModel(DeviceModel):
             inputs = (3 * num_objects) + 2
 
         # Input header
-        fbd_str = self.input_header.format(f"inst0{instance}", f"{inputs}") + '\n'
+        fbd_str = self.function_block_input_header.format(f"inst0{instance}", f"{inputs}") + '\n'
 
         # Input unit
         fbd_str += self.input_unit.format(f"{self.action}") + '\n'
@@ -804,23 +803,24 @@ class RtuModel(DeviceModel):
         for i in range(num_objects):
             fbd_str += self.input_unit.format(f"{input_data}{i + 1}") + '\n'
 
-        # triggers
-        for i in range(num_objects):
-            fbd_str += self.input_unit.format(f"{self.trigger_changes}[{i + 1}]") + '\n'
+        if purpose != 'measure':
+            # triggers
+            for i in range(num_objects):
+                fbd_str += self.input_unit.format(f"{self.trigger_changes}[{i + 1}]") + '\n'
 
-        # checks
-        for i in range(num_objects):
-            fbd_str += self.input_unit.format(f"{self.check_changes}[{i + 1}]") + '\n'
+            # checks
+            for i in range(num_objects):
+                fbd_str += self.input_unit.format(f"{self.check_changes}[{i + 1}]") + '\n'
 
         # Output header 1
-        fbd_str += self.output_header.format(f"{instance}", f"{num_objects - 1}") + '\n'
+        fbd_str += self.function_block_output_header.format(f"{instance}", f"{num_objects - 1}") + '\n'
 
         # Output unit 1
         for i in range(num_objects - 1):
             fbd_str += self.output_unit.format(f"{output_data}{i + 2}") + '\n'
 
         # Output header 2
-        fbd_str += self.output_header.format("", "1") + '\n'
+        fbd_str += self.function_block_output_header.format("", "1") + '\n'
 
         # Output unit 2
         fbd_str += self.output_unit.format(f"{output_data}1") + '\n'
@@ -830,7 +830,7 @@ class RtuModel(DeviceModel):
 
     def _save_fbd(self, instance, file):
         # Input header
-        fbd_str = self.input_header.format(f"inst0{instance}", "9") + '\n'
+        fbd_str = self.function_input_header.format("9") + '\n'
 
         # Input unit
         fbd_str += self.input_unit.format(f"{self.first_cycle}") + '\n'
@@ -851,7 +851,7 @@ class RtuModel(DeviceModel):
 
     def _sbo_fbd(self, instance, num_objects, file):
         # Input header
-        fbd_str = self.input_header.format(f"inst0{instance}", f"{num_objects + (num_objects / 2) + 1}") + '\n'
+        fbd_str = self.function_block_input_header.format(f"inst0{instance}", f"{num_objects + (num_objects / 2) + 1}") + '\n'
 
         # Input unit
         fbd_str += self.input_unit.format(f"{self.state_loc_rem}") + '\n'
@@ -865,7 +865,7 @@ class RtuModel(DeviceModel):
             fbd_str += self.input_unit.format(f"{self.status}{i + 1}") + '\n'
 
         # Output header 1
-        fbd_str += self.output_header.format(f"{instance}", f"{(num_objects + 1) - 1}") + '\n'
+        fbd_str += self.function_block_output_header.format(f"{instance}", f"{(num_objects + 1) - 1}") + '\n'
 
         # Selects
         for i in range(int(num_objects / 2)):
@@ -876,7 +876,7 @@ class RtuModel(DeviceModel):
             fbd_str += self.output_unit.format(f"{self.execute}{i + 1}") + '\n'
 
         # Output header 2
-        fbd_str += self.output_header.format("", "1") + '\n'
+        fbd_str += self.function_block_output_header.format("", "1") + '\n'
 
         # Output unit
         fbd_str += self.output_unit.format(f"{self.error}") + '\n'
@@ -886,7 +886,7 @@ class RtuModel(DeviceModel):
 
     def _handler_fbd(self, instance, file):
         # Input header
-        fbd_str = self.input_header.format(f"inst0{instance}", "1") + '\n'
+        fbd_str = self.function_input_header.format(f"inst0{instance}", "1") + '\n'
 
         # Input unit
         fbd_str += self.input_unit.format(f"{self.error}") + '\n'
@@ -939,20 +939,35 @@ class RtuModel(DeviceModel):
             output_data_type = self.saves_data_type
         elif internal_purpose == 'values':
             if rtu_purpose == 'command':
-                input_data = self.measure
-                input_data_type = self.measure_data_type
+                input_data = self.command
+                input_data_type = self.command_data_type
+                output_data_type = self.command_data_type
             elif rtu_purpose == 'state':
                 input_data = self.state
                 input_data_type = self.state_data_type
+                output_data_type = self.state_data_type
             elif rtu_purpose == 'measure':
                 input_data = self.measure
                 input_data_type = self.measure_data_type
+                output_data_type = self.measure_data_type
             output_data = self.signals
-            output_data_type = self.signals_data_type
         else:
             "gestionar errores"
 
         return input_data, input_data_type, output_data, output_data_type
+
+    def check_decision_tree(self, purpose):
+        response = {
+            'input_data_type': ''
+        }
+        if purpose == 'command':
+            response['input_data_type'] = self.command_data_type
+        elif purpose == 'state':
+            response['input_data_type'] = self.state_data_type
+        elif purpose == 'measure':
+            response['input_data_type'] = self.measure_data_type
+
+        return response
 
     def map_decision_tree(self, purpose):
         input_data = ''
@@ -999,7 +1014,7 @@ class PackModel(RtuModel):
             RtuModel.__init__(self, None, None)
 
         self.pack_model = Pack.objects.filter(Version=version).first()
-        self.st = self.pack_model.ST
+        self.st = re.sub(r'(?<={).+?(?=})', '', self.pack_model.ST)
 
     def pack(self, device_name, num_objects, rtu_purpose, internal_purpose, server_iteration, path):
         # Obtaining data
@@ -1034,7 +1049,7 @@ class PackModel(RtuModel):
         # Code construction
         code = ''
         for i in range(num_objects):
-            code += self.st.format(output_data, i + 1, input_data) + '\n'
+            code += self.st.format(output_data, i + 1, f"{input_data}{i + 1}") + '\n'
         code += self.code_end_tag
 
         # Writing the pou
@@ -1058,11 +1073,12 @@ class CheckModel(RtuModel):
         self.iterator_data_type = self.check_model.IteratorDataType
         self.last_values = self.check_model.LastValues
         self.last_values_data_type = self.check_model.LastValuesDataType
-        self.st = self.check_model.ST
+        self.st = re.sub(r'(?<={).+?(?=})', '', self.check_model.ST)
 
     def check(self, device_name, num_objects, purpose, server_iteration, path):
+        check_information = self.check_decision_tree(purpose)
         input_data = self.signals
-        input_data_type = self.signals_data_type
+        input_data_type = check_information['input_data_type']
         output_data = self.check_changes
         output_data_type = self.check_changes_data_type
 
@@ -1084,7 +1100,7 @@ class CheckModel(RtuModel):
 
         # Internals
         internal_str = f"{self.iterator} : {self.iterator_data_type};" + '\n'
-        internal_str += f"{self.last_values} : ARRAY [1..{num_objects}] OF {self.last_values_data_type};"
+        internal_str += f"{self.last_values} : ARRAY [1..{num_objects}] OF {input_data_type};"
         var_internal = self.declaration_internal.format(internal_str)
 
         # Declaration construction
@@ -1093,7 +1109,7 @@ class CheckModel(RtuModel):
         declaration += var_input + '\n'
         declaration += var_output + '\n'
         declaration += var_internal + '\n'
-        declaration += self.declaration_end_tag
+        declaration += self.declaration_end_tag + '\n'
 
         # Code construction
         code = self.st.format(
@@ -1103,7 +1119,7 @@ class CheckModel(RtuModel):
             input_data, self.iterator, self.last_values, self.iterator,
             output_data, self.iterator,
             output_data, self.iterator,
-            output_data, input_data
+            self.last_values, input_data
         )
         code += '\n' + self.code_end_tag
 
@@ -1124,7 +1140,7 @@ class MapModel(RtuModel):
             RtuModel.__init__(self, None, None)
 
         self.map_model = Map.objects.filter(Version=version).first()
-        self.st = self.map_model.ST
+        self.st = re.sub(r'(?<={).+?(?=})', '', self.map_model.ST)
 
     def map(self, device_name, num_objects, purpose, server_iteration, path):
         # Obtaining data
@@ -1145,8 +1161,9 @@ class MapModel(RtuModel):
         input_str = f"{self.action} : {self.action_data_type};" + '\n'
         input_str += f"{self.state_loc_rem} : {self.loc_rem_state_data_type};" + '\n'
         input_str += variable_to_declaration(signal=input_data, num_objects=num_objects, data_type=input_data_type) + '\n'
-        input_str += variable_to_declaration(signal=self.trigger_changes, num_objects=num_objects, data_type=self.trigger_changes_data_type) + '\n'
-        input_str += variable_to_declaration(signal=self.check_changes, num_objects=num_objects, data_type=self.check_changes_data_type)
+        if purpose != 'measure':
+            input_str += variable_to_declaration(signal=self.trigger_changes, num_objects=num_objects, data_type=self.trigger_changes_data_type) + '\n'
+            input_str += variable_to_declaration(signal=self.check_changes, num_objects=num_objects, data_type=self.check_changes_data_type)
         var_input = self.declaration_input.format(input_str)
 
         # Outputs
@@ -1155,7 +1172,7 @@ class MapModel(RtuModel):
 
         # Declaration construction
         declaration = self.declaration_attributes + '\n'
-        declaration += self.declaration_fb_header + '\n'
+        declaration += self.declaration_fb_header.format(pou_name) + '\n'
         declaration += var_input + '\n'
         declaration += var_output + '\n'
         declaration += self.declaration_end_tag + '\n'
@@ -1169,9 +1186,13 @@ class MapModel(RtuModel):
             for i in range(num_objects):
                 code += f"IF {self.trigger_changes}{i + 1} OR {self.check_changes}{i + 1} THEN" + '\n'
                 code += f"{output_data}{i + 1} := {input_data}{i + 1};" + '\n'
-                code += "END_IF"
-        code = self.st.format(code)
-        code += self.code_end_tag
+                code += "END_IF" + '\n'
+
+        code = self.st.format(
+            self.state_loc_rem, self.state_loc_rem, self.action,
+            code
+        )
+        code += '\n' + self.code_end_tag
 
         # Writing the pou
         map_object.write(declaration + code)
@@ -1194,7 +1215,7 @@ class RiseModel(RtuModel):
         self.last_rise_data_type = self.rise_model.LastRiseDataType
         self.iterator = self.rise_model.Iterator
         self.iterator_data_type = self.rise_model.IteratorDataType
-        self.st = self.rise_model.ST
+        self.st = re.sub(r'(?<={).+?(?=})', '', self.rise_model.ST)
 
     def rise(self, device_name, num_objects, purpose, server_iteration, path):
         # Obtaining data
@@ -1292,7 +1313,7 @@ class SaveModel(RtuModel):
         self.hysteresis_data_type = self.save_model.HysteresisDataType
         self.last_values = self.save_model.LastValues
         self.last_values_data_type = self.save_model.LastValuesDataType
-        self.st = self.save_model.ST
+        self.st = re.sub(r'(?<={).+?(?=})', '', self.save_model.ST)
 
     def save(self, device_name, num_objects, purpose, server_iteration, path):
         # Obtaining data
@@ -1334,7 +1355,6 @@ class SaveModel(RtuModel):
         internal_str += f"{self.new_line} : {self.new_line_data_type} := {self.new_line_init_val};" + '\n'
 
         # Obtaining hysteresis derivatives
-        hysteresis = ""
         hysteresis_condition = ""
         internal_input_code = ""
         hysteresis_code_end_tag = ""
@@ -1349,7 +1369,7 @@ class SaveModel(RtuModel):
                                        f"[{self.iterator}] < ({self.last_values}[{self.iterator}] - " \
                                        f"(({self.hysteresis}[{self.iterator}] / 100) * {self.last_values}" \
                                        f"[{self.iterator}]))) THEN"
-                internal_input_code = f"{input_data}[{self.iterator}] := {input_data}[{self.iterator}];"
+                internal_input_code = f"{self.last_values}[{self.iterator}] := {input_data}[{self.iterator}];"
                 hysteresis_code_end_tag = "END_IF"
 
         # Writing internals in their module
@@ -1426,8 +1446,8 @@ class SboModel(RtuModel):
         self.error_stat_internal_data_type = self.sbo_model.ErrorStatInternalDataType
         self.flag = self.sbo_model.Flag
         self.flag_data_type = self.sbo_model.FlagDataType
-        self.st_body = self.sbo_model.STBody
-        self.st_core = self.sbo_model.STCore
+        self.st_body = re.sub(r'(?<={).+?(?=})', '', self.sbo_model.STBody)
+        self.st_core = re.sub(r'(?<={).+?(?=})', '', self.sbo_model.STCore)
 
     def sbo(self, device_name, num_objects, purpose, server_iteration, path):
         # Obtaining data
@@ -1519,7 +1539,7 @@ class HandlerModel(RtuModel):
         self.handler_model = Handler.objects.filter(Version=version).first()
         self.error_description = self.handler_model.ErrorDescription
         self.error_description_data_type = self.handler_model.ErrorDescriptionDataType
-        self.st = self.handler_model.ST
+        self.st = re.sub(r'(?<={).+?(?=})', '', self.handler_model.ST)
 
     def handler(self, device_name, server_iteration, path):
         # Instance data
@@ -1557,5 +1577,3 @@ class HandlerModel(RtuModel):
 
         # Writing the pou
         handler_object.write(code)
-
-

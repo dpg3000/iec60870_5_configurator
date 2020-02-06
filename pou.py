@@ -2,7 +2,6 @@ import os
 import shutil
 import support_functions
 from server_parts.models import Obj35mMeTe
-from codesys import models
 from devs.models import Device
 
 path = os.path.dirname(os.path.abspath(__file__)) + '\\POUs'
@@ -18,6 +17,19 @@ iec_new_message_list = []
 rtu_pou_instance_list = []
 rtu_instance_list = []
 device_list = []
+
+# Data object repository for pou interface management
+fbd_model = None
+user_prg_model = None
+device_model = None
+rtu_model = None
+pack_model = None
+check_model = None
+map_model = None
+rise_model = None
+save_model = None
+sbo_model = None
+handler_model = None
 
 
 def delete_pous():
@@ -35,42 +47,38 @@ def delete_pous():
 
 def create_pou(device_name, device_quantity, device_operation, server_iteration):
     # Main purposes sequence list
-    device_rtu_sequence = [
-        (len(measurements_list[0]), 'measure'),
-        (len(states_list[0]), 'state'),
-        (len(single_commands_list[0]), 'command')
-    ]
+    device_rtu_sequence = [(len(measurements_list[0]), 'measure'), (len(states_list[0]), 'state'), (len(single_commands_list[0]), 'command')]
 
     for rtu in device_rtu_sequence:
         if rtu[1] == 'command':
-            pack3 = models.pack_model.pack(device_name, rtu[0], rtu[1], 'trigger', server_iteration, path)
+            pack3 = pack_model.pack(device_name, rtu[0], rtu[1], 'trigger', server_iteration, path)
             rtu_pou_instance_list.append(pack3)
 
-        if rtu[1] == 'State':
-            pack4 = models.pack_model.pack(device_name, rtu[0], rtu[1], 'trigger', server_iteration, path)
-            rise0 = models.rise_model.rise(device_name, rtu[0], rtu[1], server_iteration, path)
+        if rtu[1] == 'state':
+            pack4 = pack_model.pack(device_name, rtu[0], rtu[1], 'trigger', server_iteration, path)
+            rise0 = rise_model.rise(device_name, rtu[0], rtu[1], server_iteration, path)
             rtu_pou_instance_list.append(pack4)
             rtu_pou_instance_list.append(rise0)
 
         # Common ground between RTUs
-        pack0 = models.pack_model.pack(device_name, rtu[0], rtu[1], 'values', server_iteration, path)
-        check0 = models.check_model.check(device_name, rtu[0], rtu[1], server_iteration, path)
-        map0 = models.map_model.map(device_name, rtu[0], rtu[1], server_iteration, path)
-        pack1 = models.pack_model.pack(device_name, rtu[1], rtu[2], 'save', server_iteration, path)
-        pack2 = models.pack_model.pack(device_name, rtu[0], rtu[1], 'label', server_iteration, path)
-        save0 = models.save_model.save(device_name, rtu[0], rtu[1], server_iteration, path)
+        pack0 = pack_model.pack(device_name, rtu[0], rtu[1], 'values', server_iteration, path)
+        check0 = check_model.check(device_name, rtu[0], rtu[1], server_iteration, path)
+        map0 = map_model.map(device_name, rtu[0], rtu[1], server_iteration, path)
+        pack1 = pack_model.pack(device_name, rtu[0], rtu[1], 'save', server_iteration, path)
+        pack2 = pack_model.pack(device_name, rtu[0], rtu[1], 'label', server_iteration, path)
+        save0 = save_model.save(device_name, rtu[0], rtu[1], server_iteration, path)
 
         # rtu instances
-        rtu_pou_instance_list.append(map0)
         rtu_pou_instance_list.append(pack0)
+        rtu_pou_instance_list.append(check0)
+        rtu_pou_instance_list.append(map0)
         rtu_pou_instance_list.append(pack1)
         rtu_pou_instance_list.append(pack2)
-        rtu_pou_instance_list.append(check0)
         rtu_pou_instance_list.append(save0)
 
         # SBO capabilities
         if device_operation == "SBO":
-            if rtu[2] == 'command':
+            if rtu[1] == 'command':
                 control_list_len = 0
                 if single_commands_list:
                     control_list_len += len(single_commands_list[0])
@@ -80,19 +88,19 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
                     return f"Error - Device: {device_name}. The list of commands in the database should be even to " \
                            f"use SBO "
                 else:
-                    sbo0 = codesys.sbo_model.sbo(device_name, control_list_len, rtu[1], server_iteration, path)
-                    handler0 = codesys.handler_model.handler(device_name, server_iteration, path)
+                    sbo0 = sbo_model.sbo(device_name, control_list_len, rtu[1], server_iteration, path)
+                    handler0 = handler_model.handler(device_name, server_iteration, path)
                     rtu_pou_instance_list.append(sbo0)
                     rtu_pou_instance_list.append(handler0)
         else:
-            if rtu[2] == 'Command':
+            if rtu[1] == 'Command':
                 if Device.objects.filter(Name=device_name).first().SBO:
                     if len(single_commands_list[0]) % 2:
                         return f"Error - Device: {device_name}. The list of commands in the database should be even " \
                                f"to allow DO/SBO compatibility "
 
         # rtu
-        rtu = codesys.rtu_model.rtu(device_name, device_operation, rtu[0], rtu[1], rtu_pou_instance_list, server_iteration, path)
+        rtu = rtu_model.rtu(device_name, device_operation, rtu[0], rtu[1], rtu_pou_instance_list, server_iteration, path)
         rtu_instance_list.append(rtu)
 
         # After creating the rtu for previous purpose, clearing the instance related names
@@ -106,7 +114,7 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
     iec_new_message = iec_new_message_list.copy()
 
     # Configuring device
-    device0 = codesys.device_model.device(device_name, device_operation, rtu_instance_list, device_rtu_sequence, server_iteration, path)
+    device0 = device_model.device(device_name, device_operation, rtu_instance_list, device_rtu_sequence, server_iteration, path)
     device_list.append(
         (
             device0,
