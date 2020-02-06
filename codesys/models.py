@@ -489,7 +489,7 @@ class DeviceModel(UserPrgModel):
             for i in range(num_objects):
                 fbd_str += self.input_unit.format(f"{trigger_data}{i + 1}") + '\n'
             if purpose == 'command' and device_operation == 'SBO':
-                for i in range(num_objects / 2):
+                for i in range(int(num_objects / 2)):
                     fbd_str += self.input_unit.format(f"{self.status}{i + 1}") + '\n'
 
         # Number of outputs
@@ -507,9 +507,9 @@ class DeviceModel(UserPrgModel):
             fbd_str += self.output_unit.format(f"{output_data}{i + 2}") + '\n'
 
         if purpose == 'command' and device_operation == 'SBO':
-            for i in range(num_objects / 2):
+            for i in range(int(num_objects / 2)):
                 fbd_str += self.output_unit.format(f"{self.select}{i + 1}") + '\n'
-            for i in range(num_objects / 2):
+            for i in range(int(num_objects / 2)):
                 fbd_str += self.output_unit.format(f"{self.execute}{i + 1}") + '\n'
 
         # Output header 2
@@ -630,7 +630,7 @@ class RtuModel(DeviceModel):
             input_str += variable_to_declaration(signal=trigger_data, num_objects=num_objects, data_type=trigger_data_type) + '\n'
 
         if device_operation == "SBO" and purpose == 'command':
-            input_str += variable_to_declaration(signal=self.status, num_objects=num_objects / 2, data_type=self.status_data_type) + '\n'
+            input_str += variable_to_declaration(signal=self.status, num_objects=int(num_objects / 2), data_type=self.status_data_type) + '\n'
 
         # Outputs
         output_str = variable_to_declaration(signal=output_data, num_objects=num_objects, data_type=output_data_type) + '\n'
@@ -851,7 +851,7 @@ class RtuModel(DeviceModel):
 
     def _sbo_fbd(self, instance, num_objects, file):
         # Input header
-        fbd_str = self.function_block_input_header.format(f"inst0{instance}", f"{num_objects + (num_objects / 2) + 1}") + '\n'
+        fbd_str = self.function_block_input_header.format(f"inst0{instance}", f"{num_objects + int(num_objects / 2) + 1}") + '\n'
 
         # Input unit
         fbd_str += self.input_unit.format(f"{self.state_loc_rem}") + '\n'
@@ -1463,18 +1463,18 @@ class SboModel(RtuModel):
         # Inputs
         input_str = f"{self.state_loc_rem} : {self.state_loc_rem_data_type};" + '\n'
         input_str += variable_to_declaration(signal=self.trigger_changes, num_objects=num_objects, data_type=self.trigger_changes_data_type) + '\n'
-        input_str += variable_to_declaration(signal=self.status, num_objects=num_objects / 2, data_type=self.status_data_type) + '\n'
+        input_str += variable_to_declaration(signal=self.status, num_objects=int(num_objects / 2), data_type=self.status_data_type) + '\n'
         var_input = self.declaration_input.format(input_str)
 
         # Outputs
-        output_str = variable_to_declaration(signal=self.select, num_objects=num_objects / 2, data_type=self.select_data_type) + '\n'
-        output_str += variable_to_declaration(signal=self.execute, num_objects=num_objects / 2, data_type=self.execute_data_type) + '\n'
+        output_str = variable_to_declaration(signal=self.select, num_objects=int(num_objects / 2), data_type=self.select_data_type) + '\n'
+        output_str += variable_to_declaration(signal=self.execute, num_objects=int(num_objects / 2), data_type=self.execute_data_type) + '\n'
         output_str += f"{self.error} : {self.error_data_type};"
         var_output = self.declaration_output.format(output_str)
 
         # Internals
         internal_str = f"{self.error_stat_internal} : {self.error_stat_internal_data_type};"
-        internal_str += variable_to_declaration(signal=self.flag, num_objects=num_objects / 2, data_type=self.flag_data_type) + '\n'
+        internal_str += variable_to_declaration(signal=self.flag, num_objects=int(num_objects / 2), data_type=self.flag_data_type) + '\n'
         var_internal = self.declaration_internal.format(internal_str)
 
         # Declaration construction
@@ -1576,4 +1576,6 @@ class HandlerModel(RtuModel):
         code += '\n' + self.code_end_tag
 
         # Writing the pou
-        handler_object.write(code)
+        handler_object.write(declaration + code)
+
+        return pou_name
