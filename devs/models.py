@@ -23,9 +23,9 @@ SERVER_CHOICES = (
 )
 
 PROTOCOL_CHOICES = (
-    ('MODBUS', 'MODBUS'),
-    ('103', '103'),
-    ('104', '104')
+    ('MODBUS_TCP', 'MODBUS_TCP'),
+    ('IEC_103', 'IEC_103'),
+    ('IEC_104', 'IEC_104')
 )
 
 

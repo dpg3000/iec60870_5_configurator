@@ -304,6 +304,165 @@ class UserPrgModel(FunctionBlockDiagramModel):
         self.loc_rem_state = self.user_prg_model.LocRemState
         self.loc_rem_state_data_type = self.user_prg_model.LocRemStateDataType
 
+    def user_prg(self, device_list, path):
+        # Instance data
+        pou_name = "USER_PRG"
+
+        # create file
+        user_prg_object = open(path + "\\" + pou_name + ".EXP", "w+")
+
+        # variable definition
+        # Internal variables
+        internal_str = ''
+        total_networks = 0
+        for device in device_list:
+            for i in device['quantity']:
+                internal_str += f"inst{i}{device['name']} : {device['name']};" + '\n'
+            total_networks += device['quantity']
+
+        # Declaration construction
+        declaration = self.declaration_attributes + '\n'
+        declaration += self.declaration_fb_header.format(pou_name) + '\n'
+        declaration += self.declaration_internal.format(internal_str) + '\n'
+        declaration += self.declaration_end_tag + '\n'
+        user_prg_object.write(declaration)
+
+        # Code construction
+        user_prg_object.write(self.header.format(str(total_networks)) + '\n')
+
+        # instantiation
+        for device in device_list:
+            self._device_fbd(device, user_prg_object)
+
+        # Final tag
+        user_prg_object.write(self.code_end_tag + '\n')
+
+        # Closing file
+        user_prg_object.close()
+
+    def _device_fbd(self, device, file):
+        for i in range(device['quantity']):
+            # INPUTS
+            ####################################################################
+
+            # Number of inputs
+            control_inputs = 4
+            rtu_inputs = 3 * len(device['measurements'][i]) + 4 * len(device['states'][i]) + 4 * len(device['commands'])
+
+            if device['operation'] == 'SBO':
+                rtu_inputs += int(len(device['commands']) / 2)
+
+            total_inputs = control_inputs + rtu_inputs
+
+            # Input header
+            fbd_str = self.function_block_input_header.format(f"inst{i}{device['name']}", f"{total_inputs}") + '\n'
+
+            ####################################################################
+
+            # Control inputs
+            fbd_str += self.input_unit.format(f"{self.first_cycle}") + '\n'
+            fbd_str += self.input_unit.format(f"{i}") + '\n'
+            fbd_str += self.input_unit.format(f"{device['protocol']}") + '\n'
+            fbd_str += self.input_unit.format("???") + '\n'
+
+            ####################################################################
+
+            # Measurements (measurements)
+            for measurement in device['measurements'][i]:
+                fbd_str += self.input_unit.format("???") + '\n'
+
+            # Measurements (saves)
+            for save in device['measurements'][i]:
+                fbd_str += self.input_unit.format("TRUE") + '\n'
+
+            # Measurements (names)
+            for name in device['measurements_names'][i]:
+                fbd_str += self.input_unit.format(f"{name}") + '\n'
+
+            ####################################################################
+
+            # States (states)
+            for state in device['states'][i]:
+                fbd_str += self.input_unit.format("???") + '\n'
+
+            # States (saves)
+            for save in device['states'][i]:
+                fbd_str += self.input_unit.format("TRUE") + '\n'
+
+            # States (names)
+            for name in device['states_names'][i]:
+                fbd_str += self.input_unit.format(f"{name}") + '\n'
+
+            # States (rises)
+            for rise in device['states_names'][i]:
+                fbd_str += self.input_unit.format("???") + '\n'
+
+            ####################################################################
+
+            # Commands (commands)
+            for command in device['commands'][i]:
+                fbd_str += self.input_unit.format(f"{command}") + '\n'
+
+            # Commands (saves)
+            for save in device['commands'][i]:
+                fbd_str += self.input_unit.format("TRUE") + '\n'
+
+            # Commands (names)
+            for name in device['commands_names'][i]:
+                fbd_str += self.input_unit.format(f"{name}") + '\n'
+
+            # Commands (triggers)
+            for trigger in device['commands_triggers'][i]:
+                fbd_str += self.input_unit.format(f"{trigger}") + '\n'
+
+            if device['operation'] == 'SBO':
+                for k in range(int(len(device['commands'][i]) / 2)):
+                    fbd_str += self.input_unit.format("???") + '\n'
+
+            # OUTPUTS
+            ####################################################################
+
+            # Number of outputs
+            rtu_outputs = len(device['measurements'][i]) + len(device['states'][i]) + len(device['commands'][i])
+
+            if device['operation'] == 'SBO':
+                rtu_outputs += 2 * int(len(device['commands'][i]) / 2)
+
+            # Output header 1
+            fbd_str += self.function_block_output_header.format(f"{device['name']}", f"{rtu_outputs - 1}") + '\n'
+
+            ####################################################################
+
+            # Measurements
+            for k in range(len(device['measurements'][i]) - 1):
+                fbd_str += self.output_unit.format(f"{device['measurements'][i][k + 1]}") + '\n'
+
+            ####################################################################
+
+            # States
+            for state in device['states'][i]:
+                fbd_str += self.output_unit.format(f"{state}") + '\n'
+
+            ####################################################################
+
+            # Commands
+            for command in device['commands'][i]:
+                fbd_str += self.output_unit.format("???") + '\n'
+
+            if device['operation'] == 'SBO':
+                # select
+                for k in range(int(len(device['commands'][i]) / 2)):
+                    fbd_str += self.input_unit.format("???") + '\n'
+
+                # execute
+                for k in range(int(len(device['commands'][i]) / 2)):
+                    fbd_str += self.input_unit.format("???") + '\n'
+
+            ####################################################################
+
+            # Writing the fbd
+            file.write(fbd_str)
+
 
 class DeviceModel(UserPrgModel):
     # Copy constructor implementation
@@ -351,12 +510,12 @@ class DeviceModel(UserPrgModel):
         self.status = self.device_model.Status
         self.status_data_type = self.device_model.StatusDataType
         self.select = self.device_model.Select
-        self.select_data_type = self.device_model.Select
+        self.select_data_type = self.device_model.SelectDataType
         self.execute = self.device_model.Execute
         self.execute_data_type = self.device_model.ExecuteDataType
 
     def device(self, device_name, device_operation, rtu_instance_list, rtu, server_iteration, path):
-        # Meta-data
+        # Instance data
         pou_name = "Dev" + str(device_name) + str(server_iteration)
 
         # create file
@@ -365,9 +524,10 @@ class DeviceModel(UserPrgModel):
         # variable definition
         # inputs
         # control inputs
-        input_str = f"{self.sequence_order} : {self.sequence_order_data_type}" + '\n'
-        input_str += f"{self.protocol} : {self.protocol_data_type}" + '\n'
-        input_str += f"{self.state_loc_rem} : {self.state_loc_rem_data_type}" + '\n'
+        input_str = f"{self.first_cycle} : {self.first_cycle_data_type};" + '\n'
+        input_str += f"{self.sequence_order} : {self.sequence_order_data_type};" + '\n'
+        input_str += f"{self.protocol} : {self.protocol_data_type};" + '\n'
+        input_str += f"{self.state_loc_rem} : {self.state_loc_rem_data_type};" + '\n'
 
         # measures
         input_str += variable_to_declaration(self.measure, rtu[0][0], self.measure_data_type) + '\n'
@@ -454,7 +614,7 @@ class DeviceModel(UserPrgModel):
             num_inputs = (4 * num_objects) + 5
         elif purpose == 'command':
             if device_operation == 'SBO':
-                num_inputs = (4 * num_objects) + (num_objects / 2) + 5
+                num_inputs = (4 * num_objects) + int(num_objects / 2) + 5
             else:
                 num_inputs = (4 * num_objects) + 5
 
@@ -618,7 +778,7 @@ class RtuModel(DeviceModel):
         # variable definition
         # Inputs
         input_str = f"{self.first_cycle} : {self.first_cycle_data_type};" + '\n'
-        input_str += f"{self.sequence_order} : {self.sequence_order};" + '\n'
+        input_str += f"{self.sequence_order} : {self.sequence_order_data_type};" + '\n'
         input_str += f"{self.protocol} : {self.protocol_data_type};" + '\n'
         input_str += f"{self.state_loc_rem} : {self.state_loc_rem_data_type};" + '\n'
         input_str += f"{self.action} : {self.action_data_type};" + '\n'
@@ -636,24 +796,23 @@ class RtuModel(DeviceModel):
         output_str = variable_to_declaration(signal=output_data, num_objects=num_objects, data_type=output_data_type) + '\n'
 
         if device_operation == "SBO" and purpose == 'command':
-            output_str += variable_to_declaration(signal=self.select, num_objects=num_objects, data_type=self.select) + '\n'
-            output_str += variable_to_declaration(signal=self.execute, num_objects=num_objects, data_type=self.execute) + '\n'
+            output_str += variable_to_declaration(signal=self.select, num_objects=int(num_objects / 2), data_type=self.select_data_type) + '\n'
+            output_str += variable_to_declaration(signal=self.execute, num_objects=int(num_objects / 2), data_type=self.execute_data_type) + '\n'
 
         # Internals
-        internal_str = f"{self.action} : {self.action_data_type};" + '\n'
-        internal_str += f"{self.signals} : ARRAY [1..{num_objects}] OF {input_data_type};" + '\n'
+        internal_str = f"{self.signals} : ARRAY [1..{num_objects}] OF {input_data_type};" + '\n'
         internal_str += f"{self.check_changes} : ARRAY [1..{num_objects}] OF {self.check_changes_data_type};" + '\n'
-        internal_str += f"{self.names} : ARRAY [1..{num_objects}] OF {self.names_data_type}" + '\n'
-        internal_str += f"{self.saves} : ARRAY [1..{num_objects}] OF {self.saves_data_type}" + '\n'
-        internal_str += f"{self.error} : ARRAY [1..{num_objects}] OF {self.error_data_type}" + '\n'
+        internal_str += f"{self.names} : ARRAY [1..{num_objects}] OF {self.names_data_type};" + '\n'
+        internal_str += f"{self.saves} : ARRAY [1..{num_objects}] OF {self.saves_data_type};" + '\n'
+        internal_str += f"{self.error} : ARRAY [1..{num_objects}] OF {self.error_data_type};" + '\n'
 
         if purpose != 'measure':
-            internal_str += f"{self.trigger_changes} : ARRAY [1..{num_objects}] OF {self.trigger_changes_data_type}" + '\n'
+            internal_str += f"{self.trigger_changes} : ARRAY [1..{num_objects}] OF {self.trigger_changes_data_type};" + '\n'
             if purpose == 'state':
-                internal_str += f"{self.rise_changes} : ARRAY [1..{num_objects}] OF {self.rise_changes_data_type}" + '\n'
+                internal_str += f"{self.rise_changes} : ARRAY [1..{num_objects}] OF {self.rise_changes_data_type};" + '\n'
 
         for item in instance_list:
-            if 'Save' not in item:
+            if 'Save' not in item and 'Handler' not in item:
                 internal_str += f"inst0{item} : {item};" + '\n'
 
         # Declaration construction
@@ -1025,7 +1184,7 @@ class PackModel(RtuModel):
         output_data_type = pack_information[3]
 
         # Instance data
-        pou_name = "Pack" + str(num_objects) + input_data_type + str(device_name) + rtu_purpose + str(server_iteration)
+        pou_name = "Pack" + str(num_objects) + input_data_type + internal_purpose + str(device_name) + rtu_purpose + str(server_iteration)
 
         # create file
         pack_object = open(path + "\\" + pou_name + ".EXP", "w+")
@@ -1232,7 +1391,7 @@ class RiseModel(RtuModel):
 
         # variable definition
         # Inputs
-        input_str = f"{input_data} : ARRAY [1..{num_objects}] OF {input_data_type}"
+        input_str = f"{input_data} : ARRAY [1..{num_objects}] OF {input_data_type};"
         var_input = self.declaration_input.format(input_str)
 
         # Outputs
@@ -1553,7 +1712,7 @@ class HandlerModel(RtuModel):
         input_str = f"{self.error} : {self.error_data_type};" + '\n'
 
         # Internals
-        internal_str = f"{self.error_description} : {self.error_description};" + '\n'
+        internal_str = f"{self.error_description} : {self.error_description_data_type};" + '\n'
 
         # Declaration construction
         declaration = self.declaration_attributes + '\n'

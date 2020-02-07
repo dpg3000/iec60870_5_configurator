@@ -96,101 +96,180 @@ class ServerDevice:
 
     def _obj_35m_me_te(self, obj_info, hysteresis, sva, file):
         address = ioa_to_address(self.internal_monitor_ioa)
+        object_measures = []
         object_names = []
         for i in range(len(sva)):
-            xml_obj = obj_info.format(address[0], address[1], address[2], self.internal_monitor_ioa,
-                                      sva[i].format(self.server_iteration, self.device_count).strip(), address[2],
-                                      address[1], address[0], hysteresis[i],
-                                      sva[i].format(self.server_iteration, self.device_count).strip())
+            measure_id = sva[i].format(self.server_iteration, self.device_count).strip()
+            measure_id_split = measure_id.split("_")
+            name = measure_id_split[2]
+
+            print("HOLA K ASE")
+
+            xml_obj = obj_info.format(
+                text_first_octet=address[0],
+                text_second_octet=address[1],
+                text_third_octet=address[2],
+                ioa=self.internal_monitor_ioa,
+                comment=measure_id,
+                third_octet=address[2],
+                second_octet=address[1],
+                first_octet=address[0],
+                hysteresis=hysteresis[i],
+                signal=measure_id
+            )
 
             self.internal_monitor_ioa += 1
             address = update_address(address)
             file.write(xml_obj)
-            object_names.append(sva[i].format(self.server_iteration, self.device_count).strip())
-        pou.measurements_list.append(object_names)
+            object_measures.append(measure_id)
+            object_names.append(name)
+        pou.measurements_list.append(object_measures)
+        pou.measurements_names_list.append(object_names)
 
     def _obj_31m_dp_tb(self, obj_info, dpi, file):
         address = ioa_to_address(self.internal_monitor_ioa)
+        object_states = []
         object_names = []
         for i in range(len(dpi)):
-            xml_obj = obj_info.format(address[0], address[1], address[2], self.internal_monitor_ioa,
-                                      dpi[i].format(self.server_iteration, 0, self.device_count).strip()
-                                      + " / " + dpi[i].format(self.server_iteration, 1, self.device_count).strip(),
-                                      address[2], address[1], address[0], dpi[i].format(self.server_iteration,
-                                                                                        0, self.device_count).strip(),
-                                      dpi[i].format(self.server_iteration, 1, self.device_count).strip())
+            state_id_0 = dpi[i].format(self.server_iteration, 0, self.device_count).strip()
+            state_id_1 = dpi[i].format(self.server_iteration, 1, self.device_count).strip()
+            state_id_0_split = state_id_0.split("_")
+            state_id_1_split = state_id_1.split("_")
+            name_0 = state_id_0_split[2]
+            name_1 = state_id_1_split[2]
+
+            xml_obj = obj_info.format(
+                text_first_octet=address[0],
+                text_second_octet=address[1],
+                text_third_octet=address[2],
+                ioa=self.internal_monitor_ioa,
+                comment=f"{state_id_0} / {state_id_1}",
+                third_octet=address[2],
+                second_octet=address[1],
+                first_octet=address[0],
+                signal_0=state_id_0,
+                signal_1=state_id_1
+            )
 
             self.internal_monitor_ioa += 1
             address = update_address(address)
             file.write(xml_obj)
-            object_names.append(dpi[i].format(self.server_iteration, 0, self.device_count).strip())
-            object_names.append(dpi[i].format(self.server_iteration, 1, self.device_count).strip())
-        pou.states_list.append(object_names)
+            object_states.append(state_id_0)
+            object_states.append(state_id_1)
+            object_names.append(name_0)
+            object_names.append(name_1)
+
+        pou.states_list.append(object_states)
+        pou.states_names_list.append(object_names)
 
     def _obj_30m_sp_tb(self, obj_info, spi, file):
         address = ioa_to_address(self.internal_monitor_ioa)
+        object_states = []
         object_names = []
         for i in range(len(spi)):
-            xml_obj = obj_info.format(address[0], address[1], address[2], self.internal_monitor_ioa,
-                                      spi[i].format(self.server_iteration, self.device_count).strip(),
-                                      address[2], address[1], address[0],
-                                      spi[i].format(self.server_iteration, self.device_count).strip())
+            state_id = spi[i].format(self.server_iteration, self.device_count).strip()
+            state_id_split = state_id.split("_")
+            name = state_id_split[2]
+
+            xml_obj = obj_info.format(
+                text_first_octet=address[0],
+                text_second_octet=address[1],
+                text_third_octet=address[2],
+                ioa=self.internal_monitor_ioa,
+                comment=state_id,
+                third_octet=address[2],
+                second_octet=address[1],
+                first_octet=address[0],
+                signal=state_id
+            )
 
             self.internal_monitor_ioa += 1
             address = update_address(address)
             file.write(xml_obj)
-            object_names.append(spi[i].format(self.server_iteration, self.device_count).strip())
-        pou.states_list.append(object_names)
+            object_states.append(state_id)
+            object_names.append(name)
+
+        pou.states_list.append(object_states)
+        pou.states_names_list(object_names)
 
     def _obj_58c_sc_ta(self, obj_info, scs, file):
         address = ioa_to_address(self.internal_control_ioa)
+        object_commands = []
         object_names = []
         object_triggers = []
         for i in range(len(scs)):
             command_id = scs[i].format(self.server_iteration, self.device_count).strip()
-            command_id_splitted = command_id.split("_")
-            trigger = ""
-            try:
-                if command_id_splitted[5]:
-                    trigger = command_id_splitted[0] + "_" + command_id_splitted[1] + "_" +\
-                              command_id_splitted[2] + "_" + command_id_splitted[3] + "_" + \
-                              command_id_splitted[4] + "_Trigger_" + command_id_splitted[5]
-            except:
-                trigger = command_id_splitted[0] + "_" + command_id_splitted[1] + "_" + command_id_splitted[2] + "_" +\
-                          command_id_splitted[3] + "_Trigger_" + command_id_splitted[4]
+            command_id_split = command_id.split("_")
+            name = command_id_split[2]
+            trigger = f"{command_id_split[0]}_{command_id_split[1]}_{command_id_split[2]}_Trigger_" \
+                      f"{command_id_split[3]}_{command_id_split[4]} "
 
-            xml_obj = obj_info.format(address[0], address[1], address[2], self.internal_control_ioa,
-                                      command_id, address[2], address[1], address[0], command_id, trigger)
+            xml_obj = obj_info.format(
+                text_first_octet=address[0],
+                text_second_octet=address[1],
+                text_third_octet=address[2],
+                ioa=self.internal_control_ioa,
+                comment=command_id,
+                third_octet=address[2],
+                second_octet=address[1],
+                first_octet=address[0],
+                signal=command_id,
+                new_iec_message=trigger
+            )
 
             self.internal_control_ioa += 1
             address = update_address(address)
             file.write(xml_obj)
-            object_names.append(command_id)
+            object_commands.append(command_id)
+            object_names.append(name)
             object_triggers.append(trigger)
-        pou.single_commands_list.append(object_names)
-        pou.iec_new_message_list.append(object_triggers)
+
+        pou.commands_list.append(object_commands)
+        pou.commands_names_list.append(object_names)
+        pou.commands_triggers_list.append(object_triggers)
 
     def _obj_59c_dc_ta(self, obj_info, dcs, file):
         address = ioa_to_address(self.internal_control_ioa)
+        object_commands = []
         object_names = []
+        object_triggers = []
         for i in range(len(dcs)):
-            ######################################
-            # Faltaría añadir el trigger para DC #
-            ######################################
-            xml_obj = obj_info.format(address[0], address[1], address[2], self.internal_control_ioa,
-                                      dcs[i].format(self.server_iteration, 0, self.device_count).strip() + " / " +
-                                      dcs[i].format(self.server_iteration, 1, self.device_count).strip(), address[2],
-                                      address[1], address[0],
-                                      dcs[i].format(self.server_iteration, 0, self.device_count).strip(),
-                                      dcs[i].format(self.server_iteration, 1, self.device_count).strip())
+            command_0_id = dcs[i].format(self.server_iteration, 0, self.device_count).strip()
+            command_1_id = dcs[i].format(self.server_iteration, 1, self.device_count).strip()
+            command_0_id_split = command_0_id.split("_")
+            command_1_id_split = command_1_id.split("_")
+            name_0 = f"{command_0_id_split[2]}_{command_0_id_split[3]}"
+            name_1 = f"{command_1_id_split[2]}_{command_1_id_split[3]}"
+            trigger = f"{command_0_id_split[0]}_{command_0_id_split[1]}_{command_0_id_split[2]}_Trigger_" \
+                      f"{command_0_id_split[4]}_{command_0_id_split[5]} "
+
+            xml_obj = obj_info.format(
+                text_first_octet=address[0],
+                text_second_octet=address[1],
+                text_third_octet=address[2],
+                ioa=self.internal_control_ioa,
+                comment=f"{command_0_id} / {command_1_id}",
+                third_octet=address[2],
+                second_octet=address[1],
+                first_octet=address[0],
+                signal_0=command_0_id,
+                signal_1=command_1_id,
+                new_value=trigger
+            )
 
             self.internal_control_ioa += 1
             address = update_address(address)
             file.write(xml_obj)
-            object_names.append(dcs[i].format(self.server_iteration, 0, self.device_count).strip())
-            object_names.append(dcs[i].format(self.server_iteration, 1, self.device_count).strip())
+            object_commands.append(command_0_id)
+            object_commands.append(command_1_id)
+            object_names.append(name_0)
+            object_names.append(name_1)
+            object_triggers.append(trigger)
+            object_triggers.append(trigger)
 
-        pou.double_commands_list.append(object_names)
+        pou.commands_list.append(object_commands)
+        pou.commands_names_list.append(object_names)
+        pou.commands_triggers_list.append(object_triggers)
 
     def _update_monitor_ioa(self):
         if self.internal_monitor_ioa != self.monitor_ioa:
@@ -235,28 +314,68 @@ class ServerCard:
 
     def _obj_30m_sp_tb(self, obj_info, spi, file):
         address = ioa_to_address(self.internal_monitor_ioa)
+        object_states = []
+        object_names = []
         for i in range(len(spi)):
-            xml_obj = obj_info.format(address[0], address[1], address[2], self.internal_monitor_ioa,
-                                      spi[i].format(self.server_iteration, (16 * self.card_count) + (i + 1)).strip(),
-                                      address[2], address[1], address[0],
-                                      spi[i].format(self.server_iteration, (16 * self.card_count) + (i + 1)).strip())
+            state_id = spi[i].format(self.server_iteration, (16 * self.card_count) + (i + 1)).strip()
+            state_id_split = state_id.split("_")
+            name = state_id_split[2]
+
+            xml_obj = obj_info.format(
+                text_first_octet=address[0],
+                text_second_octet=address[1],
+                text_third_octet=address[2],
+                ioa=self.internal_monitor_ioa,
+                comment=state_id,
+                third_octet=address[2],
+                second_octet=address[1],
+                first_octet=address[0],
+                signal=state_id
+            )
 
             self.internal_monitor_ioa += 1
             address = update_address(address)
             file.write(xml_obj)
+            object_states.append(state_id)
+            object_names.append(name)
+
+        pou.states_list.append(object_states)
+        pou.states_names_list.append(object_names)
 
     def _obj_58c_sc_ta(self, obj_info, scs, file):
         address = ioa_to_address(self.internal_control_ioa)
+        object_commands = []
+        object_names = []
+        object_triggers = []
         for i in range(len(scs)):
-            xml_obj = obj_info.format(address[0], address[1], address[2], self.internal_control_ioa,
-                                      scs[i].format(self.server_iteration, (16 * self.card_count) + (i + 1)).strip(),
-                                      address[2], address[1], address[0],
-                                      scs[i].format(self.server_iteration, (16 * self.card_count) + (i + 1)).strip(),
-                                      "")
+            command_id = scs[i].format(self.server_iteration, (16 * self.card_count) + (i + 1)).strip()
+            command_id_split = command_id.split("_")
+            name = command_id_split[2]
+            trigger = f"{command_id}_Trigger"
+
+            xml_obj = obj_info.format(
+                text_first_octet=address[0],
+                text_second_octet=address[1],
+                text_third_octet=address[2],
+                ioa=self.internal_control_ioa,
+                comment=command_id,
+                third_octet=address[2],
+                second_octet=address[1],
+                first_octet=address[0],
+                signal=command_id,
+                new_iec_message=trigger
+            )
 
             self.internal_control_ioa += 1
             address = update_address(address)
             file.write(xml_obj)
+            object_commands.append(command_id)
+            object_names.append(name)
+            object_triggers.append(trigger)
+
+        pou.commands_list.append(object_commands)
+        pou.commands_names_list.append(object_names)
+        pou.commands_triggers_list.append(object_triggers)
 
     def _update_monitor_ioa(self):
         if self.internal_monitor_ioa != self.monitor_ioa:

@@ -112,7 +112,7 @@ def submit(request):
         # server closing tags
         center_ins.closing_tags(iec60870_5_config)
     # Creating user-prg
-    # pou.user_prg()
+    pou.create_user_prg()
     # write client instances
     client.write_client(iec60870_5_config)
     client.clear_class_variables()

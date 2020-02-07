@@ -2,4 +2,12 @@ NOTAS:
 
 - En el módulo map, se toma como entrada y salida, aVariableEntradaN y aVariableSalidaN. Habría que quitar el 'a' inicial y substituirla por la terminología húngara correspondiente a la entrada
 - FunctionBlockOutputHeader sobresale en la web, recortar el nombre y aplicar también a FunctionOutputHeader
-- Nombres de las vainas en device(), ahora mismo es un puto cristo
+- Cambiar los nombres de las vainas en device(), ahora mismo es un puto cristo
+- Añadir regex a la parte del servidor para añadir verbose en los modelos de los objectos etc.
+- built-in messages para gestionar las excepciones y vainas varias
+- continuar _device_fbd
+- añadir key-words a lo que requiera más verbosidad
+- En el configurador quitar el hipervinculo a los títulos
+- Modificar create_pou() de forma que valga para tarjetas y para devices (para ello únicamente gestionar la secuencia de rtus para evitar measurements)
+- Relacionado con el anterior, buscar la forma de que únicamente se hagan los RTU cuya lista de señales no esté vacía
+- PROBLEMA: el key-word en el formateo de los xml no está tirando, echar un ojo
