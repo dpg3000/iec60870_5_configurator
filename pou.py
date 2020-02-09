@@ -120,7 +120,7 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
     states = states_list.copy()
     states_names = states_names_list.copy()
     commands = commands_list.copy()
-    commands_names = commands_names_list
+    commands_names = commands_names_list.copy()
     commands_triggers = commands_triggers_list.copy()
 
     protocol = Device.objects.filter(Name=device_name).first().Protocol
@@ -155,7 +155,7 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
 
 def create_user_prg():
     # user_prg
-    user_prg_model.user_prg()
+    user_prg_model.user_prg(device_list, path)
 
     # clearing device list
     device_list.clear()

@@ -5,11 +5,6 @@ OBJ_TYPE_CHOICES = (
     ('CONTROL', 'CONTROL')
 )
 
-DATA_TYPE_CHOICES = (
-    ('BOOL', 'BOOL'),
-    ('WORD', 'WORD')
-)
-
 
 # Create your models here.
 class Server(models.Model):
@@ -31,7 +26,6 @@ class ObjsInfo(models.Model):
 
 class Obj35mMeTe(models.Model):
     DeviceName = models.CharField(max_length=255)
-    DataType = models.CharField(max_length=255, choices=DATA_TYPE_CHOICES, default="BOOL")
     Hysteresis = models.TextField(blank=True)
     SVA = models.TextField()
 
@@ -44,7 +38,6 @@ class Obj35mMeTe(models.Model):
 
 class Obj31mDpTb(models.Model):
     DeviceName = models.CharField(max_length=255)
-    DataType = models.CharField(max_length=255, choices=DATA_TYPE_CHOICES, default="BOOL")
     DPI = models.TextField()
 
     class Meta:
@@ -56,7 +49,6 @@ class Obj31mDpTb(models.Model):
 
 class Obj58cScTa(models.Model):
     DeviceName = models.CharField(max_length=255)
-    DataType = models.CharField(max_length=255, choices=DATA_TYPE_CHOICES, default="BOOL")
     SCS = models.TextField()
 
     class Meta:
@@ -68,7 +60,6 @@ class Obj58cScTa(models.Model):
 
 class Obj30mSpTb(models.Model):
     DeviceName = models.CharField(max_length=255)
-    DataType = models.CharField(max_length=255, choices=DATA_TYPE_CHOICES, default="BOOL")
     SPI = models.TextField()
 
     class Meta:
@@ -80,7 +71,6 @@ class Obj30mSpTb(models.Model):
 
 class Obj59cDcTa(models.Model):
     DeviceName = models.CharField(max_length=255)
-    DataType = models.CharField(max_length=255, choices=DATA_TYPE_CHOICES, default="BOOL")
     DCS = models.TextField()
 
     class Meta:

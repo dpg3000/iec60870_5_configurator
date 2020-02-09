@@ -22,8 +22,9 @@ class Server:
 
 
 class ServerDevice:
-    def __init__(self, name, server_iteration):
+    def __init__(self, name, element, server_iteration):
         self.name = name
+        self.element = element
         self.server_iteration = server_iteration
         self.monitor_ioa = Device.objects.filter(Name=name).first().MonitorIoa
         self.monitor_ioa_jump = Device.objects.filter(Name=name).first().MonitorIoaJump
@@ -42,57 +43,62 @@ class ServerDevice:
             self._update_monitor_ioa()
             self._update_control_ioa()
             self.device_count += 1
-            for monitor_object in self.monitor_obj_list:
-                if monitor_object == 'obj_35m_me_te':
-                    try:
-                        obj_info = ObjsInfo.objects.filter(ObjCode=monitor_object).first().ObjInfo
-                        sva = Obj35mMeTe.objects.filter(DeviceName=self.name).first().SVA.split(",")
-                        if not Obj35mMeTe.objects.filter(DeviceName=self.name).first().Hysteresis:
-                            hysteresis = ["1"] * len(sva)
-                        else:
-                            hysteresis = Obj35mMeTe.objects.filter(DeviceName=self.name).first().Hysteresis.split(",")
-                        self._obj_35m_me_te(obj_info, hysteresis, sva, file)
-                    except:
-                        return f"There is no {monitor_object} for the device {self.name}. You have to add it in the " \
-                               f"server_parts section in the DB "
-                elif monitor_object == 'obj_31m_dp_tb':
-                    try:
-                        obj_info = ObjsInfo.objects.filter(ObjCode=monitor_object).first().ObjInfo
-                        dpi = Obj31mDpTb.objects.filter(DeviceName=self.name).first().DPI.split(",")
-                        self._obj_31m_dp_tb(obj_info, dpi, file)
-                    except:
-                        return f"There is no {monitor_object} for the device {self.name}. You have to add it in the " \
-                               f"server_parts section in the DB "
-                elif monitor_object == 'obj_30m_sp_tb':
-                    try:
-                        obj_info = ObjsInfo.objects.filter(ObjCode=monitor_object).first().ObjInfo
-                        spi = Obj30mSpTb.objects.filter(DeviceName=self.name).first().SPI.split(",")
-                        self._obj_30m_sp_tb(obj_info, spi, file)
-                    except:
-                        return f"There is no {monitor_object} for the device {self.name}. You have to add it in the " \
-                               f"server_parts section in the DB "
-                else:
-                    return f"There is no logic to process the {monitor_object}"
-            for control_object in self.control_obj_list:
-                if control_object == 'obj_58c_sc_ta':
-                    try:
-                        obj_info = ObjsInfo.objects.filter(ObjCode=control_object).first().ObjInfo
-                        scs = Obj58cScTa.objects.filter(DeviceName=self.name).first().SCS.split(",")
-                        self._obj_58c_sc_ta(obj_info, scs, file)
-                    except:
-                        return f"There is no {control_object} for the device {self.name}. You have to add it to the " \
-                               f"server_parts section in the DB "
-                elif control_object == 'obj_59c_dc_ta':
-                    try:
-                        obj_info = ObjsInfo.objects.filter(ObjCode=control_object).first().ObjInfo
-                        dcs = Obj59cDcTa.objects.filter(DeviceName=self.name).first().DCS.split(",")
-                        self._obj_59c_dc_ta(obj_info, dcs, file)
-                    except:
-                        return f"There is no {control_object} for the device {self.name}. You have to add it to the " \
-                               f"server_parts section in the DB "
-                else:
-                    print(self.control_obj_list)
-                    return f"There is no logic to process the {control_object}"
+            print(self.monitor_obj_list)
+            if self.monitor_obj_list:
+                for monitor_object in self.monitor_obj_list:
+                    if monitor_object == 'obj_35m_me_te':
+                        try:
+                            obj_info = ObjsInfo.objects.filter(ObjCode=monitor_object).first().ObjInfo
+                            sva = Obj35mMeTe.objects.filter(DeviceName=self.name).first().SVA.split(",")
+                            if not Obj35mMeTe.objects.filter(DeviceName=self.name).first().Hysteresis:
+                                hysteresis = ["1"] * len(sva)
+                            else:
+                                hysteresis = Obj35mMeTe.objects.filter(DeviceName=self.name).first().Hysteresis.split(",")
+                            self._obj_35m_me_te(obj_info, hysteresis, sva, file)
+                        except:
+                            return f"There is no {monitor_object} for the device {self.name}. You have to add it in the " \
+                                   f"server_parts section in the DB "
+                    elif monitor_object == 'obj_31m_dp_tb':
+                        try:
+                            obj_info = ObjsInfo.objects.filter(ObjCode=monitor_object).first().ObjInfo
+                            dpi = Obj31mDpTb.objects.filter(DeviceName=self.name).first().DPI.split(",")
+                            self._obj_31m_dp_tb(obj_info, dpi, file)
+                        except:
+                            return f"There is no {monitor_object} for the device {self.name}. You have to add it in the " \
+                                   f"server_parts section in the DB "
+                    elif monitor_object == 'obj_30m_sp_tb':
+                        try:
+                            obj_info = ObjsInfo.objects.filter(ObjCode=monitor_object).first().ObjInfo
+                            spi = Obj30mSpTb.objects.filter(DeviceName=self.name).first().SPI.split(",")
+                            self._obj_30m_sp_tb(obj_info, spi, file)
+                        except:
+                            return f"There is no {monitor_object} for the device {self.name}. You have to add it in the " \
+                                   f"server_parts section in the DB "
+                    else:
+                        return f"There is no logic to process the {monitor_object}"
+            elif self.control_obj_list:
+                print("ENTRO EN CONTROL")
+                for control_object in self.control_obj_list:
+                    if control_object == 'obj_58c_sc_ta':
+                        try:
+                            obj_info = ObjsInfo.objects.filter(ObjCode=control_object).first().ObjInfo
+                            scs = Obj58cScTa.objects.filter(DeviceName=self.name).first().SCS.split(",")
+                            self._obj_58c_sc_ta(obj_info, scs, file)
+                        except:
+                            return f"There is no {control_object} for the device {self.name}. You have to add it to the " \
+                                   f"server_parts section in the DB "
+                    elif control_object == 'obj_59c_dc_ta':
+                        try:
+                            obj_info = ObjsInfo.objects.filter(ObjCode=control_object).first().ObjInfo
+                            dcs = Obj59cDcTa.objects.filter(DeviceName=self.name).first().DCS.split(",")
+                            self._obj_59c_dc_ta(obj_info, dcs, file)
+                        except:
+                            return f"There is no {control_object} for the device {self.name}. You have to add it to the " \
+                                   f"server_parts section in the DB "
+                    else:
+                        return f"There is no logic to process the {control_object}"
+            else:
+                "gestionar errores"
 
     def _obj_35m_me_te(self, obj_info, hysteresis, sva, file):
         address = ioa_to_address(self.internal_monitor_ioa)
@@ -102,8 +108,6 @@ class ServerDevice:
             measure_id = sva[i].format(self.server_iteration, self.device_count).strip()
             measure_id_split = measure_id.split("_")
             name = measure_id_split[2]
-
-            print("HOLA K ASE")
 
             xml_obj = obj_info.format(
                 text_first_octet=address[0],
@@ -135,8 +139,8 @@ class ServerDevice:
             state_id_1 = dpi[i].format(self.server_iteration, 1, self.device_count).strip()
             state_id_0_split = state_id_0.split("_")
             state_id_1_split = state_id_1.split("_")
-            name_0 = state_id_0_split[2]
-            name_1 = state_id_1_split[2]
+            name_0 = f"{state_id_0_split[2]}_{state_id_0_split[3]}"
+            name_1 = f"{state_id_1_split[2]}_{state_id_1_split[3]}"
 
             xml_obj = obj_info.format(
                 text_first_octet=address[0],
@@ -167,7 +171,13 @@ class ServerDevice:
         object_states = []
         object_names = []
         for i in range(len(spi)):
-            state_id = spi[i].format(self.server_iteration, self.device_count).strip()
+            state_id = ''
+            if self.element == 'card':
+                state_id = spi[i].format(self.server_iteration, (16 * self.device_count) + (i + 1)).strip()
+            elif self.element == 'device':
+                state_id = spi[i].format(self.server_iteration, self.device_count).strip()
+            else:
+                "gestionar errores"
             state_id_split = state_id.split("_")
             name = state_id_split[2]
 
@@ -190,7 +200,7 @@ class ServerDevice:
             object_names.append(name)
 
         pou.states_list.append(object_states)
-        pou.states_names_list(object_names)
+        pou.states_names_list.append(object_names)
 
     def _obj_58c_sc_ta(self, obj_info, scs, file):
         address = ioa_to_address(self.internal_control_ioa)
@@ -198,11 +208,22 @@ class ServerDevice:
         object_names = []
         object_triggers = []
         for i in range(len(scs)):
-            command_id = scs[i].format(self.server_iteration, self.device_count).strip()
-            command_id_split = command_id.split("_")
-            name = command_id_split[2]
-            trigger = f"{command_id_split[0]}_{command_id_split[1]}_{command_id_split[2]}_Trigger_" \
-                      f"{command_id_split[3]}_{command_id_split[4]} "
+            command_id = ''
+            name = ''
+            trigger = ''
+            if self.element == 'device':
+                command_id = scs[i].format(self.server_iteration, self.device_count).strip()
+                command_id_split = command_id.split("_")
+                name = command_id_split[2]
+                trigger = f"{command_id_split[0]}_{command_id_split[1]}_{command_id_split[2]}_Trigger_" \
+                          f"{command_id_split[3]}_{command_id_split[4]}"
+            elif self.element == 'card':
+                command_id = scs[i].format(self.server_iteration, (16 * self.device_count) + (i + 1)).strip()
+                command_id_split = command_id.split("_")
+                name = command_id_split[2]
+                trigger = f"{command_id}_Trigger"
+            else:
+                "gestionar errores"
 
             xml_obj = obj_info.format(
                 text_first_octet=address[0],
@@ -214,7 +235,7 @@ class ServerDevice:
                 second_octet=address[1],
                 first_octet=address[0],
                 signal=command_id,
-                new_iec_message=trigger
+                new_value=trigger
             )
 
             self.internal_control_ioa += 1
@@ -363,7 +384,7 @@ class ServerCard:
                 second_octet=address[1],
                 first_octet=address[0],
                 signal=command_id,
-                new_iec_message=trigger
+                new_value=trigger
             )
 
             self.internal_control_ioa += 1

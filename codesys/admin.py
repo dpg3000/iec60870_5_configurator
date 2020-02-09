@@ -121,10 +121,10 @@ class SboAdmin(admin.ModelAdmin):
 
 class UserPrgAdmin(admin.ModelAdmin):
     fieldsets = [
-        ("INFO", {"fields": ["Version"]}),
-        ("VARIABLE DECLARATION", {"fields": [("FirstCycle", "FirstCycleDataType"),
-                                             ("MaskLocRem", "MaskLocRemDataType"),
-                                             ("LocRemState", "LocRemStateDataType")]})
+        ("INFO", {"fields": ["Version",
+                             ("ProgramHeader", "ProgramEndTag")]}),
+        ("VARIABLE DECLARATION", {"fields": [("FirstCycle", "FirstCycleDataType", "FirstCycleInitVal"),
+                                             ("MaskLocRem", "MaskLocRemDataType")]})
     ]
 
 

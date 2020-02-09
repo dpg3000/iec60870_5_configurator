@@ -90,14 +90,16 @@ def submit(request):
         center_ins.headers(iec60870_5_config)
         for card in center.iter('card'):
             if card.attrib['server'] == 'yes':
-                card_ins = ServerCard(card.text, server_iteration)
-                card_ins.create_card(int(card.attrib['number']), iec60870_5_config)
+                card_ins = ServerDevice(card.text, 'card', server_iteration)
+                card_ins.create_device(int(card.attrib['number']), iec60870_5_config)
+                # card_ins = ServerCard(card.text, server_iteration)
+                # card_ins.create_card(int(card.attrib['number']), iec60870_5_config)
             if card.attrib['io'] == 'yes':
                 kbus_ins = Kbus(card.text)
                 kbus_ins.create_kbus(int(card.attrib['number']))
         for device in center.iter('device'):
             if device.attrib['server'] == 'yes':
-                device_ins = ServerDevice(device.text, server_iteration)
+                device_ins = ServerDevice(device.text, 'device', server_iteration)
                 error_message = device_ins.create_device(int(device.attrib['number']), iec60870_5_config)
                 if error_message:
                     return HttpResponse("<h1>" + error_message + "</h1>")

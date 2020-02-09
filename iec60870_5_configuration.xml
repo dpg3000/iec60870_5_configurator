@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-  <IEC60870ProjectDescription Version="2.8.0" Guid="BCAB5D0D-5CE5-406E-8736-146506C81871" Generated="07/02/2020 21:40:14">
+  <IEC60870ProjectDescription Version="2.8.0" Guid="BCAB5D0D-5CE5-406E-8736-146506C81871" Generated="09/02/2020 21:51:00">
     <CConfiguration Name="IEC60870 Konfiguration">
       <Text>IEC60870 Konfiguration</Text>
         <Parameter Name="AfzDefault" Type="Time" Val="t#2s" />
@@ -126,4 +126,5 @@
           <Parameter Name="TLSVersion" Type="ENUM_TLS_VERSION" Val="10" Frame="Client4_TLS_Dlg" />
           <Parameter Name="TLS_IP1" Type="IP" Val="0.0.0.0" Frame="Client4_TLS_Dlg" />
           <Parameter Name="TLS_IP2" Type="IP" Val="0.0.0.0" Frame="Client4_TLS_Dlg" />
-          <Parameter Name="TLS_IP3" Type="IP" Val="0.0.0.0" Frame="Client4_TLS_Dlg" />
+          <Parameter Name="TLS_IP3" Type="IP" Val="0.0.0.0" Frame="Client4_TLS_Dlg" /></CServer104></CConfiguration>
+    </IEC60870ProjectDescription>

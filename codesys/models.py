@@ -43,12 +43,13 @@ class FBDTemplate(models.Model):
 
 class UserPrg(models.Model):
     Version = models.CharField(max_length=255, default="")
+    ProgramHeader = models.CharField(max_length=255, default="")
+    ProgramEndTag = models.CharField(max_length=255, default="")
     FirstCycle = models.CharField(max_length=255, default="")
     FirstCycleDataType = models.CharField(max_length=255, default="")
+    FirstCycleInitVal = models.CharField(max_length=255, default="")
     MaskLocRem = models.CharField(max_length=255, default="")
     MaskLocRemDataType = models.CharField(max_length=255, default="")
-    LocRemState = models.CharField(max_length=255, default="")
-    LocRemStateDataType = models.CharField(max_length=255, default="")
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(UserPrg, self).save()
@@ -297,12 +298,13 @@ class UserPrgModel(FunctionBlockDiagramModel):
             FunctionBlockDiagramModel.__init__(self)
 
         self.user_prg_model = UserPrg.objects.filter(Version=version).first()
+        self.program_header = self.user_prg_model.ProgramHeader
+        self.program_end_tag = self.user_prg_model.ProgramEndTag
         self.first_cycle = self.user_prg_model.FirstCycle
         self.first_cycle_data_type = self.user_prg_model.FirstCycleDataType
+        self.first_cycle_init_val = self.user_prg_model.FirstCycleInitVal
         self.mask_loc_rem = self.user_prg_model.MaskLocRem
         self.mask_loc_rem_data_type = self.user_prg_model.MaskLocRemDataType
-        self.loc_rem_state = self.user_prg_model.LocRemState
-        self.loc_rem_state_data_type = self.user_prg_model.LocRemStateDataType
 
     def user_prg(self, device_list, path):
         # Instance data
@@ -314,15 +316,17 @@ class UserPrgModel(FunctionBlockDiagramModel):
         # variable definition
         # Internal variables
         internal_str = ''
+        internal_str += f"{self.first_cycle} : {self.first_cycle_data_type} := {self.first_cycle_init_val};" + '\n\t'
+
         total_networks = 0
         for device in device_list:
-            for i in device['quantity']:
-                internal_str += f"inst{i}{device['name']} : {device['name']};" + '\n'
+            for i in range(device['quantity']):
+                internal_str += f"inst{i}{device['name']} : {device['name']};" + '\n\t'
             total_networks += device['quantity']
 
         # Declaration construction
         declaration = self.declaration_attributes + '\n'
-        declaration += self.declaration_fb_header.format(pou_name) + '\n'
+        declaration += self.program_header.format(pou_name) + '\n'
         declaration += self.declaration_internal.format(internal_str) + '\n'
         declaration += self.declaration_end_tag + '\n'
         user_prg_object.write(declaration)
@@ -335,7 +339,7 @@ class UserPrgModel(FunctionBlockDiagramModel):
             self._device_fbd(device, user_prg_object)
 
         # Final tag
-        user_prg_object.write(self.code_end_tag + '\n')
+        user_prg_object.write(self.program_end_tag + '\n')
 
         # Closing file
         user_prg_object.close()
@@ -347,7 +351,7 @@ class UserPrgModel(FunctionBlockDiagramModel):
 
             # Number of inputs
             control_inputs = 4
-            rtu_inputs = 3 * len(device['measurements'][i]) + 4 * len(device['states'][i]) + 4 * len(device['commands'])
+            rtu_inputs = 3 * len(device['measurements'][i]) + 4 * len(device['states'][i]) + 4 *len(device['commands'][i])
 
             if device['operation'] == 'SBO':
                 rtu_inputs += int(len(device['commands']) / 2)
@@ -362,14 +366,14 @@ class UserPrgModel(FunctionBlockDiagramModel):
             # Control inputs
             fbd_str += self.input_unit.format(f"{self.first_cycle}") + '\n'
             fbd_str += self.input_unit.format(f"{i}") + '\n'
-            fbd_str += self.input_unit.format(f"{device['protocol']}") + '\n'
-            fbd_str += self.input_unit.format("???") + '\n'
+            fbd_str += self.input_unit.format(f"'{device['protocol']}'") + '\n'
+            fbd_str += self.input_unit.format("_EMPTY") + '\n'
 
             ####################################################################
 
             # Measurements (measurements)
             for measurement in device['measurements'][i]:
-                fbd_str += self.input_unit.format("???") + '\n'
+                fbd_str += self.input_unit.format("_EMPTY") + '\n'
 
             # Measurements (saves)
             for save in device['measurements'][i]:
@@ -377,13 +381,13 @@ class UserPrgModel(FunctionBlockDiagramModel):
 
             # Measurements (names)
             for name in device['measurements_names'][i]:
-                fbd_str += self.input_unit.format(f"{name}") + '\n'
+                fbd_str += self.input_unit.format(f"'{name}'") + '\n'
 
             ####################################################################
 
             # States (states)
             for state in device['states'][i]:
-                fbd_str += self.input_unit.format("???") + '\n'
+                fbd_str += self.input_unit.format("_EMPTY") + '\n'
 
             # States (saves)
             for save in device['states'][i]:
@@ -391,11 +395,11 @@ class UserPrgModel(FunctionBlockDiagramModel):
 
             # States (names)
             for name in device['states_names'][i]:
-                fbd_str += self.input_unit.format(f"{name}") + '\n'
+                fbd_str += self.input_unit.format(f"'{name}'") + '\n'
 
             # States (rises)
             for rise in device['states_names'][i]:
-                fbd_str += self.input_unit.format("???") + '\n'
+                fbd_str += self.input_unit.format("_EMPTY") + '\n'
 
             ####################################################################
 
@@ -409,7 +413,7 @@ class UserPrgModel(FunctionBlockDiagramModel):
 
             # Commands (names)
             for name in device['commands_names'][i]:
-                fbd_str += self.input_unit.format(f"{name}") + '\n'
+                fbd_str += self.input_unit.format(f"'{name}'") + '\n'
 
             # Commands (triggers)
             for trigger in device['commands_triggers'][i]:
@@ -417,7 +421,7 @@ class UserPrgModel(FunctionBlockDiagramModel):
 
             if device['operation'] == 'SBO':
                 for k in range(int(len(device['commands'][i]) / 2)):
-                    fbd_str += self.input_unit.format("???") + '\n'
+                    fbd_str += self.input_unit.format("_EMPTY") + '\n'
 
             # OUTPUTS
             ####################################################################
@@ -447,18 +451,24 @@ class UserPrgModel(FunctionBlockDiagramModel):
 
             # Commands
             for command in device['commands'][i]:
-                fbd_str += self.output_unit.format("???") + '\n'
+                fbd_str += self.output_unit.format("_EMPTY") + '\n'
 
             if device['operation'] == 'SBO':
                 # select
                 for k in range(int(len(device['commands'][i]) / 2)):
-                    fbd_str += self.input_unit.format("???") + '\n'
+                    fbd_str += self.input_unit.format("_EMPTY") + '\n'
 
                 # execute
                 for k in range(int(len(device['commands'][i]) / 2)):
-                    fbd_str += self.input_unit.format("???") + '\n'
+                    fbd_str += self.input_unit.format("_EMPTY") + '\n'
 
             ####################################################################
+
+            # Output header 2
+            fbd_str += self.function_block_output_header.format("", "1") + '\n'
+
+            # expression output
+            fbd_str += self.output_unit.format(f"{device['measurements'][i][1]}") + '\n'
 
             # Writing the fbd
             file.write(fbd_str)
@@ -849,7 +859,7 @@ class RtuModel(DeviceModel):
             self._map_fbd(instance_list[3], num_objects, purpose, rtu_object)
             self._pack_fbd(instance_list[4], num_objects, purpose, 'save', rtu_object)
             self._pack_fbd(instance_list[5], num_objects, purpose, 'label', rtu_object)
-            self._save_fbd(instance_list[6], rtu_object)
+            self._save_fbd(instance_list[6], purpose, rtu_object)
             if device_operation == 'SBO':
                 self._sbo_fbd(instance_list[7], num_objects, rtu_object)
                 self._handler_fbd(instance_list[8], rtu_object)
@@ -861,14 +871,14 @@ class RtuModel(DeviceModel):
             self._map_fbd(instance_list[4], num_objects, purpose, rtu_object)
             self._pack_fbd(instance_list[5], num_objects, purpose, 'save', rtu_object)
             self._pack_fbd(instance_list[6], num_objects, purpose, 'label', rtu_object)
-            self._save_fbd(instance_list[7], rtu_object)
+            self._save_fbd(instance_list[7], purpose, rtu_object)
         elif purpose == 'measure':
             self._pack_fbd(instance_list[0], num_objects, purpose, 'values', rtu_object)
             self._check_fbd(instance_list[1], rtu_object)
             self._map_fbd(instance_list[2], num_objects, purpose, rtu_object)
             self._pack_fbd(instance_list[3], num_objects, purpose, 'save', rtu_object)
             self._pack_fbd(instance_list[4], num_objects, purpose, 'label', rtu_object)
-            self._save_fbd(instance_list[5], rtu_object)
+            self._save_fbd(instance_list[5], purpose, rtu_object)
 
         # Final tag
         rtu_object.write(self.code_end_tag + '\n')
@@ -956,7 +966,7 @@ class RtuModel(DeviceModel):
 
         # Input unit
         fbd_str += self.input_unit.format(f"{self.action}") + '\n'
-        fbd_str += self.input_unit.format(f"{self.loc_rem_state}") + '\n'
+        fbd_str += self.input_unit.format(f"{self.state_loc_rem}") + '\n'
 
         # inputs
         for i in range(num_objects):
@@ -987,7 +997,7 @@ class RtuModel(DeviceModel):
         # Writing fbd
         file.write(fbd_str)
 
-    def _save_fbd(self, instance, file):
+    def _save_fbd(self, instance, purpose, file):
         # Input header
         fbd_str = self.function_input_header.format("9") + '\n'
 
@@ -995,11 +1005,14 @@ class RtuModel(DeviceModel):
         fbd_str += self.input_unit.format(f"{self.first_cycle}") + '\n'
         fbd_str += self.input_unit.format(f"{self.sequence_order}") + '\n'
         fbd_str += self.input_unit.format(f"{self.protocol}") + '\n'
-        fbd_str += self.input_unit.format(f"{self.signals}") + '\n'
-        fbd_str += self.input_unit.format(f"{self.names}") + '\n'
-        fbd_str += self.input_unit.format(f"{self.trigger_changes}") + '\n'
         fbd_str += self.input_unit.format(f"{self.state_loc_rem}") + '\n'
         fbd_str += self.input_unit.format(f"{self.action}") + '\n'
+        fbd_str += self.input_unit.format(f"{self.signals}") + '\n'
+        fbd_str += self.input_unit.format(f"{self.names}") + '\n'
+        if purpose == 'measure':
+            fbd_str += self.input_unit.format(f"{self.check_changes}") + '\n'
+        else:
+            fbd_str += self.input_unit.format(f"{self.trigger_changes}") + '\n'
         fbd_str += self.input_unit.format(f"{self.saves}") + '\n'
 
         # Output header
@@ -1318,7 +1331,7 @@ class MapModel(RtuModel):
         # Variable declaration
         # Inputs
         input_str = f"{self.action} : {self.action_data_type};" + '\n'
-        input_str += f"{self.state_loc_rem} : {self.loc_rem_state_data_type};" + '\n'
+        input_str += f"{self.state_loc_rem} : {self.state_loc_rem_data_type};" + '\n'
         input_str += variable_to_declaration(signal=input_data, num_objects=num_objects, data_type=input_data_type) + '\n'
         if purpose != 'measure':
             input_str += variable_to_declaration(signal=self.trigger_changes, num_objects=num_objects, data_type=self.trigger_changes_data_type) + '\n'
@@ -1520,8 +1533,8 @@ class SaveModel(RtuModel):
         if input_data_type == "WORD":
             hysteresis = Obj35mMeTe.objects.filter(DeviceName=device_name).first().Hysteresis
             if hysteresis:
-                internal_str += f"{self.hysteresis} : ARRAY[1..{num_objects}] OF {self.hysteresis_data_type} := [{hysteresis}];"
-                internal_str += f"{self.last_values} : ARRAY[1..{num_objects}] OF {self.last_values_data_type};"
+                internal_str += f"{self.hysteresis} : ARRAY[1..{num_objects}] OF {self.hysteresis_data_type} := {hysteresis};" + '\n'
+                internal_str += f"{self.last_values} : ARRAY[1..{num_objects}] OF {input_data_type};"
                 hysteresis_condition = f"IF ({input_data}[{self.iterator}] > ({self.last_values}" \
                                        f"[{self.iterator}] + (({self.hysteresis}[{self.iterator}] / 100) * " \
                                        f"{self.last_values}[{self.iterator}] ))) OR ({input_data}" \

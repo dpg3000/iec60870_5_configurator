@@ -48,7 +48,7 @@ class Client:
             Client.buffer_104 += self.client_headers + "\n"
 
     def create_client(self, quantity):
-        if self.protocol == "103":
+        if self.protocol == "IEC_103":
             for i in range(quantity):
                 xml_connection = self.connection_headers.format(str(Client.client_103_iteration).zfill(3),
                                                                 str(Client.client_103_iteration).zfill(3),
@@ -70,7 +70,7 @@ class Client:
                 Client.buffer_103 += objs_info + "\n"
                 Client.client_103_iteration += 1
 
-        if self.protocol == "104":
+        if self.protocol == "IEC_104":
             for i in range(quantity):
                 xml_connection = self.connection_headers.format(str(Client.asdu_address_104[1]).zfill(3),
                                                                 str(Client.asdu_address_104[2]).zfill(3),
