@@ -4,7 +4,7 @@ from .models import Card, Kbus
 
 class CardAdmin(admin.ModelAdmin):
     fieldsets = [
-        ("INFO", {"fields": ["Name"]}),
+        ("INFO", {"fields": ["Name", "Protocol"]}),
         ("MONITOR", {"fields": ["MonitorIoa", "MonitorIoaJump", "MonitorObjectList"]}),
         ("CONTROL", {"fields": ["ControlIoa", "ControlIoaJump", "ControlObjectList"]}),
         ("KBUS", {"fields": ["KbusInfo"]})

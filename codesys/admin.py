@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.db import models
-from .models import Map, Check, Save, Sbo, FBDTemplate, Device, RiseToTrigger, Rtu, UserPrg, Pack, Handler
+from .models import Map, Check, Save, Sbo, FBDTemplate, Device, RiseToTrigger, Rtu, UserPrg, Pack, Handler, PackLocRem, CheckLocRem
 
 
 # Register your models here.
@@ -17,12 +17,38 @@ from .models import Map, Check, Save, Sbo, FBDTemplate, Device, RiseToTrigger, R
 #         fields = fields + ((field_name, field_name_next),)
 
 
+class UserPrgAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ("INFO", {"fields": ["Version",
+                             ("ProgramHeader", "ProgramEndTag")]}),
+        ("VARIABLE DECLARATION", {"fields": [("FirstCycle", "FirstCycleDataType", "FirstCycleInitVal"),
+                                             ("MaskLocRem", "MaskLocRemDataType"),
+                                             ("StateLocRem", "StateLocRemDataType")]})
+    ]
+
+
+class PackLocRemAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ("INFO", {"fields": ["Version"]}),
+        ("VARIABLE DECLARATION", {"fields": [("LocRemInput", "LocRemInputDataType"),
+                                             ("LocRemOutput", "LocRemOutputDataType")]}),
+        ("CODE", {"fields": ["ST"]})
+    ]
+
+
+class CheckLocRemAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ("INFO", {"fields": ["Version"]}),
+        ("VARIABLE DECLARATION", {"fields": [("Iterator", "IteratorDataType")]}),
+        ("CODE", {"fields": ["ST"]})
+    ]
+
+
 class DeviceAdmin(admin.ModelAdmin):
     fieldsets = [
         ("INFO", {"fields": ["Version"]}),
         ("VARIABLE DECLARATION", {"fields": [("SequenceOrder", "SequenceOrderDataType"),
                                              ("Protocol", "ProtocolDataType"),
-                                             ("StateLocRem", "StateLocRemDataType"),
                                              ("Measure", "MeasureDataType"),
                                              ("MeasureOutput", "MeasureOutputDataType"),
                                              ("SaveMeasure", "SaveMeasureDataType"),
@@ -40,6 +66,29 @@ class DeviceAdmin(admin.ModelAdmin):
                                              ("Status", "StatusDataType"),
                                              ("Select", "SelectDataType"),
                                              ("Execute", "ExecuteDataType")]})
+    ]
+
+
+class RtuAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ("INFO", {"fields": ["Version"]}),
+        ("VARIABLE DECLARATION", {"fields": [("Action", "ActionDataType"),
+                                             ("RiseChanges", "RiseChangesDataType"),
+                                             ("TriggerChanges", "TriggerChangesDataType"),
+                                             ("Signals", "SignalsDataType"),
+                                             ("CheckChanges", "CheckChangesDataType"),
+                                             ("Names", "NamesDataType"),
+                                             ("Saves", "SavesDataType"),
+                                             ("Error", "ErrorDataType")]})
+    ]
+
+
+class RiseAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ("INFO", {"fields": ["Version"]}),
+        ("VARIABLE DECLARATION", {"fields": [("LastRise", "LastRiseDataType"),
+                                             ("Iterator", "IteratorDataType")]}),
+        ("CODE", {"fields": ["ST"]})
     ]
 
 
@@ -63,29 +112,6 @@ class MapAdmin(admin.ModelAdmin):
     fieldsets = [
         ("INFO", {"fields": ["Version"]}),
         ("CODE", {"fields": ["ST"]})
-    ]
-
-
-class RiseAdmin(admin.ModelAdmin):
-    fieldsets = [
-        ("INFO", {"fields": ["Version"]}),
-        ("VARIABLE DECLARATION", {"fields": [("LastRise", "LastRiseDataType"),
-                                             ("Iterator", "IteratorDataType")]}),
-        ("CODE", {"fields": ["ST"]})
-    ]
-
-
-class RtuAdmin(admin.ModelAdmin):
-    fieldsets = [
-        ("INFO", {"fields": ["Version"]}),
-        ("VARIABLE DECLARATION", {"fields": [("Action", "ActionDataType"),
-                                             ("RiseChanges", "RiseChangesDataType"),
-                                             ("TriggerChanges", "TriggerChangesDataType"),
-                                             ("Signals", "SignalsDataType"),
-                                             ("CheckChanges", "CheckChangesDataType"),
-                                             ("Names", "NamesDataType"),
-                                             ("Saves", "SavesDataType"),
-                                             ("Error", "ErrorDataType")]})
     ]
 
 
@@ -119,15 +145,6 @@ class SboAdmin(admin.ModelAdmin):
     ]
 
 
-class UserPrgAdmin(admin.ModelAdmin):
-    fieldsets = [
-        ("INFO", {"fields": ["Version",
-                             ("ProgramHeader", "ProgramEndTag")]}),
-        ("VARIABLE DECLARATION", {"fields": [("FirstCycle", "FirstCycleDataType", "FirstCycleInitVal"),
-                                             ("MaskLocRem", "MaskLocRemDataType")]})
-    ]
-
-
 class HandlerAdmin(admin.ModelAdmin):
     fieldsets = [
         ("INFO", {"fields": ["Version"]}),
@@ -136,14 +153,16 @@ class HandlerAdmin(admin.ModelAdmin):
     ]
 
 
-admin.site.register(Map, MapAdmin)
+admin.site.register(FBDTemplate)
+admin.site.register(UserPrg, UserPrgAdmin)
+admin.site.register(PackLocRem, PackLocRemAdmin)
+admin.site.register(CheckLocRem, CheckLocRemAdmin)
+admin.site.register(Device, DeviceAdmin)
+admin.site.register(Rtu, RtuAdmin)
+admin.site.register(RiseToTrigger, RiseAdmin)
 admin.site.register(Pack, PackAdmin)
 admin.site.register(Check, CheckAdmin)
+admin.site.register(Map, MapAdmin)
 admin.site.register(Save, SaveAdmin)
 admin.site.register(Sbo, SboAdmin)
-admin.site.register(Rtu, RtuAdmin)
-admin.site.register(FBDTemplate)
-admin.site.register(Device, DeviceAdmin)
-admin.site.register(RiseToTrigger, RiseAdmin)
-admin.site.register(UserPrg, UserPrgAdmin)
 admin.site.register(Handler, HandlerAdmin)

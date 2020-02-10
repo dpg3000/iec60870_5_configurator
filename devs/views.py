@@ -6,7 +6,7 @@ from cards.models import Card
 import os
 from django.http import HttpResponse, HttpResponseNotFound
 import datetime
-from server import Server, ServerDevice, ServerCard
+from server import Server, ServerDevice
 from project import Project
 import client
 from client import Client
@@ -20,20 +20,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Create your views here.
-def configurator_view(request, *args, **kwargs):
+def configurator_view(request):
     devices = Device.objects.all()
     cards = Card.objects.all()
     devices_num = devices.count()
     cards_num = cards.count()
 
-    my_context = {
+    context = {
         "devices": devices,
         "cards": cards,
         "devices_num": devices_num,
         "cards_num": cards_num
     }
 
-    return render(request, "configurator.html", my_context)
+    return render(request, "configurator.html", context)
 
 
 def validate_parameters(request):
@@ -86,23 +86,18 @@ def submit(request):
     server_iteration = 0
     pou.delete_pous()
     for center in root.iter('center'):
-        center_ins = Server(center.attrib['name'], server_iteration)
-        center_ins.headers(iec60870_5_config)
+        center_ins = Server(center.attrib['name'], server_iteration, iec60870_5_config)
+        center_ins.headers()
         for card in center.iter('card'):
             if card.attrib['server'] == 'yes':
-                card_ins = ServerDevice(card.text, 'card', server_iteration)
-                card_ins.create_device(int(card.attrib['number']), iec60870_5_config)
-                # card_ins = ServerCard(card.text, server_iteration)
-                # card_ins.create_card(int(card.attrib['number']), iec60870_5_config)
+                ServerDevice(card.text, 'card', int(card.attrib['number']), server_iteration, iec60870_5_config)
             if card.attrib['io'] == 'yes':
                 kbus_ins = Kbus(card.text)
                 kbus_ins.create_kbus(int(card.attrib['number']))
+            pou.create_pou(card.text, int(card.attrib['number']), 'DO', server_iteration)
         for device in center.iter('device'):
             if device.attrib['server'] == 'yes':
-                device_ins = ServerDevice(device.text, 'device', server_iteration)
-                error_message = device_ins.create_device(int(device.attrib['number']), iec60870_5_config)
-                if error_message:
-                    return HttpResponse("<h1>" + error_message + "</h1>")
+                ServerDevice(device.text, 'device', int(device.attrib['number']), server_iteration, iec60870_5_config)
             if device.attrib['client'] == 'yes':
                 client_ins = Client(device.text)
                 client_ins.create_client(int(device.attrib['number']))
@@ -112,7 +107,7 @@ def submit(request):
                 return HttpResponse("<h1>" + error_message + "</h1>")
         server_iteration += 1
         # server closing tags
-        center_ins.closing_tags(iec60870_5_config)
+        center_ins.closing_tags()
     # Creating user-prg
     pou.create_user_prg()
     # write client instances

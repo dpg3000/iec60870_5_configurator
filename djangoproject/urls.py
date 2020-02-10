@@ -29,6 +29,8 @@ urlpatterns = [
 # Filling interface for pou management at runserver
 pou.fbd_model = models.FunctionBlockDiagramModel()
 pou.user_prg_model = models.UserPrgModel(pou.fbd_model, models.user_prg_version)
+pou.pack_loc_rem_model = models.PackLocRemModel(pou.user_prg_model, models.pack_loc_rem_version)
+pou.check_loc_rem_model = models.CheckLocRemModel(pou.user_prg_model, models.check_loc_rem_version)
 pou.device_model = models.DeviceModel(pou.user_prg_model, models.device_version)
 pou.rtu_model = models.RtuModel(pou.device_model, models.rtu_version)
 pou.pack_model = models.PackModel(pou.rtu_model, models.pack_version)
