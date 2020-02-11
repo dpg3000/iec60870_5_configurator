@@ -26,10 +26,6 @@ $(document).ready(function(){
         previousDom.children('#table-devices').children('#body-devices').children('#row-devices').children('#cell-'+
         'devices').children('.enable-devices').prop("disabled", true);
 
-        /*previousDom.css("background", "#dfd url(../static/admin/img/icon-yes.svg) 100px 11px no-repeat");
-        previousDom.children('#table-cards').children('#body-cards').children('#row-center').children('#cell-center-'+
-        'name').children('#center-name').css("background", "#edffed");*/
-
         /*Cleaning add center status*/
         $(this).attr('disabled', true);
 
@@ -106,8 +102,12 @@ $(document).ready(function(){
 
         newElem.children('.enable-devices-section').children('#remove-devices-btn').attr('disabled', true);             //Disable remove device button
 
-        //Add line-break after previous dom
-        previousDom.children('#line-break')
+        previousDom.css("background", "url(../static/admin/img/icon-yes.svg) 100px 11px no-repeat");
+
+        /*previousDom.children('#center').css("border", "1px solid #a1becd")
+        previousDom.children('#center').css("border-radius", "5px")
+
+        previousDom.children('#line-break').append('<br><br>');*/
 
         previousDom.after(newElem);                                                                                     // Adding the new element after the previous
         jQuery('#remove-center-btn').attr('disabled', false);                                                           // Enabling 'remove center' possibility
@@ -506,6 +506,35 @@ $(document).ready(function(){
         }
     });
 
+    $(document).on('click', '.enable-cards', function() {
+        if(this.checked) {
+            if($(this).parent().parent().parent().parent().siblings('.enable-cards-section').children('#table-input-'+
+            'cards').children('#body-input-cards').children('#row-input-cards').children('#cell-input-'+
+            'cards').children('.enable-input-cards').prop('checked') ||
+            $(this).parent().parent().parent().parent().siblings('.enable-cards-section').children('#table-output-'+
+            'cards').children('#body-output-cards').children('#row-output-cards').children('#cell-output-'+
+            'cards').children('.enable-output-cards').prop('checked') ||
+            $(this).parent().parent().parent().parent().siblings('#table-devices').children('#body-'+
+            'devices').children('#row-devices').children('#cell-devices').children('.enable-devices').prop('checked')) {
+                $('#add-center-btn').attr('disabled', false);
+                $('#generate').attr('disabled', false);
+            } else {
+                $('#add-center-btn').attr('disabled', true);
+                $('#generate').attr('disabled', true);
+            }
+        } else {
+            if($(this).parent().parent().parent().parent().siblings('#table-devices').children('#body-'+
+            'devices').children('#row-devices').children('#cell-devices').children('.enable-devices').prop('checked')) {
+                $('#add-center-btn').attr('disabled', false);
+                $('#generate').attr('disabled', false);
+            } else {
+                $('#add-center-btn').attr('disabled', true);
+                $('#generate').attr('disabled', true);
+            }
+        }
+
+    });
+
     $(document).on('click', '.enable-input-cards', function() {
         if(this.checked) {
             $('#add-center-btn').attr('disabled', false);
@@ -515,7 +544,7 @@ $(document).ready(function(){
             $('#generate').attr('disabled', true);
         }
 
-        if($(this).parent().parent().parent().parent().siblings('#table-output-cards').children('#body-output'+
+        if($(this).parent().parent().parent().parent().siblings('#table-output-cards').children('#body-output-'+
         'cards').children('#row-output-cards').children('#cell-output-cards').children('.enable-output-'+
         'cards').prop('checked')) {
             $('#add-center-btn').attr('disabled', false);
@@ -538,6 +567,13 @@ $(document).ready(function(){
             $('#generate').attr('disabled', true);
         }
 
+        if($(this).parent().parent().parent().parent().siblings('#table-input-cards').children('#body-input-'+
+        'cards').children('#row-input-cards').children('#cell-input-cards').children('.enable-input-'+
+        'cards').prop('checked')) {
+            $('#add-center-btn').attr('disabled', false);
+            $('#generate').attr('disabled', false);
+        }
+
         if($(this).parent().parent().parent().parent().parent().siblings('#table-devices').children('#body-'+
         'devices').children('#row-devices').children('#cell-devices').children('.enable-devices').prop('checked')) {
             $('#add-center-btn').attr('disabled', false);
@@ -556,8 +592,20 @@ $(document).ready(function(){
 
         if($(this).parent().parent().parent().parent().siblings('#table-cards').children('#body-'+
         'cards').children('#row-cards').children('#cell-cards').children('.enable-cards').prop('checked')) {
-            $('#add-center-btn').attr('disabled', false);
-            $('#generate').attr('disabled', false);
+
+            if($(this).parent().parent().parent().parent().siblings('.enable-cards-section').children('#table-input-'+
+            'cards').children('#body-input-cards').children('#row-input-cards').children('#cell-input-'+
+            'cards').children('.enable-input-cards').prop('checked')) {
+                $('#add-center-btn').attr('disabled', false);
+                $('#generate').attr('disabled', false);
+            }
+
+            if($(this).parent().parent().parent().parent().siblings('.enable-cards-section').children('#table-output-'+
+            'cards').children('#body-output-cards').children('#row-output-cards').children('#cell-output-'+
+            'cards').children('.enable-output-cards').prop('checked')) {
+                $('#add-center-btn').attr('disabled', false);
+                $('#generate').attr('disabled', false);
+            }
         }
     });
 
@@ -572,60 +620,63 @@ $(document).ready(function(){
             "center").children("#cell-center-name").children("#center-name").val();
             xmlString += "'>";
 
-            if($(this).children('.enable-cards-section').children.children("#table-input-cards").children("#body-"+
-            "input-cards").children("#row-input-cards").children('#cell-input-cards').children('.enable-input-'+
-            'cards').prop('checked')) {
-                $(this).children('.enable-cards-section').children('.enable-input-cards-section').children('.repeat-'+
-                'input-card').each(function() {
-                    xmlString += "<input-card ";
-                    xmlString += "number='";
-                    xmlString += $(this).children('.selector-num-input-card').val();
-                    xmlString += "' ";
-                    xmlString += "server='";
-                    if($(this).children('#add-input-card-server').prop('checked')) {
-                        xmlString += "yes";
-                    } else {
-                        xmlString += "no";
-                    }
-                    xmlString += "'";
-                    xmlString += " io='";
-                    if($(this).children('#add-input-card-io').prop('checked')) {
-                        xmlString += "yes";
-                    } else {
-                        xmlString += "no";
-                    }
-                    xmlString += "'>";
-                    xmlString += $(this).children('.selector-input-card').val();
-                    xmlString += "</input-card>";
-                });
-            }
+            if($(this).children('#table-cards').children('#body-cards').children('#row-cards').children('#cell-'+
+            'cards').children('.enable-cards').prop('checked')) {
+                if($(this).children('.enable-cards-section').children("#table-input-cards").children("#body-"+
+                "input-cards").children("#row-input-cards").children('#cell-input-cards').children('.enable-input-'+
+                'cards').prop('checked')) {
+                    $(this).children('.enable-cards-section').children('.enable-input-cards-section').children('.repeat-'+
+                    'input-card').each(function() {
+                        xmlString += "<input-card ";
+                        xmlString += "number='";
+                        xmlString += $(this).children('.selector-num-input-card').val();
+                        xmlString += "' ";
+                        xmlString += "server='";
+                        if($(this).children('#add-input-card-server').prop('checked')) {
+                            xmlString += "yes";
+                        } else {
+                            xmlString += "no";
+                        }
+                        xmlString += "'";
+                        xmlString += " io='";
+                        if($(this).children('#add-input-card-io').prop('checked')) {
+                            xmlString += "yes";
+                        } else {
+                            xmlString += "no";
+                        }
+                        xmlString += "'>";
+                        xmlString += $(this).children('.selector-input-card').val();
+                        xmlString += "</input-card>";
+                    });
+                }
 
-            if($(this).children('.enable-cards-section').children.children("#table-output-cards").children("#body-"+
-            "output-cards").children("#row-output-cards").children('#cell-output-cards').children('.enable-output-'+
-            'cards').prop('checked')) {
-                $(this).children('.enable-cards-section').children('.enable-output-cards-section').children('.repeat-'+
-                'output-card').each(function() {
-                    xmlString += "<output-card ";
-                    xmlString += "number='";
-                    xmlString += $(this).children('.selector-num-output-card').val();
-                    xmlString += "' ";
-                    xmlString += "server='";
-                    if($(this).children('#add-output-card-server').prop('checked')) {
-                        xmlString += "yes";
-                    } else {
-                        xmlString += "no";
-                    }
-                    xmlString += "'";
-                    xmlString += " io='";
-                    if($(this).children('#add-output-card-io').prop('checked')) {
-                        xmlString += "yes";
-                    } else {
-                        xmlString += "no";
-                    }
-                    xmlString += "'>";
-                    xmlString += $(this).children('.selector-output-card').val();
-                    xmlString += "</output-card>";
-                });
+                if($(this).children('.enable-cards-section').children("#table-output-cards").children("#body-"+
+                "output-cards").children("#row-output-cards").children('#cell-output-cards').children('.enable-output-'+
+                'cards').prop('checked')) {
+                    $(this).children('.enable-cards-section').children('.enable-output-cards-section').children('.repeat-'+
+                    'output-card').each(function() {
+                        xmlString += "<output-card ";
+                        xmlString += "number='";
+                        xmlString += $(this).children('.selector-num-output-card').val();
+                        xmlString += "' ";
+                        xmlString += "server='";
+                        if($(this).children('#add-output-card-server').prop('checked')) {
+                            xmlString += "yes";
+                        } else {
+                            xmlString += "no";
+                        }
+                        xmlString += "'";
+                        xmlString += " io='";
+                        if($(this).children('#add-output-card-io').prop('checked')) {
+                            xmlString += "yes";
+                        } else {
+                            xmlString += "no";
+                        }
+                        xmlString += "'>";
+                        xmlString += $(this).children('.selector-output-card').val();
+                        xmlString += "</output-card>";
+                    });
+                }
             }
 
             if($(this).children("#table-devices").children("#body-devices").children("#row-devices").children('#cell-'+

@@ -2,13 +2,13 @@
 (* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
 (* @OBJECTFLAGS := '0, 8' *)
 (* @SYMFILEFLAGS := '2048' *)
-FUNCTIONBLOCK Check6LocalRemote
+FUNCTIONBLOCK Check2LocalRemote
 VAR_INPUT
-	aMaskLocalRemote : ARRAY [1..6] OF BOOL;
+	aMaskLocalRemote : ARRAY [1..2] OF BOOL;
 	
 END_VAR
 VAR_OUTPUT
-	eState : ARRAY [1..6] OF eStates;
+	eState : ARRAY [1..2] OF eStates;
 	
 END_VAR
 VAR
@@ -17,11 +17,11 @@ VAR
 END_VAR
 (* @END_DECLARATION := '0' *)
 IF NOT(aMaskLocalRemote[1]) THEN
-	FOR iN := 1 TO 6 BY 1 DO
+	FOR iN := 1 TO 2 BY 1 DO
 		eState[iN] := LOCAL;
 	END_FOR
 ELSE
-	FOR iN := 1 TO 6 BY 1 DO
+	FOR iN := 1 TO 2 BY 1 DO
 		IF aMaskLocalRemote[iN] = FALSE THEN
 			eState[iN] := DEVICE_LOCAL;
 		ELSE
