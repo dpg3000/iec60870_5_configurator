@@ -1,0 +1,29 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Pack16STRINGlabelDI16state0
+VAR_INPUT
+	sNameState1, sNameState2, sNameState3, sNameState4, sNameState5, sNameState6, sNameState7, sNameState8, sNameState9, sNameState10, sNameState11, sNameState12, sNameState13, sNameState14, sNameState15, sNameState16: STRING;
+END_VAR
+VAR_OUTPUT
+	aNames : ARRAY [1..16] OF STRING;
+END_VAR
+(* @END_DECLARATION := '0' *)
+aNames[1] := sNameState1;
+aNames[2] := sNameState2;
+aNames[3] := sNameState3;
+aNames[4] := sNameState4;
+aNames[5] := sNameState5;
+aNames[6] := sNameState6;
+aNames[7] := sNameState7;
+aNames[8] := sNameState8;
+aNames[9] := sNameState9;
+aNames[10] := sNameState10;
+aNames[11] := sNameState11;
+aNames[12] := sNameState12;
+aNames[13] := sNameState13;
+aNames[14] := sNameState14;
+aNames[15] := sNameState15;
+aNames[16] := sNameState16;
+END_FUNCTION_BLOCK

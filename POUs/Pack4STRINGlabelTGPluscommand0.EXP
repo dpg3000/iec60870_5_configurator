@@ -1,0 +1,17 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Pack4STRINGlabelTGPluscommand0
+VAR_INPUT
+	sNameCommand1, sNameCommand2, sNameCommand3, sNameCommand4: STRING;
+END_VAR
+VAR_OUTPUT
+	aNames : ARRAY [1..4] OF STRING;
+END_VAR
+(* @END_DECLARATION := '0' *)
+aNames[1] := sNameCommand1;
+aNames[2] := sNameCommand2;
+aNames[3] := sNameCommand3;
+aNames[4] := sNameCommand4;
+END_FUNCTION_BLOCK

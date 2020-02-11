@@ -1,0 +1,46 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Map8BOOLEkorcommand0
+VAR_INPUT
+	eAction : eActions;
+eState : eStates;
+xCommand1, xCommand2, xCommand3, xCommand4, xCommand5, xCommand6, xCommand7, xCommand8: BOOL;
+aTriggerChanges1, aTriggerChanges2, aTriggerChanges3, aTriggerChanges4, aTriggerChanges5, aTriggerChanges6, aTriggerChanges7, aTriggerChanges8: BOOL;
+aCheckChanges1, aCheckChanges2, aCheckChanges3, aCheckChanges4, aCheckChanges5, aCheckChanges6, aCheckChanges7, aCheckChanges8: BOOL;
+END_VAR
+VAR_OUTPUT
+	xCommandOutput1, xCommandOutput2, xCommandOutput3, xCommandOutput4, xCommandOutput5, xCommandOutput6, xCommandOutput7, xCommandOutput8: BOOL;
+END_VAR
+(* @END_DECLARATION := '0' *)
+IF  (eState = LOCAL OR eState = DEVICE_LOCAL) AND eAction = CONTROL THEN
+	RETURN;
+ELSE
+	IF aTriggerChanges1 OR aCheckChanges1 THEN
+xCommandOutput1 := xCommand1;
+END_IF
+IF aTriggerChanges2 OR aCheckChanges2 THEN
+xCommandOutput2 := xCommand2;
+END_IF
+IF aTriggerChanges3 OR aCheckChanges3 THEN
+xCommandOutput3 := xCommand3;
+END_IF
+IF aTriggerChanges4 OR aCheckChanges4 THEN
+xCommandOutput4 := xCommand4;
+END_IF
+IF aTriggerChanges5 OR aCheckChanges5 THEN
+xCommandOutput5 := xCommand5;
+END_IF
+IF aTriggerChanges6 OR aCheckChanges6 THEN
+xCommandOutput6 := xCommand6;
+END_IF
+IF aTriggerChanges7 OR aCheckChanges7 THEN
+xCommandOutput7 := xCommand7;
+END_IF
+IF aTriggerChanges8 OR aCheckChanges8 THEN
+xCommandOutput8 := xCommand8;
+END_IF
+
+END_IF
+END_FUNCTION_BLOCK

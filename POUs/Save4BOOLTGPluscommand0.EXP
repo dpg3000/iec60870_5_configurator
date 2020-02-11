@@ -1,0 +1,83 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTION Save4BOOLTGPluscommand0 : BOOL
+VAR_INPUT
+	xFirstCycle : BOOL;
+iSequenceOrder : INT;
+sProtocol : STRING;
+eState : eStates;
+eAction : eActions;
+aSignals : ARRAY [1..4] OF BOOL;
+aNames : ARRAY [1..4] OF STRING;
+aCheckChanges : ARRAY [1..4] OF BOOL;
+aSaves : ARRAY [1..4] OF BOOL;
+
+END_VAR
+VAR
+	sReason : STRING := 'NOT EXECUTED DUE TO LOCAL STATE';
+sTime : STRING;
+iOffset : INT;
+iN : INT;
+sPowerOnPrefix : STRING := '#';
+sPrefixUnderLine : STRING := '_';
+sDelimiter : STRING := '$T';
+sObjectValue : STRING;
+sPrefix : STRING;
+dwFile : DWORD;
+xClose : BOOL;
+wNewLine : WORD := 2573;
+
+END_VAR
+(* @END_DECLARATION := '0' *)
+dwFile := SysFileOpen(sPathMeasureLog,'a');
+sTime := TimeAsString();
+
+iOffset := iSequenceOrder * 4;
+sProtocol := CONCAT(sProtocol, sPrefixUnderLine);
+sPrefix := CONCAT(sProtocol,  INT_TO_STRING(iSequenceOrder));
+
+IF xFirstCycle THEN
+    FOR iN := 1 TO 4 BY 1 DO
+        IF aSaves[iN] THEN
+            
+            sObjectvalue := BOOL_TO_STRING(aSignals[iN]);
+            (*Write to datalogger*)
+            SysFileWrite(dwFile,ADR(sTime),LEN(sTime));
+            SysFileWrite(dwFile,ADR(sDelimiter),LEN(sDelimiter));
+            SysFileWrite(dwFile,ADR(sPrefix),LEN(sPrefix));
+            SysFileWrite(dwFile,ADR(sDelimiter),LEN(sDelimiter));
+            SysFileWrite(dwFile,ADR(sPowerOnPrefix),LEN(sPowerOnPrefix));
+            SysFileWrite(dwFile,ADR(aNames[iN]),LEN(aNames[iN]));
+            SysFileWrite(dwFile,ADR(sDelimiter),LEN(sDelimiter));
+            SysFileWrite(dwFile,ADR(sObjectValue),LEN(sObjectValue));
+            SysFileWrite(dwFile,ADR(wNewLine),SIZEOF(wNewLine));
+        END_IF
+    END_FOR
+ELSE
+    FOR iN := 1 TO 4 BY 1 DO
+        IF aSaves[iN] THEN
+            IF aCheckChanges[iN] THEN
+                
+                    
+                    sObjectvalue := BOOL_TO_STRING(aSignals[iN]);
+                    (*Write to datalogger*)
+                    SysFileWrite(dwFile,ADR(sTime),LEN(sTime));
+                    SysFileWrite(dwFile,ADR(sDelimiter),LEN(sDelimiter));
+                    SysFileWrite(dwFile,ADR(sPrefix),LEN(sPrefix));
+                    SysFileWrite(dwFile,ADR(sDelimiter),LEN(sDelimiter));
+                    SysFileWrite(dwFile,ADR(sPowerOnPrefix),LEN(sPowerOnPrefix));
+                    SysFileWrite(dwFile,ADR(aNames[iN]),LEN(aNames[iN]));
+                    SysFileWrite(dwFile,ADR(sDelimiter),LEN(sDelimiter));
+                    SysFileWrite(dwFile,ADR(sObjectValue),LEN(sObjectValue));
+                    SysFileWrite(dwFile,ADR(wNewLine),SIZEOF(wNewLine));
+                
+            END_IF
+        END_IF
+    END_FOR
+END_IF
+
+xClose := SysFileClose(dwFile);
+Save4BOOLTGPluscommand0 := TRUE;
+END_FUNCTION_BLOCK

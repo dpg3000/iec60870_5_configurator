@@ -1,0 +1,61 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Pack48STRINGlabel7SJ6xstate0
+VAR_INPUT
+	sNameState1, sNameState2, sNameState3, sNameState4, sNameState5, sNameState6, sNameState7, sNameState8, sNameState9, sNameState10, sNameState11, sNameState12, sNameState13, sNameState14, sNameState15, sNameState16, sNameState17, sNameState18, sNameState19, sNameState20, sNameState21, sNameState22, sNameState23, sNameState24, sNameState25, sNameState26, sNameState27, sNameState28, sNameState29, sNameState30, sNameState31, sNameState32, sNameState33, sNameState34, sNameState35, sNameState36, sNameState37, sNameState38, sNameState39, sNameState40, sNameState41, sNameState42, sNameState43, sNameState44, sNameState45, sNameState46, sNameState47, sNameState48: STRING;
+END_VAR
+VAR_OUTPUT
+	aNames : ARRAY [1..48] OF STRING;
+END_VAR
+(* @END_DECLARATION := '0' *)
+aNames[1] := sNameState1;
+aNames[2] := sNameState2;
+aNames[3] := sNameState3;
+aNames[4] := sNameState4;
+aNames[5] := sNameState5;
+aNames[6] := sNameState6;
+aNames[7] := sNameState7;
+aNames[8] := sNameState8;
+aNames[9] := sNameState9;
+aNames[10] := sNameState10;
+aNames[11] := sNameState11;
+aNames[12] := sNameState12;
+aNames[13] := sNameState13;
+aNames[14] := sNameState14;
+aNames[15] := sNameState15;
+aNames[16] := sNameState16;
+aNames[17] := sNameState17;
+aNames[18] := sNameState18;
+aNames[19] := sNameState19;
+aNames[20] := sNameState20;
+aNames[21] := sNameState21;
+aNames[22] := sNameState22;
+aNames[23] := sNameState23;
+aNames[24] := sNameState24;
+aNames[25] := sNameState25;
+aNames[26] := sNameState26;
+aNames[27] := sNameState27;
+aNames[28] := sNameState28;
+aNames[29] := sNameState29;
+aNames[30] := sNameState30;
+aNames[31] := sNameState31;
+aNames[32] := sNameState32;
+aNames[33] := sNameState33;
+aNames[34] := sNameState34;
+aNames[35] := sNameState35;
+aNames[36] := sNameState36;
+aNames[37] := sNameState37;
+aNames[38] := sNameState38;
+aNames[39] := sNameState39;
+aNames[40] := sNameState40;
+aNames[41] := sNameState41;
+aNames[42] := sNameState42;
+aNames[43] := sNameState43;
+aNames[44] := sNameState44;
+aNames[45] := sNameState45;
+aNames[46] := sNameState46;
+aNames[47] := sNameState47;
+aNames[48] := sNameState48;
+END_FUNCTION_BLOCK

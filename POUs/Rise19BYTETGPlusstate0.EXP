@@ -1,0 +1,25 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Rise19BYTETGPlusstate0
+VAR_INPUT
+	aRiseChanges : ARRAY [1..19] OF BYTE;
+END_VAR
+VAR_OUTPUT
+	aTriggerChanges : ARRAY [1..19] OF BOOL;
+END_VAR
+VAR
+	byLastRise : ARRAY [1..19] OF BYTE;
+iN : INT;
+END_VAR
+(* @END_DECLARATION := '0' *)
+FOR iN := 1 TO 19 BY 1 DO
+	IF aRiseChanges[iN] = (byLastRise[iN] + 1) THEN
+		aTriggerChanges[iN] := TRUE;
+		byLastRise[iN] := aRiseChanges[iN];
+	ELSE
+		aTriggerChanges[iN] := FALSE;
+	END_IF
+END_FOR;
+END_FUNCTION_BLOCK

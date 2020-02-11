@@ -1,0 +1,30 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Pack17WORDvaluesEkormeasure0
+VAR_INPUT
+	wMeasure1, wMeasure2, wMeasure3, wMeasure4, wMeasure5, wMeasure6, wMeasure7, wMeasure8, wMeasure9, wMeasure10, wMeasure11, wMeasure12, wMeasure13, wMeasure14, wMeasure15, wMeasure16, wMeasure17: WORD;
+END_VAR
+VAR_OUTPUT
+	aSignals : ARRAY [1..17] OF WORD;
+END_VAR
+(* @END_DECLARATION := '0' *)
+aSignals[1] := wMeasure1;
+aSignals[2] := wMeasure2;
+aSignals[3] := wMeasure3;
+aSignals[4] := wMeasure4;
+aSignals[5] := wMeasure5;
+aSignals[6] := wMeasure6;
+aSignals[7] := wMeasure7;
+aSignals[8] := wMeasure8;
+aSignals[9] := wMeasure9;
+aSignals[10] := wMeasure10;
+aSignals[11] := wMeasure11;
+aSignals[12] := wMeasure12;
+aSignals[13] := wMeasure13;
+aSignals[14] := wMeasure14;
+aSignals[15] := wMeasure15;
+aSignals[16] := wMeasure16;
+aSignals[17] := wMeasure17;
+END_FUNCTION_BLOCK

@@ -4,13 +4,12 @@ NOTAS:
 - FunctionBlockOutputHeader sobresale en la web, recortar el nombre y aplicar también a FunctionOutputHeader
 - Cambiar los nombres de las vainas en device(), ahora mismo es un puto cristo
 - Añadir regex a la parte del servidor para añadir verbose en los modelos de los objectos etc.
-- built-in messages para gestionar las excepciones y vainas varias
 - añadir key-words a lo que requiera más verbosidad
 - En el configurador quitar el hipervinculo a los títulos
 - Tabular TODAS las declaraciones
+- built-in messages para gestionar las excepciones y vainas varias
 - el nombre del archivo del servidor que sea relativo a lo que contiene
-- CARDS pasa a DEVICES por lo que hay que arreglar kbus.py y meter en la DB los texts de kbus de DI16 y DO16
-- TENGO UN BUEN JALEO CON LAS CARDS, ARREGLAR MAÑANA
-- Echar un ojo a kbus y client, client posiblemente eliminarlo, están fatal ambos
+- Echar un ojo a kbus, está hecho mierda (rehacer básicamente)
 - Crear una lista de todos los pous que se hayan hecho, cada método debe tomarla como parámetro para comprobar si ya existe un pou con el mismo nombre, de existir, ya no es necesario crear el pou actual
-- A la hora de crear las señales en el servidor, evaluar si dentro de un dispositivo existe alguna señal relativa a local/remoto, de existir, se añadiría a una lista para meterse en el fbd del pack local remote
+
+HACIENDO

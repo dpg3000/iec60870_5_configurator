@@ -1,0 +1,22 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Pack9BOOLtrigger7SJ6xcommand0
+VAR_INPUT
+	xTriggerCommand1, xTriggerCommand2, xTriggerCommand3, xTriggerCommand4, xTriggerCommand5, xTriggerCommand6, xTriggerCommand7, xTriggerCommand8, xTriggerCommand9: BOOL;
+END_VAR
+VAR_OUTPUT
+	aTriggerChanges : ARRAY [1..9] OF BOOL;
+END_VAR
+(* @END_DECLARATION := '0' *)
+aTriggerChanges[1] := xTriggerCommand1;
+aTriggerChanges[2] := xTriggerCommand2;
+aTriggerChanges[3] := xTriggerCommand3;
+aTriggerChanges[4] := xTriggerCommand4;
+aTriggerChanges[5] := xTriggerCommand5;
+aTriggerChanges[6] := xTriggerCommand6;
+aTriggerChanges[7] := xTriggerCommand7;
+aTriggerChanges[8] := xTriggerCommand8;
+aTriggerChanges[9] := xTriggerCommand9;
+END_FUNCTION_BLOCK

@@ -4,18 +4,31 @@ $(document).ready(function(){
         var newNum = new Number(num + 1);
         var previousDom = jQuery('#repeat-center-' + num);
         var newElem = jQuery('#repeat-center-' + num).clone().attr('id', 'repeat-center-' + newNum);                    // Cloning the previous element
-        var numOfCards = newElem.children('.enable-cards-section').children('.repeat-card').length;
+        var numOfInputCards = newElem.children('.enable-input-cards-section').children('.repeat-input-card').length;
+        var numOfOutputCards = newElem.children('.enable-output-cards-section').children('.repeat-output-card').length;
         var numOfDevices = newElem.children('.enable-devices-section').children('.repeat-device').length;
 
-        previousDom.children('#table-cards').children('#body-cards').children('#row-cards').children('#cell-'+          // disable the add card checkbox
+        /*disable the add card checkbox*/
+        previousDom.children('#table-cards').children('#body-cards').children('#row-cards').children('#cell-'+
         'cards').children('.enable-cards').prop("disabled", true);
 
-        previousDom.children('#table-devices').children('#body-devices').children('#row-devices').children('#cell-'+    // disable the add card checkbox
+        /*disable the add input card checkbox*/
+        previousDom.children('.enable-cards-section').children('#table-input-cards').children('#body-input-'+
+        'cards').children('#row-input-cards').children('#cell-input-cards').children('.enable-input-'+
+        'cards').prop("disabled", true);
+
+        /*disable the add output card checkbox*/
+        previousDom.children('.enable-cards-section').children('#table-output-cards').children('#body-output-'+
+        'cards').children('#row-output-cards').children('#cell-output-cards').children('.enable-output-'+
+        'cards').prop("disabled", true);
+
+        /*disable the add device checkbox*/
+        previousDom.children('#table-devices').children('#body-devices').children('#row-devices').children('#cell-'+
         'devices').children('.enable-devices').prop("disabled", true);
 
-        previousDom.css("background", "#dfd url(../static/admin/img/icon-yes.svg) 100px 11px no-repeat");
+        /*previousDom.css("background", "#dfd url(../static/admin/img/icon-yes.svg) 100px 11px no-repeat");
         previousDom.children('#table-cards').children('#body-cards').children('#row-center').children('#cell-center-'+
-        'name').children('#center-name').css("background", "#edffed");
+        'name').children('#center-name').css("background", "#edffed");*/
 
         /*Cleaning add center status*/
         $(this).attr('disabled', true);
@@ -31,39 +44,67 @@ $(document).ready(function(){
         newElem.children('#table-cards').children('#body-cards').children('#row-cards').children('#cell-'+              //Uncheck the add card checkbox
         'cards').children('.enable-cards').prop("checked", false);
 
-        newElem.children('.enable-cards-section').hide();                                                               //hide the card configurator dialog
+        newElem.children('.enable-cards-section').children('#table-input-cards').children('#body-input-'+               //Uncheck the add input card checkbox
+        'cards').children('#row-input-cards').children('#cell-input-cards').children('.enable-input-'+
+        'cards').prop("checked", false);
 
-        for (i = numOfCards; i > 1; i--) {                                                                              //Remove any card but first
-            newElem.children('.enable-cards-section').children('#repeat-card-' + i).remove();
+        newElem.children('.enable-cards-section').children('#table-output-cards').children('#body-output-'+             //Uncheck the add output card checkbox
+        'cards').children('#row-output-cards').children('#cell-output-cards').children('.enable-output-'+
+        'cards').prop("checked", false);
+
+        for (i = numOfInputCards; i > 1; i--) {                                                                         //Remove all input cards but the first
+            newElem.children('.enable-cards-section').children('.enable-input-cards-section').children('#repeat-'+
+            'input-card-' + i).remove();
         }
 
-        newElem.children('.enable-cards-section').children('#repeat-card-1').children('.selector-'+
-        'card').attr('disabled', false);
+        for (i = numOfOutputCards; i > 1; i--) {                                                                        //Remove all output cards but the first
+            newElem.children('.enable-cards-section').children('.enable-output-cards-section').children('#repeat-'+
+            'output-card-' + i).remove();
+        }
 
-        newElem.children('.enable-cards-section').children('#repeat-card-1').children('.selector-num-card').val(1);
+        newElem.children('.enable-cards-section').children('.enable-input-cards-section').hide();                       //hide the input card configurator dialog
+        newElem.children('.enable-cards-section').children('.enable-output-cards-section').hide();                      //hide the output card configurator dialog
+        newElem.children('.enable-cards-section').hide();                                                               //hide the card configurator dialog
 
-        newElem.children('.enable-cards-section').children('#add-card-btn').attr('disabled', false);                    //Enable add button
+        newElem.children('.enable-cards-section').children('.enable-input-cards-section').children('#repeat-input-'+    //Enable the selector of the input card left in the last loop
+        'card-1').children('.selector-input-card').attr('disabled', false);
+        newElem.children('.enable-cards-section').children('.enable-output-cards-section').children('#repeat-output-'+  //Enable the selector of the output card left in the last loop
+        'card-1').children('.selector-input-card').attr('disabled', false);
 
-        newElem.children('.enable-cards-section').children('#remove-card-btn').attr('disabled', true);                  //Disable remove button
+        newElem.children('.enable-cards-section').children('.enable-input-cards-section').children('#repeat-input-'+    //Initialize the number of input cards
+        'card-1').children('.selector-num-input-card').val(1);
+        newElem.children('.enable-cards-section').children('.enable-output-cards-section').children('#repeat-output-'+  //Initialize the number of output cards
+        'card-1').children('.selector-num-output-card').val(1);
+
+        newElem.children('.enable-cards-section').children('.enable-input-cards-section').children('#add-input-'+       //Enable add input card button
+        'card-btn').attr('disabled', false);
+        newElem.children('.enable-cards-section').children('.enable-output-cards-section').children('#add-output-'+     //Enable add output card button
+        'card-btn').attr('disabled', false);
+
+        newElem.children('.enable-cards-section').children('.enable-input-cards-section').children('#remove-input-'+    //Disable remove input card button
+        'card-btn').attr('disabled', true);
+        newElem.children('.enable-cards-section').children('.enable-output-cards-section').children('#remove-output-'+  //Disable remove output card button
+        'card-btn').attr('disabled', true);
 
         /*Cleaning devices*/
-        newElem.children('#table-devices').children('#body-devices').children('#row-devices').children('#cell-'+           //Uncheck the add card checkbox
+        newElem.children('#table-devices').children('#body-devices').children('#row-devices').children('#cell-'+        //Uncheck the add device checkbox
         'devices').children('.enable-devices').prop("checked", false);
 
-        newElem.children('.enable-devices-section').hide();                                                               //hide the card configurator dialog
+        newElem.children('.enable-devices-section').hide();                                                             //hide the device configurator dialog
 
-        for (i = numOfDevices; i > 1; i--) {                                                                              //Remove any card but first
+        for (i = numOfDevices; i > 1; i--) {                                                                            //Remove any devices but first
             newElem.children('.enable-devices-section').children('#repeat-device-' + i).remove();
         }
 
-        newElem.children('.enable-devices-section').children('#repeat-device-1').children('.selector-'+
+        newElem.children('.enable-devices-section').children('#repeat-device-1').children('.selector-'+                 //Enable the selector of the device left in the last loop
         'device').attr('disabled', false);
 
-        newElem.children('.enable-devices-section').children('#repeat-device-1').children('.selector-num-device').val(1);
+        newElem.children('.enable-devices-section').children('#repeat-device-1').children('.selector-num-'+             //Initialize the number of devices
+        'device').val(1);
 
-        newElem.children('.enable-devices-section').children('#add-device-btn').attr('disabled', false);                //Enable add button
+        newElem.children('.enable-devices-section').children('#add-device-btn').attr('disabled', false);                //Enable add device button
 
-        newElem.children('.enable-devices-section').children('#remove-devices-btn').attr('disabled', true);             //Disable remove button
+        newElem.children('.enable-devices-section').children('#remove-devices-btn').attr('disabled', true);             //Disable remove device button
 
         //Add line-break after previous dom
         previousDom.children('#line-break')
@@ -80,12 +121,24 @@ $(document).ready(function(){
         actualDom.children('#table-cards').children('#body-cards').children('#row-cards').children('#cell-'+            // enable the add card checkbox
         'cards').children('.enable-cards').prop("disabled", false);
 
+        actualDom.children('.enable-cards-section').children('#table-input-cards').children('#body-input-'+             // enable the add input card checkbox
+        'cards').children('#row-input-cards').children('#cell-input-cards').children('.enable-input-'+
+        'cards').prop("disabled", false);
+
+        actualDom.children('.enable-cards-section').children('#table-output-cards').children('#body-output-'+           // enable the add output card checkbox
+        'cards').children('#row-output-cards').children('#cell-output-cards').children('.enable-output-'+
+        'cards').prop("disabled", false);
+
         actualDom.children('#table-devices').children('#body-devices').children('#row-devices').children('#cell-'+      // enable the add device checkbox
         'devices').children('.enable-devices').prop("disabled", false);
 
-        if(actualDom.children('#table-cards').children('#body-cards').children('#row-cards').children('#cell-'+
-        'cards').children('.enable-cards').prop('checked') || actualDom.children('#table-devices').children('#body-'+
-        'devices').children('#row-devices').children('#cell-devices').children('.enable-devices').prop('checked')) {
+        if(actualDom.children('.enable-cards-section').children('#table-input-cards').children('#body-input-'+          // logic to control ADD CENTER and GENERATE
+        'cards').children('#row-input-cards').children('#cell-input-cards').children('.enable-input-'+
+        'cards').prop('checked') || actualDom.children('.enable-cards-section').children('#table-output-'+
+        'cards').children('#body-output-cards').children('#row-output-cards').children('#cell-output-'+
+        'cards').children('.enable-output-cards').prop('checked') || actualDom.children('#table-'+
+        'devices').children('#body-devices').children('#row-devices').children('#cell-devices').children('.enable-'+
+        'devices').prop('checked')) {
             $('#add-center-btn').attr('disabled', false);
             $('#generate').attr('disabled', false);
         } else {
@@ -100,11 +153,27 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on('click', '.enable-cards', function() {
+    $(document).on('click', '.enable-cards', function() {                                                               // Hide or show card section based on checkbox
         if(this.checked) {
             $(this).parent().parent().parent().parent().siblings('.enable-cards-section').show();
         } else {
             $(this).parent().parent().parent().parent().siblings('.enable-cards-section').hide();
+        }
+    });
+
+    $(document).on('click', '.enable-input-cards', function() {                                                         // Hide or show input card section based on checkbox
+        if(this.checked) {
+            $(this).parent().parent().parent().parent().siblings('.enable-input-cards-section').show();
+        } else {
+            $(this).parent().parent().parent().parent().siblings('.enable-input-cards-section').hide();
+        }
+    });
+
+    $(document).on('click', '.enable-output-cards', function() {                                                         // Hide or show output card section based on checkbox
+        if(this.checked) {
+            $(this).parent().parent().parent().parent().siblings('.enable-output-cards-section').show();
+        } else {
+            $(this).parent().parent().parent().parent().siblings('.enable-output-cards-section').hide();
         }
     });
 
@@ -171,15 +240,27 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on('click', '#add-card-server', function() {
+    $(document).on('click', '#add-input-card-server', function() {
         if($(this).prop('checked') == false) {
-            $(this).siblings('#add-card-io').prop('checked', true)
+            $(this).siblings('#add-input-card-io').prop('checked', true)
         }
     });
 
-    $(document).on('click', '#add-card-io', function() {
+    $(document).on('click', '#add-output-card-server', function() {
         if($(this).prop('checked') == false) {
-            $(this).siblings('#add-card-server').prop('checked', true)
+            $(this).siblings('#add-output-card-io').prop('checked', true)
+        }
+    });
+
+    $(document).on('click', '#add-input-card-io', function() {
+        if($(this).prop('checked') == false) {
+            $(this).siblings('#add-input-card-server').prop('checked', true)
+        }
+    });
+
+    $(document).on('click', '#add-output-card-io', function() {
+        if($(this).prop('checked') == false) {
+            $(this).siblings('#add-output-card-server').prop('checked', true)
         }
     });
 
@@ -195,46 +276,89 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on('click', '#add-card-btn', function() {
-        var num = $(this).siblings('.repeat-card').length;
+    $(document).on('click', '#add-input-card-btn', function() {
+        var num = $(this).siblings('.repeat-input-card').length;
         var newNum = new Number(num + 1);
-        var previousDom = $(this).siblings('#repeat-card-' + num);
-        var newElem = $(this).siblings('#repeat-card-' + num).clone().attr('id', 'repeat-card-' + newNum);
+        var previousDom = $(this).siblings('#repeat-input-card-' + num);
+        var newElem = $(this).siblings('#repeat-input-card-' + num).clone().attr('id', 'repeat-input-card-' + newNum);
 
-        newElem.children(".selector-card").children("option[value='"+ previousDom.children(".selector-"                     // unable the previous choice
-        + "card").val() +"']").attr('disabled', true);
-
-        newElem.children(".selector-card").children('option:not(:disabled)').each(function() {
-            $(this).prop('selected', true);
-        });
-
-        newElem.children(".selector-num-card").val(1);
-
-        newElem.children("#add-card-server").prop('checked', true);
-        newElem.children("#add-card-io").prop('checked', true);
-
-        previousDom.children(".selector-card").attr('disabled', true);
-
-        previousDom.after(newElem);
-        $(this).siblings('#remove-card-btn').attr('disabled', false);
-
-        if (newNum == $("#hidden-cards-num").val()) {
+        if (newNum >= $("#hidden-input-cards-num").val()) {
             $(this).attr('disabled', true);
+        } else {
+            newElem.children(".selector-input-card").children("option[value='"+ previousDom.children(".selector-input-"
+            + "card").val() +"']").attr('disabled', true);
+
+            newElem.children(".selector-input-card").children('option:not(:disabled)').each(function() {
+                $(this).prop('selected', true);
+            });
+
+            newElem.children(".selector-num-input-card").val(1);
+
+            newElem.children("#add-input-card-server").prop('checked', true);
+            newElem.children("#add-input-card-io").prop('checked', true);
+
+            previousDom.children(".selector-input-card").attr('disabled', true);
+
+            previousDom.after(newElem);
+            $(this).siblings('#remove-input-card-btn').attr('disabled', false);
         }
     });
 
-    $(document).on('click', '#remove-card-btn', function() {
-        var num = $(this).siblings('.repeat-card').length;
-        var newNum = new Number(num - 1);
-        var previousDom = $(this).siblings('#repeat-card-' + newNum);
-        var actualDom = $(this).siblings('#repeat-card-' + num);
+    $(document).on('click', '#add-output-card-btn', function() {
+        var num = $(this).siblings('.repeat-output-card').length;
+        var newNum = new Number(num + 1);
+        var previousDom = $(this).siblings('#repeat-output-card-' + num);
+        var newElem = $(this).siblings('#repeat-output-card-' + num).clone().attr('id', 'repeat-output-card-' + newNum);
 
-        actualDom.remove();                                                                                                 // remove the last element
-        $(this).siblings('#add-card-btn').attr('disabled', false);                                                          // enable the "add" button
-        previousDom.children(".selector-card").attr('disabled', false);                                                     // enable card selection
+        if (newNum >= $("#hidden-output-cards-num").val()) {
+            $(this).attr('disabled', true);
+        } else {
+            newElem.children(".selector-output-card").children("option[value='"+ previousDom.children(".selector-"+
+            "output-card").val() +"']").attr('disabled', true);
+
+            newElem.children(".selector-output-card").children('option:not(:disabled)').each(function() {
+                $(this).prop('selected', true);
+            });
+
+            newElem.children(".selector-num-output-card").val(1);
+
+            newElem.children("#add-output-card-server").prop('checked', true);
+            newElem.children("#add-output-card-io").prop('checked', true);
+
+            previousDom.children(".selector-output-card").attr('disabled', true);
+
+            previousDom.after(newElem);
+            $(this).siblings('#remove-output-card-btn').attr('disabled', false);
+        }
+    });
+
+    $(document).on('click', '#remove-input-card-btn', function() {
+        var num = $(this).siblings('.repeat-input-card').length;
+        var newNum = new Number(num - 1);
+        var previousDom = $(this).siblings('#repeat-input-card-' + newNum);
+        var actualDom = $(this).siblings('#repeat-input-card-' + num);
 
         if (newNum == 1) {
-            $(this).attr('disabled', true);                                                                                 // if only one element remains, disable the "remove" button
+            $(this).attr('disabled', true);                                                                             // if only one element remains, disable the remove button
+        } else {
+            actualDom.remove();                                                                                         // remove the last element
+            $(this).siblings('#add-input-card-btn').attr('disabled', false);                                            // enable the "add" button
+            previousDom.children(".selector-input-card").attr('disabled', false);                                       // enable input card selection
+        }
+    });
+
+    $(document).on('click', '#remove-output-card-btn', function() {
+        var num = $(this).siblings('.repeat-output-card').length;
+        var newNum = new Number(num - 1);
+        var previousDom = $(this).siblings('#repeat-output-card-' + newNum);
+        var actualDom = $(this).siblings('#repeat-output-card-' + num);
+
+        if (newNum == 1) {
+            $(this).attr('disabled', true);                                                                             // if only one element remains, disable the remove button
+        } else {
+            actualDom.remove();                                                                                         // remove the last element
+            $(this).siblings('#add-output-card-btn').attr('disabled', false);                                           // enable the "add" button
+            previousDom.children(".selector-output-card").attr('disabled', false);                                      // enable output card selection
         }
     });
 
@@ -382,7 +506,7 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on('click', '.enable-cards', function() {
+    $(document).on('click', '.enable-input-cards', function() {
         if(this.checked) {
             $('#add-center-btn').attr('disabled', false);
             $('#generate').attr('disabled', false);
@@ -391,7 +515,30 @@ $(document).ready(function(){
             $('#generate').attr('disabled', true);
         }
 
-        if($(this).parent().parent().parent().parent().siblings('#table-devices').children('#body-'+
+        if($(this).parent().parent().parent().parent().siblings('#table-output-cards').children('#body-output'+
+        'cards').children('#row-output-cards').children('#cell-output-cards').children('.enable-output-'+
+        'cards').prop('checked')) {
+            $('#add-center-btn').attr('disabled', false);
+            $('#generate').attr('disabled', false);
+        }
+
+        if($(this).parent().parent().parent().parent().parent().siblings('#table-devices').children('#body-'+
+        'devices').children('#row-devices').children('#cell-devices').children('.enable-devices').prop('checked')) {
+            $('#add-center-btn').attr('disabled', false);
+            $('#generate').attr('disabled', false);
+        }
+    });
+
+    $(document).on('click', '.enable-output-cards', function() {
+        if(this.checked) {
+            $('#add-center-btn').attr('disabled', false);
+            $('#generate').attr('disabled', false);
+        } else {
+            $('#add-center-btn').attr('disabled', true);
+            $('#generate').attr('disabled', true);
+        }
+
+        if($(this).parent().parent().parent().parent().parent().siblings('#table-devices').children('#body-'+
         'devices').children('#row-devices').children('#cell-devices').children('.enable-devices').prop('checked')) {
             $('#add-center-btn').attr('disabled', false);
             $('#generate').attr('disabled', false);
@@ -425,29 +572,59 @@ $(document).ready(function(){
             "center").children("#cell-center-name").children("#center-name").val();
             xmlString += "'>";
 
-            if($(this).children("#table-cards").children("#body-cards").children("#row-cards").children('#cell-'+
-            'cards').children('.enable-cards').prop('checked')) {
-                $(this).children(".enable-cards-section").children('.repeat-card').each(function() {
-                    xmlString += "<card ";
+            if($(this).children('.enable-cards-section').children.children("#table-input-cards").children("#body-"+
+            "input-cards").children("#row-input-cards").children('#cell-input-cards').children('.enable-input-'+
+            'cards').prop('checked')) {
+                $(this).children('.enable-cards-section').children('.enable-input-cards-section').children('.repeat-'+
+                'input-card').each(function() {
+                    xmlString += "<input-card ";
                     xmlString += "number='";
-                    xmlString += $(this).children('.selector-num-card').val();
+                    xmlString += $(this).children('.selector-num-input-card').val();
                     xmlString += "' ";
                     xmlString += "server='";
-                    if($(this).children('#add-card-server').prop('checked')) {
+                    if($(this).children('#add-input-card-server').prop('checked')) {
                         xmlString += "yes";
                     } else {
                         xmlString += "no";
                     }
                     xmlString += "'";
                     xmlString += " io='";
-                    if($(this).children('#add-card-io').prop('checked')) {
+                    if($(this).children('#add-input-card-io').prop('checked')) {
                         xmlString += "yes";
                     } else {
                         xmlString += "no";
                     }
                     xmlString += "'>";
-                    xmlString += $(this).children('.selector-card').val();
-                    xmlString += "</card>";
+                    xmlString += $(this).children('.selector-input-card').val();
+                    xmlString += "</input-card>";
+                });
+            }
+
+            if($(this).children('.enable-cards-section').children.children("#table-output-cards").children("#body-"+
+            "output-cards").children("#row-output-cards").children('#cell-output-cards').children('.enable-output-'+
+            'cards').prop('checked')) {
+                $(this).children('.enable-cards-section').children('.enable-output-cards-section').children('.repeat-'+
+                'output-card').each(function() {
+                    xmlString += "<output-card ";
+                    xmlString += "number='";
+                    xmlString += $(this).children('.selector-num-output-card').val();
+                    xmlString += "' ";
+                    xmlString += "server='";
+                    if($(this).children('#add-output-card-server').prop('checked')) {
+                        xmlString += "yes";
+                    } else {
+                        xmlString += "no";
+                    }
+                    xmlString += "'";
+                    xmlString += " io='";
+                    if($(this).children('#add-output-card-io').prop('checked')) {
+                        xmlString += "yes";
+                    } else {
+                        xmlString += "no";
+                    }
+                    xmlString += "'>";
+                    xmlString += $(this).children('.selector-output-card').val();
+                    xmlString += "</output-card>";
                 });
             }
 

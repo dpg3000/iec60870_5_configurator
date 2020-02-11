@@ -8,8 +8,6 @@ from django.http import HttpResponse, HttpResponseNotFound
 import datetime
 from server import Server, ServerDevice
 from project import Project
-import client
-from client import Client
 from kbus import Kbus
 import kbus
 from django.http import JsonResponse
@@ -22,15 +20,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Create your views here.
 def configurator_view(request):
     devices = Device.objects.all()
-    cards = Card.objects.all()
     devices_num = devices.count()
-    cards_num = cards.count()
+    input_cards = Card.objects.filter(IO='DI').all()
+    output_cards = Card.objects.filter(IO='DO').all()
+    input_cards_num = input_cards.count()
+    output_cards_num = output_cards.count()
 
     context = {
         "devices": devices,
-        "cards": cards,
         "devices_num": devices_num,
-        "cards_num": cards_num
+        "input_cards": input_cards,
+        "output_cards": output_cards,
+        "input_cards_num": input_cards_num,
+        "output_cards_num": output_cards_num
     }
 
     return render(request, "configurator.html", context)
@@ -94,25 +96,17 @@ def submit(request):
             if card.attrib['io'] == 'yes':
                 kbus_ins = Kbus(card.text)
                 kbus_ins.create_kbus(int(card.attrib['number']))
-            pou.create_pou(card.text, int(card.attrib['number']), 'DO', server_iteration)
+            pou.create_pous(card.text, int(card.attrib['number']), 'DO', server_iteration)
         for device in center.iter('device'):
             if device.attrib['server'] == 'yes':
                 ServerDevice(device.text, 'device', int(device.attrib['number']), server_iteration, iec60870_5_config)
-            if device.attrib['client'] == 'yes':
-                client_ins = Client(device.text)
-                client_ins.create_client(int(device.attrib['number']))
-            error_message = pou.create_pou(device.text, int(device.attrib['number']), device.attrib['operation'],
-                                           server_iteration)
-            if error_message:
-                return HttpResponse("<h1>" + error_message + "</h1>")
+            # if device.attrib['client'] == 'yes':
+            pou.create_pous(device.text, int(device.attrib['number']), device.attrib['operation'], server_iteration)
         server_iteration += 1
         # server closing tags
         center_ins.closing_tags()
     # Creating user-prg
     pou.create_user_prg()
-    # write client instances
-    client.write_client(iec60870_5_config)
-    client.clear_class_variables()
     # write k-bus instances
     kbus.write_kbus(k_bus)
     kbus.clear_class_variable()

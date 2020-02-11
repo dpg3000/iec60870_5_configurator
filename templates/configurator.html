@@ -69,7 +69,7 @@
                                 <th scope="row">
                                     <a href="">Cards</a>
                                 </th>
-                                <td></td>
+                                <td>
                                 <td id="cell-cards">
                                     <input type="checkbox" class="enable-cards" name="cards" value="isCards">
                                 </td>
@@ -77,22 +77,69 @@
                         </tbody>
                     </table>
                     <div class="enable-cards-section">
-                        <div id="repeat-card-1" class="repeat-card">
-                            <br>
-                            <select class="selector-card" name="card[]">
-                                <option value="Please Select {exclude}" disabled="disabled">--Select--</option>
-                                    {% for item in cards %}
-                                        <option value="{{item.Name}}">{{item.Name}}</option>
-                                    {% endfor %}
-                            </select>
-                            <input class="selector-num-card" type="number" name="card_quantity[]" value="1" min="1">
-                            <input type="checkbox" id="add-card-server" name="add_card_server" value="isServer" checked>
-                            <span id="text-add-card-server">Server</span>
-                            <input type="checkbox" id="add-card-io" name="add_card_io" value="isIO" checked>
-                            <span id="text-add-card-io">I/O</span>
+                        <table id="table-input-cards">
+                            <tbody id="body-input-cards">
+                                <tr id="row-input-cards">
+                                    <td>
+                                    <th scope="row">
+                                        <a href="">Input Cards</a>
+                                    </th>
+                                    <td id="cell-input-cards">
+                                        <input type="checkbox" class="enable-input-cards" name="input-cards" value="isCards">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="enable-input-cards-section">
+                            <div id="repeat-input-card-1" class="repeat-input-card">
+                                <br>
+                                <select class="selector-input-card" name="input_card[]">
+                                    <option value="Please Select {exclude}" disabled="disabled">--Select--</option>
+                                        {% for item in input_cards %}
+                                            <option value="{{item.ArticleNo}}">{{item.ArticleNo}}</option>
+                                        {% endfor %}
+                                </select>
+                                <input class="selector-num-input-card" type="number" name="input_card_quantity[]" value="1" min="1">
+                                <input type="checkbox" id="add-input-card-server" name="add_input_card_server" value="isServer" checked>
+                                <span id="text-add-input-card-server">Server</span>
+                                <input type="checkbox" id="add-input-card-io" name="add_input_card_io" value="isIO" checked>
+                                <span id="text-add-input-card-io">I/O</span>
+                            </div>
+                            <button type="button" id="add-input-card-btn" class="addlink btn adders">Add</button>
+                            <button type="button" id="remove-input-card-btn" class="changelink btn removers" disabled="disabled">Remove</button>
                         </div>
-                        <button type="button" id="add-card-btn" class="addlink btn adders">Add</button>
-                        <button type="button" id="remove-card-btn" class="changelink btn removers" disabled="disabled">Remove</button>
+                        <table id="table-output-cards">
+                            <tbody id="body-output-cards">
+                                <tr id="row-output-cards">
+                                    <td>
+                                    <th scope="row">
+                                        <a href="">Output Cards</a>
+                                    </th>
+                                    <td></td>
+                                    <td id="cell-output-cards">
+                                        <input type="checkbox" class="enable-output-cards" name="output-cards" value="isCards">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="enable-output-cards-section">
+                            <div id="repeat-output-card-1" class="repeat-output-card">
+                                <br>
+                                <select class="selector-output-card" name="output_card[]">
+                                    <option value="Please Select {exclude}" disabled="disabled">--Select--</option>
+                                        {% for item in output_cards %}
+                                            <option value="{{item.ArticleNo}}">{{item.ArticleNo}}</option>
+                                        {% endfor %}
+                                </select>
+                                <input class="selector-num-output-card" type="number" name="output_card_quantity[]" value="1" min="1">
+                                <input type="checkbox" id="add-output-card-server" name="add_output_card_server" value="isServer" checked>
+                                <span id="text-add-output-card-server">Server</span>
+                                <input type="checkbox" id="add-output-card-io" name="add_output_card_io" value="isIO" checked>
+                                <span id="text-add-output-card-io">I/O</span>
+                            </div>
+                            <button type="button" id="add-output-card-btn" class="addlink btn adders">Add</button>
+                            <button type="button" id="remove-output-card-btn" class="changelink btn removers" disabled="disabled">Remove</button>
+                        </div>
                     </div>
                     <table id="table-devices">
                         <tbody id="body-devices">
@@ -134,7 +181,8 @@
             </div>
         </div>
         <input type="hidden" id="hidden-devices-num" name="devices_num" value="{{devices_num}}">
-        <input type="hidden" id="hidden-cards-num" name="cards_num" value="{{cards_num}}">
+        <input type="hidden" id="hidden-input-cards-num" name="input_cards_num" value="{{input_cards_num}}">
+        <input type="hidden" id="hidden-output-cards-num" name="output_cards_num" value="{{output_cards_num}}">
         <input type="hidden" id="hidden-request-data" name="request-data" value="">
         <input type="submit" id="generate" value="Generate" disabled>
     </form>

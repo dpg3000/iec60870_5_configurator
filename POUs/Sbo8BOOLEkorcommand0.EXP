@@ -1,0 +1,158 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Sbo8BOOLEkorcommand0
+VAR_INPUT
+	eState : eStates;
+aTriggerChanges1, aTriggerChanges2, aTriggerChanges3, aTriggerChanges4, aTriggerChanges5, aTriggerChanges6, aTriggerChanges7, aTriggerChanges8: BOOL;
+Status1, Status2, Status3, Status4: ENUM870_CLIENT_COMMAND;
+
+END_VAR
+VAR_OUTPUT
+	eError : eErrorCodes;
+xSelect1, xSelect2, xSelect3, xSelect4: BOOL;
+xExecute1, xExecute2, xExecute3, xExecute4: BOOL;
+
+END_VAR
+VAR
+	eErrorStatusInternal : eErrorCodes;
+xFlag1, xFlag2, xFlag3, xFlag4: BOOL;
+
+END_VAR
+(* @END_DECLARATION := '0' *)
+eErrorStatusInternal := NO_ERROR;
+
+IF eState = LOCAL THEN
+	eError := eErrorStatusInternal;
+	RETURN;
+ELSE
+        IF (xFlag1 = FALSE) THEN
+        IF (aTriggerChanges1 OR aTriggerChanges2) THEN
+		xSelect1 := TRUE;
+		xFlag1 := TRUE;
+	END_IF
+END_IF
+
+IF xFlag1 THEN
+	CASE Status1 OF
+		IEC870_COM_SELECT_DONE		:		xSelect1 := FALSE;
+
+		IEC870_COM_IDLE				:		IF NOT(xSelect1) THEN
+													xExecute1 := TRUE;
+												END_IF
+
+		IEC870_COM_EXECUTE_DONE	        :		xExecute1 := FALSE;
+												xFlag1 := FALSE;
+												eErrorStatusInternal := NO_ERROR;
+
+		IEC870_COM_EXE_TIMEOFF		:		xExecute1 := FALSE;
+												xSelect1 := FALSE;
+												xFlag1 := FALSE;
+												eErrorStatusInternal := TIMEOFF_ERROR;
+
+		IEC870_COM_ERROR			        :		xExecute1 := FALSE;
+												xSelect1 := FALSE;
+												xFlag1 := FALSE;
+												eErrorStatusInternal := COM_ERROR;
+	END_CASE;
+END_IF
+
+IF (xFlag2 = FALSE) THEN
+        IF (aTriggerChanges3 OR aTriggerChanges4) THEN
+		xSelect2 := TRUE;
+		xFlag2 := TRUE;
+	END_IF
+END_IF
+
+IF xFlag2 THEN
+	CASE Status2 OF
+		IEC870_COM_SELECT_DONE		:		xSelect2 := FALSE;
+
+		IEC870_COM_IDLE				:		IF NOT(xSelect2) THEN
+													xExecute2 := TRUE;
+												END_IF
+
+		IEC870_COM_EXECUTE_DONE	        :		xExecute2 := FALSE;
+												xFlag2 := FALSE;
+												eErrorStatusInternal := NO_ERROR;
+
+		IEC870_COM_EXE_TIMEOFF		:		xExecute2 := FALSE;
+												xSelect2 := FALSE;
+												xFlag2 := FALSE;
+												eErrorStatusInternal := TIMEOFF_ERROR;
+
+		IEC870_COM_ERROR			        :		xExecute2 := FALSE;
+												xSelect2 := FALSE;
+												xFlag2 := FALSE;
+												eErrorStatusInternal := COM_ERROR;
+	END_CASE;
+END_IF
+
+IF (xFlag3 = FALSE) THEN
+        IF (aTriggerChanges5 OR aTriggerChanges6) THEN
+		xSelect3 := TRUE;
+		xFlag3 := TRUE;
+	END_IF
+END_IF
+
+IF xFlag3 THEN
+	CASE Status3 OF
+		IEC870_COM_SELECT_DONE		:		xSelect3 := FALSE;
+
+		IEC870_COM_IDLE				:		IF NOT(xSelect3) THEN
+													xExecute3 := TRUE;
+												END_IF
+
+		IEC870_COM_EXECUTE_DONE	        :		xExecute3 := FALSE;
+												xFlag3 := FALSE;
+												eErrorStatusInternal := NO_ERROR;
+
+		IEC870_COM_EXE_TIMEOFF		:		xExecute3 := FALSE;
+												xSelect3 := FALSE;
+												xFlag3 := FALSE;
+												eErrorStatusInternal := TIMEOFF_ERROR;
+
+		IEC870_COM_ERROR			        :		xExecute3 := FALSE;
+												xSelect3 := FALSE;
+												xFlag3 := FALSE;
+												eErrorStatusInternal := COM_ERROR;
+	END_CASE;
+END_IF
+
+IF (xFlag4 = FALSE) THEN
+        IF (aTriggerChanges7 OR aTriggerChanges8) THEN
+		xSelect4 := TRUE;
+		xFlag4 := TRUE;
+	END_IF
+END_IF
+
+IF xFlag4 THEN
+	CASE Status4 OF
+		IEC870_COM_SELECT_DONE		:		xSelect4 := FALSE;
+
+		IEC870_COM_IDLE				:		IF NOT(xSelect4) THEN
+													xExecute4 := TRUE;
+												END_IF
+
+		IEC870_COM_EXECUTE_DONE	        :		xExecute4 := FALSE;
+												xFlag4 := FALSE;
+												eErrorStatusInternal := NO_ERROR;
+
+		IEC870_COM_EXE_TIMEOFF		:		xExecute4 := FALSE;
+												xSelect4 := FALSE;
+												xFlag4 := FALSE;
+												eErrorStatusInternal := TIMEOFF_ERROR;
+
+		IEC870_COM_ERROR			        :		xExecute4 := FALSE;
+												xSelect4 := FALSE;
+												xFlag4 := FALSE;
+												eErrorStatusInternal := COM_ERROR;
+	END_CASE;
+END_IF
+
+
+END_IF
+
+eError := eErrorStatusInternal;
+END_FUNCTION_BLOCK

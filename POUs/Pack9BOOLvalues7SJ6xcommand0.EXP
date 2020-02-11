@@ -1,0 +1,22 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Pack9BOOLvalues7SJ6xcommand0
+VAR_INPUT
+	xCommand1, xCommand2, xCommand3, xCommand4, xCommand5, xCommand6, xCommand7, xCommand8, xCommand9: BOOL;
+END_VAR
+VAR_OUTPUT
+	aSignals : ARRAY [1..9] OF BOOL;
+END_VAR
+(* @END_DECLARATION := '0' *)
+aSignals[1] := xCommand1;
+aSignals[2] := xCommand2;
+aSignals[3] := xCommand3;
+aSignals[4] := xCommand4;
+aSignals[5] := xCommand5;
+aSignals[6] := xCommand6;
+aSignals[7] := xCommand7;
+aSignals[8] := xCommand8;
+aSignals[9] := xCommand9;
+END_FUNCTION_BLOCK

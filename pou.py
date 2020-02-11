@@ -1,7 +1,5 @@
 import os
 import shutil
-import support_functions
-from server_parts.models import Obj35mMeTe
 from devs.models import Device
 from cards.models import Card
 
@@ -20,7 +18,7 @@ commands_names_list = []
 commands_triggers_list = []
 
 # Execution time related lists
-pou_instance_list = []
+pou_list = []
 rtu_instance_list = []
 device_list = []
 
@@ -56,7 +54,7 @@ def delete_pous():
             print('Failed to delete %s. Reason: %s' % (file_path, e))
 
 
-def create_pou(device_name, device_quantity, device_operation, server_iteration):
+def create_pous(device_name, device_quantity, operation, server_iteration):
     # Main purposes sequence list
     if measurements_list:
         sequence['measure'] = len(measurements_list[0])
@@ -68,32 +66,30 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
     for purpose in sequence:
         if purpose == 'command':
             pack3 = pack_model.pack(device_name, sequence[purpose], purpose, 'trigger', server_iteration, path)
-            pou_instance_list.append(pack3)
+            pou_list.append(pack3)
 
         if purpose == 'state':
             pack4 = pack_model.pack(device_name, sequence[purpose], purpose, 'trigger', server_iteration, path)
+            pou_list.append(pack4)
             rise0 = rise_model.rise(device_name, sequence[purpose], purpose, server_iteration, path)
-            pou_instance_list.append(pack4)
-            pou_instance_list.append(rise0)
+            pou_list.append(rise0)
 
         # Common ground between RTUs
         pack0 = pack_model.pack(device_name, sequence[purpose], purpose, 'values', server_iteration, path)
+        pou_list.append(pack0)
         check0 = check_model.check(device_name, sequence[purpose], purpose, server_iteration, path)
+        pou_list.append(check0)
         map0 = map_model.map(device_name, sequence[purpose], purpose, server_iteration, path)
+        pou_list.append(map0)
         pack1 = pack_model.pack(device_name, sequence[purpose], purpose, 'save', server_iteration, path)
+        pou_list.append(pack1)
         pack2 = pack_model.pack(device_name, sequence[purpose], purpose, 'label', server_iteration, path)
+        pou_list.append(pack2)
         save0 = save_model.save(device_name, sequence[purpose], purpose, server_iteration, path)
-
-        # rtu instances
-        pou_instance_list.append(pack0)
-        pou_instance_list.append(check0)
-        pou_instance_list.append(map0)
-        pou_instance_list.append(pack1)
-        pou_instance_list.append(pack2)
-        pou_instance_list.append(save0)
+        pou_list.append(save0)
 
         # SBO capabilities
-        if device_operation == "SBO":
+        if operation == "SBO":
             if purpose == 'command':
                 if sequence[purpose] % 2:
                     return f"Error - Device: {device_name}. The list of commands in the database should be even to " \
@@ -101,18 +97,18 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
                 else:
                     sbo0 = sbo_model.sbo(device_name, sequence[purpose], purpose, server_iteration, path)
                     handler0 = handler_model.handler(device_name, server_iteration, path)
-                    pou_instance_list.append(sbo0)
-                    pou_instance_list.append(handler0)
+                    pou_list.append(sbo0)
+                    pou_list.append(handler0)
 
         # rtu
-        rtu = rtu_model.rtu(device_name, device_operation, sequence[purpose], purpose, pou_instance_list, server_iteration, path)
+        rtu = rtu_model.rtu(device_name, operation, sequence[purpose], purpose, pou_list, server_iteration, path)
         rtu_instance_list.append(rtu)
 
         # After creating the rtu for previous purpose, clearing the instance related names
-        pou_instance_list.clear()
+        pou_list.clear()
 
     # Configuring device
-    device0 = device_model.device(device_name, device_operation, rtu_instance_list, sequence, server_iteration, path)
+    device0 = device_model.device(device_name, operation, rtu_instance_list, sequence, server_iteration, path)
 
     # Clearing rtu instance list for next device
     rtu_instance_list.clear()
@@ -135,7 +131,7 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
         {
             'name': device0,
             'quantity': device_quantity,
-            'operation': device_operation,
+            'operation': operation,
             'protocol': protocol,
             'measurements': measurements,
             'measurements_names': measurements_names,
@@ -163,7 +159,7 @@ def create_pou(device_name, device_quantity, device_operation, server_iteration)
 
 
 def create_user_prg():
-    # Obtaining the total number of devices (intra and inter)
+    # Obtaining the total number of devices
     total_devices = 1
     for device in device_list:
         total_devices += device['quantity']

@@ -3,6 +3,12 @@ from multiselectfield import MultiSelectField
 from server_parts.models import ObjsInfo
 
 
+IO_CHOICES = (
+    ('DI', 'DI'),
+    ('DO', 'DO')
+)
+
+
 MONITOR_OBJ_CHOICES = ()
 CONTROL_OBJ_CHOICES = ()
 
@@ -15,23 +21,31 @@ for m in ObjsInfo.objects.all():
 
 # Create your models here.
 class Card(models.Model):
-    Name = models.CharField(max_length=255, default="DI16")
+    ArticleNo = models.CharField(max_length=255, default="")
+    SubBusName = models.CharField(max_length=255, default="")
+    ModuleType = models.CharField(max_length=255, default="")
+    ModuleChannels = models.CharField(max_length=255, default="")
+    IO = models.CharField(max_length=255, choices=IO_CHOICES, default="")
     MonitorIoa = models.IntegerField(blank=True)
     MonitorIoaJump = models.IntegerField(blank=True)
     MonitorObjectList = MultiSelectField(choices=MONITOR_OBJ_CHOICES, blank=True)
     ControlIoa = models.IntegerField(blank=True)
     ControlIoaJump = models.IntegerField(blank=True)
     ControlObjectList = MultiSelectField(choices=CONTROL_OBJ_CHOICES, blank=True)
-    KbusInfo = models.TextField(default="")
 
     def __str__(self):
-        return self.Name
+        return self.ArticleNo
 
 
 class Kbus(models.Model):
-    Headers = models.TextField(default="")
-    ClosingTag = models.TextField(default="")
-    FinalTerminal = models.TextField(default="")
+    Body = models.TextField(default="")
+    Terminal = models.TextField(default="")
+    DISignal = models.CharField(max_length=255, default="")
+    PrivateInputChannel = models.TextField(default="")
+    PublicInputChannel = models.TextField(default="")
+    DOSignal = models.CharField(max_length=255, default="")
+    PrivateOutputChannel = models.TextField(default="")
+    PublicOutputChannel = models.TextField(default="")
 
     class Meta:
         verbose_name_plural = "Kbus"
