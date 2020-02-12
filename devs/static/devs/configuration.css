@@ -13,6 +13,12 @@
     text-decoration: underline;
 }
 
+#center {
+    border: 1px solid #f0f0f0;
+    border-radius: 5px;
+    padding-bottom: -10px;
+}
+
 .enable-cards-section {
     display: none;
 }
@@ -41,10 +47,10 @@
     bottom: 27px;
 }
 
-#center-name {
+/*#center-name {
     position: relative;
     left: 30px;
-}
+}*/
 
 .repeat-input-card {
     position: relative;

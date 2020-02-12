@@ -37,7 +37,9 @@ class ServerDevice:
         if element == 'device':
             self.server_element = Device.objects.filter(Name=name).first()
         elif element == 'card':
-            self.server_element = Card.objects.filter(Name=name).first()
+            self.server_element = Card.objects.filter(ArticleNo=name).first()
+            self.name = Card.objects.filter(ArticleNo=name).first().IO
+            self.card_channels = Card.objects.filter(ArticleNo=name).first().ModuleChannels
         else:
             "gestionar errores"
         self.monitor_ioa = self.server_element.MonitorIoa
@@ -83,6 +85,8 @@ class ServerDevice:
                         try:
                             obj_info = ObjsInfo.objects.filter(ObjCode=monitor_object).first().ObjInfo
                             spi = Obj30mSpTb.objects.filter(DeviceName=self.name).first().SPI.split(",")
+                            if self.element == 'card':
+                                spi = [spi[0] for i in range(int(self.card_channels))]
                             self._obj_30m_sp_tb(obj_info, spi, self.file)
                         except:
                             return f"There is no {monitor_object} for the device {self.name}. You have to add it in the " \
@@ -95,6 +99,8 @@ class ServerDevice:
                         try:
                             obj_info = ObjsInfo.objects.filter(ObjCode=control_object).first().ObjInfo
                             scs = Obj58cScTa.objects.filter(DeviceName=self.name).first().SCS.split(",")
+                            if self.element == 'card':
+                                scs = [scs[0] for i in range(int(self.card_channels))]
                             self._obj_58c_sc_ta(obj_info, scs, self.file)
                         except:
                             return f"There is no {control_object} for the device {self.name}. You have to add it to the " \
@@ -183,7 +189,7 @@ class ServerDevice:
         for i in range(len(spi)):
             state_id = ''
             if self.element == 'card':
-                state_id = spi[i].format(self.server_iteration, (16 * self.device_count) + (i + 1)).strip()
+                state_id = spi[i].format(self.server_iteration, (int(self.card_channels) * self.device_count) + (i + 1)).strip()
             elif self.element == 'device':
                 state_id = spi[i].format(self.server_iteration, self.device_count).strip()
 
@@ -227,7 +233,7 @@ class ServerDevice:
                 trigger = f"{command_id_split[0]}_{command_id_split[1]}_{command_id_split[2]}_Trigger_" \
                           f"{command_id_split[3]}_{command_id_split[4]}"
             elif self.element == 'card':
-                command_id = scs[i].format(self.server_iteration, (16 * self.device_count) + (i + 1)).strip()
+                command_id = scs[i].format(self.server_iteration, (int(self.card_channels) * self.device_count) + (i + 1)).strip()
                 command_id_split = command_id.split("_")
                 name = command_id_split[2]
                 trigger = f"{command_id}_Trigger"

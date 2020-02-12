@@ -1,15 +1,16 @@
-NOTAS:
-
+PENDIENTE:
 - En el módulo map, se toma como entrada y salida, aVariableEntradaN y aVariableSalidaN. Habría que quitar el 'a' inicial y substituirla por la terminología húngara correspondiente a la entrada
 - FunctionBlockOutputHeader sobresale en la web, recortar el nombre y aplicar también a FunctionOutputHeader
 - Cambiar los nombres de las vainas en device(), ahora mismo es un puto cristo
 - Añadir regex a la parte del servidor para añadir verbose en los modelos de los objectos etc.
-- añadir key-words a lo que requiera más verbosidad
 - En el configurador quitar el hipervinculo a los títulos
 - Tabular TODAS las declaraciones
 - built-in messages para gestionar las excepciones y vainas varias
 - el nombre del archivo del servidor que sea relativo a lo que contiene
-- Echar un ojo a kbus, está hecho mierda (rehacer básicamente)
 - Crear una lista de todos los pous que se hayan hecho, cada método debe tomarla como parámetro para comprobar si ya existe un pou con el mismo nombre, de existir, ya no es necesario crear el pou actual
 
-HACIENDO
+HACIENDO:
+- Añadir asignación en el user prg para limpiar la xFirstCycle
+
+- añadir key-words a lo que requiera más verbosidad
+- comentar el código

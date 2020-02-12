@@ -370,7 +370,7 @@ class UserPrgModel(FunctionBlockDiagramModel):
 
         # Declaration construction
         declaration = self.declaration_attributes + '\n'
-        declaration += self.program_header.format(pou_name) + '\n'
+        declaration += self.program_header.format(pou_name=pou_name) + '\n'
         declaration += self.declaration_internal.format(internal_str) + '\n'
         declaration += self.declaration_end_tag + '\n'
         user_prg_object.write(declaration)
@@ -523,7 +523,7 @@ class UserPrgModel(FunctionBlockDiagramModel):
 
             # Commands
             if device['commands']:
-                if device['measurements'] and device['states']:
+                if device['measurements'] or device['states']:
                     for command in device['commands'][i]:
                         fbd_str += self.output_unit.format("_EMPTY") + '\n'
                 else:

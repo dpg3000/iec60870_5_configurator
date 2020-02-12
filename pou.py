@@ -2,6 +2,7 @@ import os
 import shutil
 from devs.models import Device
 from cards.models import Card
+import itertools
 
 path = os.path.dirname(os.path.abspath(__file__)) + '\\POUs'
 
@@ -54,7 +55,32 @@ def delete_pous():
             print('Failed to delete %s. Reason: %s' % (file_path, e))
 
 
-def create_pous(device_name, device_quantity, operation, server_iteration):
+def create_pous(device_name, element, device_quantity, operation, server_iteration):
+    # Hub device/card
+    protocol = ''
+    if element == 'device':
+        protocol = Device.objects.filter(Name=device_name).first().Protocol
+    elif element == 'card':
+        protocol = 'IO-Logic'
+        # Joining the inner devices (in this case cards) to collect them in a single device POU
+        states_temp = list(itertools.chain(*states_list))
+        states_list.clear()
+        states_list.append(states_temp)
+        states_names_temp = list(itertools.chain(*states_names_list))
+        states_names_list.clear()
+        states_names_list.append(states_names_temp)
+        commands_temp = list(itertools.chain(*commands_list))
+        commands_list.clear()
+        commands_list.append(commands_temp)
+        commands_names_temp = list(itertools.chain(*commands_names_list))
+        commands_names_list.clear()
+        commands_names_list.append(commands_names_temp)
+        commands_triggers_temp = list(itertools.chain(*commands_triggers_list))
+        commands_triggers_list.clear()
+        commands_triggers_list.append(commands_triggers_temp)
+    else:
+        "gestionar errores"
+
     # Main purposes sequence list
     if measurements_list:
         sequence['measure'] = len(measurements_list[0])
@@ -121,11 +147,6 @@ def create_pous(device_name, device_quantity, operation, server_iteration):
     commands = commands_list.copy()
     commands_names = commands_names_list.copy()
     commands_triggers = commands_triggers_list.copy()
-
-    if 'DI' or 'DO' in device_name:
-        protocol = 'IEC_104'
-    else:
-        protocol = Device.objects.filter(Name=device_name).first().Protocol
 
     device_list.append(
         {

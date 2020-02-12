@@ -55,127 +55,129 @@
             </div>
             <div class="module">
                 <div id="repeat-center-1" class="repeat-center">
-                    <table id="table-cards">
-                        <tbody id="body-cards">
-                            <tr id="row-center">
-                                <th scope="row">
-                                    <a href="">Center name</a>
-                                </th>
-                                <td id="cell-center-name">
-                                    <input type="text" name="center_name" id="center-name">
-                                </td>
-                            </tr>
-                            <tr id="row-cards">
-                                <th scope="row">
-                                    <a href="">Cards</a>
-                                </th>
-                                <td>
-                                <td id="cell-cards">
-                                    <input type="checkbox" class="enable-cards" name="cards" value="isCards">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="enable-cards-section">
-                        <table id="table-input-cards">
-                            <tbody id="body-input-cards">
-                                <tr id="row-input-cards">
-                                    <td>
+                    <div id="center">
+                        <table id="table-cards">
+                            <tbody id="body-cards">
+                                <tr id="row-center">
                                     <th scope="row">
-                                        <a href="">Input Cards</a>
+                                        <a href="">Center name</a>
                                     </th>
-                                    <td id="cell-input-cards">
-                                        <input type="checkbox" class="enable-input-cards" name="input-cards" value="isCards">
+                                    <td id="cell-center-name">
+                                        <input type="text" name="center_name" id="center-name">
+                                    </td>
+                                </tr>
+                                <tr id="row-cards">
+                                    <th scope="row">
+                                        <a href="">Cards</a>
+                                    </th>
+                                    <td id="cell-cards">
+                                        <input type="checkbox" class="enable-cards" name="cards" value="isCards">
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="enable-input-cards-section">
-                            <div id="repeat-input-card-1" class="repeat-input-card">
-                                <br>
-                                <select class="selector-input-card" name="input_card[]">
-                                    <option value="Please Select {exclude}" disabled="disabled">--Select--</option>
-                                        {% for item in input_cards %}
-                                            <option value="{{item.ArticleNo}}">{{item.ArticleNo}}</option>
-                                        {% endfor %}
-                                </select>
-                                <input class="selector-num-input-card" type="number" name="input_card_quantity[]" value="1" min="1">
-                                <input type="checkbox" id="add-input-card-server" name="add_input_card_server" value="isServer" checked>
-                                <span id="text-add-input-card-server">Server</span>
-                                <input type="checkbox" id="add-input-card-io" name="add_input_card_io" value="isIO" checked>
-                                <span id="text-add-input-card-io">I/O</span>
+                        <div class="enable-cards-section">
+                            <table id="table-input-cards">
+                                <tbody id="body-input-cards">
+                                    <tr id="row-input-cards">
+                                        <td>
+                                        <th scope="row">
+                                            <a href="">Input Cards</a>
+                                        </th>
+                                        <td id="cell-input-cards">
+                                            <input type="checkbox" class="enable-input-cards" name="input-cards" value="isCards">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="enable-input-cards-section">
+                                <div id="repeat-input-card-1" class="repeat-input-card">
+                                    <br>
+                                    <select class="selector-input-card" name="input_card[]">
+                                        <option value="Please Select {exclude}" disabled="disabled">--Select--</option>
+                                            {% for item in input_cards %}
+                                                <option value="{{item.ArticleNo}}">{{item.ArticleNo}}</option>
+                                            {% endfor %}
+                                    </select>
+                                    <input class="selector-num-input-card" type="number" name="input_card_quantity[]" value="1" min="1">
+                                    <input type="checkbox" id="add-input-card-server" name="add_input_card_server" value="isServer" checked>
+                                    <span id="text-add-input-card-server">Server</span>
+                                    <input type="checkbox" id="add-input-card-io" name="add_input_card_io" value="isIO" checked>
+                                    <span id="text-add-input-card-io">I/O</span>
+                                </div>
+                                <button type="button" id="add-input-card-btn" class="addlink btn adders">Add</button>
+                                <button type="button" id="remove-input-card-btn" class="changelink btn removers" disabled="disabled">Remove</button>
                             </div>
-                            <button type="button" id="add-input-card-btn" class="addlink btn adders">Add</button>
-                            <button type="button" id="remove-input-card-btn" class="changelink btn removers" disabled="disabled">Remove</button>
+                            <table id="table-output-cards">
+                                <tbody id="body-output-cards">
+                                    <tr id="row-output-cards">
+                                        <td>
+                                        <th scope="row">
+                                            <a href="">Output Cards</a>
+                                        </th>
+                                        <td></td>
+                                        <td id="cell-output-cards">
+                                            <input type="checkbox" class="enable-output-cards" name="output-cards" value="isCards">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="enable-output-cards-section">
+                                <div id="repeat-output-card-1" class="repeat-output-card">
+                                    <br>
+                                    <select class="selector-output-card" name="output_card[]">
+                                        <option value="Please Select {exclude}" disabled="disabled">--Select--</option>
+                                            {% for item in output_cards %}
+                                                <option value="{{item.ArticleNo}}">{{item.ArticleNo}}</option>
+                                            {% endfor %}
+                                    </select>
+                                    <input class="selector-num-output-card" type="number" name="output_card_quantity[]" value="1" min="1">
+                                    <input type="checkbox" id="add-output-card-server" name="add_output_card_server" value="isServer" checked>
+                                    <span id="text-add-output-card-server">Server</span>
+                                    <input type="checkbox" id="add-output-card-io" name="add_output_card_io" value="isIO" checked>
+                                    <span id="text-add-output-card-io">I/O</span>
+                                </div>
+                                <button type="button" id="add-output-card-btn" class="addlink btn adders">Add</button>
+                                <button type="button" id="remove-output-card-btn" class="changelink btn removers" disabled="disabled">Remove</button>
+                            </div>
                         </div>
-                        <table id="table-output-cards">
-                            <tbody id="body-output-cards">
-                                <tr id="row-output-cards">
-                                    <td>
+                        <table id="table-devices">
+                            <tbody id="body-devices">
+                                <tr id="row-devices">
                                     <th scope="row">
-                                        <a href="">Output Cards</a>
+                                        <a href="">Devices</a>
                                     </th>
-                                    <td></td>
-                                    <td id="cell-output-cards">
-                                        <input type="checkbox" class="enable-output-cards" name="output-cards" value="isCards">
+                                    <td id="cell-devices">
+                                        <input type="checkbox" class="enable-devices" name="devices" value="isDevices">
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="enable-output-cards-section">
-                            <div id="repeat-output-card-1" class="repeat-output-card">
+                        <div class="enable-devices-section">
+                            <div id="repeat-device-1" class="repeat-device">
                                 <br>
-                                <select class="selector-output-card" name="output_card[]">
+                                <select class="selector-device" name="device[]">
                                     <option value="Please Select {exclude}" disabled="disabled">--Select--</option>
-                                        {% for item in output_cards %}
-                                            <option value="{{item.ArticleNo}}">{{item.ArticleNo}}</option>
-                                        {% endfor %}
+                                    {% for item in devices %}
+                                        <option value="{{item.Name}}">{{item.Name}}</option>
+                                    {% endfor %}
                                 </select>
-                                <input class="selector-num-output-card" type="number" name="output_card_quantity[]" value="1" min="1">
-                                <input type="checkbox" id="add-output-card-server" name="add_output_card_server" value="isServer" checked>
-                                <span id="text-add-output-card-server">Server</span>
-                                <input type="checkbox" id="add-output-card-io" name="add_output_card_io" value="isIO" checked>
-                                <span id="text-add-output-card-io">I/O</span>
+                                <select class="selector-operation" name="operation[]">
+                                    <option value="Please Select {exclude}" disabled="disabled">--Select--</option>
+                                    <option value="DO">DO</option>
+                                    <option value="SBO">SBO</option>
+                                </select>
+                                <input class="selector-num-device" type="number" name="device_quantity[]" value="1" min="1">
+                                <input type="checkbox" id="add-device-server" name="add_device_server" value="isServer" checked>
+                                <span id="text-add-device-server">Server</span>
+                                <input type="checkbox" id="add-device-client" name="add_device_client" value="isClient">
+                                <span id="text-add-device-client">Client</span>
                             </div>
-                            <button type="button" id="add-output-card-btn" class="addlink btn adders">Add</button>
-                            <button type="button" id="remove-output-card-btn" class="changelink btn removers" disabled="disabled">Remove</button>
+                            <button type="button" id="add-device-btn" class="addlink btn adders">Add</button>
+                            <button type="button" id="remove-device-btn" class="changelink btn removers" disabled="disabled">Remove</button>
                         </div>
                     </div>
-                    <table id="table-devices">
-                        <tbody id="body-devices">
-                            <tr id="row-devices">
-                                <th scope="row">
-                                    <a href="">Devices</a>
-                                </th>
-                                <td id="cell-devices">
-                                    <input type="checkbox" class="enable-devices" name="devices" value="isDevices">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="enable-devices-section">
-                        <div id="repeat-device-1" class="repeat-device">
-                            <br>
-                            <select class="selector-device" name="device[]">
-                                <option value="Please Select {exclude}" disabled="disabled">--Select--</option>
-                                {% for item in devices %}
-                                    <option value="{{item.Name}}">{{item.Name}}</option>
-                                {% endfor %}
-                            </select>
-                            <select class="selector-operation" name="operation[]">
-                                <option value="Please Select {exclude}" disabled="disabled">--Select--</option>
-                                <option value="DO">DO</option>
-                                <option value="SBO">SBO</option>
-                            </select>
-                            <input class="selector-num-device" type="number" name="device_quantity[]" value="1" min="1">
-                            <input type="checkbox" id="add-device-server" name="add_device_server" value="isServer" checked>
-                            <span id="text-add-device-server">Server</span>
-                            <input type="checkbox" id="add-device-client" name="add_device_client" value="isClient">
-                            <span id="text-add-device-client">Client</span>
-                        </div>
-                        <button type="button" id="add-device-btn" class="addlink btn adders">Add</button>
-                        <button type="button" id="remove-device-btn" class="changelink btn removers" disabled="disabled">Remove</button>
-                    </div>
+                    <br>
                 </div>
             </div>
         </div>

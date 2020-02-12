@@ -8,10 +8,10 @@ from django.http import HttpResponse, HttpResponseNotFound
 import datetime
 from server import Server, ServerDevice
 from project import Project
-from kbus import Kbus
-import kbus
+from kbus import BusModule, assemble_modules
 from django.http import JsonResponse
 import pou
+from pou import delete_pous
 import shutil
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,6 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Create your views here.
 def configurator_view(request):
+    # Collecting the necessary information to render the form page
     devices = Device.objects.all()
     devices_num = devices.count()
     input_cards = Card.objects.filter(IO='DI').all()
@@ -39,6 +40,7 @@ def configurator_view(request):
 
 
 def validate_parameters(request):
+
     device_name = request.GET.get('device_name', None)
 
     client_existence = Device.objects.filter(Name=device_name).first().ClientObjs
@@ -86,30 +88,44 @@ def submit(request):
 
     # iterating over parsed xml to create the server instances
     server_iteration = 0
-    pou.delete_pous()
+    flag_input_cards = False
+    flag_output_cards = False
+    bus_modules_list = []
+    delete_pous()
     for center in root.iter('center'):
         center_ins = Server(center.attrib['name'], server_iteration, iec60870_5_config)
         center_ins.headers()
-        for card in center.iter('card'):
-            if card.attrib['server'] == 'yes':
-                ServerDevice(card.text, 'card', int(card.attrib['number']), server_iteration, iec60870_5_config)
-            if card.attrib['io'] == 'yes':
-                kbus_ins = Kbus(card.text)
-                kbus_ins.create_kbus(int(card.attrib['number']))
-            pou.create_pous(card.text, int(card.attrib['number']), 'DO', server_iteration)
+        for input_card in center.iter('input-card'):
+            if input_card.attrib['server'] == 'yes':
+                ServerDevice(input_card.text, 'card', int(input_card.attrib['number']), server_iteration, iec60870_5_config)
+                flag_input_cards = True
+            if input_card.attrib['io'] == 'yes':
+                for k in range(int(input_card.attrib['number'])):
+                    kbus_ins = BusModule(input_card.text)
+                    bus_modules_list.append(kbus_ins)
+        for output_card in center.iter('output-card'):
+            if output_card.attrib['server'] == 'yes':
+                ServerDevice(output_card.text, 'card', int(output_card.attrib['number']), server_iteration, iec60870_5_config)
+                flag_output_cards = True
+            if output_card.attrib['io'] == 'yes':
+                for k in range(int(output_card.attrib['number'])):
+                    kbus_ins = BusModule(output_card.text)
+                    bus_modules_list.append(kbus_ins)
+        if flag_input_cards or flag_output_cards:
+            pou.create_pous('Cards', 'card', 1, 'DO', server_iteration)
         for device in center.iter('device'):
             if device.attrib['server'] == 'yes':
                 ServerDevice(device.text, 'device', int(device.attrib['number']), server_iteration, iec60870_5_config)
             # if device.attrib['client'] == 'yes':
-            pou.create_pous(device.text, int(device.attrib['number']), device.attrib['operation'], server_iteration)
+            # GESTIONAR EL CLIENTE
+            pou.create_pous(device.text, 'device', int(device.attrib['number']), device.attrib['operation'], server_iteration)
         server_iteration += 1
         # server closing tags
         center_ins.closing_tags()
     # Creating user-prg
     pou.create_user_prg()
     # write k-bus instances
-    kbus.write_kbus(k_bus)
-    kbus.clear_class_variable()
+    assemble_modules(bus_modules_list, k_bus)
     # project closing tags
     project.closing_tags(iec60870_5_config)
 
