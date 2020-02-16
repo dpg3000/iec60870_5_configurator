@@ -91,27 +91,36 @@ def create_pous(device_name, element, device_quantity, operation, server_iterati
 
     for purpose in sequence:
         if purpose == 'command':
+            # Generating pou and related name
             pack3 = pack_model.pack(device_name, sequence[purpose], purpose, 'trigger', server_iteration, path)
+
+            # Adding to rtu instance list
             pou_list.append(pack3)
 
         if purpose == 'state':
+            # Generating pou and related name
             pack4 = pack_model.pack(device_name, sequence[purpose], purpose, 'trigger', server_iteration, path)
-            pou_list.append(pack4)
             rise0 = rise_model.rise(device_name, sequence[purpose], purpose, server_iteration, path)
+
+            # Adding to rtu instance list
+            pou_list.append(pack4)
             pou_list.append(rise0)
 
         # Common ground between RTUs
+        # Generating pou and related name
         pack0 = pack_model.pack(device_name, sequence[purpose], purpose, 'values', server_iteration, path)
-        pou_list.append(pack0)
         check0 = check_model.check(device_name, sequence[purpose], purpose, server_iteration, path)
-        pou_list.append(check0)
         map0 = map_model.map(device_name, sequence[purpose], purpose, server_iteration, path)
-        pou_list.append(map0)
         pack1 = pack_model.pack(device_name, sequence[purpose], purpose, 'save', server_iteration, path)
-        pou_list.append(pack1)
         pack2 = pack_model.pack(device_name, sequence[purpose], purpose, 'label', server_iteration, path)
-        pou_list.append(pack2)
         save0 = save_model.save(device_name, sequence[purpose], purpose, server_iteration, path)
+
+        # Adding to rtu instance list
+        pou_list.append(pack0)
+        pou_list.append(check0)
+        pou_list.append(map0)
+        pou_list.append(pack1)
+        pou_list.append(pack2)
         pou_list.append(save0)
 
         # SBO capabilities
@@ -121,8 +130,11 @@ def create_pous(device_name, element, device_quantity, operation, server_iterati
                     return f"Error - Device: {device_name}. The list of commands in the database should be even to " \
                            f"use SBO "
                 else:
+                    # Generating pou and related name
                     sbo0 = sbo_model.sbo(device_name, sequence[purpose], purpose, server_iteration, path)
                     handler0 = handler_model.handler(device_name, server_iteration, path)
+
+                    # Adding to rtu instance list
                     pou_list.append(sbo0)
                     pou_list.append(handler0)
 
@@ -150,21 +162,21 @@ def create_pous(device_name, element, device_quantity, operation, server_iterati
 
     device_list.append(
         {
-            'name': device0,
-            'quantity': device_quantity,
-            'operation': operation,
-            'protocol': protocol,
-            'measurements': measurements,
-            'measurements_names': measurements_names,
-            'states': states,
-            'states_names': states_names,
-            'commands': commands,
-            'commands_names': commands_names,
-            'commands_triggers': commands_triggers
+            'name':                 device0,
+            'quantity':             device_quantity,
+            'operation':            operation,
+            'protocol':             protocol,
+            'measurements':         measurements,
+            'measurements_names':   measurements_names,
+            'states':               states,
+            'states_names':         states_names,
+            'commands':             commands,
+            'commands_names':       commands_names,
+            'commands_triggers':    commands_triggers
         }
     )
 
-    # Clearing lists related to a particular device to leave room for next device
+    # Clearing lists related to a particular device to leave room for the next device
     measurements_list.clear()
     measurements_names_list.clear()
     states_list.clear()
@@ -187,6 +199,7 @@ def create_user_prg():
 
     # Pack local remote
     pack = pack_loc_rem_model.pack_loc_rem(total_devices, path)
+
     # Check local remote
     check = check_loc_rem_model.check_loc_rem(total_devices, path)
 

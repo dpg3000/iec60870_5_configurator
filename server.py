@@ -121,7 +121,7 @@ class ServerDevice:
         object_measures = []
         object_names = []
         for i in range(len(sva)):
-            measure_id = sva[i].format(self.server_iteration, self.device_count).strip()
+            measure_id = sva[i].format(server=self.server_iteration, device=self.device_count).strip()
             measure_id_split = measure_id.split("_")
             name = measure_id_split[2]
 
@@ -151,8 +151,8 @@ class ServerDevice:
         object_states = []
         object_names = []
         for i in range(len(dpi)):
-            state_id_0 = dpi[i].format(self.server_iteration, 0, self.device_count).strip()
-            state_id_1 = dpi[i].format(self.server_iteration, 1, self.device_count).strip()
+            state_id_0 = dpi[i].format(server=self.server_iteration, dp=0, device=self.device_count).strip()
+            state_id_1 = dpi[i].format(server=self.server_iteration, dp=1, device=self.device_count).strip()
             state_id_0_split = state_id_0.split("_")
             state_id_1_split = state_id_1.split("_")
             name_0 = f"{state_id_0_split[2]}_{state_id_0_split[3]}"
@@ -189,9 +189,15 @@ class ServerDevice:
         for i in range(len(spi)):
             state_id = ''
             if self.element == 'card':
-                state_id = spi[i].format(self.server_iteration, (int(self.card_channels) * self.device_count) + (i + 1)).strip()
+                state_id = spi[i].format(
+                    server=self.server_iteration,
+                    iteration=(int(self.card_channels) * self.device_count) + (i + 1)
+                ).strip()
             elif self.element == 'device':
-                state_id = spi[i].format(self.server_iteration, self.device_count).strip()
+                state_id = spi[i].format(
+                    server=self.server_iteration,
+                    device=self.device_count
+                ).strip()
 
             state_id_split = state_id.split("_")
             name = state_id_split[2]
@@ -227,13 +233,19 @@ class ServerDevice:
             name = ''
             trigger = ''
             if self.element == 'device':
-                command_id = scs[i].format(self.server_iteration, self.device_count).strip()
+                command_id = scs[i].format(
+                    server=self.server_iteration,
+                    device=self.device_count
+                ).strip()
                 command_id_split = command_id.split("_")
                 name = command_id_split[2]
                 trigger = f"{command_id_split[0]}_{command_id_split[1]}_{command_id_split[2]}_Trigger_" \
                           f"{command_id_split[3]}_{command_id_split[4]}"
             elif self.element == 'card':
-                command_id = scs[i].format(self.server_iteration, (int(self.card_channels) * self.device_count) + (i + 1)).strip()
+                command_id = scs[i].format(
+                    server=self.server_iteration,
+                    iteration=(int(self.card_channels) * self.device_count) + (i + 1)
+                ).strip()
                 command_id_split = command_id.split("_")
                 name = command_id_split[2]
                 trigger = f"{command_id}_Trigger"
@@ -268,8 +280,8 @@ class ServerDevice:
         object_names = []
         object_triggers = []
         for i in range(len(dcs)):
-            command_0_id = dcs[i].format(self.server_iteration, 0, self.device_count).strip()
-            command_1_id = dcs[i].format(self.server_iteration, 1, self.device_count).strip()
+            command_0_id = dcs[i].format(server=self.server_iteration, dc=0, device=self.device_count).strip()
+            command_1_id = dcs[i].format(server=self.server_iteration, dc=1, device=self.device_count).strip()
             command_0_id_split = command_0_id.split("_")
             command_1_id_split = command_1_id.split("_")
             name_0 = f"{command_0_id_split[2]}_{command_0_id_split[3]}"
@@ -312,3 +324,42 @@ class ServerDevice:
     def _update_control_ioa(self):
         if self.internal_control_ioa != self.control_ioa:
             self.internal_control_ioa = self.control_ioa + (self.device_count + 1) * self.control_ioa_jump
+
+
+def device_ajax_request(device_name):
+    # Obtaining data
+    device_model = Device.objects.filter(Name=device_name).first()
+    monitor_obj_list = [i.strip() for i in str(device_model.MonitorObjectList).split(",")]
+    control_obj_list = [i.strip() for i in str(device_model.ControlObjectList).split(",")]
+
+    data = {}
+    monitor_dict = {}
+    control_dict = {}
+
+    for monitor_object in monitor_obj_list:
+        if monitor_object == 'obj_35m_me_te':
+            sva = Obj35mMeTe.objects.filter(DeviceName=device_name).first().SVA.split(",")
+            monitor_dict[monitor_object] = sva
+        elif monitor_object == 'obj_31m_dp_tb':
+            dpi = Obj31mDpTb.objects.filter(DeviceName=device_name).first().DPI.split(",")
+            monitor_dict[monitor_object] = dpi
+        elif monitor_object == 'obj_30m_sp_tb':
+            spi = Obj30mSpTb.objects.filter(DeviceName=device_name).first().SPI.split(",")
+            monitor_dict[monitor_object] = spi
+        else:
+            "gestionar errores"
+
+    for control_object in control_obj_list:
+        if control_object == 'obj_58c_sc_ta':
+            scs = Obj58cScTa.objects.filter(DeviceName=device_name).first().SCS.split(",")
+            control_dict[control_object] = scs
+        elif control_object == 'obj_59c_dc_ta':
+            dcs = Obj59cDcTa.objects.filter(DeviceName=device_name).first().DCS.split(",")
+            control_dict[control_object] = dcs
+        else:
+            "gestionar errores"
+
+    data['monitor'] = monitor_dict
+    data['control'] = control_dict
+
+    return data

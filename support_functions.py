@@ -50,8 +50,8 @@ def asdu_to_ioa(asdu):
     return asdu[1] * 256 + asdu[2]
 
 
-def variable_to_declaration(signal, num_objects, data_type):
-    input_str = [signal + str(i + 1) + ', ' for i in range(num_objects)]
+def variable_to_declaration(signal, size, data_type):
+    input_str = [signal + str(i + 1) + ', ' for i in range(size)]
     input_str = ''.join(input_str)
     input_str = input_str[:-2]
     input_str += ": " + data_type.upper() + ";"

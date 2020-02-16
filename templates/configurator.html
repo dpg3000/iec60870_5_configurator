@@ -56,8 +56,8 @@
             <div class="module">
                 <div id="repeat-center-1" class="repeat-center">
                     <div id="center">
-                        <table id="table-cards">
-                            <tbody id="body-cards">
+                        <table id="table-center">
+                            <tbody id="body-center">
                                 <tr id="row-center">
                                     <th scope="row">
                                         <a href="">Center name</a>
@@ -66,12 +66,17 @@
                                         <input type="text" name="center_name" id="center-name">
                                     </td>
                                 </tr>
+                            </tbody>
+                        </table>
+                        <table id="table-cards">
+                            <tbody id="body-cards">
                                 <tr id="row-cards">
                                     <th scope="row">
                                         <a href="">Cards</a>
                                     </th>
                                     <td id="cell-cards">
-                                        <input type="checkbox" class="enable-cards" name="cards" value="isCards">
+                                        <input type="checkbox" class="tgl tgl-light enable-cards cb" id="cb1" name="cards" value="isCards">
+                                        <label class="tgl-btn" for="cb1"></label>
                                     </td>
                                 </tr>
                             </tbody>
@@ -85,7 +90,17 @@
                                             <a href="">Input Cards</a>
                                         </th>
                                         <td id="cell-input-cards">
-                                            <input type="checkbox" class="enable-input-cards" name="input-cards" value="isCards">
+                                            <input type="checkbox" class="enable-input-cards" id="cbx1" name="input-cards" value="isCards">
+                                            <label class="cbx" for="cbx1">
+                                                <div class="flip">
+                                                <div class="front"></div>
+                                                    <div class="back">
+                                                        <svg width="16" height="14" viewBox="0 0 16 14">
+                                                            <path d="M2 8.5L6 12.5L14 1.5"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </label>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -117,7 +132,17 @@
                                         </th>
                                         <td></td>
                                         <td id="cell-output-cards">
-                                            <input type="checkbox" class="enable-output-cards" name="output-cards" value="isCards">
+                                            <input type="checkbox" class="enable-output-cards" id="cbx2" name="output-cards" value="isCards">
+                                            <label class="cbx" for="cbx2">
+                                                <div class="flip">
+                                                <div class="front"></div>
+                                                    <div class="back">
+                                                        <svg width="16" height="14" viewBox="0 0 16 14">
+                                                            <path d="M2 8.5L6 12.5L14 1.5"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </label>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -148,7 +173,8 @@
                                         <a href="">Devices</a>
                                     </th>
                                     <td id="cell-devices">
-                                        <input type="checkbox" class="enable-devices" name="devices" value="isDevices">
+                                        <input type="checkbox" class="tgl tgl-light enable-devices" id="cb2" name="devices" value="isDevices">
+                                        <label class="tgl-btn" for="cb2"></label>
                                     </td>
                                 </tr>
                             </tbody>
@@ -168,7 +194,14 @@
                                     <option value="SBO">SBO</option>
                                 </select>
                                 <input class="selector-num-device" type="number" name="device_quantity[]" value="1" min="1">
-                                <input type="checkbox" id="add-device-server" name="add_device_server" value="isServer" checked>
+                                <!--<input type="checkbox" id="add-device-server" name="add_device_server" value="isServer" checked>-->
+                                <input type="checkbox" id="add-device-server">
+                                <label for="add-device-server" class="check">
+                                    <svg width="18px" height="18px" viewBox="0 0 18 18">
+                                        <path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
+                                        <polyline points="1 9 7 14 15 4"></polyline>
+                                    </svg>
+                                </label>
                                 <span id="text-add-device-server">Server</span>
                                 <input type="checkbox" id="add-device-client" name="add_device_client" value="isClient">
                                 <span id="text-add-device-client">Client</span>
@@ -181,25 +214,20 @@
                 </div>
             </div>
         </div>
+        <div id="content-related">
+            <div class="module" id="device-configuration-module">
+                <h1 id="device-configuration-title">
+                    Device configuration
+                </h1>
+                <div id="device-list">
+                </div>
+            </div>
+        </div>
         <input type="hidden" id="hidden-devices-num" name="devices_num" value="{{devices_num}}">
         <input type="hidden" id="hidden-input-cards-num" name="input_cards_num" value="{{input_cards_num}}">
         <input type="hidden" id="hidden-output-cards-num" name="output_cards_num" value="{{output_cards_num}}">
         <input type="hidden" id="hidden-request-data" name="request-data" value="">
         <input type="submit" id="generate" value="Generate" disabled>
     </form>
-
-    <!--<table style="background: #dfd url(../static/admin/img/icon-yes.svg) 100px 11px no-repeat;">
-        <tbody>
-            <tr>
-                <th scope="row">
-                    <a href="">Center name</a>
-                </th>
-                <td width="54%"></td>
-                <td>
-                    <input type="text" style="background: #edffed">
-                </td>
-            </tr>
-        </tbody>
-    </table>-->
 
 {% endblock %}

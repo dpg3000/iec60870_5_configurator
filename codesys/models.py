@@ -32,6 +32,7 @@ class FBDTemplate(models.Model):
     Header = models.TextField(default="")
     FunctionBlockInputHeader = models.TextField(default="")
     FunctionInputHeader = models.TextField(default="")
+    AssignInputHeader = models.TextField(default="")
     InputUnit = models.TextField(default="")
     FunctionBlockOutputHeader = models.TextField(default="")
     FunctionOutputHeader = models.TextField(default="")
@@ -41,6 +42,9 @@ class FBDTemplate(models.Model):
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(FBDTemplate, self).save()
         pou.fbd_model = FunctionBlockDiagramModel()
+
+    class Meta:
+        verbose_name_plural = "fbd_template"
 
 
 class UserPrg(models.Model):
@@ -62,6 +66,9 @@ class UserPrg(models.Model):
     def __str__(self):
         return self.Version
 
+    class Meta:
+        verbose_name_plural = "user_prg"
+
 
 class PackLocRem(models.Model):
     Version = models.CharField(max_length=255)
@@ -78,6 +85,9 @@ class PackLocRem(models.Model):
     def __str__(self):
         return self.Version
 
+    class Meta:
+        verbose_name_plural = "pack_loc_rem"
+
 
 class CheckLocRem(models.Model):
     Version = models.CharField(max_length=255)
@@ -88,6 +98,12 @@ class CheckLocRem(models.Model):
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(CheckLocRem, self).save()
         pou.check_loc_rem_model = CheckLocRemModel(pou.user_prg_model, check_loc_rem_version)
+
+    def __str__(self):
+        return self.Version
+
+    class Meta:
+        verbose_name_plural = "check_loc_rem"
 
 
 class Device(models.Model):
@@ -138,6 +154,9 @@ class Device(models.Model):
     def __str__(self):
         return self.Version
 
+    class Meta:
+        verbose_name_plural = "device"
+
 
 class Rtu(models.Model):
     Version = models.CharField(max_length=255, default="")
@@ -165,6 +184,9 @@ class Rtu(models.Model):
     def __str__(self):
         return self.Version
 
+    class Meta:
+        verbose_name_plural = "rtu"
+
 
 class Pack(models.Model):
     Version = models.CharField(max_length=255)
@@ -176,6 +198,9 @@ class Pack(models.Model):
 
     def __str__(self):
         return self.Version
+
+    class Meta:
+        verbose_name_plural = "pack"
 
 
 class Check(models.Model):
@@ -193,6 +218,9 @@ class Check(models.Model):
     def __str__(self):
         return self.Version
 
+    class Meta:
+        verbose_name_plural = "check"
+
 
 class Map(models.Model):
     Version = models.CharField(max_length=255)
@@ -204,6 +232,9 @@ class Map(models.Model):
 
     def __str__(self):
         return self.Version
+
+    class Meta:
+        verbose_name_plural = "map"
 
 
 class RiseToTrigger(models.Model):
@@ -220,6 +251,9 @@ class RiseToTrigger(models.Model):
 
     def __str__(self):
         return self.Version
+
+    class Meta:
+        verbose_name_plural = "rise_to_trigger"
 
 
 class Save(models.Model):
@@ -266,6 +300,9 @@ class Save(models.Model):
     def __str__(self):
         return self.Version
 
+    class Meta:
+        verbose_name_plural = "save"
+
 
 class Sbo(models.Model):
     Version = models.CharField(max_length=255)
@@ -283,6 +320,9 @@ class Sbo(models.Model):
     def __str__(self):
         return self.Version
 
+    class Meta:
+        verbose_name_plural = "sbo"
+
 
 class Handler(models.Model):
     Version = models.CharField(max_length=255)
@@ -297,31 +337,28 @@ class Handler(models.Model):
     def __str__(self):
         return self.Version
 
+    class Meta:
+        verbose_name_plural = "handler"
+
 
 class FunctionBlockDiagramModel:
     def __init__(self):
         self.function_block_diagram_template = FBDTemplate.objects.first()
         self.declaration_attributes = self.function_block_diagram_template.DeclarationAttributes
-        self.declaration_fb_header = re.sub(r'(?<={).+?(?=})', '',
-                                            self.function_block_diagram_template.DeclarationFBHeader)
-        self.declaration_f_header = re.sub(r'(?<={).+?(?=})', '',
-                                           self.function_block_diagram_template.DeclarationFHeader)
-        self.declaration_input = re.sub(r'(?<={).+?(?=})', '', self.function_block_diagram_template.DeclarationInput)
-        self.declaration_output = re.sub(r'(?<={).+?(?=})', '', self.function_block_diagram_template.DeclarationOutput)
-        self.declaration_internal = re.sub(r'(?<={).+?(?=})', '',
-                                           self.function_block_diagram_template.DeclarationInternal)
+        self.declaration_fb_header = self.function_block_diagram_template.DeclarationFBHeader
+        self.declaration_f_header = self.function_block_diagram_template.DeclarationFHeader
+        self.declaration_input = self.function_block_diagram_template.DeclarationInput
+        self.declaration_output = self.function_block_diagram_template.DeclarationOutput
+        self.declaration_internal = self.function_block_diagram_template.DeclarationInternal
         self.declaration_end_tag = self.function_block_diagram_template.DeclarationEndTag
-        self.header = re.sub(r'(?<={).+?(?=})', '', self.function_block_diagram_template.Header)
-        self.function_block_input_header = re.sub(r'(?<={).+?(?=})', '',
-                                                  self.function_block_diagram_template.FunctionBlockInputHeader)
-        self.function_input_header = re.sub(r'(?<={).+?(?=})', '',
-                                            self.function_block_diagram_template.FunctionInputHeader)
-        self.input_unit = re.sub(r'(?<={).+?(?=})', '', self.function_block_diagram_template.InputUnit)
-        self.function_block_output_header = re.sub(r'(?<={).+?(?=})', '',
-                                                   self.function_block_diagram_template.FunctionBlockOutputHeader)
-        self.function_output_header = re.sub(r'(?<={).+?(?=})', '',
-                                             self.function_block_diagram_template.FunctionOutputHeader)
-        self.output_unit = re.sub(r'(?<={).+?(?=})', '', self.function_block_diagram_template.OutputUnit)
+        self.header = self.function_block_diagram_template.Header
+        self.function_block_input_header = self.function_block_diagram_template.FunctionBlockInputHeader
+        self.function_input_header = self.function_block_diagram_template.FunctionInputHeader
+        self.assign_input_header = self.function_block_diagram_template.AssignInputHeader
+        self.input_unit = self.function_block_diagram_template.InputUnit
+        self.function_block_output_header = self.function_block_diagram_template.FunctionBlockOutputHeader
+        self.function_output_header = self.function_block_diagram_template.FunctionOutputHeader
+        self.output_unit = self.function_block_diagram_template.OutputUnit
         self.code_end_tag = self.function_block_diagram_template.CodeEndTag
 
 
@@ -354,15 +391,15 @@ class UserPrgModel(FunctionBlockDiagramModel):
         # variable definition
         # Internal variables
         internal_str = ''
-        internal_str += f"{self.first_cycle} : {self.first_cycle_data_type} := {self.first_cycle_init_val};" + '\n\t'
-        internal_str += f"{self.mask_loc_rem} : ARRAY [1..{num_objects}] OF {self.mask_loc_rem_data_type};" + '\n\t'
-        internal_str += f"{self.state_loc_rem} : ARRAY [1..{num_objects}] OF {self.state_loc_rem_data_type};" + '\n\t'
+        internal_str += f"{self.first_cycle}    : {self.first_cycle_data_type} := {self.first_cycle_init_val};" + '\n\t'
+        internal_str += f"{self.mask_loc_rem}   : ARRAY [1..{num_objects}] OF {self.mask_loc_rem_data_type};" + '\n\t'
+        internal_str += f"{self.state_loc_rem}  : ARRAY [1..{num_objects}] OF {self.state_loc_rem_data_type};" + '\n\t'
 
         # instances
-        internal_str += f"inst0{pack_loc_rem} : {pack_loc_rem};" + '\n\t'
-        internal_str += f"inst0{check_loc_rem} : {check_loc_rem};" + '\n\t'
+        internal_str += f"inst0{pack_loc_rem}   : {pack_loc_rem};" + '\n\t'
+        internal_str += f"inst0{check_loc_rem}  : {check_loc_rem};" + '\n\t'
 
-        total_networks = 2  # pack + check
+        total_networks = 3  # pack + check + clearing
         for device in device_list:
             for i in range(device['quantity']):
                 internal_str += f"inst{i}{device['name']} : {device['name']};" + '\n\t'
@@ -371,12 +408,12 @@ class UserPrgModel(FunctionBlockDiagramModel):
         # Declaration construction
         declaration = self.declaration_attributes + '\n'
         declaration += self.program_header.format(pou_name=pou_name) + '\n'
-        declaration += self.declaration_internal.format(internal_str) + '\n'
+        declaration += self.declaration_internal.format(internal=internal_str) + '\n'
         declaration += self.declaration_end_tag + '\n'
         user_prg_object.write(declaration)
 
         # Code construction
-        user_prg_object.write(self.header.format(str(total_networks)) + '\n')
+        user_prg_object.write(self.header.format(size=str(total_networks)) + '\n')
 
         # instantiation
         # Pack
@@ -389,18 +426,72 @@ class UserPrgModel(FunctionBlockDiagramModel):
         for device in device_list:
             self._device_fbd(device, user_prg_object)
 
+        # First Cycle clearing
+        self._assign(self.first_cycle, "FALSE", user_prg_object)
+
         # Final tag
         user_prg_object.write(self.program_end_tag + '\n')
 
         # Closing file
         user_prg_object.close()
 
+    def _pack_loc_rem_fbd(self, instance, num_objects, file):
+        # Inputs
+        ####################################################################
+
+        # Input header
+        fbd_str = self.function_block_input_header.format(instance=f"inst0{instance}", size=str(num_objects)) + '\n'
+
+        # Input unit
+        for i in range(num_objects):
+            fbd_str += self.input_unit.format(signal="_EMPTY") + '\n'
+
+        # Outputs
+        ####################################################################
+
+        # Output header 1
+        fbd_str += self.function_block_output_header.format(instance=instance, size="0") + '\n'
+
+        # Output header 2
+        fbd_str += self.function_block_output_header.format(instance="", size="1") + '\n'
+
+        # Output unit
+        fbd_str += self.output_unit.format(signal=self.mask_loc_rem) + '\n'
+
+        # Writing the fbd
+        file.write(fbd_str)
+
+    def _check_loc_rem_fbd(self, instance, file):
+        # Inputs
+        ####################################################################
+
+        # Input header
+        fbd_str = self.function_block_input_header.format(instance=f"inst0{instance}", size="1") + '\n'
+
+        # Input unit
+        fbd_str += self.input_unit.format(signal=self.mask_loc_rem) + '\n'
+
+        # Outputs
+        ####################################################################
+
+        # Output header 1
+        fbd_str += self.function_block_output_header.format(instance=instance, size="0") + '\n'
+
+        # Output header 2
+        fbd_str += self.function_block_output_header.format(instance="", size="1") + '\n'
+
+        # Output unit
+        fbd_str += self.output_unit.format(signal=self.state_loc_rem) + '\n'
+
+        # Writing the fbd
+        file.write(fbd_str)
+
     def _device_fbd(self, device, file):
         for i in range(device['quantity']):
-            # INPUTS
+            # Inputs
             ####################################################################
 
-            # Number of inputs
+            # Input size
             control_inputs = 4
             rtu_inputs = 0
             if device['measurements']:
@@ -416,74 +507,81 @@ class UserPrgModel(FunctionBlockDiagramModel):
             total_inputs = control_inputs + rtu_inputs
 
             # Input header
-            fbd_str = self.function_block_input_header.format(f"inst{i}{device['name']}", f"{total_inputs}") + '\n'
+            fbd_str = self.function_block_input_header.format(
+                instance=f"inst{i}{device['name']}",
+                size=total_inputs
+            ) + '\n'
 
             ####################################################################
 
             # Control inputs
-            fbd_str += self.input_unit.format(f"{self.first_cycle}") + '\n'
-            fbd_str += self.input_unit.format(f"{i}") + '\n'
-            fbd_str += self.input_unit.format(f"'{device['protocol']}'") + '\n'
-            fbd_str += self.input_unit.format("_EMPTY") + '\n'
+            fbd_str += self.input_unit.format(signal=self.first_cycle) + '\n'
+            fbd_str += self.input_unit.format(signal=str(i)) + '\n'
+            fbd_str += self.input_unit.format(signal=f"'{device['protocol']}'") + '\n'
+            fbd_str += self.input_unit.format(signal="_EMPTY") + '\n'
 
             ####################################################################
 
+            # Measurements
             if device['measurements']:
-                # Measurements (measurements)
+                # signals
                 for measurement in device['measurements'][i]:
-                    fbd_str += self.input_unit.format("_EMPTY") + '\n'
+                    fbd_str += self.input_unit.format(signal="_EMPTY") + '\n'
 
-                # Measurements (saves)
+                # saves
                 for save in device['measurements'][i]:
-                    fbd_str += self.input_unit.format("TRUE") + '\n'
+                    fbd_str += self.input_unit.format(signal="TRUE") + '\n'
 
-                # Measurements (names)
+                # names
                 for name in device['measurements_names'][i]:
-                    fbd_str += self.input_unit.format(f"'{name}'") + '\n'
+                    fbd_str += self.input_unit.format(signal=f"'{name}'") + '\n'
 
             ####################################################################
 
+            # States
             if device['states']:
-                # States (states)
+                # signals
                 for state in device['states'][i]:
-                    fbd_str += self.input_unit.format("_EMPTY") + '\n'
+                    fbd_str += self.input_unit.format(signal="_EMPTY") + '\n'
 
-                # States (saves)
+                # saves
                 for save in device['states'][i]:
-                    fbd_str += self.input_unit.format("TRUE") + '\n'
+                    fbd_str += self.input_unit.format(signal="TRUE") + '\n'
 
-                # States (names)
+                # names
                 for name in device['states_names'][i]:
-                    fbd_str += self.input_unit.format(f"'{name}'") + '\n'
+                    fbd_str += self.input_unit.format(signal=f"'{name}'") + '\n'
 
-                # States (rises)
+                # rises
                 for rise in device['states_names'][i]:
-                    fbd_str += self.input_unit.format("_EMPTY") + '\n'
+                    fbd_str += self.input_unit.format(signal="_EMPTY") + '\n'
 
             ####################################################################
 
+            # Commands
             if device['commands']:
-                # Commands (commands)
+                # signals
                 for command in device['commands'][i]:
-                    fbd_str += self.input_unit.format(f"{command}") + '\n'
+                    fbd_str += self.input_unit.format(signal=command) + '\n'
 
-                # Commands (saves)
+                # saves
                 for save in device['commands'][i]:
-                    fbd_str += self.input_unit.format("TRUE") + '\n'
+                    fbd_str += self.input_unit.format(signal="TRUE") + '\n'
 
-                # Commands (names)
+                # names
                 for name in device['commands_names'][i]:
-                    fbd_str += self.input_unit.format(f"'{name}'") + '\n'
+                    fbd_str += self.input_unit.format(signal=f"'{name}'") + '\n'
 
-                # Commands (triggers)
+                # triggers
                 for trigger in device['commands_triggers'][i]:
-                    fbd_str += self.input_unit.format(f"{trigger}") + '\n'
+                    fbd_str += self.input_unit.format(signal=trigger) + '\n'
 
+                # status
                 if device['operation'] == 'SBO':
                     for k in range(int(len(device['commands'][i]) / 2)):
-                        fbd_str += self.input_unit.format("_EMPTY") + '\n'
+                        fbd_str += self.input_unit.format(signal="_EMPTY") + '\n'
 
-            # OUTPUTS
+            # Outputs
             ####################################################################
 
             # Number of outputs
@@ -499,14 +597,17 @@ class UserPrgModel(FunctionBlockDiagramModel):
                     rtu_outputs += 2 * int(len(device['commands'][i]) / 2)
 
             # Output header 1
-            fbd_str += self.function_block_output_header.format(f"{device['name']}", f"{rtu_outputs - 1}") + '\n'
+            fbd_str += self.function_block_output_header.format(
+                instance=device['name'],
+                size=str(rtu_outputs - 1)
+            ) + '\n'
 
             ####################################################################
 
             # Measurements
             if device['measurements']:
                 for k in range(len(device['measurements'][i]) - 1):
-                    fbd_str += self.output_unit.format(f"{device['measurements'][i][k + 1]}") + '\n'
+                    fbd_str += self.output_unit.format(signal=device['measurements'][i][k + 1]) + '\n'
 
             ####################################################################
 
@@ -514,10 +615,10 @@ class UserPrgModel(FunctionBlockDiagramModel):
             if device['states']:
                 if device['measurements']:
                     for state in device['states'][i]:
-                        fbd_str += self.output_unit.format(f"{state}") + '\n'
+                        fbd_str += self.output_unit.format(signal=state) + '\n'
                 else:
                     for k in range(len(device['states'][i]) - 1):
-                        fbd_str += self.output_unit.format(f"{device['states'][i][k + 1]}") + '\n'
+                        fbd_str += self.output_unit.format(signal=device['states'][i][k + 1]) + '\n'
 
             ####################################################################
 
@@ -525,71 +626,54 @@ class UserPrgModel(FunctionBlockDiagramModel):
             if device['commands']:
                 if device['measurements'] or device['states']:
                     for command in device['commands'][i]:
-                        fbd_str += self.output_unit.format("_EMPTY") + '\n'
+                        fbd_str += self.output_unit.format(signal="_EMPTY") + '\n'
                 else:
                     for k in range(len(device['commands'][i]) - 1):
-                        fbd_str += self.output_unit.format("_EMPTY") + '\n'
+                        fbd_str += self.output_unit.format(signal="_EMPTY") + '\n'
 
                 if device['operation'] == 'SBO':
                     # select
                     for k in range(int(len(device['commands'][i]) / 2)):
-                        fbd_str += self.output_unit.format("_EMPTY") + '\n'
+                        fbd_str += self.output_unit.format(signal="_EMPTY") + '\n'
 
                     # execute
                     for k in range(int(len(device['commands'][i]) / 2)):
-                        fbd_str += self.output_unit.format("_EMPTY") + '\n'
+                        fbd_str += self.output_unit.format(signal="_EMPTY") + '\n'
 
             ####################################################################
 
             # Output header 2
-            fbd_str += self.function_block_output_header.format("", "1") + '\n'
+            fbd_str += self.function_block_output_header.format(instance="", size="1") + '\n'
 
-            # expression output
+            # output expression
             if device['measurements']:
-                fbd_str += self.output_unit.format(f"{device['measurements'][i][0]}") + '\n'
+                fbd_str += self.output_unit.format(signal=device['measurements'][i][0]) + '\n'
             elif device['states']:
-                fbd_str += self.output_unit.format(f"{device['states'][i][0]}") + '\n'
+                fbd_str += self.output_unit.format(signal=device['states'][i][0]) + '\n'
             elif device['commands']:
-                fbd_str += self.output_unit.format("_EMPTY") + '\n'
+                fbd_str += self.output_unit.format(signal="_EMPTY") + '\n'
 
             # Writing the fbd
             file.write(fbd_str)
 
-    def _pack_loc_rem_fbd(self, instance, num_objects, file):
+    def _assign(self, signal, value, file):
+        # Inputs
+        ####################################################################
+
         # Input header
-        fbd_str = self.function_block_input_header.format(f"inst0{instance}", str(num_objects)) + '\n'
+        fbd_str = self.assign_input_header + '\n'
 
         # Input unit
-        for i in range(num_objects):
-            fbd_str += self.input_unit.format("_EMPTY") + '\n'
+        fbd_str += self.input_unit.format(signal=value) + '\n'
 
-        # Output header 1
-        fbd_str += self.function_block_output_header.format(f"{instance}", "0") + '\n'
-
-        # Output header 2
-        fbd_str += self.function_block_output_header.format("", "1") + '\n'
-
-        # Output unit
-        fbd_str += self.output_unit.format(self.mask_loc_rem) + '\n'
-
-        # Writing the fbd
-        file.write(fbd_str)
-
-    def _check_loc_rem_fbd(self, instance, file):
-        # Input header
-        fbd_str = self.function_block_input_header.format(f"inst0{instance}", "1") + '\n'
-
-        # Input unit
-        fbd_str += self.input_unit.format(f"{self.mask_loc_rem}") + '\n'
-
-        # Output header 1
-        fbd_str += self.function_block_output_header.format(f"{instance}", "0") + '\n'
+        # Outputs
+        ####################################################################
 
         # Output header 2
-        fbd_str += self.function_block_output_header.format("", "1") + '\n'
+        fbd_str += self.function_block_output_header.format(instance="", size="1") + '\n'
 
         # Output unit
-        fbd_str += self.output_unit.format(self.state_loc_rem) + '\n'
+        fbd_str += self.output_unit.format(signal=signal) + '\n'
 
         # Writing the fbd
         file.write(fbd_str)
@@ -607,7 +691,7 @@ class PackLocRemModel(UserPrgModel):
         self.loc_rem_input_data_type = self.pack_loc_rem_model.LocRemInputDataType
         self.loc_rem_output = self.pack_loc_rem_model.LocRemOutput
         self.loc_rem_output_data_type = self.pack_loc_rem_model.LocRemOutputDataType
-        self.st = re.sub(r'(?<={).+?(?=})', '', self.pack_loc_rem_model.ST)
+        self.st = self.pack_loc_rem_model.ST
 
     def pack_loc_rem(self, num_objects, path):
         # Instance data
@@ -618,25 +702,30 @@ class PackLocRemModel(UserPrgModel):
 
         # variable definition
         # Inputs
-        input_str = variable_to_declaration(signal=self.loc_rem_input, num_objects=num_objects,
-                                            data_type=self.loc_rem_input_data_type)
-        var_input = self.declaration_input.format(input_str)
+        input_str = variable_to_declaration(
+            signal=self.loc_rem_input,
+            size=num_objects,
+            data_type=self.loc_rem_input_data_type
+        )
 
         # Outputs
         output_str = f"{self.loc_rem_output} : ARRAY [1..{num_objects}] OF {self.loc_rem_output_data_type};"
-        var_output = self.declaration_output.format(output_str)
 
         # Declaration construction
         declaration = self.declaration_attributes + '\n'
-        declaration += self.declaration_fb_header.format(pou_name) + '\n'
-        declaration += var_input + '\n'
-        declaration += var_output + '\n'
+        declaration += self.declaration_fb_header.format(name=pou_name) + '\n'
+        declaration += self.declaration_input.format(input=input_str) + '\n'
+        declaration += self.declaration_output.format(output=output_str) + '\n'
         declaration += self.declaration_end_tag + '\n'
 
         # Code construction
         code = ''
         for i in range(num_objects):
-            code += self.st.format(self.loc_rem_output, i + 1, f"{self.loc_rem_input}{i + 1}") + '\n'
+            code += self.st.format(
+                output=self.loc_rem_output,
+                iterator=(i + 1),
+                input=f"{self.loc_rem_input}{i + 1}"
+            ) + '\n'
         code += self.code_end_tag
 
         # Writing the pou
@@ -658,7 +747,7 @@ class CheckLocRemModel(UserPrgModel):
         self.check_loc_rem_model = CheckLocRem.objects.filter(Version=version).first()
         self.iterator = self.check_loc_rem_model.Iterator
         self.iterator_data_type = self.check_loc_rem_model.IteratorDataType
-        self.st = re.sub(r'(?<={).+?(?=})', '', self.check_loc_rem_model.ST)
+        self.st = self.check_loc_rem_model.ST
 
     def check_loc_rem(self, num_objects, path):
         # Instance data
@@ -679,21 +768,21 @@ class CheckLocRemModel(UserPrgModel):
 
         # Declaration construction
         declaration = self.declaration_attributes + '\n'
-        declaration += self.declaration_fb_header.format(pou_name) + '\n'
-        declaration += self.declaration_input.format(input_str) + '\n'
-        declaration += self.declaration_output.format(output_str) + '\n'
-        declaration += self.declaration_internal.format(internal_str) + '\n'
+        declaration += self.declaration_fb_header.format(name=pou_name) + '\n'
+        declaration += self.declaration_input.format(input=input_str) + '\n'
+        declaration += self.declaration_output.format(output=output_str) + '\n'
+        declaration += self.declaration_internal.format(internal=internal_str) + '\n'
         declaration += self.declaration_end_tag + '\n'
 
         # Code construction
         code = self.st.format(
-            self.mask_loc_rem,
-            self.iterator, num_objects,
-            self.state_loc_rem, self.iterator,
-            self.iterator, num_objects,
-            self.mask_loc_rem, self.iterator,
-            self.state_loc_rem, self.iterator,
-            self.state_loc_rem, self.iterator
+            mask_0=self.mask_loc_rem,
+            iterator_0=self.iterator,   size_0=num_objects,
+            state_0=self.state_loc_rem, iterator_1=self.iterator,
+            iterator_2=self.iterator,   size_1=num_objects,
+            mask_1=self.mask_loc_rem,   iterator_3=self.iterator,
+            state_1=self.state_loc_rem, iterator_4=self.iterator,
+            state_2=self.state_loc_rem, iterator_5=self.iterator
         )
         code += '\n' + self.code_end_tag
 
@@ -764,66 +853,133 @@ class DeviceModel(UserPrgModel):
         # variable definition
         # inputs
         # control inputs
-        input_str = f"{self.first_cycle} : {self.first_cycle_data_type};" + '\n'
-        input_str += f"{self.sequence_order} : {self.sequence_order_data_type};" + '\n'
-        input_str += f"{self.protocol} : {self.protocol_data_type};" + '\n'
-        input_str += f"{self.state_loc_rem} : {self.state_loc_rem_data_type};" + '\n'
+        input_str = f"{self.first_cycle}        : {self.first_cycle_data_type};" + '\n'
+        input_str += f"{self.sequence_order}    : {self.sequence_order_data_type};" + '\n'
+        input_str += f"{self.protocol}          : {self.protocol_data_type};" + '\n'
+        input_str += f"{self.state_loc_rem}     : {self.state_loc_rem_data_type};" + '\n'
 
+        # Obtaining sequence keys to apply individual conditions
         purposes = sequence.keys()
 
         # measures
         if 'measure' in purposes:
-            input_str += variable_to_declaration(self.measure, sequence['measure'], self.measure_data_type) + '\n'
-            input_str += variable_to_declaration(self.save_measure, sequence['measure'],
-                                                 self.save_measure_data_type) + '\n'
-            input_str += variable_to_declaration(self.name_measure, sequence['measure'],
-                                                 self.name_measure_data_type) + '\n'
+            input_str += variable_to_declaration(
+                signal=self.measure,
+                size=sequence['measure'],
+                data_type=self.measure_data_type
+            ) + '\n'
+
+            input_str += variable_to_declaration(
+                signal=self.save_measure,
+                size=sequence['measure'],
+                data_type=self.save_measure_data_type
+            ) + '\n'
+
+            input_str += variable_to_declaration(
+                signal=self.name_measure,
+                size=sequence['measure'],
+                data_type=self.name_measure_data_type
+            ) + '\n'
 
         # states
         if 'state' in purposes:
-            input_str += variable_to_declaration(self.state, sequence['state'], self.state_data_type) + '\n'
-            input_str += variable_to_declaration(self.save_state, sequence['state'], self.save_state_data_type) + '\n'
-            input_str += variable_to_declaration(self.name_state, sequence['state'], self.name_state_data_type) + '\n'
-            input_str += variable_to_declaration(self.rise_state, sequence['state'], self.rise_state_data_type) + '\n'
+            input_str += variable_to_declaration(
+                signal=self.state,
+                size=sequence['state'],
+                data_type=self.state_data_type
+            ) + '\n'
+
+            input_str += variable_to_declaration(
+                signal=self.save_state,
+                size=sequence['state'],
+                data_type=self.save_state_data_type
+            ) + '\n'
+
+            input_str += variable_to_declaration(
+                signal=self.name_state,
+                size=sequence['state'],
+                data_type=self.name_state_data_type
+            ) + '\n'
+
+            input_str += variable_to_declaration(
+                signal=self.rise_state,
+                size=sequence['state'],
+                data_type=self.rise_state_data_type
+            ) + '\n'
 
         # commands
         if 'command' in purposes:
-            input_str += variable_to_declaration(self.command, sequence['command'], self.command_data_type) + '\n'
-            input_str += variable_to_declaration(self.save_command, sequence['command'],
-                                                 self.save_command_data_type) + '\n'
-            input_str += variable_to_declaration(self.name_command, sequence['command'],
-                                                 self.name_command_data_type) + '\n'
-            input_str += variable_to_declaration(self.trigger_command, sequence['command'],
-                                                 self.trigger_command_data_type) + '\n'
+            input_str += variable_to_declaration(
+                signal=self.command,
+                size=sequence['command'],
+                data_type=self.command_data_type
+            ) + '\n'
+
+            input_str += variable_to_declaration(
+                signal=self.save_command,
+                size=sequence['command'],
+                data_type=self.save_command_data_type
+            ) + '\n'
+
+            input_str += variable_to_declaration(
+                signal=self.name_command,
+                size=sequence['command'],
+                data_type=self.name_command_data_type
+            ) + '\n'
+
+            input_str += variable_to_declaration(
+                signal=self.trigger_command,
+                size=sequence['command'],
+                data_type=self.trigger_command_data_type
+            ) + '\n'
 
             # inputs sbo
             if device_operation == "SBO":
-                input_str += variable_to_declaration(self.status, int(sequence['command'] / 2),
-                                                     self.status_data_type) + '\n'
+                input_str += variable_to_declaration(
+                    signal=self.status,
+                    size=int(sequence['command'] / 2),
+                    data_type=self.status_data_type
+                ) + '\n'
 
         # Outputs
         output_str = ''
         # measures
         if 'measure' in purposes:
-            output_str += variable_to_declaration(self.measure_output, sequence['measure'],
-                                                  self.measure_output_data_type) + '\n'
+            output_str += variable_to_declaration(
+                signal=self.measure_output,
+                size=sequence['measure'],
+                data_type=self.measure_output_data_type
+            ) + '\n'
 
         # states
         if 'state' in purposes:
-            output_str += variable_to_declaration(self.state_output, sequence['state'],
-                                                  self.state_output_data_type) + '\n'
+            output_str += variable_to_declaration(
+                signal=self.state_output,
+                size=sequence['state'],
+                data_type=self.state_output_data_type
+            ) + '\n'
 
         # commands
         if 'command' in purposes:
-            output_str += variable_to_declaration(self.command_output, sequence['command'],
-                                                  self.command_output_data_type) + '\n'
+            output_str += variable_to_declaration(
+                signal=self.command_output,
+                size=sequence['command'],
+                data_type=self.command_output_data_type
+            ) + '\n'
 
             # outputs sbo
             if device_operation == "SBO":
-                output_str += variable_to_declaration(self.select, int(sequence['command'] / 2),
-                                                      self.select_data_type) + '\n'
-                output_str += variable_to_declaration(self.execute, int(sequence['command'] / 2),
-                                                      self.execute_data_type) + '\n'
+                output_str += variable_to_declaration(
+                    signal=self.select,
+                    size=int(sequence['command'] / 2),
+                    data_type=self.select_data_type
+                ) + '\n'
+
+                output_str += variable_to_declaration(
+                    signal=self.execute,
+                    size=int(sequence['command'] / 2),
+                    data_type=self.execute_data_type
+                ) + '\n'
 
         # Internals
         internal_str = ''
@@ -832,15 +988,15 @@ class DeviceModel(UserPrgModel):
 
         # Declaration construction
         declaration = self.declaration_attributes + '\n'
-        declaration += self.declaration_fb_header.format(pou_name) + '\n'
-        declaration += self.declaration_input.format(input_str) + '\n'
-        declaration += self.declaration_output.format(output_str) + '\n'
-        declaration += self.declaration_internal.format(internal_str) + '\n'
+        declaration += self.declaration_fb_header.format(name=pou_name) + '\n'
+        declaration += self.declaration_input.format(input=input_str) + '\n'
+        declaration += self.declaration_output.format(output=output_str) + '\n'
+        declaration += self.declaration_internal.format(internal=internal_str) + '\n'
         declaration += self.declaration_end_tag + '\n'
         device_object.write(declaration)
 
         # Code construction
-        device_object.write(self.header.format(str(len(purposes))) + '\n')
+        device_object.write(self.header.format(size=str(len(purposes))) + '\n')
 
         # Instantiation
         for i, key in enumerate(purposes):
@@ -863,7 +1019,10 @@ class DeviceModel(UserPrgModel):
         name_data = rtu_information['name_data']
         trigger_data = rtu_information['trigger_data']
 
-        # Number of inputs
+        # Inputs
+        ####################################################################
+
+        # Input size
         num_inputs = 0
         if purpose == 'measure':
             num_inputs = (3 * num_objects) + 5
@@ -876,64 +1035,66 @@ class DeviceModel(UserPrgModel):
                 num_inputs = (4 * num_objects) + 5
 
         # Input header
-        fbd_str = self.function_block_input_header.format(f"inst0{instance}", f"{num_inputs}") + '\n'
+        fbd_str = self.function_block_input_header.format(instance=f"inst0{instance}", size=str(num_inputs)) + '\n'
 
         # Inputs
         # header
-        fbd_str += self.input_unit.format(f"{self.first_cycle}") + '\n'
-        fbd_str += self.input_unit.format(f"{self.sequence_order}") + '\n'
-        fbd_str += self.input_unit.format(f"{self.protocol}") + '\n'
-        fbd_str += self.input_unit.format(f"{self.state_loc_rem}") + '\n'
+        fbd_str += self.input_unit.format(signal=self.first_cycle) + '\n'
+        fbd_str += self.input_unit.format(signal=self.sequence_order) + '\n'
+        fbd_str += self.input_unit.format(signal=self.protocol) + '\n'
+        fbd_str += self.input_unit.format(signal=self.state_loc_rem) + '\n'
         if purpose == 'command':
-            fbd_str += self.input_unit.format("CONTROL") + '\n'
+            fbd_str += self.input_unit.format(signal="CONTROL") + '\n'
         else:
-            fbd_str += self.input_unit.format("MONITOR") + '\n'
+            fbd_str += self.input_unit.format(signal="MONITOR") + '\n'
 
         # input data
         for i in range(num_objects):
-            fbd_str += self.input_unit.format(f"{input_data}{i + 1}") + '\n'
+            fbd_str += self.input_unit.format(signal=f"{input_data}{i + 1}") + '\n'
 
         # saves
         for i in range(num_objects):
-            fbd_str += self.input_unit.format(f"{save_data}{i + 1}") + '\n'
+            fbd_str += self.input_unit.format(signal=f"{save_data}{i + 1}") + '\n'
 
         # names
         for i in range(num_objects):
-            fbd_str += self.input_unit.format(f"{name_data}{i + 1}") + '\n'
+            fbd_str += self.input_unit.format(signal=f"{name_data}{i + 1}") + '\n'
 
         # trigger and status
         if purpose != 'measure':
             for i in range(num_objects):
-                fbd_str += self.input_unit.format(f"{trigger_data}{i + 1}") + '\n'
+                fbd_str += self.input_unit.format(signal=f"{trigger_data}{i + 1}") + '\n'
             if purpose == 'command' and device_operation == 'SBO':
                 for i in range(int(num_objects / 2)):
-                    fbd_str += self.input_unit.format(f"{self.status}{i + 1}") + '\n'
+                    fbd_str += self.input_unit.format(signal=f"{self.status}{i + 1}") + '\n'
 
-        # Number of outputs
-        num_outputs = 0
+        # Outputs
+        ####################################################################
+
+        # Output size
         if purpose == 'command' and device_operation == 'SBO':
             num_outputs = (2 * num_objects) - 1
         else:
             num_outputs = num_objects - 1
 
         # output header 1
-        fbd_str += self.function_block_output_header.format(f"{instance}", f"{num_outputs}") + '\n'
+        fbd_str += self.function_block_output_header.format(instance=instance, size=num_outputs) + '\n'
 
         # output unit 1
         for i in range(num_objects - 1):
-            fbd_str += self.output_unit.format(f"{output_data}{i + 2}") + '\n'
+            fbd_str += self.output_unit.format(signal=f"{output_data}{i + 2}") + '\n'
 
         if purpose == 'command' and device_operation == 'SBO':
             for i in range(int(num_objects / 2)):
-                fbd_str += self.output_unit.format(f"{self.select}{i + 1}") + '\n'
+                fbd_str += self.output_unit.format(signal=f"{self.select}{i + 1}") + '\n'
             for i in range(int(num_objects / 2)):
-                fbd_str += self.output_unit.format(f"{self.execute}{i + 1}") + '\n'
+                fbd_str += self.output_unit.format(signal=f"{self.execute}{i + 1}") + '\n'
 
         # Output header 2
-        fbd_str += self.function_block_output_header.format("", "1") + '\n'
+        fbd_str += self.function_block_output_header.format(instance="", size="1") + '\n'
 
         # output unit 2
-        fbd_str += self.output_unit.format(f"{output_data}1") + '\n'
+        fbd_str += self.output_unit.format(signal=f"{output_data}1") + '\n'
 
         # Writing the fbd
         file.write(fbd_str)
@@ -1034,56 +1195,88 @@ class RtuModel(DeviceModel):
 
         # variable definition
         # Inputs
-        input_str = f"{self.first_cycle} : {self.first_cycle_data_type};" + '\n'
-        input_str += f"{self.sequence_order} : {self.sequence_order_data_type};" + '\n'
-        input_str += f"{self.protocol} : {self.protocol_data_type};" + '\n'
-        input_str += f"{self.state_loc_rem} : {self.state_loc_rem_data_type};" + '\n'
-        input_str += f"{self.action} : {self.action_data_type};" + '\n'
-        input_str += variable_to_declaration(signal=input_data, num_objects=num_objects,
-                                             data_type=input_data_type) + '\n'
-        input_str += variable_to_declaration(signal=save_data, num_objects=num_objects, data_type=save_data_type) + '\n'
-        input_str += variable_to_declaration(signal=name_data, num_objects=num_objects, data_type=name_data_type) + '\n'
+        input_str = f"{self.first_cycle}        : {self.first_cycle_data_type};" + '\n'
+        input_str += f"{self.sequence_order}    : {self.sequence_order_data_type};" + '\n'
+        input_str += f"{self.protocol}          : {self.protocol_data_type};" + '\n'
+        input_str += f"{self.state_loc_rem}     : {self.state_loc_rem_data_type};" + '\n'
+        input_str += f"{self.action}            : {self.action_data_type};" + '\n'
+
+        input_str += variable_to_declaration(
+            signal=input_data,
+            size=num_objects,
+            data_type=input_data_type
+        ) + '\n'
+
+        input_str += variable_to_declaration(
+            signal=save_data,
+            size=num_objects,
+            data_type=save_data_type
+        ) + '\n'
+
+        input_str += variable_to_declaration(
+            signal=name_data,
+            size=num_objects,
+            data_type=name_data_type
+        ) + '\n'
 
         if purpose != 'measure':
-            input_str += variable_to_declaration(signal=trigger_data, num_objects=num_objects,
-                                                 data_type=trigger_data_type) + '\n'
+            input_str += variable_to_declaration(
+                signal=trigger_data,
+                size=num_objects,
+                data_type=trigger_data_type
+            ) + '\n'
 
         if device_operation == "SBO" and purpose == 'command':
-            input_str += variable_to_declaration(signal=self.status, num_objects=int(num_objects / 2),
-                                                 data_type=self.status_data_type) + '\n'
+            input_str += variable_to_declaration(
+                signal=self.status,
+                size=int(num_objects / 2),
+                data_type=self.status_data_type
+            ) + '\n'
 
         # Outputs
-        output_str = variable_to_declaration(signal=output_data, num_objects=num_objects,
-                                             data_type=output_data_type) + '\n'
+        output_str = variable_to_declaration(
+            signal=output_data,
+            size=num_objects,
+            data_type=output_data_type
+        ) + '\n'
 
         if device_operation == "SBO" and purpose == 'command':
-            output_str += variable_to_declaration(signal=self.select, num_objects=int(num_objects / 2),
-                                                  data_type=self.select_data_type) + '\n'
-            output_str += variable_to_declaration(signal=self.execute, num_objects=int(num_objects / 2),
-                                                  data_type=self.execute_data_type) + '\n'
+            output_str += variable_to_declaration(
+                signal=self.select,
+                size=int(num_objects / 2),
+                data_type=self.select_data_type
+            ) + '\n'
+
+            output_str += variable_to_declaration(
+                signal=self.execute,
+                size=int(num_objects / 2),
+                data_type=self.execute_data_type
+            ) + '\n'
 
         # Internals
-        internal_str = f"{self.signals} : ARRAY [1..{num_objects}] OF {input_data_type};" + '\n'
-        internal_str += f"{self.check_changes} : ARRAY [1..{num_objects}] OF {self.check_changes_data_type};" + '\n'
-        internal_str += f"{self.names} : ARRAY [1..{num_objects}] OF {self.names_data_type};" + '\n'
-        internal_str += f"{self.saves} : ARRAY [1..{num_objects}] OF {self.saves_data_type};" + '\n'
-        internal_str += f"{self.error} : {self.error_data_type};" + '\n'
+        internal_str = f"{self.signals}         : ARRAY [1..{num_objects}] OF {input_data_type};" + '\n'
+        internal_str += f"{self.check_changes}  : ARRAY [1..{num_objects}] OF {self.check_changes_data_type};" + '\n'
+        internal_str += f"{self.names}          : ARRAY [1..{num_objects}] OF {self.names_data_type};" + '\n'
+        internal_str += f"{self.saves}          : ARRAY [1..{num_objects}] OF {self.saves_data_type};" + '\n'
+        internal_str += f"{self.error}          : {self.error_data_type};" + '\n'
 
         if purpose != 'measure':
-            internal_str += f"{self.trigger_changes} : ARRAY [1..{num_objects}] OF {self.trigger_changes_data_type};" + '\n'
+            internal_str += f"{self.trigger_changes} : ARRAY [1..{num_objects}] OF " \
+                            f"{self.trigger_changes_data_type};" + '\n'
             if purpose == 'state':
-                internal_str += f"{self.rise_changes} : ARRAY [1..{num_objects}] OF {self.rise_changes_data_type};" + '\n'
+                internal_str += f"{self.rise_changes} : ARRAY [1..{num_objects}] OF " \
+                                f"{self.rise_changes_data_type};" + '\n'
 
         for item in instance_list:
-            if 'Save' not in item and 'Handler' not in item:
+            if 'Save' not in item and 'Handler' not in item:    # Save and Handler aren't fb but functions
                 internal_str += f"inst0{item} : {item};" + '\n'
 
         # Declaration construction
         declaration = self.declaration_attributes + '\n'
-        declaration += self.declaration_fb_header.format(pou_name) + '\n'
-        declaration += self.declaration_input.format(input_str) + '\n'
-        declaration += self.declaration_output.format(output_str) + '\n'
-        declaration += self.declaration_internal.format(internal_str) + '\n'
+        declaration += self.declaration_fb_header.format(name=pou_name) + '\n'
+        declaration += self.declaration_input.format(input=input_str) + '\n'
+        declaration += self.declaration_output.format(output=output_str) + '\n'
+        declaration += self.declaration_internal.format(internal=internal_str) + '\n'
         declaration += self.declaration_end_tag + '\n'
         rtu_object.write(declaration)
 
@@ -1101,7 +1294,7 @@ class RtuModel(DeviceModel):
                 body_networks = 8
 
         # Writing body networks
-        networks = self.header.format(body_networks)
+        networks = self.header.format(size=body_networks)
         rtu_object.write(networks + '\n')
 
         # RTU hub
@@ -1145,60 +1338,78 @@ class RtuModel(DeviceModel):
         input_data = pack_information[0]
         output_data = pack_information[2]
 
+        # Inputs
+        ####################################################################
+
         # Input header
-        fbd_str = self.function_block_input_header.format(f"inst0{instance}", str(num_objects)) + '\n'
+        fbd_str = self.function_block_input_header.format(instance=f"inst0{instance}", size=str(num_objects)) + '\n'
 
         # Input unit
         for i in range(num_objects):
-            fbd_str += self.input_unit.format(f"{input_data}{i + 1}") + '\n'
+            fbd_str += self.input_unit.format(signal=f"{input_data}{i + 1}") + '\n'
+
+        # Outputs
+        ####################################################################
 
         # Output header 1
-        fbd_str += self.function_block_output_header.format(f"{instance}", "0") + '\n'
+        fbd_str += self.function_block_output_header.format(instance=instance, size="0") + '\n'
 
         # Output header 2
-        fbd_str += self.function_block_output_header.format("", "1") + '\n'
+        fbd_str += self.function_block_output_header.format(instance="", size="1") + '\n'
 
         # Output unit
-        fbd_str += self.output_unit.format(output_data) + '\n'
+        fbd_str += self.output_unit.format(signal=output_data) + '\n'
 
         # Writing the fbd
         file.write(fbd_str)
 
     def _rise_fbd(self, instance, file):
+        # Inputs
+        ####################################################################
+
         # Input header
-        fbd_str = self.function_block_input_header.format(f"inst0{instance}", "1") + '\n'
+        fbd_str = self.function_block_input_header.format(instance=f"inst0{instance}", size="1") + '\n'
 
         # Input unit
-        fbd_str += self.input_unit.format(f"{self.rise_changes}") + '\n'
+        fbd_str += self.input_unit.format(signal=self.rise_changes) + '\n'
+
+        # Outputs
+        ####################################################################
 
         # Output header 1
-        fbd_str += self.function_block_output_header.format(f"{instance}", "0") + '\n'
+        fbd_str += self.function_block_output_header.format(instance=instance, size="0") + '\n'
 
         # Output header 2
-        fbd_str += self.function_block_output_header.format("", "1") + '\n'
+        fbd_str += self.function_block_output_header.format(instance="", size="1") + '\n'
 
         # Output unit
-        fbd_str += self.output_unit.format(self.trigger_changes) + '\n'
+        fbd_str += self.output_unit.format(signal=self.trigger_changes) + '\n'
 
         # Writing the fbd
         file.write(fbd_str)
 
     def _check_fbd(self, instance, file):
+        # Inputs
+        ####################################################################
+
         # Input header
-        fbd_str = self.function_block_input_header.format(f"inst0{instance}", "2") + '\n'
+        fbd_str = self.function_block_input_header.format(instance=f"inst0{instance}", size="2") + '\n'
 
         # Input unit
-        fbd_str += self.input_unit.format(f"{self.signals}") + '\n'
-        fbd_str += self.input_unit.format(f"{self.first_cycle}") + '\n'
+        fbd_str += self.input_unit.format(signal=self.signals) + '\n'
+        fbd_str += self.input_unit.format(signal=self.first_cycle) + '\n'
+
+        # Outputs
+        ####################################################################
 
         # Output header 1
-        fbd_str += self.function_block_output_header.format(f"{instance}", "0") + '\n'
+        fbd_str += self.function_block_output_header.format(instance=instance, size="0") + '\n'
 
         # Output header 2
-        fbd_str += self.function_block_output_header.format("", "1") + '\n'
+        fbd_str += self.function_block_output_header.format(instance="", size="1") + '\n'
 
         # Output unit
-        fbd_str += self.output_unit.format(self.check_changes) + '\n'
+        fbd_str += self.output_unit.format(signal=self.check_changes) + '\n'
 
         # Writing the fbd
         file.write(fbd_str)
@@ -1209,116 +1420,137 @@ class RtuModel(DeviceModel):
         input_data = map_information[0]
         output_data = map_information[2]
 
+        # Inputs
+        ####################################################################
+
+        # Input size
         if purpose == 'measure':
             inputs = num_objects + 2
         else:
             inputs = (3 * num_objects) + 2
 
         # Input header
-        fbd_str = self.function_block_input_header.format(f"inst0{instance}", f"{inputs}") + '\n'
+        fbd_str = self.function_block_input_header.format(instance=f"inst0{instance}", size=inputs) + '\n'
 
         # Input unit
-        fbd_str += self.input_unit.format(f"{self.action}") + '\n'
-        fbd_str += self.input_unit.format(f"{self.state_loc_rem}") + '\n'
+        fbd_str += self.input_unit.format(signal=self.action) + '\n'
+        fbd_str += self.input_unit.format(signal=self.state_loc_rem) + '\n'
 
         # inputs
         for i in range(num_objects):
-            fbd_str += self.input_unit.format(f"{input_data}{i + 1}") + '\n'
+            fbd_str += self.input_unit.format(signal=f"{input_data}{i + 1}") + '\n'
 
         if purpose != 'measure':
             # triggers
             for i in range(num_objects):
-                fbd_str += self.input_unit.format(f"{self.trigger_changes}[{i + 1}]") + '\n'
+                fbd_str += self.input_unit.format(signal=f"{self.trigger_changes}[{i + 1}]") + '\n'
 
             # checks
             for i in range(num_objects):
-                fbd_str += self.input_unit.format(f"{self.check_changes}[{i + 1}]") + '\n'
+                fbd_str += self.input_unit.format(signal=f"{self.check_changes}[{i + 1}]") + '\n'
+
+        # Outputs
+        ####################################################################
 
         # Output header 1
-        fbd_str += self.function_block_output_header.format(f"{instance}", f"{num_objects - 1}") + '\n'
+        fbd_str += self.function_block_output_header.format(instance=instance, size=str(num_objects - 1)) + '\n'
 
         # Output unit 1
         for i in range(num_objects - 1):
-            fbd_str += self.output_unit.format(f"{output_data}{i + 2}") + '\n'
+            fbd_str += self.output_unit.format(signal=f"{output_data}{i + 2}") + '\n'
 
         # Output header 2
-        fbd_str += self.function_block_output_header.format("", "1") + '\n'
+        fbd_str += self.function_block_output_header.format(instance="", size="1") + '\n'
 
         # Output unit 2
-        fbd_str += self.output_unit.format(f"{output_data}1") + '\n'
+        fbd_str += self.output_unit.format(signal=f"{output_data}1") + '\n'
 
         # Writing fbd
         file.write(fbd_str)
 
     def _save_fbd(self, instance, purpose, file):
+        # Inputs
+        ####################################################################
+
         # Input header
-        fbd_str = self.function_input_header.format("9") + '\n'
+        fbd_str = self.function_input_header.format(size="9") + '\n'
 
         # Input unit
-        fbd_str += self.input_unit.format(f"{self.first_cycle}") + '\n'
-        fbd_str += self.input_unit.format(f"{self.sequence_order}") + '\n'
-        fbd_str += self.input_unit.format(f"{self.protocol}") + '\n'
-        fbd_str += self.input_unit.format(f"{self.state_loc_rem}") + '\n'
-        fbd_str += self.input_unit.format(f"{self.action}") + '\n'
-        fbd_str += self.input_unit.format(f"{self.signals}") + '\n'
-        fbd_str += self.input_unit.format(f"{self.names}") + '\n'
+        fbd_str += self.input_unit.format(signal=self.first_cycle) + '\n'
+        fbd_str += self.input_unit.format(signal=self.sequence_order) + '\n'
+        fbd_str += self.input_unit.format(signal=self.protocol) + '\n'
+        fbd_str += self.input_unit.format(signal=self.state_loc_rem) + '\n'
+        fbd_str += self.input_unit.format(signal=self.action) + '\n'
+        fbd_str += self.input_unit.format(signal=self.signals) + '\n'
+        fbd_str += self.input_unit.format(signal=self.names) + '\n'
         if purpose == 'measure':
-            fbd_str += self.input_unit.format(f"{self.check_changes}") + '\n'
+            fbd_str += self.input_unit.format(signal=self.check_changes) + '\n'
         else:
-            fbd_str += self.input_unit.format(f"{self.trigger_changes}") + '\n'
-        fbd_str += self.input_unit.format(f"{self.saves}") + '\n'
+            fbd_str += self.input_unit.format(signal=self.trigger_changes) + '\n'
+        fbd_str += self.input_unit.format(signal=self.saves) + '\n'
 
         # Output header
-        fbd_str += self.function_output_header.format(f"{instance}") + '\n'
+        fbd_str += self.function_output_header.format(instance=instance) + '\n'
 
         # Writing the fbd
         file.write(fbd_str)
 
     def _sbo_fbd(self, instance, num_objects, file):
+        # Inputs
+        ####################################################################
+
         # Input header
-        fbd_str = self.function_block_input_header.format(f"inst0{instance}",
-                                                          f"{num_objects + int(num_objects / 2) + 1}") + '\n'
+        fbd_str = self.function_block_input_header.format(
+            instance=f"inst0{instance}",
+            size=str(num_objects + int(num_objects / 2) + 1)
+        ) + '\n'
 
         # Input unit
-        fbd_str += self.input_unit.format(f"{self.state_loc_rem}") + '\n'
+        fbd_str += self.input_unit.format(signal=self.state_loc_rem) + '\n'
 
         # Triggers
         for i in range(num_objects):
-            fbd_str += self.input_unit.format(f"{self.trigger_changes}[{i + 1}]") + '\n'
+            fbd_str += self.input_unit.format(signal=f"{self.trigger_changes}[{i + 1}]") + '\n'
 
         # Status
         for i in range(int(num_objects / 2)):
-            fbd_str += self.input_unit.format(f"{self.status}{i + 1}") + '\n'
+            fbd_str += self.input_unit.format(signal=f"{self.status}{i + 1}") + '\n'
+
+        # Outputs
+        ####################################################################
 
         # Output header 1
-        fbd_str += self.function_block_output_header.format(f"{instance}", f"{(num_objects + 1) - 1}") + '\n'
+        fbd_str += self.function_block_output_header.format(instance=instance, size=str((num_objects + 1) - 1)) + '\n'
 
         # Selects
         for i in range(int(num_objects / 2)):
-            fbd_str += self.output_unit.format(f"{self.select}{i + 1}") + '\n'
+            fbd_str += self.output_unit.format(signal=f"{self.select}{i + 1}") + '\n'
 
         # Executes
         for i in range(int(num_objects / 2)):
-            fbd_str += self.output_unit.format(f"{self.execute}{i + 1}") + '\n'
+            fbd_str += self.output_unit.format(signal=f"{self.execute}{i + 1}") + '\n'
 
         # Output header 2
-        fbd_str += self.function_block_output_header.format("", "1") + '\n'
+        fbd_str += self.function_block_output_header.format(instance="", size="1") + '\n'
 
         # Output unit
-        fbd_str += self.output_unit.format(f"{self.error}") + '\n'
+        fbd_str += self.output_unit.format(signal=self.error) + '\n'
 
         # Writing the fbd
         file.write(fbd_str)
 
     def _handler_fbd(self, instance, file):
+        # Inputs
+        ####################################################################
+
         # Input header
-        fbd_str = self.function_input_header.format(f"inst0{instance}", "1") + '\n'
+        fbd_str = self.function_input_header.format(instance=f"inst0{instance}", size="1") + '\n'
 
         # Input unit
-        fbd_str += self.input_unit.format(f"{self.error}") + '\n'
+        fbd_str += self.input_unit.format(signal=self.error) + '\n'
 
         # Function output header
-        fbd_str += self.function_output_header.format(f"{instance}") + '\n'
+        fbd_str += self.function_output_header.format(instance=instance) + '\n'
 
         # Writing the fbd
         file.write(fbd_str)
@@ -1440,7 +1672,7 @@ class PackModel(RtuModel):
             RtuModel.__init__(self, None, None)
 
         self.pack_model = Pack.objects.filter(Version=version).first()
-        self.st = re.sub(r'(?<={).+?(?=})', '', self.pack_model.ST)
+        self.st = self.pack_model.ST
 
     def pack(self, device_name, num_objects, rtu_purpose, internal_purpose, server_iteration, path):
         # Obtaining data
@@ -1459,24 +1691,26 @@ class PackModel(RtuModel):
 
         # variable definition
         # Inputs
-        input_str = variable_to_declaration(signal=input_data, num_objects=num_objects, data_type=input_data_type)
-        var_input = self.declaration_input.format(input_str)
+        input_str = variable_to_declaration(signal=input_data, size=num_objects, data_type=input_data_type)
 
         # Outputs
         output_str = f"{output_data} : ARRAY [1..{num_objects}] OF {output_data_type};"
-        var_output = self.declaration_output.format(output_str)
 
         # Declaration construction
         declaration = self.declaration_attributes + '\n'
-        declaration += self.declaration_fb_header.format(pou_name) + '\n'
-        declaration += var_input + '\n'
-        declaration += var_output + '\n'
+        declaration += self.declaration_fb_header.format(name=pou_name) + '\n'
+        declaration += self.declaration_input.format(input=input_str) + '\n'
+        declaration += self.declaration_output.format(output=output_str) + '\n'
         declaration += self.declaration_end_tag + '\n'
 
         # Code construction
         code = ''
         for i in range(num_objects):
-            code += self.st.format(output_data, i + 1, f"{input_data}{i + 1}") + '\n'
+            code += self.st.format(
+                output_variable=output_data,
+                iterator=(i + 1),
+                input_variable=f"{input_data}{i + 1}"
+            ) + '\n'
         code += self.code_end_tag
 
         # Writing the pou
@@ -1500,7 +1734,7 @@ class CheckModel(RtuModel):
         self.iterator_data_type = self.check_model.IteratorDataType
         self.last_values = self.check_model.LastValues
         self.last_values_data_type = self.check_model.LastValuesDataType
-        self.st = re.sub(r'(?<={).+?(?=})', '', self.check_model.ST)
+        self.st = self.check_model.ST
 
     def check(self, device_name, num_objects, purpose, server_iteration, path):
         check_information = self.check_decision_tree(purpose)
@@ -1517,36 +1751,35 @@ class CheckModel(RtuModel):
 
         # variable definition
         # Inputs
-        input_str = f"{input_data} : ARRAY [1..{num_objects}] OF {input_data_type};" + '\n'
-        input_str += f"{self.first_cycle} : {self.first_cycle_data_type};"
-        var_input = self.declaration_input.format(input_str)
+        input_str = f"{input_data}              : ARRAY [1..{num_objects}] OF {input_data_type};" + '\n'
+        input_str += f"{self.first_cycle}       : {self.first_cycle_data_type};"
 
         # Outputs
-        output_str = f"{output_data} : ARRAY [1..{num_objects}] OF {output_data_type};"
-        var_output = self.declaration_output.format(output_str)
+        output_str = f"{output_data}            : ARRAY [1..{num_objects}] OF {output_data_type};"
 
         # Internals
-        internal_str = f"{self.iterator} : {self.iterator_data_type};" + '\n'
-        internal_str += f"{self.last_values} : ARRAY [1..{num_objects}] OF {input_data_type};"
-        var_internal = self.declaration_internal.format(internal_str)
+        internal_str = f"{self.iterator}        : {self.iterator_data_type};" + '\n'
+        internal_str += f"{self.last_values}    : ARRAY [1..{num_objects}] OF {input_data_type};"
 
         # Declaration construction
         declaration = self.declaration_attributes + '\n'
-        declaration += self.declaration_fb_header.format(pou_name) + '\n'
-        declaration += var_input + '\n'
-        declaration += var_output + '\n'
-        declaration += var_internal + '\n'
+        declaration += self.declaration_fb_header.format(name=pou_name) + '\n'
+        declaration += self.declaration_input.format(input=input_str) + '\n'
+        declaration += self.declaration_output.format(output=output_str) + '\n'
+        declaration += self.declaration_internal.format(internal=internal_str) + '\n'
         declaration += self.declaration_end_tag + '\n'
 
         # Code construction
         code = self.st.format(
-            self.iterator, num_objects,
-            self.first_cycle,
-            self.last_values, self.iterator, input_data, self.iterator,
-            input_data, self.iterator, self.last_values, self.iterator,
-            output_data, self.iterator,
-            output_data, self.iterator,
-            self.last_values, input_data
+            iterator_0=self.iterator,       size=num_objects,
+            first_cycle=self.first_cycle,
+            last_values_0=self.last_values, iterator_1=self.iterator, values_0=input_data,
+            iterator_2=self.iterator,
+            values_1=input_data,            iterator_3=self.iterator, last_values_1=self.last_values,
+            iterator_4=self.iterator,
+            mask_changes_0=output_data,     iterator_5=self.iterator,
+            mask_changes_1=output_data,     iterator_6=self.iterator,
+            last_values_2=self.last_values, values_2=input_data
         )
         code += '\n' + self.code_end_tag
 
@@ -1567,7 +1800,7 @@ class MapModel(RtuModel):
             RtuModel.__init__(self, None, None)
 
         self.map_model = Map.objects.filter(Version=version).first()
-        self.st = re.sub(r'(?<={).+?(?=})', '', self.map_model.ST)
+        self.st = self.map_model.ST
 
     def map(self, device_name, num_objects, purpose, server_iteration, path):
         # Obtaining data
@@ -1587,24 +1820,36 @@ class MapModel(RtuModel):
         # Inputs
         input_str = f"{self.action} : {self.action_data_type};" + '\n'
         input_str += f"{self.state_loc_rem} : {self.state_loc_rem_data_type};" + '\n'
-        input_str += variable_to_declaration(signal=input_data, num_objects=num_objects,
-                                             data_type=input_data_type) + '\n'
+        input_str += variable_to_declaration(
+            signal=input_data,
+            size=num_objects,
+            data_type=input_data_type
+        ) + '\n'
+
         if purpose != 'measure':
-            input_str += variable_to_declaration(signal=self.trigger_changes, num_objects=num_objects,
-                                                 data_type=self.trigger_changes_data_type) + '\n'
-            input_str += variable_to_declaration(signal=self.check_changes, num_objects=num_objects,
-                                                 data_type=self.check_changes_data_type)
-        var_input = self.declaration_input.format(input_str)
+            input_str += variable_to_declaration(
+                signal=self.trigger_changes,
+                size=num_objects,
+                data_type=self.trigger_changes_data_type
+            ) + '\n'
+            input_str += variable_to_declaration(
+                signal=self.check_changes,
+                size=num_objects,
+                data_type=self.check_changes_data_type
+            )
 
         # Outputs
-        output_str = variable_to_declaration(signal=output_data, num_objects=num_objects, data_type=output_data_type)
-        var_output = self.declaration_output.format(output_str)
+        output_str = variable_to_declaration(
+            signal=output_data,
+            size=num_objects,
+            data_type=output_data_type
+        )
 
         # Declaration construction
         declaration = self.declaration_attributes + '\n'
-        declaration += self.declaration_fb_header.format(pou_name) + '\n'
-        declaration += var_input + '\n'
-        declaration += var_output + '\n'
+        declaration += self.declaration_fb_header.format(name=pou_name) + '\n'
+        declaration += self.declaration_input.format(input=input_str) + '\n'
+        declaration += self.declaration_output.format(output=output_str) + '\n'
         declaration += self.declaration_end_tag + '\n'
 
         # Code construction
@@ -1619,8 +1864,10 @@ class MapModel(RtuModel):
                 code += "END_IF" + '\n'
 
         code = self.st.format(
-            self.state_loc_rem, self.state_loc_rem, self.action,
-            code
+            state_0=self.state_loc_rem,
+            state_1=self.state_loc_rem,
+            action=self.action,
+            mapping=code
         )
         code += '\n' + self.code_end_tag
 
@@ -1645,7 +1892,7 @@ class RiseModel(RtuModel):
         self.last_rise_data_type = self.rise_model.LastRiseDataType
         self.iterator = self.rise_model.Iterator
         self.iterator_data_type = self.rise_model.IteratorDataType
-        self.st = re.sub(r'(?<={).+?(?=})', '', self.rise_model.ST)
+        self.st = self.rise_model.ST
 
     def rise(self, device_name, num_objects, purpose, server_iteration, path):
         # Obtaining data
@@ -1662,34 +1909,31 @@ class RiseModel(RtuModel):
 
         # variable definition
         # Inputs
-        input_str = f"{input_data} : ARRAY [1..{num_objects}] OF {input_data_type};"
-        var_input = self.declaration_input.format(input_str)
+        input_str = f"{input_data}          : ARRAY [1..{num_objects}] OF {input_data_type};"
 
         # Outputs
-        output_str = f"{output_data} : ARRAY [1..{num_objects}] OF {output_data_type};"
-        var_output = self.declaration_output.format(output_str)
+        output_str = f"{output_data}        : ARRAY [1..{num_objects}] OF {output_data_type};"
 
         # Internals
-        internal_str = f"{self.last_rise} : ARRAY [1..{num_objects}] OF {self.last_rise_data_type};" + '\n'
-        internal_str += f"{self.iterator} : {self.iterator_data_type};"
-        var_internal = self.declaration_internal.format(internal_str)
+        internal_str = f"{self.last_rise}   : ARRAY [1..{num_objects}] OF {self.last_rise_data_type};" + '\n'
+        internal_str += f"{self.iterator}   : {self.iterator_data_type};"
 
         # Declaration construction
         declaration = ''
         declaration += self.declaration_attributes + '\n'
-        declaration += self.declaration_fb_header.format(pou_name) + '\n'
-        declaration += var_input + '\n'
-        declaration += var_output + '\n'
-        declaration += var_internal + '\n'
+        declaration += self.declaration_fb_header.format(name=pou_name) + '\n'
+        declaration += self.declaration_input.format(input=input_str) + '\n'
+        declaration += self.declaration_output.format(output=output_str) + '\n'
+        declaration += self.declaration_internal.format(internal=internal_str) + '\n'
         declaration += self.declaration_end_tag + '\n'
 
         # Code construction
         code = self.st.format(
-            self.iterator, num_objects,
-            input_data, self.iterator, self.last_rise, self.iterator,
-            output_data, self.iterator,
-            self.last_rise, self.iterator, input_data, self.iterator,
-            output_data, self.iterator
+            iterator_0=self.iterator,   num_objects=num_objects,
+            rise_0=input_data,          iterator_1=self.iterator, last_rise_0=self.last_rise, iterator_2=self.iterator,
+            trigger_0=output_data,      iterator_3=self.iterator,
+            last_rise_1=self.last_rise, iterator_4=self.iterator, rise_1=input_data,          iterator_5=self.iterator,
+            trigger_1=output_data,      iterator_6=self.iterator
         )
         code += '\n' + self.code_end_tag
 
@@ -1743,12 +1987,11 @@ class SaveModel(RtuModel):
         self.hysteresis_data_type = self.save_model.HysteresisDataType
         self.last_values = self.save_model.LastValues
         self.last_values_data_type = self.save_model.LastValuesDataType
-        self.st = re.sub(r'(?<={).+?(?=})', '', self.save_model.ST)
+        self.st = self.save_model.ST
 
     def save(self, device_name, num_objects, purpose, server_iteration, path):
         # Obtaining data
         save_information = self.save_decision_tree(purpose)
-        input_data = self.signals
         input_data_type = save_information['input_data_type']
 
         # Instance data
@@ -1759,30 +2002,31 @@ class SaveModel(RtuModel):
 
         # Variable definition
         # Inputs
-        input_str = f"{self.first_cycle} : {self.first_cycle_data_type};" + '\n'
-        input_str += f"{self.sequence_order} : {self.sequence_order_data_type};" + '\n'
-        input_str += f"{self.protocol} : {self.protocol_data_type};" + '\n'
-        input_str += f"{self.state_loc_rem} : {self.state_loc_rem_data_type};" + '\n'
-        input_str += f"{self.action} : {self.action_data_type};" + '\n'
-        input_str += f"{input_data} : ARRAY [1..{num_objects}] OF {input_data_type};" + '\n'
-        input_str += f"{self.names} : ARRAY [1..{num_objects}] OF {self.names_data_type};" + '\n'
-        input_str += f"{self.check_changes} : ARRAY [1..{num_objects}] OF {self.check_changes_data_type};" + '\n'
-        input_str += f"{self.saves} : ARRAY [1..{num_objects}] OF {self.saves_data_type};" + '\n'
-        var_input = self.declaration_input.format(input_str)
+        input_str = f"{self.first_cycle}        : {self.first_cycle_data_type};" + '\n'
+        input_str += f"{self.sequence_order}    : {self.sequence_order_data_type};" + '\n'
+        input_str += f"{self.protocol}          : {self.protocol_data_type};" + '\n'
+        input_str += f"{self.state_loc_rem}     : {self.state_loc_rem_data_type};" + '\n'
+        input_str += f"{self.action}            : {self.action_data_type};" + '\n'
+        input_str += f"{self.signals}           : ARRAY [1..{num_objects}] OF {input_data_type};" + '\n'
+        input_str += f"{self.names}             : ARRAY [1..{num_objects}] OF {self.names_data_type};" + '\n'
+        input_str += f"{self.check_changes}     : ARRAY [1..{num_objects}] OF {self.check_changes_data_type};" + '\n'
+        input_str += f"{self.saves}             : ARRAY [1..{num_objects}] OF {self.saves_data_type};" + '\n'
 
         # Internals
-        internal_str = f"{self.reason} : {self.reason_data_type} := {self.reason_init_val};" + '\n'
-        internal_str += f"{self.time} : {self.time_data_type};" + '\n'
-        internal_str += f"{self.offset} : {self.offset_data_type};" + '\n'
-        internal_str += f"{self.iterator} : {self.iterator_data_type};" + '\n'
-        internal_str += f"{self.power_on_prefix} : {self.power_on_prefix_data_type} := {self.power_on_prefix_init_val};" + '\n'
-        internal_str += f"{self.prefix_under_line} : {self.prefix_under_line_data_type} := {self.prefix_under_line_init_val};" + '\n'
-        internal_str += f"{self.delimiter} : {self.delimiter_data_type} := {self.delimiter_init_val};" + '\n'
-        internal_str += f"{self.object_value} : {self.object_value_data_type};" + '\n'
-        internal_str += f"{self.prefix} : {self.prefix_data_type};" + '\n'
-        internal_str += f"{self.file} : {self.file_data_type};" + '\n'
-        internal_str += f"{self.close} : {self.close_data_type};" + '\n'
-        internal_str += f"{self.new_line} : {self.new_line_data_type} := {self.new_line_init_val};" + '\n'
+        internal_str = f"{self.reason}              : {self.reason_data_type} := {self.reason_init_val};" + '\n'
+        internal_str += f"{self.time}               : {self.time_data_type};" + '\n'
+        internal_str += f"{self.offset}             : {self.offset_data_type};" + '\n'
+        internal_str += f"{self.iterator}           : {self.iterator_data_type};" + '\n'
+        internal_str += f"{self.power_on_prefix}    : {self.power_on_prefix_data_type} := " \
+                        f"{self.power_on_prefix_init_val};" + '\n'
+        internal_str += f"{self.prefix_under_line}  : {self.prefix_under_line_data_type} := " \
+                        f"{self.prefix_under_line_init_val};" + '\n'
+        internal_str += f"{self.delimiter}          : {self.delimiter_data_type} := {self.delimiter_init_val};" + '\n'
+        internal_str += f"{self.object_value}       : {self.object_value_data_type};" + '\n'
+        internal_str += f"{self.prefix}             : {self.prefix_data_type};" + '\n'
+        internal_str += f"{self.file}               : {self.file_data_type};" + '\n'
+        internal_str += f"{self.close}              : {self.close_data_type};" + '\n'
+        internal_str += f"{self.new_line}           : {self.new_line_data_type} := {self.new_line_init_val};" + '\n'
 
         # Obtaining hysteresis derivatives
         hysteresis_condition = ""
@@ -1791,66 +2035,69 @@ class SaveModel(RtuModel):
         if input_data_type == "WORD":
             hysteresis = Obj35mMeTe.objects.filter(DeviceName=device_name).first().Hysteresis
             if hysteresis:
-                internal_str += f"{self.hysteresis} : ARRAY[1..{num_objects}] OF {self.hysteresis_data_type} := {hysteresis};" + '\n'
+                internal_str += f"{self.hysteresis} : ARRAY[1..{num_objects}] OF {self.hysteresis_data_type} :=" \
+                                f" {hysteresis};" + '\n'
                 internal_str += f"{self.last_values} : ARRAY[1..{num_objects}] OF {input_data_type};"
-                hysteresis_condition = f"IF ({input_data}[{self.iterator}] > ({self.last_values}" \
+                hysteresis_condition = f"IF ({self.signals}[{self.iterator}] > ({self.last_values}" \
                                        f"[{self.iterator}] + (({self.hysteresis}[{self.iterator}] / 100) * " \
-                                       f"{self.last_values}[{self.iterator}] ))) OR ({input_data}" \
+                                       f"{self.last_values}[{self.iterator}] ))) OR ({self.signals}" \
                                        f"[{self.iterator}] < ({self.last_values}[{self.iterator}] - " \
                                        f"(({self.hysteresis}[{self.iterator}] / 100) * {self.last_values}" \
                                        f"[{self.iterator}]))) THEN"
-                internal_input_code = f"{self.last_values}[{self.iterator}] := {input_data}[{self.iterator}];"
+                internal_input_code = f"{self.last_values}[{self.iterator}] := {self.signals}[{self.iterator}];"
                 hysteresis_code_end_tag = "END_IF"
-
-        # Writing internals in their module
-        var_internal = self.declaration_internal.format(internal_str)
 
         # Declaration construction
         declaration = self.declaration_attributes + '\n'
-        declaration += self.declaration_f_header.format(pou_name) + '\n'
-        declaration += var_input + '\n'
-        declaration += var_internal + '\n'
+        declaration += self.declaration_f_header.format(name=pou_name) + '\n'
+        declaration += self.declaration_input.format(input=input_str) + '\n'
+        declaration += self.declaration_internal.format(internal=internal_str) + '\n'
         declaration += self.declaration_end_tag + '\n'
 
-        # Code construction
+        # Code construction (every format line represents a line of Structured Text code in the database)
         code = self.st.format(
-            self.file,
-            self.time,
-            self.offset, self.sequence_order, num_objects,
-            self.protocol, self.protocol, self.prefix_under_line,
-            self.prefix, self.protocol, self.sequence_order_data_type, self.sequence_order,
-            self.first_cycle,
-            self.iterator, num_objects,
-            self.saves, self.iterator,
-            internal_input_code,
-            input_data_type, input_data, self.iterator,
-            self.file, self.time, self.time,
-            self.file, self.delimiter, self.delimiter,
-            self.file, self.prefix, self.prefix,
-            self.file, self.delimiter, self.delimiter,
-            self.file, self.power_on_prefix, self.power_on_prefix,
-            self.file, self.names, self.iterator, self.names, self.iterator,
-            self.file, self.delimiter, self.delimiter,
-            self.file, self.object_value, self.object_value,
-            self.file, self.new_line, self.new_line,
-            self.iterator, num_objects,
-            self.saves, self.iterator,
-            self.check_changes, self.iterator,
-            hysteresis_condition,
-            internal_input_code,
-            input_data_type, input_data, self.iterator,
-            self.file, self.time, self.time,
-            self.file, self.delimiter, self.delimiter,
-            self.file, self.prefix, self.prefix,
-            self.file, self.delimiter, self.delimiter,
-            self.file, self.power_on_prefix, self.power_on_prefix,
-            self.file, self.names, self.iterator, self.names, self.iterator,
-            self.file, self.delimiter, self.delimiter,
-            self.file, self.object_value, self.object_value,
-            self.file, self.new_line, self.new_line,
-            hysteresis_code_end_tag,
-            self.close, self.file,
-            pou_name
+            file_0=self.file,
+            time_0=self.time,
+            offset=self.offset, sequence_order_0=self.sequence_order, signals_size_0=num_objects,
+            protocol_0=self.protocol, protocol_1=self.protocol, prefix_under_line=self.prefix_under_line,
+            prefix_0=self.prefix, protocol_2=self.protocol, sequence_order_data_type=self.sequence_order_data_type,
+            sequence_order_1=self.sequence_order,
+            first_cycle=self.first_cycle,
+            iterator_0=self.iterator, signals_size_1=num_objects,
+            saves_0=self.saves, iterator_1=self.iterator,
+            save_last_value_0=internal_input_code,
+            object_value_0=self.object_value, signal_data_type_0=input_data_type, signal_0=self.signals,
+            iterator_2=self.iterator,
+            file_1=self.file, time_1=self.time, time_2=self.time,
+            file_2=self.file, delimiter_0=self.delimiter, delimiter_1=self.delimiter,
+            file_3=self.file, prefix_1=self.prefix, prefix_2=self.prefix,
+            file_4=self.file, delimiter_2=self.delimiter, delimiter_3=self.delimiter,
+            file_5=self.file, power_on_prefix_0=self.power_on_prefix, power_on_prefix_1=self.power_on_prefix,
+            file_6=self.file, names_0=self.names, iterator_3=self.iterator, names_1=self.names,
+            iterator_4=self.iterator,
+            file_7=self.file, delimiter_4=self.delimiter, delimiter_5=self.delimiter,
+            file_8=self.file, object_value_1=self.object_value, object_value_2=self.object_value,
+            file_9=self.file, new_line_0=self.new_line, new_line_1=self.new_line,
+            iterator_5=self.iterator, signals_size_2=num_objects,
+            saves_1=self.saves, iterator_6=self.iterator,
+            mask_changes=self.check_changes, iterator_7=self.iterator,
+            hysteresis=hysteresis_condition,
+            save_last_value_1=internal_input_code,
+            object_value_3=self.object_value, signal_data_type_1=input_data_type, signal_1=self.signals,
+            iterator_8=self.iterator,
+            file_10=self.file, time_3=self.time, time_4=self.time,
+            file_11=self.file, delimiter_6=self.delimiter, delimiter_7=self.delimiter,
+            file_12=self.file, prefix_3=self.prefix, prefix_4=self.prefix,
+            file_13=self.file, delimiter_8=self.delimiter, delimiter_9=self.delimiter,
+            file_14=self.file, power_on_prefix_2=self.power_on_prefix, power_on_prefix_3=self.power_on_prefix,
+            file_15=self.file, names_2=self.names, iterator_9=self.iterator, names_3=self.names,
+            iterator_10=self.iterator,
+            file_16=self.file, delimiter_10=self.delimiter, delimiter_11=self.delimiter,
+            file_17=self.file, object_value_4=self.object_value, object_value_5=self.object_value,
+            file_18=self.file, new_line_2=self.new_line, new_line_3=self.new_line,
+            hysteresis_end_tag=hysteresis_code_end_tag,
+            close=self.close, file_19=self.file,
+            name=pou_name
         )
 
         code += '\n' + self.code_end_tag
@@ -1876,8 +2123,8 @@ class SboModel(RtuModel):
         self.error_stat_internal_data_type = self.sbo_model.ErrorStatInternalDataType
         self.flag = self.sbo_model.Flag
         self.flag_data_type = self.sbo_model.FlagDataType
-        self.st_body = re.sub(r'(?<={).+?(?=})', '', self.sbo_model.STBody)
-        self.st_core = re.sub(r'(?<={).+?(?=})', '', self.sbo_model.STCore)
+        self.st_body = self.sbo_model.STBody
+        self.st_core = self.sbo_model.STCore
 
     def sbo(self, device_name, num_objects, purpose, server_iteration, path):
         # Obtaining data
@@ -1892,66 +2139,83 @@ class SboModel(RtuModel):
         # Variable declaration
         # Inputs
         input_str = f"{self.state_loc_rem} : {self.state_loc_rem_data_type};" + '\n'
-        input_str += variable_to_declaration(signal=self.trigger_changes, num_objects=num_objects,
-                                             data_type=self.trigger_changes_data_type) + '\n'
-        input_str += variable_to_declaration(signal=self.status, num_objects=int(num_objects / 2),
-                                             data_type=self.status_data_type) + '\n'
-        var_input = self.declaration_input.format(input_str)
+
+        input_str += variable_to_declaration(
+            signal=self.trigger_changes,
+            size=num_objects,
+            data_type=self.trigger_changes_data_type
+        ) + '\n'
+
+        input_str += variable_to_declaration(
+            signal=self.status,
+            size=int(num_objects / 2),
+            data_type=self.status_data_type
+        ) + '\n'
 
         # Outputs
         output_str = f"{self.error} : {self.error_data_type};" + '\n'
-        output_str += variable_to_declaration(signal=self.select, num_objects=int(num_objects / 2),
-                                              data_type=self.select_data_type) + '\n'
-        output_str += variable_to_declaration(signal=self.execute, num_objects=int(num_objects / 2),
-                                              data_type=self.execute_data_type) + '\n'
-        var_output = self.declaration_output.format(output_str)
+
+        output_str += variable_to_declaration(
+            signal=self.select,
+            size=int(num_objects / 2),
+            data_type=self.select_data_type
+        ) + '\n'
+
+        output_str += variable_to_declaration(
+            signal=self.execute,
+            size=int(num_objects / 2),
+            data_type=self.execute_data_type
+        ) + '\n'
 
         # Internals
         internal_str = f"{self.error_stat_internal} : {self.error_stat_internal_data_type};" + '\n'
-        internal_str += variable_to_declaration(signal=self.flag, num_objects=int(num_objects / 2),
-                                                data_type=self.flag_data_type) + '\n'
-        var_internal = self.declaration_internal.format(internal_str)
+
+        internal_str += variable_to_declaration(
+            signal=self.flag,
+            size=int(num_objects / 2),
+            data_type=self.flag_data_type
+        ) + '\n'
 
         # Declaration construction
         declaration = self.declaration_attributes + '\n'
-        declaration += self.declaration_fb_header.format(pou_name) + '\n'
-        declaration += var_input + '\n'
-        declaration += var_output + '\n'
-        declaration += var_internal + '\n'
+        declaration += self.declaration_fb_header.format(name=pou_name) + '\n'
+        declaration += self.declaration_input.format(input=input_str) + '\n'
+        declaration += self.declaration_output.format(output=output_str) + '\n'
+        declaration += self.declaration_internal.format(internal=internal_str) + '\n'
         declaration += self.declaration_end_tag + '\n'
 
         # Code construction
         code_core = ''
         for s in range(int(num_objects / 2)):
             code_core += self.st_core.format(
-                f"{self.flag}{s + 1}",
-                f"{self.trigger_changes}{(2 * s) + 1}", f"{self.trigger_changes}{(2 * s) + 2}",
-                f"{self.select}{s + 1}",
-                f"{self.flag}{s + 1}",
-                f"{self.flag}{s + 1}",
-                f"{self.status}{s + 1}",
-                f"{self.select}{s + 1}",
-                f"{self.select}{s + 1}",
-                f"{self.execute}{s + 1}",
-                f"{self.execute}{s + 1}",
-                f"{self.flag}{s + 1}",
-                self.error_stat_internal,
-                f"{self.execute}{s + 1}",
-                f"{self.select}{s + 1}",
-                f"{self.flag}{s + 1}",
-                self.error_stat_internal,
-                f"{self.execute}{s + 1}",
-                f"{self.select}{s + 1}",
-                f"{self.flag}{s + 1}",
-                self.error_stat_internal,
+                flag_0=f"{self.flag}{s + 1}",
+                input_n=f"{self.trigger_changes}{(2 * s) + 1}",     input_m=f"{self.trigger_changes}{(2 * s) + 2}",
+                select_0=f"{self.select}{s + 1}",
+                flag_1=f"{self.flag}{s + 1}",
+                flag_2=f"{self.flag}{s + 1}",
+                status=f"{self.status}{s + 1}",
+                select_1=f"{self.select}{s + 1}",
+                select_2=f"{self.select}{s + 1}",
+                execute_0=f"{self.execute}{s + 1}",
+                execute_1=f"{self.execute}{s + 1}",
+                flag_3=f"{self.flag}{s + 1}",
+                error_status_internal_0=self.error_stat_internal,
+                execute_2=f"{self.execute}{s + 1}",
+                select_3=f"{self.select}{s + 1}",
+                flag_4=f"{self.flag}{s + 1}",
+                error_status_internal_1=self.error_stat_internal,
+                execute_3=f"{self.execute}{s + 1}",
+                select_4=f"{self.select}{s + 1}",
+                flag_5=f"{self.flag}{s + 1}",
+                error_status_internal_2=self.error_stat_internal,
             ) + "\n\n"
 
         code = self.st_body.format(
-            self.error_stat_internal,
-            self.state_loc_rem,
-            self.error, self.error_stat_internal,
-            code_core,
-            self.error, self.error_stat_internal
+            error_status_internal_0=self.error_stat_internal,
+            state=self.state_loc_rem,
+            error_status_output_0=self.error,                    error_status_internal_1=self.error_stat_internal,
+            core=code_core,
+            error_status_output_1=self.error,                    error_status_internal_2=self.error_stat_internal
         )
         code += '\n' + self.code_end_tag
 
@@ -1974,7 +2238,7 @@ class HandlerModel(RtuModel):
         self.handler_model = Handler.objects.filter(Version=version).first()
         self.error_description = self.handler_model.ErrorDescription
         self.error_description_data_type = self.handler_model.ErrorDescriptionDataType
-        self.st = re.sub(r'(?<={).+?(?=})', '', self.handler_model.ST)
+        self.st = self.handler_model.ST
 
     def handler(self, device_name, server_iteration, path):
         # Instance data
@@ -1992,21 +2256,21 @@ class HandlerModel(RtuModel):
 
         # Declaration construction
         declaration = self.declaration_attributes + '\n'
-        declaration += self.declaration_f_header.format(pou_name) + '\n'
-        declaration += self.declaration_input.format(input_str) + '\n'
-        declaration += self.declaration_internal.format(internal_str) + '\n'
+        declaration += self.declaration_f_header.format(name=pou_name) + '\n'
+        declaration += self.declaration_input.format(input=input_str) + '\n'
+        declaration += self.declaration_internal.format(internal=internal_str) + '\n'
         declaration += self.declaration_end_tag + '\n'
 
         # Code construction
         code = self.st.format(
-            self.error,
-            self.error,
-            self.error_description,
-            self.error_description,
-            self.error_description,
-            self.error_description,
-            self.error_description,
-            pou_name
+            input_error_0=self.error,
+            input_error_1=self.error,
+            description_0=self.error_description,
+            description_1=self.error_description,
+            description_2=self.error_description,
+            description_3=self.error_description,
+            description_4=self.error_description,
+            pou_name=pou_name
         )
         code += '\n' + self.code_end_tag
 

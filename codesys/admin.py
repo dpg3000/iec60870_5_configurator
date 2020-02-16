@@ -1,22 +1,10 @@
 from django.contrib import admin
 from django.db import models
-from .models import Map, Check, Save, Sbo, FBDTemplate, Device, RiseToTrigger, Rtu, UserPrg, Pack, Handler, PackLocRem, CheckLocRem
+from .models import Map, Check, Save, Sbo, FBDTemplate, Device, RiseToTrigger, Rtu, UserPrg, Pack, Handler, \
+    PackLocRem, CheckLocRem
 
 
 # Register your models here.
-# Another way to iterate the meta fields of the models, but if the structure varies, tends to get messy
-# class DeviceAdmin(admin.ModelAdmin):
-#     fields = (
-#         'Version',
-#     )
-#     field_list = Device._meta.get_fields()
-#
-#     for index in range(int((len(field_list) - 2) / 2)):
-#         field_name = str(field_list[(2 * index) + 2]).split('.')[2]
-#         field_name_next = str(field_list[(2 * index) + 3]).split('.')[2]
-#         fields = fields + ((field_name, field_name_next),)
-
-
 class UserPrgAdmin(admin.ModelAdmin):
     fieldsets = [
         ("INFO", {"fields": ["Version",

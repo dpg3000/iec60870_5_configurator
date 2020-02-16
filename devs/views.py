@@ -6,7 +6,7 @@ from cards.models import Card
 import os
 from django.http import HttpResponse, HttpResponseNotFound
 import datetime
-from server import Server, ServerDevice
+from server import Server, ServerDevice, device_ajax_request
 from project import Project
 from kbus import BusModule, assemble_modules
 from django.http import JsonResponse
@@ -40,22 +40,28 @@ def configurator_view(request):
 
 
 def validate_parameters(request):
-
+    # Obtaining data
     device_name = request.GET.get('device_name', None)
 
+    # Client evaluation
     client_existence = Device.objects.filter(Name=device_name).first().ClientObjs
     if client_existence:
         client_existence = True
     else:
         client_existence = False
 
+    # Getting operation data
     do_capability = Device.objects.filter(Name=device_name).first().DO
     sbo_capability = Device.objects.filter(Name=device_name).first().SBO
+
+    # Getting server data
+    device_data = device_ajax_request(device_name)
 
     data = {
         'is_client': client_existence,
         'is_do': do_capability,
-        'is_sbo': sbo_capability
+        'is_sbo': sbo_capability,
+        'device_data': device_data
     }
 
     return JsonResponse(data)

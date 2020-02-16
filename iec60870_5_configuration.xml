@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-  <IEC60870ProjectDescription Version="2.8.0" Guid="BCAB5D0D-5CE5-406E-8736-146506C81871" Generated="12/02/2020 16:27:48">
+  <IEC60870ProjectDescription Version="2.8.0" Guid="BCAB5D0D-5CE5-406E-8736-146506C81871" Generated="16/02/2020 20:03:13">
     <CConfiguration Name="IEC60870 Konfiguration">
       <Text>IEC60870 Konfiguration</Text>
         <Parameter Name="AfzDefault" Type="Time" Val="t#2s" />
@@ -478,358 +478,6 @@
     <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
     <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
     <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.217 = 217)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DI17" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="217" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DI17" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.218 = 218)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DI18" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="218" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DI18" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.219 = 219)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DI19" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="219" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DI19" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.220 = 220)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DI20" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="220" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DI20" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.221 = 221)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DI21" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="221" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DI21" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.222 = 222)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DI22" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="222" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DI22" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.223 = 223)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DI23" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="223" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DI23" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.224 = 224)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DI24" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="224" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DI24" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.225 = 225)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DI25" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="225" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DI25" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.226 = 226)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DI26" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="226" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DI26" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.227 = 227)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DI27" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="227" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DI27" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.228 = 228)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DI28" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="228" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DI28" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.229 = 229)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DI29" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="229" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DI29" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.230 = 230)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DI30" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="230" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DI30" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.231 = 231)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DI31" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="231" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DI31" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.232 = 232)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DI32" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="232" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DI32" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
 </CObjectServer><CObjectServer Name="IObj58C_SC_TA">
                <Text>IObj58C_SC_TA (0.2.189 = 701)</Text>
                <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DO1" />
@@ -1102,14 +750,826 @@
                <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
                <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
                <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
+</CObjectServer><CObjectServer Name="IObj35M_ME_TE">
+            <Text>IObj35M_ME_TE (0.11.185 = 3001)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_IR_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="185" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Parameter Name="Hysterese" Type="DINT" Val="8" />
+            <Parameter Name="HystereseType" Type="ENUM_HYSTERESE" Val="1" />
+            <Parameter Name="SkalierungOffset" Type="DINT" Val="0" />
+            <Parameter Name="SkalierungDivisor" Type="DINT" Val="32767" />
+            <Channel Name="SVA" Type="INT" Autoapply="True" Assignment="sgl104_S0_IR_0_7SJ" />
+            <Channel Name="OV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="SignalPreprocessArchive_Choice" Type="ENUM_SignalPreprocessArchive" Val="0" />
+            <Parameter Name="SignalPreprocessArchive_Timebase" Type="Time" Val="t#15m" />
+            <Parameter Name="SignalPreprocessArchive_COT_Label" Type="" Val="" />
+            <Parameter Name="AlarmModem_SVA" Type="ENUM_AlarmModem_SVA" Val="0" />
+            <Parameter Name="AlarmModem_Min_SVA" Type="INT" Val="0" />
+            <Parameter Name="AlarmModem_Max_SVA" Type="INT" Val="0" />
+</CObjectServer><CObjectServer Name="IObj35M_ME_TE">
+            <Text>IObj35M_ME_TE (0.11.186 = 3002)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_IS_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="186" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Parameter Name="Hysterese" Type="DINT" Val=" 8" />
+            <Parameter Name="HystereseType" Type="ENUM_HYSTERESE" Val="1" />
+            <Parameter Name="SkalierungOffset" Type="DINT" Val="0" />
+            <Parameter Name="SkalierungDivisor" Type="DINT" Val="32767" />
+            <Channel Name="SVA" Type="INT" Autoapply="True" Assignment="sgl104_S0_IS_0_7SJ" />
+            <Channel Name="OV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="SignalPreprocessArchive_Choice" Type="ENUM_SignalPreprocessArchive" Val="0" />
+            <Parameter Name="SignalPreprocessArchive_Timebase" Type="Time" Val="t#15m" />
+            <Parameter Name="SignalPreprocessArchive_COT_Label" Type="" Val="" />
+            <Parameter Name="AlarmModem_SVA" Type="ENUM_AlarmModem_SVA" Val="0" />
+            <Parameter Name="AlarmModem_Min_SVA" Type="INT" Val="0" />
+            <Parameter Name="AlarmModem_Max_SVA" Type="INT" Val="0" />
+</CObjectServer><CObjectServer Name="IObj35M_ME_TE">
+            <Text>IObj35M_ME_TE (0.11.187 = 3003)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_IT_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="187" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Parameter Name="Hysterese" Type="DINT" Val=" 8" />
+            <Parameter Name="HystereseType" Type="ENUM_HYSTERESE" Val="1" />
+            <Parameter Name="SkalierungOffset" Type="DINT" Val="0" />
+            <Parameter Name="SkalierungDivisor" Type="DINT" Val="32767" />
+            <Channel Name="SVA" Type="INT" Autoapply="True" Assignment="sgl104_S0_IT_0_7SJ" />
+            <Channel Name="OV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="SignalPreprocessArchive_Choice" Type="ENUM_SignalPreprocessArchive" Val="0" />
+            <Parameter Name="SignalPreprocessArchive_Timebase" Type="Time" Val="t#15m" />
+            <Parameter Name="SignalPreprocessArchive_COT_Label" Type="" Val="" />
+            <Parameter Name="AlarmModem_SVA" Type="ENUM_AlarmModem_SVA" Val="0" />
+            <Parameter Name="AlarmModem_Min_SVA" Type="INT" Val="0" />
+            <Parameter Name="AlarmModem_Max_SVA" Type="INT" Val="0" />
+</CObjectServer><CObjectServer Name="IObj35M_ME_TE">
+            <Text>IObj35M_ME_TE (0.11.188 = 3004)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_I0_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="188" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Parameter Name="Hysterese" Type="DINT" Val=" 8" />
+            <Parameter Name="HystereseType" Type="ENUM_HYSTERESE" Val="1" />
+            <Parameter Name="SkalierungOffset" Type="DINT" Val="0" />
+            <Parameter Name="SkalierungDivisor" Type="DINT" Val="32767" />
+            <Channel Name="SVA" Type="INT" Autoapply="True" Assignment="sgl104_S0_I0_0_7SJ" />
+            <Channel Name="OV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="SignalPreprocessArchive_Choice" Type="ENUM_SignalPreprocessArchive" Val="0" />
+            <Parameter Name="SignalPreprocessArchive_Timebase" Type="Time" Val="t#15m" />
+            <Parameter Name="SignalPreprocessArchive_COT_Label" Type="" Val="" />
+            <Parameter Name="AlarmModem_SVA" Type="ENUM_AlarmModem_SVA" Val="0" />
+            <Parameter Name="AlarmModem_Min_SVA" Type="INT" Val="0" />
+            <Parameter Name="AlarmModem_Max_SVA" Type="INT" Val="0" />
+</CObjectServer><CObjectServer Name="IObj35M_ME_TE">
+            <Text>IObj35M_ME_TE (0.11.189 = 3005)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_VRS_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="189" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Parameter Name="Hysterese" Type="DINT" Val=" 8" />
+            <Parameter Name="HystereseType" Type="ENUM_HYSTERESE" Val="1" />
+            <Parameter Name="SkalierungOffset" Type="DINT" Val="0" />
+            <Parameter Name="SkalierungDivisor" Type="DINT" Val="32767" />
+            <Channel Name="SVA" Type="INT" Autoapply="True" Assignment="sgl104_S0_VRS_0_7SJ" />
+            <Channel Name="OV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="SignalPreprocessArchive_Choice" Type="ENUM_SignalPreprocessArchive" Val="0" />
+            <Parameter Name="SignalPreprocessArchive_Timebase" Type="Time" Val="t#15m" />
+            <Parameter Name="SignalPreprocessArchive_COT_Label" Type="" Val="" />
+            <Parameter Name="AlarmModem_SVA" Type="ENUM_AlarmModem_SVA" Val="0" />
+            <Parameter Name="AlarmModem_Min_SVA" Type="INT" Val="0" />
+            <Parameter Name="AlarmModem_Max_SVA" Type="INT" Val="0" />
+</CObjectServer><CObjectServer Name="IObj35M_ME_TE">
+            <Text>IObj35M_ME_TE (0.11.190 = 3006)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_VST_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="190" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Parameter Name="Hysterese" Type="DINT" Val=" 8" />
+            <Parameter Name="HystereseType" Type="ENUM_HYSTERESE" Val="1" />
+            <Parameter Name="SkalierungOffset" Type="DINT" Val="0" />
+            <Parameter Name="SkalierungDivisor" Type="DINT" Val="32767" />
+            <Channel Name="SVA" Type="INT" Autoapply="True" Assignment="sgl104_S0_VST_0_7SJ" />
+            <Channel Name="OV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="SignalPreprocessArchive_Choice" Type="ENUM_SignalPreprocessArchive" Val="0" />
+            <Parameter Name="SignalPreprocessArchive_Timebase" Type="Time" Val="t#15m" />
+            <Parameter Name="SignalPreprocessArchive_COT_Label" Type="" Val="" />
+            <Parameter Name="AlarmModem_SVA" Type="ENUM_AlarmModem_SVA" Val="0" />
+            <Parameter Name="AlarmModem_Min_SVA" Type="INT" Val="0" />
+            <Parameter Name="AlarmModem_Max_SVA" Type="INT" Val="0" />
+</CObjectServer><CObjectServer Name="IObj35M_ME_TE">
+            <Text>IObj35M_ME_TE (0.11.191 = 3007)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_VTR_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="191" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Parameter Name="Hysterese" Type="DINT" Val=" 8" />
+            <Parameter Name="HystereseType" Type="ENUM_HYSTERESE" Val="1" />
+            <Parameter Name="SkalierungOffset" Type="DINT" Val="0" />
+            <Parameter Name="SkalierungDivisor" Type="DINT" Val="32767" />
+            <Channel Name="SVA" Type="INT" Autoapply="True" Assignment="sgl104_S0_VTR_0_7SJ" />
+            <Channel Name="OV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="SignalPreprocessArchive_Choice" Type="ENUM_SignalPreprocessArchive" Val="0" />
+            <Parameter Name="SignalPreprocessArchive_Timebase" Type="Time" Val="t#15m" />
+            <Parameter Name="SignalPreprocessArchive_COT_Label" Type="" Val="" />
+            <Parameter Name="AlarmModem_SVA" Type="ENUM_AlarmModem_SVA" Val="0" />
+            <Parameter Name="AlarmModem_Min_SVA" Type="INT" Val="0" />
+            <Parameter Name="AlarmModem_Max_SVA" Type="INT" Val="0" />
+</CObjectServer><CObjectServer Name="IObj35M_ME_TE">
+            <Text>IObj35M_ME_TE (0.11.192 = 3008)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_P_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="192" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Parameter Name="Hysterese" Type="DINT" Val=" 34" />
+            <Parameter Name="HystereseType" Type="ENUM_HYSTERESE" Val="1" />
+            <Parameter Name="SkalierungOffset" Type="DINT" Val="0" />
+            <Parameter Name="SkalierungDivisor" Type="DINT" Val="32767" />
+            <Channel Name="SVA" Type="INT" Autoapply="True" Assignment="sgl104_S0_P_0_7SJ" />
+            <Channel Name="OV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="SignalPreprocessArchive_Choice" Type="ENUM_SignalPreprocessArchive" Val="0" />
+            <Parameter Name="SignalPreprocessArchive_Timebase" Type="Time" Val="t#15m" />
+            <Parameter Name="SignalPreprocessArchive_COT_Label" Type="" Val="" />
+            <Parameter Name="AlarmModem_SVA" Type="ENUM_AlarmModem_SVA" Val="0" />
+            <Parameter Name="AlarmModem_Min_SVA" Type="INT" Val="0" />
+            <Parameter Name="AlarmModem_Max_SVA" Type="INT" Val="0" />
+</CObjectServer><CObjectServer Name="IObj35M_ME_TE">
+            <Text>IObj35M_ME_TE (0.11.193 = 3009)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_Q_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="193" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Parameter Name="Hysterese" Type="DINT" Val=" 1" />
+            <Parameter Name="HystereseType" Type="ENUM_HYSTERESE" Val="1" />
+            <Parameter Name="SkalierungOffset" Type="DINT" Val="0" />
+            <Parameter Name="SkalierungDivisor" Type="DINT" Val="32767" />
+            <Channel Name="SVA" Type="INT" Autoapply="True" Assignment="sgl104_S0_Q_0_7SJ" />
+            <Channel Name="OV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="SignalPreprocessArchive_Choice" Type="ENUM_SignalPreprocessArchive" Val="0" />
+            <Parameter Name="SignalPreprocessArchive_Timebase" Type="Time" Val="t#15m" />
+            <Parameter Name="SignalPreprocessArchive_COT_Label" Type="" Val="" />
+            <Parameter Name="AlarmModem_SVA" Type="ENUM_AlarmModem_SVA" Val="0" />
+            <Parameter Name="AlarmModem_Min_SVA" Type="INT" Val="0" />
+            <Parameter Name="AlarmModem_Max_SVA" Type="INT" Val="0" />
+</CObjectServer><CObjectServer Name="IObj35M_ME_TE">
+            <Text>IObj35M_ME_TE (0.11.194 = 3010)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_Frec_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="194" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Parameter Name="Hysterese" Type="DINT" Val=" 1" />
+            <Parameter Name="HystereseType" Type="ENUM_HYSTERESE" Val="1" />
+            <Parameter Name="SkalierungOffset" Type="DINT" Val="0" />
+            <Parameter Name="SkalierungDivisor" Type="DINT" Val="32767" />
+            <Channel Name="SVA" Type="INT" Autoapply="True" Assignment="sgl104_S0_Frec_0_7SJ" />
+            <Channel Name="OV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="SignalPreprocessArchive_Choice" Type="ENUM_SignalPreprocessArchive" Val="0" />
+            <Parameter Name="SignalPreprocessArchive_Timebase" Type="Time" Val="t#15m" />
+            <Parameter Name="SignalPreprocessArchive_COT_Label" Type="" Val="" />
+            <Parameter Name="AlarmModem_SVA" Type="ENUM_AlarmModem_SVA" Val="0" />
+            <Parameter Name="AlarmModem_Min_SVA" Type="INT" Val="0" />
+            <Parameter Name="AlarmModem_Max_SVA" Type="INT" Val="0" />
+</CObjectServer><CObjectServer Name="IObj35M_ME_TE">
+            <Text>IObj35M_ME_TE (0.11.195 = 3011)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_CosPhi_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="195" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Parameter Name="Hysterese" Type="DINT" Val=" 17" />
+            <Parameter Name="HystereseType" Type="ENUM_HYSTERESE" Val="1" />
+            <Parameter Name="SkalierungOffset" Type="DINT" Val="0" />
+            <Parameter Name="SkalierungDivisor" Type="DINT" Val="32767" />
+            <Channel Name="SVA" Type="INT" Autoapply="True" Assignment="sgl104_S0_CosPhi_0_7SJ" />
+            <Channel Name="OV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="SignalPreprocessArchive_Choice" Type="ENUM_SignalPreprocessArchive" Val="0" />
+            <Parameter Name="SignalPreprocessArchive_Timebase" Type="Time" Val="t#15m" />
+            <Parameter Name="SignalPreprocessArchive_COT_Label" Type="" Val="" />
+            <Parameter Name="AlarmModem_SVA" Type="ENUM_AlarmModem_SVA" Val="0" />
+            <Parameter Name="AlarmModem_Min_SVA" Type="INT" Val="0" />
+            <Parameter Name="AlarmModem_Max_SVA" Type="INT" Val="0" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (196.11.0 = 3012)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_MandoLocalRemotoDispositivo_0_0_7SJ / sgl104_S0_MandoLocalRemotoDispositivo_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="196" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_MandoLocalRemotoDispositivo_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_MandoLocalRemotoDispositivo_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (197.11.0 = 3013)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DeviceOK_0_0_7SJ / sgl104_S0_DeviceOK_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="197" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DeviceOK_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DeviceOK_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (198.11.0 = 3014)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_BloqREDispositivo_0_0_7SJ / sgl104_S0_BloqREDispositivo_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="198" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_BloqREDispositivo_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_BloqREDispositivo_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (199.11.0 = 3015)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_ActiveRE_0_0_7SJ / sgl104_S0_ActiveRE_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="199" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_ActiveRE_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_ActiveRE_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (200.11.0 = 3016)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_NotReadyRE_0_0_7SJ / sgl104_S0_NotReadyRE_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="200" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_NotReadyRE_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_NotReadyRE_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (201.11.0 = 3017)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_InProgressRE_0_0_7SJ / sgl104_S0_InProgressRE_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="201" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_InProgressRE_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_InProgressRE_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (202.11.0 = 3018)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DispFinRE_0_0_7SJ / sgl104_S0_DispFinRE_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="202" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DispFinRE_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DispFinRE_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (203.11.0 = 3019)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_GeneralPickup_0_0_7SJ / sgl104_S0_GeneralPickup_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="203" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_GeneralPickup_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_GeneralPickup_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (204.11.0 = 3020)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_GeneralTrip_0_0_7SJ / sgl104_S0_GeneralTrip_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="204" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_GeneralTrip_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_GeneralTrip_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (205.11.0 = 3021)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_TempPhaseTrip_0_0_7SJ / sgl104_S0_TempPhaseTrip_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="205" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_TempPhaseTrip_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_TempPhaseTrip_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (206.11.0 = 3022)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_InstPhaseTrip1_0_0_7SJ / sgl104_S0_InstPhaseTrip1_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="206" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_InstPhaseTrip1_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_InstPhaseTrip1_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (207.11.0 = 3023)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_InstPhaseTrip2_0_0_7SJ / sgl104_S0_InstPhaseTrip2_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="207" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_InstPhaseTrip2_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_InstPhaseTrip2_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (208.11.0 = 3024)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_TempGndTrip_0_0_7SJ / sgl104_S0_TempGndTrip_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="208" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_TempGndTrip_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_TempGndTrip_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (209.11.0 = 3025)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_InstGndTrip1_0_0_7SJ / sgl104_S0_InstGndTrip1_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="209" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_InstGndTrip1_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_InstGndTrip1_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (210.11.0 = 3026)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_InstGndTrip2_0_0_7SJ / sgl104_S0_InstGndTrip2_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="210" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_InstGndTrip2_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_InstGndTrip2_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (211.11.0 = 3027)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_ActiveDirPhaseTrip_0_0_7SJ / sgl104_S0_ActiveDirPhaseTrip_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="211" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_ActiveDirPhaseTrip_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_ActiveDirPhaseTrip_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (212.11.0 = 3028)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DirPhaseTrip1_0_0_7SJ / sgl104_S0_DirPhaseTrip1_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="212" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DirPhaseTrip1_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DirPhaseTrip1_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (213.11.0 = 3029)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DirPhaseTrip2_0_0_7SJ / sgl104_S0_DirPhaseTrip2_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="213" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DirPhaseTrip2_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DirPhaseTrip2_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (214.11.0 = 3030)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_ActiveDirGndTrip_0_0_7SJ / sgl104_S0_ActiveDirGndTrip_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="214" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_ActiveDirGndTrip_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_ActiveDirGndTrip_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (215.11.0 = 3031)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DirGndTrip1_0_0_7SJ / sgl104_S0_DirGndTrip1_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="215" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DirGndTrip1_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DirGndTrip1_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (216.11.0 = 3032)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DirGndTrip2_0_0_7SJ / sgl104_S0_DirGndTrip2_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="216" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DirGndTrip2_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DirGndTrip2_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (217.11.0 = 3033)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_SensGndForwardPickup_0_0_7SJ / sgl104_S0_SensGndForwardPickup_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="217" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_SensGndForwardPickup_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_SensGndForwardPickup_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (218.11.0 = 3034)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_SensGndReversePickup_0_0_7SJ / sgl104_S0_SensGndReversePickup_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="218" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_SensGndReversePickup_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_SensGndReversePickup_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
+</CObjectServer><CObjectServer Name="IObj31M_DP_TB">
+            <Text>IObj31M_DP_TB (219.11.0 = 3035)</Text>
+            <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_SensGndUndefPickup_0_0_7SJ / sgl104_S0_SensGndUndefPickup_1_0_7SJ" />
+            <Parameter Name="InfoObjAdr1" Type="BYTE" Val="219" />
+            <Parameter Name="InfoObjAdr2" Type="BYTE" Val="11" />
+            <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
+            <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
+            <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
+            <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
+            <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
+            <Channel Name="DPI1" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_SensGndUndefPickup_0_0_7SJ" />
+            <Channel Name="DPI2" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_SensGndUndefPickup_1_0_7SJ" />
+            <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
+            <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
+            <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
+            <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
+            <Parameter Name="AlarmModem_DPI" Type="ENUM_AlarmModem_DPI" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Choice" Type="ENUM_DPISignalPreprocess" Val="0" />
+            <Parameter Name="SignalPreprocessDPI_Delay" Type="Time" Val="t#1s" />
 </CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.205 = 717)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DO17" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="205" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
+               <Text>IObj58C_SC_TA (0.15.61 = 3901)</Text>
+               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_OpenCell_0_7SJ" />
+               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="61" />
+               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="15" />
                <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO17" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO17_Trigger" />
+               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_OpenCell_0_7SJ" />
+               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_OpenCell_Trigger_0_7SJ" />
                <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
                <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
                <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
@@ -1120,13 +1580,13 @@
                <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
                <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
 </CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.206 = 718)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DO18" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="206" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
+               <Text>IObj58C_SC_TA (0.15.62 = 3902)</Text>
+               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_CloseCell_0_7SJ" />
+               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="62" />
+               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="15" />
                <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO18" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO18_Trigger" />
+               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_CloseCell_0_7SJ" />
+               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_CloseCell_Trigger_0_7SJ" />
                <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
                <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
                <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
@@ -1137,13 +1597,13 @@
                <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
                <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
 </CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.207 = 719)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DO19" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="207" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
+               <Text>IObj58C_SC_TA (0.15.63 = 3903)</Text>
+               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_ExecuteCellSwitch_0_7SJ" />
+               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="63" />
+               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="15" />
                <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO19" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO19_Trigger" />
+               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_ExecuteCellSwitch_0_7SJ" />
+               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_ExecuteCellSwitch_Trigger_0_7SJ" />
                <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
                <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
                <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
@@ -1154,13 +1614,13 @@
                <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
                <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
 </CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.208 = 720)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DO20" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="208" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
+               <Text>IObj58C_SC_TA (0.15.64 = 3904)</Text>
+               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_RemoteDesbloqREDispositivo_0_7SJ" />
+               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="64" />
+               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="15" />
                <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO20" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO20_Trigger" />
+               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_RemoteDesbloqREDispositivo_0_7SJ" />
+               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_RemoteDesbloqREDispositivo_Trigger_0_7SJ" />
                <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
                <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
                <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
@@ -1171,13 +1631,13 @@
                <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
                <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
 </CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.209 = 721)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DO21" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="209" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
+               <Text>IObj58C_SC_TA (0.15.65 = 3905)</Text>
+               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_RemoteBloqREDispositivo_0_7SJ" />
+               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="65" />
+               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="15" />
                <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO21" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO21_Trigger" />
+               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_RemoteBloqREDispositivo_0_7SJ" />
+               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_RemoteBloqREDispositivo_Trigger_0_7SJ" />
                <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
                <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
                <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
@@ -1188,13 +1648,13 @@
                <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
                <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
 </CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.210 = 722)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DO22" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="210" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
+               <Text>IObj58C_SC_TA (0.15.66 = 3906)</Text>
+               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_ExecuteRemoteBloqREDispositivo_0_7SJ" />
+               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="66" />
+               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="15" />
                <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO22" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO22_Trigger" />
+               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_ExecuteRemoteBloqREDispositivo_0_7SJ" />
+               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_ExecuteRemoteBloqREDispositivo_Trigger_0_7SJ" />
                <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
                <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
                <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
@@ -1205,13 +1665,13 @@
                <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
                <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
 </CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.211 = 723)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DO23" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="211" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
+               <Text>IObj58C_SC_TA (0.15.67 = 3907)</Text>
+               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_OpenGndSwitch_0_7SJ" />
+               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="67" />
+               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="15" />
                <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO23" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO23_Trigger" />
+               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_OpenGndSwitch_0_7SJ" />
+               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_OpenGndSwitch_Trigger_0_7SJ" />
                <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
                <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
                <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
@@ -1222,13 +1682,13 @@
                <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
                <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
 </CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.212 = 724)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DO24" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="212" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
+               <Text>IObj58C_SC_TA (0.15.68 = 3908)</Text>
+               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_CloseGndSwitch_0_7SJ" />
+               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="68" />
+               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="15" />
                <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO24" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO24_Trigger" />
+               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_CloseGndSwitch_0_7SJ" />
+               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_CloseGndSwitch_Trigger_0_7SJ" />
                <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
                <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
                <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
@@ -1239,845 +1699,13 @@
                <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
                <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
 </CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.213 = 725)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DO25" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="213" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
+               <Text>IObj58C_SC_TA (0.15.69 = 3909)</Text>
+               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_ExecuteGndSwitch_0_7SJ" />
+               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="69" />
+               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="15" />
                <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO25" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO25_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.214 = 726)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DO26" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="214" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO26" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO26_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.215 = 727)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DO27" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="215" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO27" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO27_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.216 = 728)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DO28" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="216" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO28" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO28_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.217 = 729)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DO29" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="217" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO29" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO29_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.218 = 730)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DO30" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="218" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO30" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO30_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.219 = 731)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DO31" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="219" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO31" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO31_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.220 = 732)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S0_DO32" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="220" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO32" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_DO32_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer></CServer104><CServer104 Name="Server104">
-    <Text></Text>
-    <Parameter Name="TaskInfoObj" Type="ENUM_TASKS" Val="1" />
-    <Parameter Name="TaskComm" Type="ENUM_TASKS" Val="1" />
-    <Parameter Name="ASDUAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="ASDUAdr1" Type="BYTE" Val="1" />
-    <Parameter Name="HrkAdr" Type="BYTE" Val="1" />
-    <Channel Name="LinkOk" Type="ARRAY[1..IEC870_MAX_CLIENTS] OF BOOL" Autoapply="True" Assignment="sgl104_S1_StatusLinkLayer" />
-    <Channel Name="LinkOkMultilink" Type="ARRAY[1..IEC870_MAX_SVLINKS] OF BOOL" Autoapply="True" Assignment="USERS104" />
-    <Parameter Name="MaxMsgLen" Type="BYTE" Val="120" />
-    <Parameter Name="PacketFrames" Type="ENUM_FrameSize104" Val="0" />
-    <Parameter Name="ParameterK" Type="WORD" Val="12" />
-    <Parameter Name="ParameterW" Type="WORD" Val="8" />
-    <Parameter Name="ParameterT1" Type="TIME" Val="T#15s" />
-    <Parameter Name="ParameterT2" Type="TIME" Val="T#10s" />
-    <Parameter Name="ParameterT3" Type="TIME" Val="T#20s" />
-    <Parameter Name="TestframesServer104" Type="BOOL" Val="False" />
-    <Parameter Name="Port104" Type="WORD" Val="2405" />
-    <Parameter Name="BindIP" Type="ENUM_BindIP" Val="0" />
-    <Parameter Name="BindIP_Addr" Type="IP" Val="0.0.0.0" />
-    <Parameter Name="TransmitDelay" Type="Time" Val="t#0ms" />
-    <Parameter Name="CounterMode" Type="ENUM_CounterMode" Val="2" />
-    <Parameter Name="SelectBeforeExecute" Type="ENUM_SelectBeforeExecute" Val="0" />
-    <Parameter Name="ExeuteTimeout" Type="TIME" Val="t#5s" />
-    <Parameter Name="ControlObjectsRetain" Type="BOOL" Val="FALSE" />
-    <Channel Name="CloseTcpConS104" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_TCPDeact" />
-    <Parameter Name="DialUp" Type="ENUM_DialUp104" Val="0" />
-          <Parameter Name="IPControlCenter" Type="IP" Val="91.116.138.211" />
-          <Parameter Name="MaxClients" Type="ENUM_CLIENTS" Val="1" />
-          <Parameter Name="MaxClientsTLS" Type="ENUM_CLIENTS_TLS" Val="1" />
-          <Parameter Name="ParameterT0" Type="TIME" Val="T#10s" />
-          <Parameter Name="IPFilter" Type="BOOL" Val="False" />
-          <Parameter Name="Client1_TLS_Dlg" Type="" Val="" />
-          <Parameter Name="Client2_TLS_Dlg" Type="" Val="" />
-          <Parameter Name="Client3_TLS_Dlg" Type="" Val="" />
-          <Parameter Name="Client4_TLS_Dlg" Type="" Val="" />
-          <Parameter Name="Client1IP1" Type="IP" Val="91.116.138.211" />
-          <Parameter Name="Client1IP2" Type="IP" Val="91.116.138.211" />
-          <Parameter Name="Client1IP3" Type="IP" Val="91.116.138.211" />
-          <Parameter Name="Client1IP4" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="Client2IP1" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="Client2IP2" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="Client2IP3" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="Client2IP4" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="Client3IP1" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="Client3IP2" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="Client3IP3" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="Client3IP4" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="Client4IP1" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="Client4IP2" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="Client4IP3" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="Client4IP4" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="MultiClient1IP1" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="MultiClient1IP2" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="MultiClient1IP3" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="MultiClient2IP1" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="MultiClient2IP2" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="MultiClient2IP3" Type="IP" Val="0.0.0.0" />
-          <Parameter Name="TLSVerificationFile" Type="" Val="3S_CA.cer" Frame="Client1_TLS_Dlg" />
-          <Parameter Name="TLSCertificateFile" Type="" Val="Default.cer" Frame="Client1_TLS_Dlg" />
-          <Parameter Name="TLSPrivateKeyFile" Type="" Val="3S_CA.der" Frame="Client1_TLS_Dlg" />
-          <Parameter Name="TLSFiletype" Type="ENUM_TLS_FILETYPE" Val="2" Frame="Client1_TLS_Dlg" />
-          <Parameter Name="TLSVersion" Type="ENUM_TLS_VERSION" Val="10" Frame="Client1_TLS_Dlg" />
-          <Parameter Name="TLS_IP1" Type="IP" Val="0.0.0.0" Frame="Client1_TLS_Dlg" />
-          <Parameter Name="TLS_IP2" Type="IP" Val="0.0.0.0" Frame="Client1_TLS_Dlg" />
-          <Parameter Name="TLS_IP3" Type="IP" Val="0.0.0.0" Frame="Client1_TLS_Dlg" />
-          <Parameter Name="TLSVerificationFile" Type="" Val="3S_CA.cer" Frame="Client2_TLS_Dlg" />
-          <Parameter Name="TLSCertificateFile" Type="" Val="Default.cer" Frame="Client2_TLS_Dlg" />
-          <Parameter Name="TLSPrivateKeyFile" Type="" Val="3S_CA.der" Frame="Client2_TLS_Dlg" />
-          <Parameter Name="TLSFiletype" Type="ENUM_TLS_FILETYPE" Val="2" Frame="Client2_TLS_Dlg" />
-          <Parameter Name="TLSVersion" Type="ENUM_TLS_VERSION" Val="10" Frame="Client2_TLS_Dlg" />
-          <Parameter Name="TLS_IP1" Type="IP" Val="0.0.0.0" Frame="Client2_TLS_Dlg" />
-          <Parameter Name="TLS_IP2" Type="IP" Val="0.0.0.0" Frame="Client2_TLS_Dlg" />
-          <Parameter Name="TLS_IP3" Type="IP" Val="0.0.0.0" Frame="Client2_TLS_Dlg" />
-          <Parameter Name="TLSVerificationFile" Type="" Val="3S_CA.cer" Frame="Client3_TLS_Dlg" />
-          <Parameter Name="TLSCertificateFile" Type="" Val="Default.cer" Frame="Client3_TLS_Dlg" />
-          <Parameter Name="TLSPrivateKeyFile" Type="" Val="3S_CA.der" Frame="Client3_TLS_Dlg" />
-          <Parameter Name="TLSFiletype" Type="ENUM_TLS_FILETYPE" Val="2" Frame="Client3_TLS_Dlg" />
-          <Parameter Name="TLSVersion" Type="ENUM_TLS_VERSION" Val="10" Frame="Client3_TLS_Dlg" />
-          <Parameter Name="TLS_IP1" Type="IP" Val="0.0.0.0" Frame="Client3_TLS_Dlg" />
-          <Parameter Name="TLS_IP2" Type="IP" Val="0.0.0.0" Frame="Client3_TLS_Dlg" />
-          <Parameter Name="TLS_IP3" Type="IP" Val="0.0.0.0" Frame="Client3_TLS_Dlg" />
-          <Parameter Name="TLSVerificationFile" Type="" Val="3S_CA.cer" Frame="Client4_TLS_Dlg" />
-          <Parameter Name="TLSCertificateFile" Type="" Val="Default.cer" Frame="Client4_TLS_Dlg" />
-          <Parameter Name="TLSPrivateKeyFile" Type="" Val="3S_CA.der" Frame="Client4_TLS_Dlg" />
-          <Parameter Name="TLSFiletype" Type="ENUM_TLS_FILETYPE" Val="2" Frame="Client4_TLS_Dlg" />
-          <Parameter Name="TLSVersion" Type="ENUM_TLS_VERSION" Val="10" Frame="Client4_TLS_Dlg" />
-          <Parameter Name="TLS_IP1" Type="IP" Val="0.0.0.0" Frame="Client4_TLS_Dlg" />
-          <Parameter Name="TLS_IP2" Type="IP" Val="0.0.0.0" Frame="Client4_TLS_Dlg" />
-          <Parameter Name="TLS_IP3" Type="IP" Val="0.0.0.0" Frame="Client4_TLS_Dlg" /><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.201 = 201)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DI1" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="201" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DI1" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.202 = 202)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DI2" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="202" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DI2" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.203 = 203)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DI3" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="203" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DI3" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.204 = 204)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DI4" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="204" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DI4" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.205 = 205)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DI5" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="205" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DI5" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.206 = 206)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DI6" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="206" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DI6" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.207 = 207)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DI7" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="207" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DI7" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.208 = 208)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DI8" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="208" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DI8" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.209 = 209)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DI9" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="209" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DI9" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.210 = 210)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DI10" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="210" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DI10" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.211 = 211)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DI11" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="211" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DI11" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.212 = 212)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DI12" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="212" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DI12" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.213 = 213)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DI13" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="213" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DI13" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.214 = 214)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DI14" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="214" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DI14" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.215 = 215)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DI15" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="215" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DI15" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj30M_SP_TB">
-    <Text>IObj30M_SP_TB (0.0.216 = 216)</Text>
-    <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DI16" />
-    <Parameter Name="InfoObjAdr1" Type="BYTE" Val="216" />
-    <Parameter Name="InfoObjAdr2" Type="BYTE" Val="0" />
-    <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-    <Parameter Name="RepeatTime" Type="TIME" Val="t#0s" />
-    <Parameter Name="LinkFailure" Type="BOOL" Val="TRUE" />
-    <Parameter Name="GARequest" Type="ENUM_GA" Val="0" />
-    <Parameter Name="ObjectGroup" Type="ENUM_GROUP" Val="255" />
-    <Channel Name="SPI" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DI16" />
-    <Channel Name="BL" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="SB" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="NT" Type="BOOL" Autoapply="True" Assignment="" />
-    <Channel Name="IV" Type="BOOL" Autoapply="True" Assignment="" />
-    <Parameter Name="ObjectTime_Select" Type="ENUM_OBJECT_TIME" Val="0" />
-    <Channel Name="ObjectTime_Var_CP56" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-    <Parameter Name="AlarmModem_SPI" Type="ENUM_AlarmModem_SPI" Val="0" />
-    <Parameter Name="SignalPreprocess_Choice" Type="ENUM_SignalPreprocess" Val="0" />
-    <Parameter Name="SignalPreprocessDI_Delay" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OnTime" Type="Time" Val="t#1s" />
-    <Parameter Name="SignalPreprocessDI_OffTime" Type="Time" Val="t#1s" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.189 = 701)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DO1" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="189" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO1" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO1_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.190 = 702)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DO2" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="190" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO2" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO2_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.191 = 703)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DO3" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="191" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO3" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO3_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.192 = 704)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DO4" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="192" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO4" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO4_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.193 = 705)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DO5" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="193" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO5" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO5_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.194 = 706)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DO6" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="194" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO6" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO6_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.195 = 707)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DO7" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="195" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO7" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO7_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.196 = 708)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DO8" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="196" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO8" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO8_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.197 = 709)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DO9" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="197" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO9" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO9_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.198 = 710)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DO10" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="198" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO10" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO10_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.199 = 711)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DO11" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="199" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO11" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO11_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.200 = 712)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DO12" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="200" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO12" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO12_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.201 = 713)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DO13" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="201" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO13" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO13_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.202 = 714)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DO14" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="202" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO14" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO14_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.203 = 715)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DO15" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="203" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO15" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO15_Trigger" />
-               <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
-               <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />
-               <Channel Name="FeedbackSPI_LocalRemote" Type="BOOL" Autoapply="True" Assignment="" />
-               <Parameter Name="FeedbackSPI_Choice" Type="ENUM_QOIFeedback" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr1" Type="BYTE" Val="1" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr2" Type="BYTE" Val="0" />
-               <Parameter Name="FeedbackSPI_InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="FeedbackSPI" Type="BOOL" Autoapply="True" Assignment="" />
-</CObjectServer><CObjectServer Name="IObj58C_SC_TA">
-               <Text>IObj58C_SC_TA (0.2.204 = 716)</Text>
-               <Parameter Name="Comment" Type="STRING" Val="sgl104_S1_DO16" />
-               <Parameter Name="InfoObjAdr1" Type="BYTE" Val="204" />
-               <Parameter Name="InfoObjAdr2" Type="BYTE" Val="2" />
-               <Parameter Name="InfoObjAdr3" Type="BYTE" Val="0" />
-               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO16" />
-               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S1_DO16_Trigger" />
+               <Channel Name="SCS" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_ExecuteGndSwitch_0_7SJ" />
+               <Channel Name="NewValue" Type="BOOL" Autoapply="True" Assignment="sgl104_S0_ExecuteGndSwitch_Trigger_0_7SJ" />
                <Channel Name="Timestamp" Type="IEC870_CP56" Autoapply="True" Assignment="" />
                <Channel Name="HrkAdrClient" Type="BYTE" Autoapply="True" Assignment="" />
                <Channel Name="FeedbackSPI_Lock" Type="BOOL" Autoapply="True" Assignment="" />

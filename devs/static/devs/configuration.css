@@ -167,3 +167,225 @@ select {
     top: 8px;
     right: 28px;
 }
+
+#device-configuration-title {
+    background: none;
+    padding: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+#content-related {
+    width: 550px;
+    margin-right: -600px;
+}
+
+/*--------------------------*/
+
+.tgl {
+	 display: none;
+}
+.tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl + .tgl-btn {
+	 box-sizing: border-box;
+}
+.tgl::selection, .tgl:after::selection, .tgl:before::selection, .tgl *::selection, .tgl *:after::selection, .tgl *:before::selection, .tgl + .tgl-btn::selection {
+	 background: none;
+}
+.tgl + .tgl-btn {
+	 outline: 0;
+	 display: block;
+	 width: 4em;
+	 height: 2em;
+	 position: relative;
+	 cursor: pointer;
+	 user-select: none;
+}
+.tgl + .tgl-btn:after, .tgl + .tgl-btn:before {
+    position: relative;
+    display: block;
+    content: "";
+    width: 50%;
+    height: 100%;
+}
+ .tgl + .tgl-btn:after {
+	 left: 0;
+}
+ .tgl + .tgl-btn:before {
+	 display: none;
+}
+ .tgl:checked + .tgl-btn:after {
+	 left: 50%;
+}
+ .tgl-light + .tgl-btn {
+	 background: #f0f0f0;
+	 border-radius: 2em;
+	 padding: 2px;
+	 transition: all 0.4s ease;
+}
+ .tgl-light + .tgl-btn:after {
+	 border-radius: 50%;
+	 background: #fff;
+	 transition: all 0.2s ease;
+}
+ .tgl-light:checked + .tgl-btn {
+	 background: #79aec8;
+}
+
+/*-----------------------------------*/
+
+.cbx {
+    display: block;
+	-webkit-perspective: 20;
+	perspective: 20;
+	border: 2px solid #e8e8eb;
+	background: #e8e8eb;
+	border-radius: 4px;
+	transform: translate3d(0, 0, 0);
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.cbx:hover {
+	border-color: #79aec8;
+}
+
+.flip {
+	display: block;
+	transition: all 0.4s ease;
+	transform-style: preserve-3d;
+	position: relative;
+	width: 20px;
+	height: 20px;
+}
+
+#cbx1 {
+	display: none;
+}
+
+#cbx1:checked + .cbx {
+	border-color: #79aec8;
+}
+
+#cbx1:checked + .cbx .flip {
+	transform: rotateY(180deg);
+}
+
+#cbx2 {
+	display: none;
+}
+
+#cbx2:checked + .cbx {
+	border-color: #79aec8;
+}
+
+#cbx2:checked + .cbx .flip {
+	transform: rotateY(180deg);
+}
+
+.front,
+.back {
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 20px;
+	height: 20px;
+	border-radius: 2px;
+}
+
+.front {
+	background: #fff;
+	z-index: 1;
+}
+
+.back {
+	transform: rotateY(180deg);
+	background: #79aec8;
+	text-align: center;
+	color: #fff;
+	line-height: 20px;
+	box-shadow: 0 0 0 1px #79aec8;
+}
+
+.back svg {
+	margin-top: 3px;
+	fill: none;
+}
+
+.back svg path {
+	stroke: #fff;
+	stroke-width: 2.5;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+}
+
+/*---------------------------*/
+
+.check {
+  cursor: pointer;
+  position: relative;
+  margin: auto;
+  width: 18px;
+  height: 18px;
+  -webkit-tap-highlight-color: transparent;
+  transform: translate3d(0, 0, 0);
+}
+
+.check:before {
+  content: "";
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(34,50,84,0.03);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.check svg {
+  position: relative;
+  z-index: 1;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #c8ccd4;
+  stroke-width: 1.5;
+  transform: translate3d(0, 0, 0);
+  transition: all 0.2s ease;
+}
+
+.check svg path {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 0;
+}
+
+.check svg polyline {
+  stroke-dasharray: 22;
+  stroke-dashoffset: 66;
+}
+
+.check:hover:before {
+  opacity: 1;
+}
+
+.check:hover svg {
+  stroke: #4285f4;
+}
+
+#add-device-server:checked + .check svg {
+  stroke: #4285f4;
+}
+
+#add-device-server:checked + .check svg path {
+  stroke-dashoffset: 60;
+  transition: all 0.3s linear;
+}
+
+#add-device-server:checked + .check svg polyline {
+  stroke-dashoffset: 42;
+  transition: all 0.2s linear;
+  transition-delay: 0.15s;
+}

@@ -1,4 +1,7 @@
 $(document).ready(function(){
+    var device_list = [];
+    var lastDeviceName;
+
     jQuery('#add-center-btn').click(function() {
         var num = jQuery('.repeat-center').length;
         var newNum = new Number(num + 1);
@@ -36,7 +39,7 @@ $(document).ready(function(){
         $('#generate').attr('disabled', true);
 
         /*Cleaning Center*/
-        newElem.children('#center').children('#table-cards').children('#body-cards').children('#row-'+
+        newElem.children('#center').children('#table-center').children('#body-center').children('#row-'+
         'center').children('#cell-center-name').children('#center-name').val("");
 
         /*Cleaning cards*/
@@ -179,64 +182,40 @@ $(document).ready(function(){
 
     $(document).on('click', '.enable-devices', function() {
         var deviceName = $(this).parent().parent().parent().parent().siblings('.enable-devices-'+
-        'section').children('.repeat-device').children('.selector-device').val();
-        var root = $(this).parent().parent().parent().parent().siblings('.enable-devices-section').children('.repeat-'+
-        'device')
+        'section').children('#repeat-device-1').children('.selector-device').val();
+        var root = $(this).parent().parent().parent().parent().siblings('.enable-devices-section').children('#repeat-'+
+        'device-1')
 
-        $.ajax({
-            url: '/ajax/validate_parameters/',
-            data: {
-              'device_name': deviceName
-            },
-            dataType: 'json',
-            success: function (data) {
-              if (!data.is_client) {
-                root.children('#add-device-client').prop('checked', false)
-                root.children('#add-device-client').prop('disabled', true)
-                root.children('#add-device-server').prop('checked', true)
-                root.children('#add-device-server').prop('disabled', true)
-              } else {
-                root.children('#add-device-client').prop('checked', true)
-                root.children('#add-device-client').prop('disabled', false)
-                root.children('#add-device-server').prop('checked', true)
-                root.children('#add-device-server').prop('disabled', false)
-              }
-              if (!data.is_do) {
-                root.children('.selector-operation').children().each(function() {
-                    if ($(this).val() == "DO") {
-                        $(this).prop('disabled', true)
-                    }
-                });
-              } else {
-                root.children('.selector-operation').children().each(function() {
-                    if ($(this).val() == "DO") {
-                        $(this).prop('disabled', false)
-                    }
-                });
-              }
-              if (!data.is_sbo) {
-                root.children('.selector-operation').children().each(function() {
-                    if ($(this).val() == "SBO") {
-                        $(this).prop('disabled', true)
-                    }
-                });
-                root.children('.selector-operation').val("DO");
-              } else {
-                root.children('.selector-operation').children().each(function() {
-                    if ($(this).val() == "SBO") {
-                        $(this).prop('disabled', false)
-                    }
-                });
-              }
-            }
-        });
-    });
-
-    $(document).on('click', '.enable-devices', function() {
-        if(this.checked) {
+        if (this.checked) {
+            $('#device-list').show();
+            ajax_processing(deviceName, root);
+            console.log(device_list);
             $(this).parent().parent().parent().parent().siblings('.enable-devices-section').show();
+            $('#add-center-btn').attr('disabled', false);
+            $('#generate').attr('disabled', false);
         } else {
+            $('#device-list').hide();
             $(this).parent().parent().parent().parent().siblings('.enable-devices-section').hide();
+            $('#add-center-btn').attr('disabled', true);
+            $('#generate').attr('disabled', true);
+        }
+
+        if($(this).parent().parent().parent().parent().siblings('#table-cards').children('#body-'+
+        'cards').children('#row-cards').children('#cell-cards').children('.enable-cards').prop('checked')) {
+
+            if($(this).parent().parent().parent().parent().siblings('.enable-cards-section').children('#table-input-'+
+            'cards').children('#body-input-cards').children('#row-input-cards').children('#cell-input-'+
+            'cards').children('.enable-input-cards').prop('checked')) {
+                $('#add-center-btn').attr('disabled', false);
+                $('#generate').attr('disabled', false);
+            }
+
+            if($(this).parent().parent().parent().parent().siblings('.enable-cards-section').children('#table-output-'+
+            'cards').children('#body-output-cards').children('#row-output-cards').children('#cell-output-'+
+            'cards').children('.enable-output-cards').prop('checked')) {
+                $('#add-center-btn').attr('disabled', false);
+                $('#generate').attr('disabled', false);
+            }
         }
     });
 
@@ -362,57 +341,24 @@ $(document).ready(function(){
         }
     });
 
+    $(document).on('focus', '.selector-device', function() {
+        lastDeviceName = this.value;
+    }).change(function() {
+        lastDeviceName = this.value;
+    });
+
     $(document).on('change', '.selector-device', function() {
         var deviceName = $(this).val()
         var root = $(this).parent()
 
-        $.ajax({
-            url: '/ajax/validate_parameters/',
-            data: {
-              'device_name': deviceName
-            },
-            dataType: 'json',
-            success: function (data) {
-              if (!data.is_client) {
-                root.children('#add-device-client').prop('checked', false)
-                root.children('#add-device-client').prop('disabled', true)
-                root.children('#add-device-server').prop('checked', true)
-                root.children('#add-device-server').prop('disabled', true)
-              } else {
-                root.children('#add-device-client').prop('checked', true)
-                root.children('#add-device-client').prop('disabled', false)
-                root.children('#add-device-server').prop('checked', true)
-                root.children('#add-device-server').prop('disabled', false)
-              }
-              if (!data.is_do) {
-                root.children('.selector-operation').children().each(function() {
-                    if ($(this).val() == "DO") {
-                        $(this).prop('disabled', true)
-                    }
-                });
-              } else {
-                root.children('.selector-operation').children().each(function() {
-                    if ($(this).val() == "DO") {
-                        $(this).prop('disabled', false)
-                    }
-                });
-              }
-              if (!data.is_sbo) {
-                root.children('.selector-operation').children().each(function() {
-                    if ($(this).val() == "SBO") {
-                        $(this).prop('disabled', true)
-                    }
-                });
-                root.children('.selector-operation').val("DO");
-              } else {
-                root.children('.selector-operation').children().each(function() {
-                    if ($(this).val() == "SBO") {
-                        $(this).prop('disabled', false)
-                    }
-                });
-              }
-            }
-        });
+        $("#device-list").children('#' + lastDeviceName).remove();
+        const index = device_list.indexOf(lastDeviceName);
+        if (index > -1) {
+            device_list.splice(index, 1);
+        }
+
+        ajax_processing(deviceName, root);
+        console.log(device_list);
     });
 
     $(document).on('click', '#add-device-btn', function() {
@@ -433,53 +379,8 @@ $(document).ready(function(){
         var deviceName = newElem.children(".selector-device").val()
         var root = newElem
 
-        $.ajax({
-            url: '/ajax/validate_parameters/',
-            data: {
-              'device_name': deviceName
-            },
-            dataType: 'json',
-            success: function (data) {
-              if (!data.is_client) {
-                root.children('#add-device-client').prop('checked', false)
-                root.children('#add-device-client').prop('disabled', true)
-                root.children('#add-device-server').prop('checked', true)
-                root.children('#add-device-server').prop('disabled', true)
-              } else {
-                root.children('#add-device-client').prop('checked', true)
-                root.children('#add-device-client').prop('disabled', false)
-                root.children('#add-device-server').prop('checked', true)
-                root.children('#add-device-server').prop('disabled', false)
-              }
-              if (!data.is_do) {
-                root.children('.selector-operation').children().each(function() {
-                    if ($(this).val() == "DO") {
-                        $(this).prop('disabled', true)
-                    }
-                });
-              } else {
-                root.children('.selector-operation').children().each(function() {
-                    if ($(this).val() == "DO") {
-                        $(this).prop('disabled', false)
-                    }
-                });
-              }
-              if (!data.is_sbo) {
-                root.children('.selector-operation').children().each(function() {
-                    if ($(this).val() == "SBO") {
-                        $(this).prop('disabled', true)
-                    }
-                });
-                root.children('.selector-operation').val("DO");
-              } else {
-                root.children('.selector-operation').children().each(function() {
-                    if ($(this).val() == "SBO") {
-                        $(this).prop('disabled', false)
-                    }
-                });
-              }
-            }
-        });
+        ajax_processing(deviceName, root);
+        console.log(device_list);
 
         previousDom.children(".selector-device").attr('disabled', true);
 
@@ -496,6 +397,14 @@ $(document).ready(function(){
         var newNum = new Number(num - 1);
         var previousDom = $(this).siblings('#repeat-device-' + newNum);
         var actualDom = $(this).siblings('#repeat-device-' + num);
+        var deviceName = actualDom.children('.selector-device').val();
+
+        $("#device-list").children('#' + deviceName).remove();
+        const index = device_list.indexOf(deviceName);
+        if (index > -1) {
+            device_list.splice(index, 1);
+        }
+        console.log(device_list);
 
         actualDom.remove();                                                                                                 // remove the last element
         $(this).siblings('#add-device-btn').attr('disabled', false);                                                        // enable the "add" button
@@ -581,33 +490,154 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on('click', '.enable-devices', function() {
-        if(this.checked) {
-            $('#add-center-btn').attr('disabled', false);
-            $('#generate').attr('disabled', false);
+    $(document).on('click', '.enable-device', function() {
+        if (this.checked) {
+            $(this).siblings(".object-section").show();
         } else {
-            $('#add-center-btn').attr('disabled', true);
-            $('#generate').attr('disabled', true);
-        }
-
-        if($(this).parent().parent().parent().parent().siblings('#table-cards').children('#body-'+
-        'cards').children('#row-cards').children('#cell-cards').children('.enable-cards').prop('checked')) {
-
-            if($(this).parent().parent().parent().parent().siblings('.enable-cards-section').children('#table-input-'+
-            'cards').children('#body-input-cards').children('#row-input-cards').children('#cell-input-'+
-            'cards').children('.enable-input-cards').prop('checked')) {
-                $('#add-center-btn').attr('disabled', false);
-                $('#generate').attr('disabled', false);
-            }
-
-            if($(this).parent().parent().parent().parent().siblings('.enable-cards-section').children('#table-output-'+
-            'cards').children('#body-output-cards').children('#row-output-cards').children('#cell-output-'+
-            'cards').children('.enable-output-cards').prop('checked')) {
-                $('#add-center-btn').attr('disabled', false);
-                $('#generate').attr('disabled', false);
-            }
+            $(this).siblings(".object-section").hide();
         }
     });
+
+    $(document).on('click', '.enable-monitor-objects', function() {
+        if (this.checked) {
+            $(this).siblings(".monitor-objects-section").show();
+        } else {
+            $(this).siblings(".monitor-objects-section").hide();
+        }
+    });
+
+    $(document).on('click', '.enable-control-objects', function() {
+        if (this.checked) {
+            $(this).siblings(".control-objects-section").show();
+        } else {
+            $(this).siblings(".control-objects-section").hide();
+        }
+    });
+
+    $(document).on('click', '.enable-signals', function() {
+        if (this.checked) {
+            $(this).siblings(".signals-section").show();
+        } else {
+            $(this).siblings(".signals-section").hide();
+        }
+    });
+
+    function ajax_processing(deviceName, root) {
+        $.ajax({
+            url: '/ajax/validate_parameters/',
+            data: {
+              'device_name': deviceName
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (!data.is_client) {
+                    root.children('#add-device-client').prop('checked', false)
+                    root.children('#add-device-client').prop('disabled', true)
+                    root.children('#add-device-server').prop('checked', true)
+                    root.children('#add-device-server').prop('disabled', true)
+                } else {
+                    root.children('#add-device-client').prop('checked', true)
+                    root.children('#add-device-client').prop('disabled', false)
+                    root.children('#add-device-server').prop('checked', true)
+                    root.children('#add-device-server').prop('disabled', false)
+                }
+                if (!data.is_do) {
+                    root.children('.selector-operation').children().each(function() {
+                        if ($(this).val() == "DO") {
+                            $(this).prop('disabled', true)
+                        }
+                    });
+                } else {
+                    root.children('.selector-operation').children().each(function() {
+                        if ($(this).val() == "DO") {
+                            $(this).prop('disabled', false)
+                        }
+                    });
+                }
+                if (!data.is_sbo) {
+                    root.children('.selector-operation').children().each(function() {
+                        if ($(this).val() == "SBO") {
+                            $(this).prop('disabled', true)
+                        }
+                    });
+                    root.children('.selector-operation').val("DO");
+                } else {
+                    root.children('.selector-operation').children().each(function() {
+                        if ($(this).val() == "SBO") {
+                           $(this).prop('disabled', false)
+                        }
+                    });
+                }
+
+                if (!device_list.includes(deviceName)) {
+                    //Add element to list
+                    device_list.push(deviceName);
+                    device_processing(deviceName, data.device_data);
+                }
+            }
+        });
+    }
+
+    function device_processing(deviceName, data) {
+        var device = '';
+
+        //Create drop-down menu
+        device += '<div class="actionlist" id="' + deviceName + '">\n';
+        device += '\t<input type="checkbox" class="enable-device" id="' + deviceName + '-cbx">\n';
+        device += '\t<label>' + deviceName + '</label>\n';
+        device += '\t<div class="object-section" style="display:none;">\n';
+        $.each(data, function(key, value){
+            if (key == 'monitor') {
+                device += '\t\t<div class="monitor-section">\n';
+                device += '\t\t\t<input type="checkbox" class="enable-monitor-objects" id="monitor-cbx" style="position:relative; left:15px;">\n';
+                device += '\t\t\t<label style="position:relative; left:15px;">monitor objects</label>\n';
+                device += '\t\t\t<div class="monitor-objects-section" style="display:none;">\n';
+                $.each(value, function(key, value){
+                    device += '\t\t\t\t<div class="monitor-object" id="' + key + '">\n';
+                    device += '\t\t\t\t\t<input class="enable-signals" type="checkbox" id="' + key + '-cbx" style="position:relative; left:30px;">\n';
+                    device += '\t\t\t\t\t<label style="position:relative; left:30px;">' + key + '</label>\n';
+                    device += '\t\t\t\t\t<div class="signals-section" style="display:none;">\n';
+                    $.each(value, function(index, value){
+                        device += '\t\t\t\t\t\t<div class="signal">\n';
+                        device += '\t\t\t\t\t\t\t<input type="checkbox" id="' + value + '-cbx" value="' + value + '" style="position:relative; left:45px;" checked>\n';
+                        device += '\t\t\t\t\t\t\t<label style="position:relative; left:45px;">' + value + '</label>\n';
+                        device += '\t\t\t\t\t\t</div>\n';
+                    });
+                    device += '\t\t\t\t\t</div>\n';
+                    device += '\t\t\t\t</div>\n';
+                });
+                device += '\t\t\t</div>\n';
+                device += '\t\t</div>\n';
+            }
+            if (key == 'control') {
+                device += '\t\t<div class="control-section">\n';
+                device += '\t\t\t<input type="checkbox" class="enable-control-objects" id="control-cbx" style="position:relative; left:15px;">\n';
+                device += '\t\t\t<label style="position:relative; left:15px;">control objects</label>\n';
+                device += '\t\t\t<div class="control-objects-section" style="display:none;">\n';
+                $.each(value, function(key, value){
+                    device += '\t\t\t\t<div class="control-object" id="' + key + '">\n';
+                    device += '\t\t\t\t\t<input class="enable-signals" type="checkbox" id="' + key + '-cbx" style="position:relative; left:30px;">\n';
+                    device += '\t\t\t\t\t<label style="position:relative; left:30px;">' + key + '</label>\n';
+                    device += '\t\t\t\t\t<div class="signals-section" style="display:none;">\n';
+                    $.each(value, function(index, value){
+                        device += '\t\t\t\t\t\t<div class="signal">\n';
+                        device += '\t\t\t\t\t\t\t<input type="checkbox" id="' + value + '-cbx" value="' + value + '" style="position:relative; left:45px;" checked>\n';
+                        device += '\t\t\t\t\t\t\t<label style="position:relative; left:45px;">' + value + '</label>\n';
+                        device += '\t\t\t\t\t\t</div>\n';
+                    });
+                    device += '\t\t\t\t\t</div>\n';
+                    device += '\t\t\t\t</div>\n';
+                });
+                device += '\t\t\t</div>\n';
+                device += '\t\t</div>\n';
+            }
+        });
+
+        device += '\t</div>\n';
+        device += '</div>\n';
+
+        $("#device-list").append(device);
+    }
 
     $('#form-data').submit(function(event) {
         var xmlString = "";
@@ -616,8 +646,8 @@ $(document).ready(function(){
         xmlString += "<root>";
         $('.repeat-center').each(function() {
             xmlString += "<center name='";
-            xmlString += $(this).children('#center').children("#table-cards").children("#body-cards").children("#row-"+
-            "center").children("#cell-center-name").children("#center-name").val();
+            xmlString += $(this).children('#center').children("#table-center").children("#body-"+
+            "center").children("#row-center").children("#cell-center-name").children("#center-name").val();
             xmlString += "'>";
 
             if($(this).children('#center').children('#table-cards').children('#body-cards').children('#row-'+
