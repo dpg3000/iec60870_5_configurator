@@ -13,6 +13,8 @@ from django.http import JsonResponse
 import pou
 from pou import delete_pous
 import shutil
+from django.contrib import messages
+from django.shortcuts import redirect
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -73,6 +75,8 @@ def submit(request):
     fl_k_bus = os.path.abspath("k_bus_configuration.xml")
     fl_pou_files = os.path.abspath("POUs")
 
+    error_messages = ""
+
     # Initial erase to avoid partial overwriting
     if os.path.isfile(fl_iec60870_5_config):
         os.remove(fl_iec60870_5_config)
@@ -103,7 +107,11 @@ def submit(request):
         center_ins.headers()
         for input_card in center.iter('input-card'):
             if input_card.attrib['server'] == 'yes':
-                ServerDevice(input_card.text, 'card', int(input_card.attrib['number']), server_iteration, iec60870_5_config)
+                server_input_car = ServerDevice(input_card.text, 'card', int(input_card.attrib['number']), server_iteration, iec60870_5_config)
+                error_message = server_input_car.create_device()
+                if error_message:
+                    messages.error(request, error_message)
+                    error_messages += error_message + '\n'
                 flag_input_cards = True
             if input_card.attrib['io'] == 'yes':
                 for k in range(int(input_card.attrib['number'])):
@@ -111,17 +119,30 @@ def submit(request):
                     bus_modules_list.append(kbus_ins)
         for output_card in center.iter('output-card'):
             if output_card.attrib['server'] == 'yes':
-                ServerDevice(output_card.text, 'card', int(output_card.attrib['number']), server_iteration, iec60870_5_config)
+                server_output_card = ServerDevice(output_card.text, 'card', int(output_card.attrib['number']), server_iteration, iec60870_5_config)
+                error_message = server_output_card.create_device()
+                if error_message:
+                    messages.error(request, error_message)
+                    error_messages += error_message + '\n'
                 flag_output_cards = True
             if output_card.attrib['io'] == 'yes':
                 for k in range(int(output_card.attrib['number'])):
                     kbus_ins = BusModule(output_card.text)
                     bus_modules_list.append(kbus_ins)
         if flag_input_cards or flag_output_cards:
-            pou.create_pous('Cards', 'card', 1, 'DO', server_iteration)
+            error_message = pou.create_pous('Cards', 'card', 1, 'DO', server_iteration)
+            flag_input_cards = False
+            flag_output_cards = False
+            if error_message:
+                messages.error(request, error_message)
+                error_messages += error_message + '\n'
         for device in center.iter('device'):
             if device.attrib['server'] == 'yes':
-                ServerDevice(device.text, 'device', int(device.attrib['number']), server_iteration, iec60870_5_config)
+                server_device = ServerDevice(device.text, 'device', int(device.attrib['number']), server_iteration, iec60870_5_config)
+                error_message = server_device.create_device()
+                if error_message:
+                    messages.error(request, error_message)
+                    error_messages += error_message + '\n'
             # if device.attrib['client'] == 'yes':
             # GESTIONAR EL CLIENTE
             pou.create_pous(device.text, 'device', int(device.attrib['number']), device.attrib['operation'], server_iteration)
@@ -152,6 +173,9 @@ def submit(request):
     zp.close()
 
     # Sending response
+    if error_messages:
+        print(error_messages)
+        return redirect('/configurator')
     return http_response('configuration.zip', 'rb')
 
 

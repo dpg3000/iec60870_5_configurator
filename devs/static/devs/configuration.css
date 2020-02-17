@@ -185,12 +185,15 @@ select {
 .tgl {
 	 display: none;
 }
+
 .tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl + .tgl-btn {
 	 box-sizing: border-box;
 }
+
 .tgl::selection, .tgl:after::selection, .tgl:before::selection, .tgl *::selection, .tgl *:after::selection, .tgl *:before::selection, .tgl + .tgl-btn::selection {
 	 background: none;
 }
+
 .tgl + .tgl-btn {
 	 outline: 0;
 	 display: block;

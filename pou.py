@@ -1,7 +1,6 @@
 import os
 import shutil
 from devs.models import Device
-from cards.models import Card
 import itertools
 
 path = os.path.dirname(os.path.abspath(__file__)) + '\\POUs'
@@ -52,7 +51,7 @@ def delete_pous():
             elif os.path.isdir(file_path):
                 shutil.rmtree(file_path)
         except Exception as e:
-            print('Failed to delete %s. Reason: %s' % (file_path, e))
+            print(f"Failed to delete {file_path}. Reason: {e}")
 
 
 def create_pous(device_name, element, device_quantity, operation, server_iteration):
@@ -62,31 +61,39 @@ def create_pous(device_name, element, device_quantity, operation, server_iterati
         protocol = Device.objects.filter(Name=device_name).first().Protocol
     elif element == 'card':
         protocol = 'IO-Logic'
-        # Joining the inner devices (in this case cards) to collect them in a single device POU
-        states_temp = list(itertools.chain(*states_list))
-        states_list.clear()
-        states_list.append(states_temp)
-        states_names_temp = list(itertools.chain(*states_names_list))
-        states_names_list.clear()
-        states_names_list.append(states_names_temp)
-        commands_temp = list(itertools.chain(*commands_list))
-        commands_list.clear()
-        commands_list.append(commands_temp)
-        commands_names_temp = list(itertools.chain(*commands_names_list))
-        commands_names_list.clear()
-        commands_names_list.append(commands_names_temp)
-        commands_triggers_temp = list(itertools.chain(*commands_triggers_list))
-        commands_triggers_list.clear()
-        commands_triggers_list.append(commands_triggers_temp)
     else:
-        "gestionar errores"
+        return f"Error: unknown element in the device/card hub inside create_pous()"
 
     # Main purposes sequence list
     if measurements_list:
+        if element == 'card':
+            # Joining the inner devices (in this case cards) to collect them in a single device POU
+            measurements_temp = list(itertools.chain(*measurements_list))
+            measurements_list.clear()
+            measurements_list.append(measurements_temp)
         sequence['measure'] = len(measurements_list[0])
     if states_list:
+        if element == 'card':
+            # Joining the inner devices (in this case cards) to collect them in a single device POU
+            states_temp = list(itertools.chain(*states_list))
+            states_list.clear()
+            states_list.append(states_temp)
+            states_names_temp = list(itertools.chain(*states_names_list))
+            states_names_list.clear()
+            states_names_list.append(states_names_temp)
         sequence['state'] = len(states_list[0])
     if commands_list:
+        if element == 'card':
+            # Joining the inner devices (in this case cards) to collect them in a single device POU
+            commands_temp = list(itertools.chain(*commands_list))
+            commands_list.clear()
+            commands_list.append(commands_temp)
+            commands_names_temp = list(itertools.chain(*commands_names_list))
+            commands_names_list.clear()
+            commands_names_list.append(commands_names_temp)
+            commands_triggers_temp = list(itertools.chain(*commands_triggers_list))
+            commands_triggers_list.clear()
+            commands_triggers_list.append(commands_triggers_temp)
         sequence['command'] = len(commands_list[0])
 
     for purpose in sequence:
@@ -208,9 +215,3 @@ def create_user_prg():
 
     # clearing device list
     device_list.clear()
-
-
-
-
-
-

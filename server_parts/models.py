@@ -8,6 +8,7 @@ OBJ_TYPE_CHOICES = (
 
 # Create your models here.
 class Server(models.Model):
+    BasePort = models.CharField(max_length=255, default="")
     Header = models.TextField(default="header")
     ClosingTag = models.TextField(default="closing tag")
 

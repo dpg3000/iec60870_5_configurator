@@ -10,6 +10,7 @@ class Server:
         self.name = name
         self.server_object = Serv.objects.first()
         self.server_iteration = server_iteration
+        self.base_port = self.server_object.BasePort
         self.header = self.server_object.Header
         self.closing_tag = self.server_object.ClosingTag
         self.file = file
@@ -18,7 +19,7 @@ class Server:
         header = self.header.format(
             text_server_name=self.name,
             server_iteration_0=str(self.server_iteration),
-            port=str(2404 + self.server_iteration),
+            port=str(int(self.base_port) + self.server_iteration),
             server_iteration_1=str(self.server_iteration)
         )
         self.file.write(header)
@@ -40,8 +41,6 @@ class ServerDevice:
             self.server_element = Card.objects.filter(ArticleNo=name).first()
             self.name = Card.objects.filter(ArticleNo=name).first().IO
             self.card_channels = Card.objects.filter(ArticleNo=name).first().ModuleChannels
-        else:
-            "gestionar errores"
         self.monitor_ioa = self.server_element.MonitorIoa
         self.monitor_ioa_jump = self.server_element.MonitorIoaJump
         self.monitor_obj_list = [i.strip() for i in str(self.server_element.MonitorObjectList).split(",")]
@@ -51,8 +50,6 @@ class ServerDevice:
         self.internal_monitor_ioa = self.monitor_ioa
         self.internal_control_ioa = self.control_ioa
         self.device_count = -1
-
-        self.create_device()
 
     def create_device(self):
         for iteration in range(self.quantity):
@@ -71,16 +68,16 @@ class ServerDevice:
                                 hysteresis = Obj35mMeTe.objects.filter(DeviceName=self.name).first().Hysteresis.split(",")
                             self._obj_35m_me_te(obj_info, hysteresis, sva, self.file)
                         except:
-                            return f"There is no {monitor_object} for the device {self.name}. You have to add it in the " \
-                                   f"server_parts section in the DB "
+                            return f"{self.__class__.__name__} error: exception occurred in the {monitor_object} " \
+                                   f"function for the device {self.name}"
                     elif monitor_object == 'obj_31m_dp_tb':
                         try:
                             obj_info = ObjsInfo.objects.filter(ObjCode=monitor_object).first().ObjInfo
                             dpi = Obj31mDpTb.objects.filter(DeviceName=self.name).first().DPI.split(",")
                             self._obj_31m_dp_tb(obj_info, dpi, self.file)
                         except:
-                            return f"There is no {monitor_object} for the device {self.name}. You have to add it in the " \
-                                   f"server_parts section in the DB "
+                            return f"{self.__class__.__name__} error: exception occurred in the {monitor_object} " \
+                                   f"function for the device {self.name}"
                     elif monitor_object == 'obj_30m_sp_tb':
                         try:
                             obj_info = ObjsInfo.objects.filter(ObjCode=monitor_object).first().ObjInfo
@@ -89,10 +86,11 @@ class ServerDevice:
                                 spi = [spi[0] for i in range(int(self.card_channels))]
                             self._obj_30m_sp_tb(obj_info, spi, self.file)
                         except:
-                            return f"There is no {monitor_object} for the device {self.name}. You have to add it in the " \
-                                   f"server_parts section in the DB "
+                            return f"{self.__class__.__name__} error: exception occurred in the {monitor_object} " \
+                                   f"function for the device {self.name}"
                     else:
-                        return f"There is no logic to process the {monitor_object}"
+                        return f"{self.__class__.__name__} error: There is no logic to process the {monitor_object}"
+
             if '' not in self.control_obj_list:
                 for control_object in self.control_obj_list:
                     if control_object == 'obj_58c_sc_ta':
@@ -103,18 +101,18 @@ class ServerDevice:
                                 scs = [scs[0] for i in range(int(self.card_channels))]
                             self._obj_58c_sc_ta(obj_info, scs, self.file)
                         except:
-                            return f"There is no {control_object} for the device {self.name}. You have to add it to the " \
-                                   f"server_parts section in the DB "
+                            return f"{self.__class__.__name__} error: exception occurred in the {control_object} " \
+                                   f"function for the device {self.name}"
                     elif control_object == 'obj_59c_dc_ta':
                         try:
                             obj_info = ObjsInfo.objects.filter(ObjCode=control_object).first().ObjInfo
                             dcs = Obj59cDcTa.objects.filter(DeviceName=self.name).first().DCS.split(",")
                             self._obj_59c_dc_ta(obj_info, dcs, self.file)
                         except:
-                            return f"There is no {control_object} for the device {self.name}. You have to add it to the " \
-                                   f"server_parts section in the DB "
+                            return f"{self.__class__.__name__} error: exception occurred in the {control_object} " \
+                                   f"function for the device {self.name}"
                     else:
-                        return f"There is no logic to process the {control_object}"
+                        return f"{self.__class__.__name__} error: There is no logic to process the {control_object}"
 
     def _obj_35m_me_te(self, obj_info, hysteresis, sva, file):
         address = ioa_to_address(self.internal_monitor_ioa)
@@ -338,26 +336,46 @@ def device_ajax_request(device_name):
 
     for monitor_object in monitor_obj_list:
         if monitor_object == 'obj_35m_me_te':
-            sva = Obj35mMeTe.objects.filter(DeviceName=device_name).first().SVA.split(",")
-            monitor_dict[monitor_object] = sva
+            try:
+                sva = Obj35mMeTe.objects.filter(DeviceName=device_name).first().SVA.split(",")
+                monitor_dict[monitor_object] = sva
+            except:
+                print(f"device_ajax_request() error: There is no {monitor_object} for the device {device_name}. You "
+                      f"have to add it in the server_parts section in the DB")
         elif monitor_object == 'obj_31m_dp_tb':
-            dpi = Obj31mDpTb.objects.filter(DeviceName=device_name).first().DPI.split(",")
-            monitor_dict[monitor_object] = dpi
+            try:
+                dpi = Obj31mDpTb.objects.filter(DeviceName=device_name).first().DPI.split(",")
+                monitor_dict[monitor_object] = dpi
+            except:
+                print(f"device_ajax_request() error: There is no {monitor_object} for the device {device_name}. You "
+                      f"have to add it in the server_parts section in the DB")
         elif monitor_object == 'obj_30m_sp_tb':
-            spi = Obj30mSpTb.objects.filter(DeviceName=device_name).first().SPI.split(",")
-            monitor_dict[monitor_object] = spi
+            try:
+                spi = Obj30mSpTb.objects.filter(DeviceName=device_name).first().SPI.split(",")
+                monitor_dict[monitor_object] = spi
+            except:
+                print(f"device_ajax_request() error: There is no {monitor_object} for the device {device_name}. You "
+                      f"have to add it in the server_parts section in the DB")
         else:
-            "gestionar errores"
+            print(f"device_ajax_request() error: There is no logic to process the {monitor_object}")
 
     for control_object in control_obj_list:
         if control_object == 'obj_58c_sc_ta':
-            scs = Obj58cScTa.objects.filter(DeviceName=device_name).first().SCS.split(",")
-            control_dict[control_object] = scs
+            try:
+                scs = Obj58cScTa.objects.filter(DeviceName=device_name).first().SCS.split(",")
+                control_dict[control_object] = scs
+            except:
+                print(f"device_ajax_request() error: There is no {control_object} for the device {device_name}. You "
+                      f"have to add it in the server_parts section in the DB")
         elif control_object == 'obj_59c_dc_ta':
-            dcs = Obj59cDcTa.objects.filter(DeviceName=device_name).first().DCS.split(",")
-            control_dict[control_object] = dcs
+            try:
+                dcs = Obj59cDcTa.objects.filter(DeviceName=device_name).first().DCS.split(",")
+                control_dict[control_object] = dcs
+            except:
+                print(f"device_ajax_request() error: There is no {control_object} for the device {device_name}. You "
+                      f"have to add it in the server_parts section in the DB")
         else:
-            "gestionar errores"
+            print(f"device_ajax_request() error: There is no logic to process the {control_object}")
 
     data['monitor'] = monitor_dict
     data['control'] = control_dict

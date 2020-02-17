@@ -6,7 +6,7 @@ $(document).ready(function(){
         var num = jQuery('.repeat-center').length;
         var newNum = new Number(num + 1);
         var previousDom = jQuery('#repeat-center-' + num);
-        var newElem = jQuery('#repeat-center-' + num).clone().attr('id', 'repeat-center-' + newNum);                    // Cloning the previous element
+        var newElem = jQuery('#repeat-center-' + num).clone().attr('id', 'repeat-center-' + newNum);                    // cloning the previous element
         var numOfInputCards = newElem.children('#center').children('.enable-input-cards-section').children('.repeat-'+
         'input-card').length;
         var numOfOutputCards = newElem.children('#center').children('.enable-output-cards-section').children('.repeat-'+
@@ -14,52 +14,48 @@ $(document).ready(function(){
         var numOfDevices = newElem.children('#center').children('.enable-devices-section').children('.repeat-'+
         'device').length;
 
-        /*disable the add card checkbox*/
-        previousDom.children('#center').children('#table-cards').children('#body-cards').children('#row-'+
+        /*PREVIOUS CENTER*/
+        previousDom.children('#center').children('#table-cards').children('#body-cards').children('#row-'+              // disabling the "enable cards" checkbox
         'cards').children('#cell-cards').children('.enable-cards').prop("disabled", true);
 
-        /*disable the add input card checkbox*/
-        previousDom.children('#center').children('.enable-cards-section').children('#table-input-'+
+        previousDom.children('#center').children('.enable-cards-section').children('#table-input-'+                     // disabling the "enable input cards" checkbox
         'cards').children('#body-input-cards').children('#row-input-cards').children('#cell-input-'+
         'cards').children('.enable-input-cards').prop("disabled", true);
 
-        /*disable the add output card checkbox*/
-        previousDom.children('#center').children('.enable-cards-section').children('#table-output-'+
+        previousDom.children('#center').children('.enable-cards-section').children('#table-output-'+                    // disabling the "enable output cards" checkbox
         'cards').children('#body-output-cards').children('#row-output-cards').children('#cell-output-'+
         'cards').children('.enable-output-cards').prop("disabled", true);
 
-        /*disable the add device checkbox*/
-        previousDom.children('#center').children('#table-devices').children('#body-devices').children('#row-'+
+        previousDom.children('#center').children('#table-devices').children('#body-devices').children('#row-'+          // disabling the "enable devices" checkbox
         'devices').children('#cell-devices').children('.enable-devices').prop("disabled", true);
 
-        /*Cleaning add center status*/
-        $(this).attr('disabled', true);
+        previousDom.children('#center').css("background", "url(../static/admin/img/icon-yes.svg) 100px 11px no-repeat");// Adding "validated" icon
 
-        /*Cleaning generate status*/
-        $('#generate').attr('disabled', true);
+        $(this).attr('disabled', true);                                                                                 // disabling the "add center" button
 
-        /*Cleaning Center*/
-        newElem.children('#center').children('#table-center').children('#body-center').children('#row-'+
+        $('#generate').attr('disabled', true);                                                                          // disabling "generate" button
+
+        /*NEW CENTER*/
+        newElem.children('#center').children('#table-center').children('#body-center').children('#row-'+                // cleaning center name
         'center').children('#cell-center-name').children('#center-name').val("");
 
-        /*Cleaning cards*/
-        newElem.children('#center').children('#table-cards').children('#body-cards').children('#row-'+                  //Uncheck the add card checkbox
+        newElem.children('#center').children('#table-cards').children('#body-cards').children('#row-'+                  // Unchecking the "enable cards" checkbox
         'cards').children('#cell-cards').children('.enable-cards').prop("checked", false);
 
-        newElem.children('#center').children('.enable-cards-section').children('#table-input-'+                         //Uncheck the add input card checkbox
+        newElem.children('#center').children('.enable-cards-section').children('#table-input-'+                         // Unchecking the "enable input card" checkbox
         'cards').children('#body-input-cards').children('#row-input-cards').children('#cell-input-'+
         'cards').children('.enable-input-cards').prop("checked", false);
 
-        newElem.children('#center').children('.enable-cards-section').children('#table-output-'+                        //Uncheck the add output card checkbox
+        newElem.children('#center').children('.enable-cards-section').children('#table-output-'+                        // Unchecking the "enable output card" checkbox
         'cards').children('#body-output-cards').children('#row-output-cards').children('#cell-output-'+
         'cards').children('.enable-output-cards').prop("checked", false);
 
-        for (i = numOfInputCards; i > 1; i--) {                                                                         //Remove all input cards but the first
+        for (i = numOfInputCards; i > 1; i--) {                                                                         // Removing all input cards but the first
             newElem.children('#center').children('.enable-cards-section').children('.enable-input-cards-'+
             'section').children('#repeat-input-card-' + i).remove();
         }
 
-        for (i = numOfOutputCards; i > 1; i--) {                                                                        //Remove all output cards but the first
+        for (i = numOfOutputCards; i > 1; i--) {                                                                        // Removing all output cards but the first
             newElem.children('#center').children('.enable-cards-section').children('.enable-output-cards-'+
             'section').children('#repeat-output-card-' + i).remove();
         }
@@ -110,8 +106,6 @@ $(document).ready(function(){
         newElem.children('#center').children('.enable-devices-section').children('#remove-devices-'+                    //Disable remove device button
         'btn').attr('disabled', true);
 
-        previousDom.children('#center').css("background", "url(../static/admin/img/icon-yes.svg) 100px 11px no-repeat");
-
         previousDom.after(newElem);                                                                                     // Adding the new element after the previous
         jQuery('#remove-center-btn').attr('disabled', false);                                                           // Enabling 'remove center' possibility
     });
@@ -120,6 +114,8 @@ $(document).ready(function(){
         var num = jQuery('.repeat-center').length;
         var newNum = new Number(num - 1);
         var actualDom = jQuery('#repeat-center-' + newNum);
+
+        actualDom.children('#center').css("background", "");
 
         actualDom.children('#center').children('#table-cards').children('#body-cards').children('#row-'+                // enable the add card checkbox
         'cards').children('#cell-cards').children('.enable-cards').prop("disabled", false);

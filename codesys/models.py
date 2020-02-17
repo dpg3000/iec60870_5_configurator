@@ -853,10 +853,10 @@ class DeviceModel(UserPrgModel):
         # variable definition
         # inputs
         # control inputs
-        input_str = f"{self.first_cycle}        : {self.first_cycle_data_type};" + '\n'
-        input_str += f"{self.sequence_order}    : {self.sequence_order_data_type};" + '\n'
-        input_str += f"{self.protocol}          : {self.protocol_data_type};" + '\n'
-        input_str += f"{self.state_loc_rem}     : {self.state_loc_rem_data_type};" + '\n'
+        input_str = f"{self.first_cycle}        : {self.first_cycle_data_type};" + '\n\t'
+        input_str += f"{self.sequence_order}    : {self.sequence_order_data_type};" + '\n\t'
+        input_str += f"{self.protocol}          : {self.protocol_data_type};" + '\n\t'
+        input_str += f"{self.state_loc_rem}     : {self.state_loc_rem_data_type};" + '\n\t'
 
         # Obtaining sequence keys to apply individual conditions
         purposes = sequence.keys()
@@ -867,19 +867,19 @@ class DeviceModel(UserPrgModel):
                 signal=self.measure,
                 size=sequence['measure'],
                 data_type=self.measure_data_type
-            ) + '\n'
+            ) + '\n\t'
 
             input_str += variable_to_declaration(
                 signal=self.save_measure,
                 size=sequence['measure'],
                 data_type=self.save_measure_data_type
-            ) + '\n'
+            ) + '\n\t'
 
             input_str += variable_to_declaration(
                 signal=self.name_measure,
                 size=sequence['measure'],
                 data_type=self.name_measure_data_type
-            ) + '\n'
+            ) + '\n\t'
 
         # states
         if 'state' in purposes:
@@ -887,25 +887,25 @@ class DeviceModel(UserPrgModel):
                 signal=self.state,
                 size=sequence['state'],
                 data_type=self.state_data_type
-            ) + '\n'
+            ) + '\n\t'
 
             input_str += variable_to_declaration(
                 signal=self.save_state,
                 size=sequence['state'],
                 data_type=self.save_state_data_type
-            ) + '\n'
+            ) + '\n\t'
 
             input_str += variable_to_declaration(
                 signal=self.name_state,
                 size=sequence['state'],
                 data_type=self.name_state_data_type
-            ) + '\n'
+            ) + '\n\t'
 
             input_str += variable_to_declaration(
                 signal=self.rise_state,
                 size=sequence['state'],
                 data_type=self.rise_state_data_type
-            ) + '\n'
+            ) + '\n\t'
 
         # commands
         if 'command' in purposes:
@@ -913,25 +913,25 @@ class DeviceModel(UserPrgModel):
                 signal=self.command,
                 size=sequence['command'],
                 data_type=self.command_data_type
-            ) + '\n'
+            ) + '\n\t'
 
             input_str += variable_to_declaration(
                 signal=self.save_command,
                 size=sequence['command'],
                 data_type=self.save_command_data_type
-            ) + '\n'
+            ) + '\n\t'
 
             input_str += variable_to_declaration(
                 signal=self.name_command,
                 size=sequence['command'],
                 data_type=self.name_command_data_type
-            ) + '\n'
+            ) + '\n\t'
 
             input_str += variable_to_declaration(
                 signal=self.trigger_command,
                 size=sequence['command'],
                 data_type=self.trigger_command_data_type
-            ) + '\n'
+            ) + '\n\t'
 
             # inputs sbo
             if device_operation == "SBO":
@@ -939,7 +939,7 @@ class DeviceModel(UserPrgModel):
                     signal=self.status,
                     size=int(sequence['command'] / 2),
                     data_type=self.status_data_type
-                ) + '\n'
+                ) + '\n\t'
 
         # Outputs
         output_str = ''
@@ -949,7 +949,7 @@ class DeviceModel(UserPrgModel):
                 signal=self.measure_output,
                 size=sequence['measure'],
                 data_type=self.measure_output_data_type
-            ) + '\n'
+            ) + '\n\t'
 
         # states
         if 'state' in purposes:
@@ -957,7 +957,7 @@ class DeviceModel(UserPrgModel):
                 signal=self.state_output,
                 size=sequence['state'],
                 data_type=self.state_output_data_type
-            ) + '\n'
+            ) + '\n\t'
 
         # commands
         if 'command' in purposes:
@@ -965,7 +965,7 @@ class DeviceModel(UserPrgModel):
                 signal=self.command_output,
                 size=sequence['command'],
                 data_type=self.command_output_data_type
-            ) + '\n'
+            ) + '\n\t'
 
             # outputs sbo
             if device_operation == "SBO":
@@ -973,18 +973,18 @@ class DeviceModel(UserPrgModel):
                     signal=self.select,
                     size=int(sequence['command'] / 2),
                     data_type=self.select_data_type
-                ) + '\n'
+                ) + '\n\t'
 
                 output_str += variable_to_declaration(
                     signal=self.execute,
                     size=int(sequence['command'] / 2),
                     data_type=self.execute_data_type
-                ) + '\n'
+                ) + '\n\t'
 
         # Internals
         internal_str = ''
         for instance in rtu_instance_list:
-            internal_str += f"inst0{instance} : {instance};" + '\n'
+            internal_str += f"inst0{instance} : {instance};" + '\n\t'
 
         # Declaration construction
         declaration = self.declaration_attributes + '\n'
@@ -1195,81 +1195,81 @@ class RtuModel(DeviceModel):
 
         # variable definition
         # Inputs
-        input_str = f"{self.first_cycle}        : {self.first_cycle_data_type};" + '\n'
-        input_str += f"{self.sequence_order}    : {self.sequence_order_data_type};" + '\n'
-        input_str += f"{self.protocol}          : {self.protocol_data_type};" + '\n'
-        input_str += f"{self.state_loc_rem}     : {self.state_loc_rem_data_type};" + '\n'
-        input_str += f"{self.action}            : {self.action_data_type};" + '\n'
+        input_str = f"{self.first_cycle}        : {self.first_cycle_data_type};" + '\n\t'
+        input_str += f"{self.sequence_order}    : {self.sequence_order_data_type};" + '\n\t'
+        input_str += f"{self.protocol}          : {self.protocol_data_type};" + '\n\t'
+        input_str += f"{self.state_loc_rem}     : {self.state_loc_rem_data_type};" + '\n\t'
+        input_str += f"{self.action}            : {self.action_data_type};" + '\n\t'
 
         input_str += variable_to_declaration(
             signal=input_data,
             size=num_objects,
             data_type=input_data_type
-        ) + '\n'
+        ) + '\n\t'
 
         input_str += variable_to_declaration(
             signal=save_data,
             size=num_objects,
             data_type=save_data_type
-        ) + '\n'
+        ) + '\n\t'
 
         input_str += variable_to_declaration(
             signal=name_data,
             size=num_objects,
             data_type=name_data_type
-        ) + '\n'
+        ) + '\n\t'
 
         if purpose != 'measure':
             input_str += variable_to_declaration(
                 signal=trigger_data,
                 size=num_objects,
                 data_type=trigger_data_type
-            ) + '\n'
+            ) + '\n\t'
 
         if device_operation == "SBO" and purpose == 'command':
             input_str += variable_to_declaration(
                 signal=self.status,
                 size=int(num_objects / 2),
                 data_type=self.status_data_type
-            ) + '\n'
+            ) + '\n\t'
 
         # Outputs
         output_str = variable_to_declaration(
             signal=output_data,
             size=num_objects,
             data_type=output_data_type
-        ) + '\n'
+        ) + '\n\t'
 
         if device_operation == "SBO" and purpose == 'command':
             output_str += variable_to_declaration(
                 signal=self.select,
                 size=int(num_objects / 2),
                 data_type=self.select_data_type
-            ) + '\n'
+            ) + '\n\t'
 
             output_str += variable_to_declaration(
                 signal=self.execute,
                 size=int(num_objects / 2),
                 data_type=self.execute_data_type
-            ) + '\n'
+            ) + '\n\t'
 
         # Internals
-        internal_str = f"{self.signals}         : ARRAY [1..{num_objects}] OF {input_data_type};" + '\n'
-        internal_str += f"{self.check_changes}  : ARRAY [1..{num_objects}] OF {self.check_changes_data_type};" + '\n'
-        internal_str += f"{self.names}          : ARRAY [1..{num_objects}] OF {self.names_data_type};" + '\n'
-        internal_str += f"{self.saves}          : ARRAY [1..{num_objects}] OF {self.saves_data_type};" + '\n'
-        internal_str += f"{self.error}          : {self.error_data_type};" + '\n'
+        internal_str = f"{self.signals}         : ARRAY [1..{num_objects}] OF {input_data_type};" + '\n\t'
+        internal_str += f"{self.check_changes}  : ARRAY [1..{num_objects}] OF {self.check_changes_data_type};" + '\n\t'
+        internal_str += f"{self.names}          : ARRAY [1..{num_objects}] OF {self.names_data_type};" + '\n\t'
+        internal_str += f"{self.saves}          : ARRAY [1..{num_objects}] OF {self.saves_data_type};" + '\n\t'
+        internal_str += f"{self.error}          : {self.error_data_type};" + '\n\t'
 
         if purpose != 'measure':
             internal_str += f"{self.trigger_changes} : ARRAY [1..{num_objects}] OF " \
-                            f"{self.trigger_changes_data_type};" + '\n'
+                            f"{self.trigger_changes_data_type};" + '\n\t'
             if purpose == 'state':
                 internal_str += f"{self.rise_changes} : ARRAY [1..{num_objects}] OF " \
-                                f"{self.rise_changes_data_type};" + '\n'
+                                f"{self.rise_changes_data_type};" + '\n\t'
 
         for item in instance_list:
             if 'Save' not in item and 'Handler' not in item:    # Save and Handler aren't fb but functions
-                internal_str += f"inst0{item} : {item};" + '\n'
+                internal_str += f"inst0{item} : {item};" + '\n\t'
 
         # Declaration construction
         declaration = self.declaration_attributes + '\n'
@@ -1335,8 +1335,8 @@ class RtuModel(DeviceModel):
     def _pack_fbd(self, instance, num_objects, purpose, internal_purpose, file):
         # Obtaining data
         pack_information = self.pack_decision_tree(purpose, internal_purpose)
-        input_data = pack_information[0]
-        output_data = pack_information[2]
+        input_data = pack_information['input_data']
+        output_data = pack_information['output_data']
 
         # Inputs
         ####################################################################
@@ -1417,8 +1417,8 @@ class RtuModel(DeviceModel):
     def _map_fbd(self, instance, num_objects, purpose, file):
         # Obtaining data
         map_information = self.map_decision_tree(purpose)
-        input_data = map_information[0]
-        output_data = map_information[2]
+        input_data = map_information['input_data']
+        output_data = map_information['output_data']
 
         # Inputs
         ####################################################################
@@ -1556,63 +1556,60 @@ class RtuModel(DeviceModel):
         file.write(fbd_str)
 
     def pack_decision_tree(self, rtu_purpose, internal_purpose):
-        input_data = ''
-        output_data = ''
-        input_data_type = ''
-        output_data_type = ''
+        response = {}
         if internal_purpose == 'trigger':
             if rtu_purpose == 'command':
-                input_data = self.trigger_command
-                output_data = self.trigger_changes
-                input_data_type = self.trigger_command_data_type
-                output_data_type = self.trigger_changes_data_type
+                response['input_data'] = self.trigger_command
+                response['output_data'] = self.trigger_changes
+                response['input_data_type'] = self.trigger_command_data_type
+                response['output_data_type'] = self.trigger_changes_data_type
             elif rtu_purpose == 'state':
-                input_data = self.rise_state
-                output_data = self.rise_changes
-                input_data_type = self.rise_state_data_type
-                output_data_type = self.rise_changes_data_type
+                response['input_data'] = self.rise_state
+                response['output_data'] = self.rise_changes
+                response['input_data_type'] = self.rise_state_data_type
+                response['output_data_type'] = self.rise_changes_data_type
         elif internal_purpose == 'label':
             if rtu_purpose == 'command':
-                input_data = self.name_command
-                input_data_type = self.name_command_data_type
+                response['input_data'] = self.name_command
+                response['input_data_type'] = self.name_command_data_type
             elif rtu_purpose == 'state':
-                input_data = self.name_state
-                input_data_type = self.name_state_data_type
+                response['input_data'] = self.name_state
+                response['input_data_type'] = self.name_state_data_type
             elif rtu_purpose == 'measure':
-                input_data = self.name_measure
-                input_data_type = self.name_measure_data_type
-            output_data = self.names
-            output_data_type = self.names_data_type
+                response['input_data'] = self.name_measure
+                response['input_data_type'] = self.name_measure_data_type
+            response['output_data'] = self.names
+            response['output_data_type'] = self.names_data_type
         elif internal_purpose == 'save':
             if rtu_purpose == 'command':
-                input_data = self.save_command
-                input_data_type = self.save_command_data_type
+                response['input_data'] = self.save_command
+                response['input_data_type'] = self.save_command_data_type
             elif rtu_purpose == 'state':
-                input_data = self.save_state
-                input_data_type = self.save_state_data_type
+                response['input_data'] = self.save_state
+                response['input_data_type'] = self.save_state_data_type
             elif rtu_purpose == 'measure':
-                input_data = self.save_measure
-                input_data_type = self.save_measure_data_type
-            output_data = self.saves
-            output_data_type = self.saves_data_type
+                response['input_data'] = self.save_measure
+                response['input_data_type'] = self.save_measure_data_type
+            response['output_data'] = self.saves
+            response['output_data_type'] = self.saves_data_type
         elif internal_purpose == 'values':
             if rtu_purpose == 'command':
-                input_data = self.command
-                input_data_type = self.command_data_type
-                output_data_type = self.command_data_type
+                response['input_data'] = self.command
+                response['input_data_type'] = self.command_data_type
+                response['output_data_type'] = self.command_data_type
             elif rtu_purpose == 'state':
-                input_data = self.state
-                input_data_type = self.state_data_type
-                output_data_type = self.state_data_type
+                response['input_data'] = self.state
+                response['input_data_type'] = self.state_data_type
+                response['output_data_type'] = self.state_data_type
             elif rtu_purpose == 'measure':
-                input_data = self.measure
-                input_data_type = self.measure_data_type
-                output_data_type = self.measure_data_type
-            output_data = self.signals
+                response['input_data'] = self.measure
+                response['input_data_type'] = self.measure_data_type
+                response['output_data_type'] = self.measure_data_type
+            response['output_data'] = self.signals
         else:
             "gestionar errores"
 
-        return input_data, input_data_type, output_data, output_data_type
+        return response
 
     def check_decision_tree(self, purpose):
         response = {
@@ -1628,27 +1625,29 @@ class RtuModel(DeviceModel):
         return response
 
     def map_decision_tree(self, purpose):
-        input_data = ''
-        input_data_type = ''
-        output_data = ''
-        output_data_type = ''
+        response = {
+            'input_data': '',
+            'input_data_type': '',
+            'output_data': '',
+            'output_data_type': ''
+        }
         if purpose == 'command':
-            input_data = self.command
-            input_data_type = self.command_data_type
-            output_data = self.command_output
-            output_data_type = self.command_output_data_type
+            response['input_data'] = self.command
+            response['input_data_type'] = self.command_data_type
+            response['output_data'] = self.command_output
+            response['output_data_type'] = self.command_output_data_type
         elif purpose == 'state':
-            input_data = self.state
-            input_data_type = self.state_data_type
-            output_data = self.state_output
-            output_data_type = self.state_output_data_type
+            response['input_data'] = self.state
+            response['input_data_type'] = self.state_data_type
+            response['output_data'] = self.state_output
+            response['output_data_type'] = self.state_output_data_type
         elif purpose == 'measure':
-            input_data = self.measure
-            input_data_type = self.measure_data_type
-            output_data = self.measure_output
-            output_data_type = self.measure_output_data_type
+            response['input_data'] = self.measure
+            response['input_data_type'] = self.measure_data_type
+            response['output_data'] = self.measure_output
+            response['output_data_type'] = self.measure_output_data_type
 
-        return input_data, input_data_type, output_data, output_data_type
+        return response
 
     def save_decision_tree(self, purpose):
         response = {
@@ -1677,10 +1676,10 @@ class PackModel(RtuModel):
     def pack(self, device_name, num_objects, rtu_purpose, internal_purpose, server_iteration, path):
         # Obtaining data
         pack_information = self.pack_decision_tree(rtu_purpose, internal_purpose)
-        input_data = pack_information[0]
-        input_data_type = pack_information[1]
-        output_data = pack_information[2]
-        output_data_type = pack_information[3]
+        input_data = pack_information['input_data']
+        input_data_type = pack_information['input_data_type']
+        output_data = pack_information['output_data']
+        output_data_type = pack_information['output_data_type']
 
         # Instance data
         pou_name = "Pack" + str(num_objects) + input_data_type + internal_purpose + str(
@@ -1751,14 +1750,14 @@ class CheckModel(RtuModel):
 
         # variable definition
         # Inputs
-        input_str = f"{input_data}              : ARRAY [1..{num_objects}] OF {input_data_type};" + '\n'
+        input_str = f"{input_data}              : ARRAY [1..{num_objects}] OF {input_data_type};" + '\n\t'
         input_str += f"{self.first_cycle}       : {self.first_cycle_data_type};"
 
         # Outputs
         output_str = f"{output_data}            : ARRAY [1..{num_objects}] OF {output_data_type};"
 
         # Internals
-        internal_str = f"{self.iterator}        : {self.iterator_data_type};" + '\n'
+        internal_str = f"{self.iterator}        : {self.iterator_data_type};" + '\n\t'
         internal_str += f"{self.last_values}    : ARRAY [1..{num_objects}] OF {input_data_type};"
 
         # Declaration construction
@@ -1805,10 +1804,10 @@ class MapModel(RtuModel):
     def map(self, device_name, num_objects, purpose, server_iteration, path):
         # Obtaining data
         map_information = self.map_decision_tree(purpose)
-        input_data = map_information[0]
-        input_data_type = map_information[1]
-        output_data = map_information[2]
-        output_data_type = map_information[3]
+        input_data = map_information['input_data']
+        input_data_type = map_information['input_data_type']
+        output_data = map_information['output_data']
+        output_data_type = map_information['output_data_type']
 
         # Instance data
         pou_name = "Map" + str(num_objects) + input_data_type + str(device_name) + purpose + str(server_iteration)
@@ -1818,20 +1817,20 @@ class MapModel(RtuModel):
 
         # Variable declaration
         # Inputs
-        input_str = f"{self.action} : {self.action_data_type};" + '\n'
-        input_str += f"{self.state_loc_rem} : {self.state_loc_rem_data_type};" + '\n'
+        input_str = f"{self.action} : {self.action_data_type};" + '\n\t'
+        input_str += f"{self.state_loc_rem} : {self.state_loc_rem_data_type};" + '\n\t'
         input_str += variable_to_declaration(
             signal=input_data,
             size=num_objects,
             data_type=input_data_type
-        ) + '\n'
+        ) + '\n\t'
 
         if purpose != 'measure':
             input_str += variable_to_declaration(
                 signal=self.trigger_changes,
                 size=num_objects,
                 data_type=self.trigger_changes_data_type
-            ) + '\n'
+            ) + '\n\t'
             input_str += variable_to_declaration(
                 signal=self.check_changes,
                 size=num_objects,
