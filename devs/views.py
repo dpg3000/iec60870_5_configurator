@@ -105,9 +105,11 @@ def submit(request):
     for center in root.iter('center'):
         center_ins = Server(center.attrib['name'], server_iteration, iec60870_5_config)
         center_ins.headers()
+
         for input_card in center.iter('input-card'):
             if input_card.attrib['server'] == 'yes':
-                server_input_car = ServerDevice(input_card.text, 'card', int(input_card.attrib['number']), server_iteration, iec60870_5_config)
+                server_input_car = ServerDevice(input_card.text, 'card', int(input_card.attrib['number']),
+                                                server_iteration, iec60870_5_config)
                 error_message = server_input_car.create_device()
                 if error_message:
                     messages.error(request, error_message)
@@ -117,9 +119,11 @@ def submit(request):
                 for k in range(int(input_card.attrib['number'])):
                     kbus_ins = BusModule(input_card.text)
                     bus_modules_list.append(kbus_ins)
+
         for output_card in center.iter('output-card'):
             if output_card.attrib['server'] == 'yes':
-                server_output_card = ServerDevice(output_card.text, 'card', int(output_card.attrib['number']), server_iteration, iec60870_5_config)
+                server_output_card = ServerDevice(output_card.text, 'card', int(output_card.attrib['number']),
+                                                  server_iteration, iec60870_5_config)
                 error_message = server_output_card.create_device()
                 if error_message:
                     messages.error(request, error_message)
@@ -129,6 +133,7 @@ def submit(request):
                 for k in range(int(output_card.attrib['number'])):
                     kbus_ins = BusModule(output_card.text)
                     bus_modules_list.append(kbus_ins)
+
         if flag_input_cards or flag_output_cards:
             error_message = pou.create_pous('Cards', 'card', 1, 'DO', server_iteration)
             flag_input_cards = False
@@ -136,19 +141,25 @@ def submit(request):
             if error_message:
                 messages.error(request, error_message)
                 error_messages += error_message + '\n'
+
         for device in center.iter('device'):
             if device.attrib['server'] == 'yes':
-                server_device = ServerDevice(device.text, 'device', int(device.attrib['number']), server_iteration, iec60870_5_config)
+                server_device = ServerDevice(device.text, 'device', int(device.attrib['number']), server_iteration,
+                                             iec60870_5_config)
                 error_message = server_device.create_device()
                 if error_message:
                     messages.error(request, error_message)
                     error_messages += error_message + '\n'
             # if device.attrib['client'] == 'yes':
             # GESTIONAR EL CLIENTE
-            pou.create_pous(device.text, 'device', int(device.attrib['number']), device.attrib['operation'], server_iteration)
+            pou.create_pous(device.text, 'device', int(device.attrib['number']), device.attrib['operation'],
+                            server_iteration)
+
+        # Increase server iteration
         server_iteration += 1
         # server closing tags
         center_ins.closing_tags()
+
     # Creating user-prg
     pou.create_user_prg()
     # write k-bus instances

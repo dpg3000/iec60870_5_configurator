@@ -60,54 +60,53 @@ $(document).ready(function(){
             'section').children('#repeat-output-card-' + i).remove();
         }
 
-        newElem.children('#center').children('.enable-cards-section').children('.enable-input-cards-section').hide();   //hide the input card configurator dialog
-        newElem.children('#center').children('.enable-cards-section').children('.enable-output-cards-section').hide();  //hide the output card configurator dialog
-        newElem.children('#center').children('.enable-cards-section').hide();                                           //hide the card configurator dialog
+        newElem.children('#center').children('.enable-cards-section').children('.enable-input-cards-section').hide();   //hiding the "input card section"
+        newElem.children('#center').children('.enable-cards-section').children('.enable-output-cards-section').hide();  //hiding the "output card section"
+        newElem.children('#center').children('.enable-cards-section').hide();                                           //hiding the "global card section"
 
-        newElem.children('#center').children('.enable-cards-section').children('.enable-input-cards-'+                  //Enable the selector of the input card left in the last loop
+        newElem.children('#center').children('.enable-cards-section').children('.enable-input-cards-'+                  //Enabling the selector of the input card left in the last loop
         'section').children('#repeat-input-card-1').children('.selector-input-card').attr('disabled', false);
-        newElem.children('#center').children('.enable-cards-section').children('.enable-output-cards-'+                 //Enable the selector of the output card left in the last loop
+        newElem.children('#center').children('.enable-cards-section').children('.enable-output-cards-'+                 //Enabling the selector of the output card left in the last loop
         'section').children('#repeat-output-card-1').children('.selector-input-card').attr('disabled', false);
 
-        newElem.children('#center').children('.enable-cards-section').children('.enable-input-cards-'+                  //Initialize the number of input cards
+        newElem.children('#center').children('.enable-cards-section').children('.enable-input-cards-'+                  //Initializing the number of input cards
         'section').children('#repeat-input-card-1').children('.selector-num-input-card').val(1);
-        newElem.children('#center').children('.enable-cards-section').children('.enable-output-cards-'+                 //Initialize the number of output cards
+        newElem.children('#center').children('.enable-cards-section').children('.enable-output-cards-'+                 //Initializing the number of output cards
         'section').children('#repeat-output-card-1').children('.selector-num-output-card').val(1);
 
-        newElem.children('#center').children('.enable-cards-section').children('.enable-input-cards-'+                  //Enable add input card button
+        newElem.children('#center').children('.enable-cards-section').children('.enable-input-cards-'+                  //Enabling the "add input card" button
         'section').children('#add-input-card-btn').attr('disabled', false);
-        newElem.children('#center').children('.enable-cards-section').children('.enable-output-cards-'+                 //Enable add output card button
+        newElem.children('#center').children('.enable-cards-section').children('.enable-output-cards-'+                 //Enabling the "add output card" button
         'section').children('#add-output-card-btn').attr('disabled', false);
 
-        newElem.children('#center').children('.enable-cards-section').children('.enable-input-cards-'+                  //Disable remove input card button
+        newElem.children('#center').children('.enable-cards-section').children('.enable-input-cards-'+                  //Disabling the "remove input card" button
         'section').children('#remove-input-card-btn').attr('disabled', true);
-        newElem.children('#center').children('.enable-cards-section').children('.enable-output-cards-'+                 //Disable remove output card button
+        newElem.children('#center').children('.enable-cards-section').children('.enable-output-cards-'+                 //Disabling the "remove output card" button
         'section').children('#remove-output-card-btn').attr('disabled', true);
 
-        /*Cleaning devices*/
-        newElem.children('#center').children('#table-devices').children('#body-devices').children('#row-'+              //Uncheck the add device checkbox
+        newElem.children('#center').children('#table-devices').children('#body-devices').children('#row-'+              //Unchecking the "add device" checkbox
         'devices').children('#cell-devices').children('.enable-devices').prop("checked", false);
 
-        newElem.children('#center').children('.enable-devices-section').hide();                                         //hide the device configurator dialog
+        newElem.children('#center').children('.enable-devices-section').hide();                                         //hiding the "device section"
 
-        for (i = numOfDevices; i > 1; i--) {                                                                            //Remove any devices but first
+        for (i = numOfDevices; i > 1; i--) {                                                                            //Removing any devices but first
             newElem.children('#center').children('.enable-devices-section').children('#repeat-device-' + i).remove();
         }
 
-        newElem.children('#center').children('.enable-devices-section').children('#repeat-'+                            //Enable the selector of the device left in the last loop
+        newElem.children('#center').children('.enable-devices-section').children('#repeat-'+                            //Enabling the selector of the device left in the last loop
         'device-1').children('.selector-device').attr('disabled', false);
 
-        newElem.children('#center').children('.enable-devices-section').children('#repeat-'+                            //Initialize the number of devices
+        newElem.children('#center').children('.enable-devices-section').children('#repeat-'+                            //Initializing the number of devices
         'device-1').children('.selector-num-device').val(1);
 
-        newElem.children('#center').children('.enable-devices-section').children('#add-device-'+                        //Enable add device button
+        newElem.children('#center').children('.enable-devices-section').children('#add-device-'+                        //Enabling the "add device" button
         'btn').attr('disabled', false);
 
-        newElem.children('#center').children('.enable-devices-section').children('#remove-devices-'+                    //Disable remove device button
+        newElem.children('#center').children('.enable-devices-section').children('#remove-devices-'+                    //Disabling the "remove device" button
         'btn').attr('disabled', true);
 
         previousDom.after(newElem);                                                                                     // Adding the new element after the previous
-        jQuery('#remove-center-btn').attr('disabled', false);                                                           // Enabling 'remove center' possibility
+        jQuery('#remove-center-btn').attr('disabled', false);                                                           // Enabling the "remove center" button
     });
 
     jQuery('#remove-center-btn').click(function() {
@@ -115,24 +114,24 @@ $(document).ready(function(){
         var newNum = new Number(num - 1);
         var actualDom = jQuery('#repeat-center-' + newNum);
 
-        actualDom.children('#center').css("background", "");
+        actualDom.children('#center').css("background", "");                                                            // Removing "validated" icon
 
-        actualDom.children('#center').children('#table-cards').children('#body-cards').children('#row-'+                // enable the add card checkbox
+        actualDom.children('#center').children('#table-cards').children('#body-cards').children('#row-'+                // Enabling the "add card" checkbox
         'cards').children('#cell-cards').children('.enable-cards').prop("disabled", false);
 
-        actualDom.children('#center').children('.enable-cards-section').children('#table-input-'+                       // enable the add input card checkbox
+        actualDom.children('#center').children('.enable-cards-section').children('#table-input-'+                       // Enabling the "add input card" checkbox
         'cards').children('#body-input-cards').children('#row-input-cards').children('#cell-input-'+
         'cards').children('.enable-input-cards').prop("disabled", false);
 
-        actualDom.children('#center').children('.enable-cards-section').children('#table-output-'+                      // enable the add output card checkbox
+        actualDom.children('#center').children('.enable-cards-section').children('#table-output-'+                      // Enabling the "add output card" checkbox
         'cards').children('#body-output-cards').children('#row-output-cards').children('#cell-output-'+
         'cards').children('.enable-output-cards').prop("disabled", false);
 
-        actualDom.children('#center').children('#table-devices').children('#body-devices').children('#row-'+            // enable the add device checkbox
+        actualDom.children('#center').children('#table-devices').children('#body-devices').children('#row-'+            // Enabling the "add device" checkbox
         'devices').children('#cell-devices').children('.enable-devices').prop("disabled", false);
 
-        if(actualDom.children('#center').children('.enable-cards-section').children('#table-input-'+                    // logic to control ADD CENTER and GENERATE
-        'cards').children('#body-input-cards').children('#row-input-cards').children('#cell-input-'+
+        if(actualDom.children('#center').children('.enable-cards-section').children('#table-input-'+                    // Logic to control "add center" and "generate" buttons
+        'cards').children('#body-input-cards').children('#row-input-cards').children('#cell-input-'+                    // They'll be enabled only in case there are any cards or devices selected
         'cards').children('.enable-input-cards').prop('checked') || actualDom.children('#center').children('.enable-'+
         'cards-section').children('#table-output-cards').children('#body-output-cards').children('#row-output-'+
         'cards').children('#cell-output-cards').children('.enable-output-'+
@@ -145,14 +144,14 @@ $(document).ready(function(){
             $('#generate').attr('disabled', true);
         }
 
-        jQuery('#repeat-center-' + num).remove();                                                                       // Removing the last element
+        jQuery('#repeat-center-' + num).remove();                                                                       // Removing the last center
 
         if (newNum == 1) {
-            jQuery('#remove-center-btn').attr('disabled', true);                                                        // Last element can not be removed
+            jQuery('#remove-center-btn').attr('disabled', true);                                                        // Last element can not be removed if there is only one left
         }
     });
 
-    $(document).on('click', '.enable-cards', function() {                                                               // Hide or show card section based on checkbox
+    $(document).on('click', '.enable-cards', function() {                                                               // Card section behaviour
         if(this.checked) {
             $(this).parent().parent().parent().parent().siblings('.enable-cards-section').show();
         } else {
@@ -160,7 +159,7 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on('click', '.enable-input-cards', function() {                                                         // Hide or show input card section based on checkbox
+    $(document).on('click', '.enable-input-cards', function() {                                                         // Input card section behaviour
         if(this.checked) {
             $(this).parent().parent().parent().parent().siblings('.enable-input-cards-section').show();
         } else {
@@ -168,7 +167,7 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on('click', '.enable-output-cards', function() {                                                         // Hide or show output card section based on checkbox
+    $(document).on('click', '.enable-output-cards', function() {                                                        // Output card section behaviour
         if(this.checked) {
             $(this).parent().parent().parent().parent().siblings('.enable-output-cards-section').show();
         } else {
@@ -176,27 +175,26 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on('click', '.enable-devices', function() {
+    $(document).on('click', '.enable-devices', function() {                                                             // Device section behaviour
         var deviceName = $(this).parent().parent().parent().parent().siblings('.enable-devices-'+
         'section').children('#repeat-device-1').children('.selector-device').val();
         var root = $(this).parent().parent().parent().parent().siblings('.enable-devices-section').children('#repeat-'+
         'device-1')
 
         if (this.checked) {
-            $('#device-list').show();
-            ajax_processing(deviceName, root);
-            console.log(device_list);
-            $(this).parent().parent().parent().parent().siblings('.enable-devices-section').show();
-            $('#add-center-btn').attr('disabled', false);
-            $('#generate').attr('disabled', false);
+            $('#device-list').show();                                                                                   // Showing signal selection list
+            ajax_processing(deviceName, root);                                                                          // ajax to process DB options of the first device
+            $(this).parent().parent().parent().parent().siblings('.enable-devices-section').show();                     // Showing the "device section"
+            $('#add-center-btn').attr('disabled', false);                                                               // "add center" button behaviour
+            $('#generate').attr('disabled', false);                                                                     // "generate" button behaviour
         } else {
-            $('#device-list').hide();
+            $('#device-list').hide();                                                                                   // Hiding signal selection list
             $(this).parent().parent().parent().parent().siblings('.enable-devices-section').hide();
             $('#add-center-btn').attr('disabled', true);
             $('#generate').attr('disabled', true);
         }
 
-        if($(this).parent().parent().parent().parent().siblings('#table-cards').children('#body-'+
+        if($(this).parent().parent().parent().parent().siblings('#table-cards').children('#body-'+                      //"add center" and "generate" buttons behaviour
         'cards').children('#row-cards').children('#cell-cards').children('.enable-cards').prop('checked')) {
 
             if($(this).parent().parent().parent().parent().siblings('.enable-cards-section').children('#table-input-'+
@@ -215,95 +213,93 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on('click', '#add-input-card-server', function() {
+    $(document).on('click', '#add-input-card-server', function() {                                                      // Input card server / io rebound behaviour
         if($(this).prop('checked') == false) {
             $(this).siblings('#add-input-card-io').prop('checked', true)
         }
     });
 
-    $(document).on('click', '#add-output-card-server', function() {
+    $(document).on('click', '#add-output-card-server', function() {                                                     // Output card server / io rebound behaviour
         if($(this).prop('checked') == false) {
             $(this).siblings('#add-output-card-io').prop('checked', true)
         }
     });
 
-    $(document).on('click', '#add-input-card-io', function() {
+    $(document).on('click', '#add-input-card-io', function() {                                                          // Input card server / io rebound behaviour
         if($(this).prop('checked') == false) {
             $(this).siblings('#add-input-card-server').prop('checked', true)
         }
     });
 
-    $(document).on('click', '#add-output-card-io', function() {
+    $(document).on('click', '#add-output-card-io', function() {                                                         // Output card server / io rebound behaviour
         if($(this).prop('checked') == false) {
             $(this).siblings('#add-output-card-server').prop('checked', true)
         }
     });
 
-    $(document).on('click', '#add-device-server', function() {
+    $(document).on('click', '#add-device-server', function() {                                                          // Device server / client rebound behaviour
         if($(this).prop('checked') == false) {
             $(this).siblings('#add-device-client').prop('checked', true)
         }
     });
 
-    $(document).on('click', '#add-device-client', function() {
+    $(document).on('click', '#add-device-client', function() {                                                          // Device server / client rebound behaviour
         if($(this).prop('checked') == false) {
             $(this).siblings('#add-device-server').prop('checked', true)
         }
     });
 
-    $(document).on('click', '#add-input-card-btn', function() {
+    $(document).on('click', '#add-input-card-btn', function() {                                                         // "Add input card" button behaviour
         var num = $(this).siblings('.repeat-input-card').length;
         var newNum = new Number(num + 1);
         var previousDom = $(this).siblings('#repeat-input-card-' + num);
         var newElem = $(this).siblings('#repeat-input-card-' + num).clone().attr('id', 'repeat-input-card-' + newNum);
 
-        if (newNum >= $("#hidden-input-cards-num").val()) {
+        if (newNum > $("#hidden-input-cards-num").val()) {                                                              // Limiting the number of adds
             $(this).attr('disabled', true);
         } else {
-            newElem.children(".selector-input-card").children("option[value='"+ previousDom.children(".selector-input-"
+            newElem.children(".selector-input-card").children("option[value='"+ previousDom.children(".selector-input-" // Disabling last choice
             + "card").val() +"']").attr('disabled', true);
 
-            newElem.children(".selector-input-card").children('option:not(:disabled)').each(function() {
+            newElem.children(".selector-input-card").children('option:not(:disabled)').each(function() {                // Enabling the ones left
                 $(this).prop('selected', true);
             });
 
-            newElem.children(".selector-num-input-card").val(1);
+            newElem.children(".selector-num-input-card").val(1);                                                        // Initializing the number of input cards
+            newElem.children("#add-input-card-server").prop('checked', true);                                           // Initializing the server option
+            newElem.children("#add-input-card-io").prop('checked', true);                                               // Initializing the io option
 
-            newElem.children("#add-input-card-server").prop('checked', true);
-            newElem.children("#add-input-card-io").prop('checked', true);
+            previousDom.children(".selector-input-card").attr('disabled', true);                                        // Fixing the last option to avoid over-selection
+            previousDom.after(newElem);                                                                                 // Concatenating the new element
 
-            previousDom.children(".selector-input-card").attr('disabled', true);
-
-            previousDom.after(newElem);
-            $(this).siblings('#remove-input-card-btn').attr('disabled', false);
+            $(this).siblings('#remove-input-card-btn').attr('disabled', false);                                         // Enabling "remove input card" button
         }
     });
 
-    $(document).on('click', '#add-output-card-btn', function() {
+    $(document).on('click', '#add-output-card-btn', function() {                                                        // "Add input card" button behaviour
         var num = $(this).siblings('.repeat-output-card').length;
         var newNum = new Number(num + 1);
         var previousDom = $(this).siblings('#repeat-output-card-' + num);
         var newElem = $(this).siblings('#repeat-output-card-' + num).clone().attr('id', 'repeat-output-card-' + newNum);
 
-        if (newNum >= $("#hidden-output-cards-num").val()) {
+        if (newNum > $("#hidden-output-cards-num").val()) {                                                             // Limiting the number of adds
             $(this).attr('disabled', true);
         } else {
-            newElem.children(".selector-output-card").children("option[value='"+ previousDom.children(".selector-"+
+            newElem.children(".selector-output-card").children("option[value='"+ previousDom.children(".selector-"+     // Disabling last choice
             "output-card").val() +"']").attr('disabled', true);
 
-            newElem.children(".selector-output-card").children('option:not(:disabled)').each(function() {
+            newElem.children(".selector-output-card").children('option:not(:disabled)').each(function() {               // Enabling the ones left
                 $(this).prop('selected', true);
             });
 
-            newElem.children(".selector-num-output-card").val(1);
+            newElem.children(".selector-num-output-card").val(1);                                                       // Initializing the number of input cards
+            newElem.children("#add-output-card-server").prop('checked', true);                                          // Initializing the server option
+            newElem.children("#add-output-card-io").prop('checked', true);                                              // Initializing the io option
 
-            newElem.children("#add-output-card-server").prop('checked', true);
-            newElem.children("#add-output-card-io").prop('checked', true);
+            previousDom.children(".selector-output-card").attr('disabled', true);                                       // Fixing the last option to avoid over-selection
+            previousDom.after(newElem);                                                                                 // Concatenating the new element
 
-            previousDom.children(".selector-output-card").attr('disabled', true);
-
-            previousDom.after(newElem);
-            $(this).siblings('#remove-output-card-btn').attr('disabled', false);
+            $(this).siblings('#remove-output-card-btn').attr('disabled', false);                                        // Enabling "remove input card" button
         }
     });
 
@@ -313,12 +309,12 @@ $(document).ready(function(){
         var previousDom = $(this).siblings('#repeat-input-card-' + newNum);
         var actualDom = $(this).siblings('#repeat-input-card-' + num);
 
-        if (newNum == 1) {
-            $(this).attr('disabled', true);                                                                             // if only one element remains, disable the remove button
+        if (newNum == 1) {                                                                                              // If only one element remains, disabling the "remove button"
+            $(this).attr('disabled', true);
         } else {
-            actualDom.remove();                                                                                         // remove the last element
-            $(this).siblings('#add-input-card-btn').attr('disabled', false);                                            // enable the "add" button
-            previousDom.children(".selector-input-card").attr('disabled', false);                                       // enable input card selection
+            actualDom.remove();                                                                                         // Removing the last element
+            $(this).siblings('#add-input-card-btn').attr('disabled', false);                                            // Enabling the "add input card" button
+            previousDom.children(".selector-input-card").attr('disabled', false);                                       // Enabling the "input card" section
         }
     });
 
@@ -328,16 +324,16 @@ $(document).ready(function(){
         var previousDom = $(this).siblings('#repeat-output-card-' + newNum);
         var actualDom = $(this).siblings('#repeat-output-card-' + num);
 
-        if (newNum == 1) {
-            $(this).attr('disabled', true);                                                                             // if only one element remains, disable the remove button
+        if (newNum == 1) {                                                                                              // If only one element remains, disabling the "remove button"
+            $(this).attr('disabled', true);
         } else {
-            actualDom.remove();                                                                                         // remove the last element
-            $(this).siblings('#add-output-card-btn').attr('disabled', false);                                           // enable the "add" button
-            previousDom.children(".selector-output-card").attr('disabled', false);                                      // enable output card selection
+            actualDom.remove();                                                                                         // Removing the last element
+            $(this).siblings('#add-output-card-btn').attr('disabled', false);                                           // Enabling the "add output card" button
+            previousDom.children(".selector-output-card").attr('disabled', false);                                      // Enabling the "output card" section
         }
     });
 
-    $(document).on('focus', '.selector-device', function() {
+    $(document).on('focus', '.selector-device', function() {                                                            // Event concatenation in order to register the device before a change
         lastDeviceName = this.value;
     }).change(function() {
         lastDeviceName = this.value;
@@ -347,14 +343,13 @@ $(document).ready(function(){
         var deviceName = $(this).val()
         var root = $(this).parent()
 
-        $("#device-list").children('#' + lastDeviceName).remove();
-        const index = device_list.indexOf(lastDeviceName);
+        $("#device-list").children('#' + lastDeviceName).remove();                                                      // Removing the last device before the change, from the signal configurator
+
+        const index = device_list.indexOf(lastDeviceName);                                                              // Removing the last device before the change, from the device list
         if (index > -1) {
             device_list.splice(index, 1);
         }
-
-        ajax_processing(deviceName, root);
-        console.log(device_list);
+        ajax_processing(deviceName, root);                                                                              // ajax to process DB options of the device after the change
     });
 
     $(document).on('click', '#add-device-btn', function() {
@@ -362,29 +357,27 @@ $(document).ready(function(){
         var newNum = new Number(num + 1);
         var previousDom = $(this).siblings('#repeat-device-' + num);
         var newElem = $(this).siblings('#repeat-device-' + num).clone().attr('id', 'repeat-device-' + newNum);
+        var deviceName;
+        var root;
 
-        newElem.children(".selector-device").children("option[value='"+ previousDom.children(".selector-"                 // unable the previous choice
-        + "device").val() +"']").attr('disabled', true);
-
-        newElem.children(".selector-num-device").val(1);
-
-        newElem.children(".selector-device").children('option:not(:disabled)').each(function() {
-            $(this).prop('selected', true);
-        });
-
-        var deviceName = newElem.children(".selector-device").val()
-        var root = newElem
-
-        ajax_processing(deviceName, root);
-        console.log(device_list);
-
-        previousDom.children(".selector-device").attr('disabled', true);
-
-        previousDom.after(newElem);
-        $(this).siblings('#remove-device-btn').attr('disabled', false);
-
-        if (newNum == $("#hidden-devices-num").val()) {
+        if (newNum > $("#hidden-devices-num").val()) {
             $(this).attr('disabled', true);
+        } else {
+            newElem.children(".selector-device").children("option[value='"+ previousDom.children(".selector-"           // Disabling the previous choice
+            + "device").val() +"']").attr('disabled', true);
+            newElem.children(".selector-device").children('option:not(:disabled)').each(function() {                    // Enabling the ones left
+                $(this).prop('selected', true);
+            });
+            newElem.children(".selector-num-device").val(1);                                                            // Initializing the number of devices
+
+            deviceName = newElem.children(".selector-device").val()                                                     // Data for ajax
+            root = newElem
+            ajax_processing(deviceName, root);                                                                          // ajax to process DB options of the new device
+
+            previousDom.children(".selector-device").attr('disabled', true);                                            // Fixing the last option to avoid over-selection
+
+            previousDom.after(newElem);                                                                                 // Concatenating the new element
+            $(this).siblings('#remove-device-btn').attr('disabled', false);                                             // Enabling "remove device" button
         }
     });
 
@@ -395,24 +388,23 @@ $(document).ready(function(){
         var actualDom = $(this).siblings('#repeat-device-' + num);
         var deviceName = actualDom.children('.selector-device').val();
 
-        $("#device-list").children('#' + deviceName).remove();
-        const index = device_list.indexOf(deviceName);
+        $("#device-list").children('#' + deviceName).remove();                                                          // Removing the last device from the signal configurator
+        const index = device_list.indexOf(deviceName);                                                                  // Removing the last device from the device list
         if (index > -1) {
             device_list.splice(index, 1);
         }
-        console.log(device_list);
+        actualDom.remove();                                                                                             // Removing the last element
 
-        actualDom.remove();                                                                                                 // remove the last element
-        $(this).siblings('#add-device-btn').attr('disabled', false);                                                        // enable the "add" button
-        previousDom.children(".selector-device").attr('disabled', false);                                                   // enable device selection
+        $(this).siblings('#add-device-btn').attr('disabled', false);                                                    // Enabling the "add device" button
+        previousDom.children(".selector-device").attr('disabled', false);                                               // Enabling the device selector
 
-        if (newNum == 1) {
-            $(this).attr('disabled', true);                                                                                 // if only one element remains, disable the "remove" button
+        if (newNum == 1) {                                                                                              // if only one element remains, disabling the "remove device" button
+            $(this).attr('disabled', true);
         }
     });
 
     $(document).on('click', '.enable-cards', function() {
-        if(this.checked) {
+        if(this.checked) {                                                                                              // Behaviour of "generate" and "add center" buttons
             if($(this).parent().parent().parent().parent().siblings('.enable-cards-section').children('#table-input-'+
             'cards').children('#body-input-cards').children('#row-input-cards').children('#cell-input-'+
             'cards').children('.enable-input-cards').prop('checked') ||
@@ -440,7 +432,7 @@ $(document).ready(function(){
 
     });
 
-    $(document).on('click', '.enable-input-cards', function() {
+    $(document).on('click', '.enable-input-cards', function() {                                                         // Behaviour of "generate" and "add center" buttons
         if(this.checked) {
             $('#add-center-btn').attr('disabled', false);
             $('#generate').attr('disabled', false);
@@ -463,7 +455,7 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on('click', '.enable-output-cards', function() {
+    $(document).on('click', '.enable-output-cards', function() {                                                        // Behaviour of "generate" and "add center" buttons
         if(this.checked) {
             $('#add-center-btn').attr('disabled', false);
             $('#generate').attr('disabled', false);
@@ -486,39 +478,7 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on('click', '.enable-device', function() {
-        if (this.checked) {
-            $(this).siblings(".object-section").show();
-        } else {
-            $(this).siblings(".object-section").hide();
-        }
-    });
-
-    $(document).on('click', '.enable-monitor-objects', function() {
-        if (this.checked) {
-            $(this).siblings(".monitor-objects-section").show();
-        } else {
-            $(this).siblings(".monitor-objects-section").hide();
-        }
-    });
-
-    $(document).on('click', '.enable-control-objects', function() {
-        if (this.checked) {
-            $(this).siblings(".control-objects-section").show();
-        } else {
-            $(this).siblings(".control-objects-section").hide();
-        }
-    });
-
-    $(document).on('click', '.enable-signals', function() {
-        if (this.checked) {
-            $(this).siblings(".signals-section").show();
-        } else {
-            $(this).siblings(".signals-section").hide();
-        }
-    });
-
-    function ajax_processing(deviceName, root) {
+    function ajax_processing(deviceName, root) {                                                                        // ajax for client, server and getting device signals data
         $.ajax({
             url: '/ajax/validate_parameters/',
             data: {
@@ -565,14 +525,46 @@ $(document).ready(function(){
                     });
                 }
 
-                if (!device_list.includes(deviceName)) {
-                    //Add element to list
+                if (!device_list.includes(deviceName)) {                                                                // Only adding if it is not already there
                     device_list.push(deviceName);
                     device_processing(deviceName, data.device_data);
                 }
             }
         });
     }
+
+    /*LOGIC FOR DEVICE SIGNALS DYNAMIC CODE*/
+    $(document).on('click', '.enable-device', function() {
+        if (this.checked) {
+            $(this).siblings(".object-section").show();
+        } else {
+            $(this).siblings(".object-section").hide();
+        }
+    });
+
+    $(document).on('click', '.enable-monitor-objects', function() {
+        if (this.checked) {
+            $(this).siblings(".monitor-objects-section").show();
+        } else {
+            $(this).siblings(".monitor-objects-section").hide();
+        }
+    });
+
+    $(document).on('click', '.enable-control-objects', function() {
+        if (this.checked) {
+            $(this).siblings(".control-objects-section").show();
+        } else {
+            $(this).siblings(".control-objects-section").hide();
+        }
+    });
+
+    $(document).on('click', '.enable-signals', function() {
+        if (this.checked) {
+            $(this).siblings(".signals-section").show();
+        } else {
+            $(this).siblings(".signals-section").hide();
+        }
+    });
 
     function device_processing(deviceName, data) {
         var device = '';
@@ -635,7 +627,7 @@ $(document).ready(function(){
         $("#device-list").append(device);
     }
 
-    $('#form-data').submit(function(event) {
+    $('#form-data').submit(function(event) {                                                                            // Construction of the request (xml format)
         var xmlString = "";
 
         xmlString += '<?xml version="1.0" encoding="UTF-8"?>';
