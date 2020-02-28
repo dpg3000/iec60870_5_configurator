@@ -1,0 +1,45 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Map24WORDSepamSeries40measure0
+VAR_INPUT
+	eAction : eActions;
+	eState : eStates;
+	wMeasure1, wMeasure2, wMeasure3, wMeasure4, wMeasure5, wMeasure6, wMeasure7, wMeasure8, wMeasure9, wMeasure10, wMeasure11, wMeasure12, wMeasure13, wMeasure14, wMeasure15, wMeasure16, wMeasure17, wMeasure18, wMeasure19, wMeasure20, wMeasure21, wMeasure22, wMeasure23, wMeasure24: WORD;
+	
+END_VAR
+VAR_OUTPUT
+	wMeasureOutput1, wMeasureOutput2, wMeasureOutput3, wMeasureOutput4, wMeasureOutput5, wMeasureOutput6, wMeasureOutput7, wMeasureOutput8, wMeasureOutput9, wMeasureOutput10, wMeasureOutput11, wMeasureOutput12, wMeasureOutput13, wMeasureOutput14, wMeasureOutput15, wMeasureOutput16, wMeasureOutput17, wMeasureOutput18, wMeasureOutput19, wMeasureOutput20, wMeasureOutput21, wMeasureOutput22, wMeasureOutput23, wMeasureOutput24: WORD;
+END_VAR
+(* @END_DECLARATION := '0' *)
+IF  (eState = LOCAL OR eState = DEVICE_LOCAL) AND eAction = CONTROL THEN
+	RETURN;
+ELSE
+	wMeasureOutput1 := wMeasure1;
+wMeasureOutput2 := wMeasure2;
+wMeasureOutput3 := wMeasure3;
+wMeasureOutput4 := wMeasure4;
+wMeasureOutput5 := wMeasure5;
+wMeasureOutput6 := wMeasure6;
+wMeasureOutput7 := wMeasure7;
+wMeasureOutput8 := wMeasure8;
+wMeasureOutput9 := wMeasure9;
+wMeasureOutput10 := wMeasure10;
+wMeasureOutput11 := wMeasure11;
+wMeasureOutput12 := wMeasure12;
+wMeasureOutput13 := wMeasure13;
+wMeasureOutput14 := wMeasure14;
+wMeasureOutput15 := wMeasure15;
+wMeasureOutput16 := wMeasure16;
+wMeasureOutput17 := wMeasure17;
+wMeasureOutput18 := wMeasure18;
+wMeasureOutput19 := wMeasure19;
+wMeasureOutput20 := wMeasure20;
+wMeasureOutput21 := wMeasure21;
+wMeasureOutput22 := wMeasure22;
+wMeasureOutput23 := wMeasure23;
+wMeasureOutput24 := wMeasure24;
+
+END_IF
+END_FUNCTION_BLOCK

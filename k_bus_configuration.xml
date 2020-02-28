@@ -3,80 +3,8 @@
 	<project project-name="EA-Configuration">
 		<node node-name="Knoten" node-pos="0">
 			<module subbus-id="0" subbus-name="0x2014" article-no="0750-8212/####-0001" module-name="K_Bus(TargetId=38505, ApplicationId=5)" target-id="38505"/>
-                                <module subbus-id="1" subbus-name="0x9001" article-no="0750-1405" module-name="Type_1_16_Channels" comment="">
-        <channel channel-no="1" channel-name="Ch_1 Digital input"/>
-<channel channel-no="2" channel-name="Ch_2 Digital input"/>
-<channel channel-no="3" channel-name="Ch_3 Digital input"/>
-<channel channel-no="4" channel-name="Ch_4 Digital input"/>
-<channel channel-no="5" channel-name="Ch_5 Digital input"/>
-<channel channel-no="6" channel-name="Ch_6 Digital input"/>
-<channel channel-no="7" channel-name="Ch_7 Digital input"/>
-<channel channel-no="8" channel-name="Ch_8 Digital input"/>
-<channel channel-no="9" channel-name="Ch_9 Digital input"/>
-<channel channel-no="10" channel-name="Ch_10 Digital input"/>
-<channel channel-no="11" channel-name="Ch_11 Digital input"/>
-<channel channel-no="12" channel-name="Ch_12 Digital input"/>
-<channel channel-no="13" channel-name="Ch_13 Digital input"/>
-<channel channel-no="14" channel-name="Ch_14 Digital input"/>
-<channel channel-no="15" channel-name="Ch_15 Digital input"/>
-<channel channel-no="16" channel-name="Ch_16 Digital input"/>
-
-<var name="_IN_Ch1" visible-name="DI1" comment="Ch_1 Digital input"/>
-<var name="_IN_Ch2" visible-name="DI2" comment="Ch_2 Digital input"/>
-<var name="_IN_Ch3" visible-name="DI3" comment="Ch_3 Digital input"/>
-<var name="_IN_Ch4" visible-name="DI4" comment="Ch_4 Digital input"/>
-<var name="_IN_Ch5" visible-name="DI5" comment="Ch_5 Digital input"/>
-<var name="_IN_Ch6" visible-name="DI6" comment="Ch_6 Digital input"/>
-<var name="_IN_Ch7" visible-name="DI7" comment="Ch_7 Digital input"/>
-<var name="_IN_Ch8" visible-name="DI8" comment="Ch_8 Digital input"/>
-<var name="_IN_Ch9" visible-name="DI9" comment="Ch_9 Digital input"/>
-<var name="_IN_Ch10" visible-name="DI10" comment="Ch_10 Digital input"/>
-<var name="_IN_Ch11" visible-name="DI11" comment="Ch_11 Digital input"/>
-<var name="_IN_Ch12" visible-name="DI12" comment="Ch_12 Digital input"/>
-<var name="_IN_Ch13" visible-name="DI13" comment="Ch_13 Digital input"/>
-<var name="_IN_Ch14" visible-name="DI14" comment="Ch_14 Digital input"/>
-<var name="_IN_Ch15" visible-name="DI15" comment="Ch_15 Digital input"/>
-<var name="_IN_Ch16" visible-name="DI16" comment="Ch_16 Digital input"/>
-
-</module>
-<module subbus-id="2" subbus-name="0x9002" article-no="0750-1504" module-name="Type_10_16_Channels" comment="">
-        <channel channel-no="1" channel-name="Ch_1 Digital output"/>
-<channel channel-no="2" channel-name="Ch_2 Digital output"/>
-<channel channel-no="3" channel-name="Ch_3 Digital output"/>
-<channel channel-no="4" channel-name="Ch_4 Digital output"/>
-<channel channel-no="5" channel-name="Ch_5 Digital output"/>
-<channel channel-no="6" channel-name="Ch_6 Digital output"/>
-<channel channel-no="7" channel-name="Ch_7 Digital output"/>
-<channel channel-no="8" channel-name="Ch_8 Digital output"/>
-<channel channel-no="9" channel-name="Ch_9 Digital output"/>
-<channel channel-no="10" channel-name="Ch_10 Digital output"/>
-<channel channel-no="11" channel-name="Ch_11 Digital output"/>
-<channel channel-no="12" channel-name="Ch_12 Digital output"/>
-<channel channel-no="13" channel-name="Ch_13 Digital output"/>
-<channel channel-no="14" channel-name="Ch_14 Digital output"/>
-<channel channel-no="15" channel-name="Ch_15 Digital output"/>
-<channel channel-no="16" channel-name="Ch_16 Digital output"/>
-
-<var name="_OUT_Ch1" visible-name="DO1" comment="Ch_1 Digital output"/>
-<var name="_OUT_Ch2" visible-name="DO2" comment="Ch_2 Digital output"/>
-<var name="_OUT_Ch3" visible-name="DO3" comment="Ch_3 Digital output"/>
-<var name="_OUT_Ch4" visible-name="DO4" comment="Ch_4 Digital output"/>
-<var name="_OUT_Ch5" visible-name="DO5" comment="Ch_5 Digital output"/>
-<var name="_OUT_Ch6" visible-name="DO6" comment="Ch_6 Digital output"/>
-<var name="_OUT_Ch7" visible-name="DO7" comment="Ch_7 Digital output"/>
-<var name="_OUT_Ch8" visible-name="DO8" comment="Ch_8 Digital output"/>
-<var name="_OUT_Ch9" visible-name="DO9" comment="Ch_9 Digital output"/>
-<var name="_OUT_Ch10" visible-name="DO10" comment="Ch_10 Digital output"/>
-<var name="_OUT_Ch11" visible-name="DO11" comment="Ch_11 Digital output"/>
-<var name="_OUT_Ch12" visible-name="DO12" comment="Ch_12 Digital output"/>
-<var name="_OUT_Ch13" visible-name="DO13" comment="Ch_13 Digital output"/>
-<var name="_OUT_Ch14" visible-name="DO14" comment="Ch_14 Digital output"/>
-<var name="_OUT_Ch15" visible-name="DO15" comment="Ch_15 Digital output"/>
-<var name="_OUT_Ch16" visible-name="DO16" comment="Ch_16 Digital output"/>
-
-</module>
-
-                        <module subbus-id="3" subbus-name="0x0000" article-no="0750-0600"/>
+                                
+                        <module subbus-id="1" subbus-name="0x0000" article-no="0750-0600"/>
 		 </node>
 	 </project>
 </application>

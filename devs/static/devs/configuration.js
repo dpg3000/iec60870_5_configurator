@@ -335,8 +335,6 @@ $(document).ready(function(){
 
     $(document).on('focus', '.selector-device', function() {                                                            // Event concatenation in order to register the device before a change
         lastDeviceName = this.value;
-    }).change(function() {
-        lastDeviceName = this.value;
     });
 
     $(document).on('change', '.selector-device', function() {
@@ -350,6 +348,7 @@ $(document).ready(function(){
             device_list.splice(index, 1);
         }
         ajax_processing(deviceName, root);                                                                              // ajax to process DB options of the device after the change
+        lastDeviceName = this.value;
     });
 
     $(document).on('click', '#add-device-btn', function() {
@@ -478,7 +477,7 @@ $(document).ready(function(){
         }
     });
 
-    function ajax_processing(deviceName, root) {                                                                        // ajax for client, server and getting device signals data
+    function ajax_processing(deviceName, root) {                                                                        // ajax for server and getting device signals data
         $.ajax({
             url: '/ajax/validate_parameters/',
             data: {
@@ -486,17 +485,6 @@ $(document).ready(function(){
             },
             dataType: 'json',
             success: function (data) {
-                if (!data.is_client) {
-                    root.children('#add-device-client').prop('checked', false)
-                    root.children('#add-device-client').prop('disabled', true)
-                    root.children('#add-device-server').prop('checked', true)
-                    root.children('#add-device-server').prop('disabled', true)
-                } else {
-                    root.children('#add-device-client').prop('checked', true)
-                    root.children('#add-device-client').prop('disabled', false)
-                    root.children('#add-device-server').prop('checked', true)
-                    root.children('#add-device-server').prop('disabled', false)
-                }
                 if (!data.is_do) {
                     root.children('.selector-operation').children().each(function() {
                         if ($(this).val() == "DO") {

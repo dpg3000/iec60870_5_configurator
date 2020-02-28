@@ -41,8 +41,6 @@ class Device(models.Model):
     ControlIoa = models.IntegerField(default=1000)
     ControlIoaJump = models.IntegerField(default=100)
     ControlObjectList = MultiSelectField(choices=CONTROL_OBJ_CHOICES, blank=True)
-    ClientObjs = models.TextField(blank=True)
-    ClientSignals = models.TextField(blank=True)
 
     def __str__(self):
         return self.Name

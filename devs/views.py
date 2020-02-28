@@ -45,13 +45,6 @@ def validate_parameters(request):
     # Obtaining data
     device_name = request.GET.get('device_name', None)
 
-    # Client evaluation
-    client_existence = Device.objects.filter(Name=device_name).first().ClientObjs
-    if client_existence:
-        client_existence = True
-    else:
-        client_existence = False
-
     # Getting operation data
     do_capability = Device.objects.filter(Name=device_name).first().DO
     sbo_capability = Device.objects.filter(Name=device_name).first().SBO
@@ -60,7 +53,6 @@ def validate_parameters(request):
     device_data = device_ajax_request(device_name)
 
     data = {
-        'is_client': client_existence,
         'is_do': do_capability,
         'is_sbo': sbo_capability,
         'device_data': device_data
@@ -75,6 +67,7 @@ def submit(request):
     fl_k_bus = os.path.abspath("k_bus_configuration.xml")
     fl_pou_files = os.path.abspath("POUs")
 
+    # String to concatenate the processing error messages
     error_messages = ""
 
     # Initial erase to avoid partial overwriting
@@ -89,8 +82,8 @@ def submit(request):
     k_bus = open("k_bus_configuration.xml", "w+")
 
     # Project header with time stamp
-    project = Project(datetime.datetime.now())
-    project.headers(iec60870_5_config)
+    project = Project(datetime.datetime.now(), iec60870_5_config)
+    project.headers()
 
     # Parsing xml from form data
     raw_xml = request.POST.get('request-data')
@@ -100,60 +93,100 @@ def submit(request):
     server_iteration = 0
     flag_input_cards = False
     flag_output_cards = False
+    flag_general_cards = True
     bus_modules_list = []
     delete_pous()
+
+    # Centers
     for center in root.iter('center'):
         center_ins = Server(center.attrib['name'], server_iteration, iec60870_5_config)
         center_ins.headers()
 
+        # Input cards
         for input_card in center.iter('input-card'):
+            # Server
             if input_card.attrib['server'] == 'yes':
-                server_input_car = ServerDevice(input_card.text, 'card', int(input_card.attrib['number']),
-                                                server_iteration, iec60870_5_config)
+                server_input_car = ServerDevice(
+                    name=input_card.text,
+                    element='card',
+                    quantity=int(input_card.attrib['number']),
+                    server_iteration=server_iteration,
+                    file=iec60870_5_config
+                )
                 error_message = server_input_car.create_device()
                 if error_message:
                     messages.error(request, error_message)
                     error_messages += error_message + '\n'
                 flag_input_cards = True
+            # K-bus
             if input_card.attrib['io'] == 'yes':
                 for k in range(int(input_card.attrib['number'])):
                     kbus_ins = BusModule(input_card.text)
                     bus_modules_list.append(kbus_ins)
 
+        # Output cards
         for output_card in center.iter('output-card'):
+            # Server
             if output_card.attrib['server'] == 'yes':
-                server_output_card = ServerDevice(output_card.text, 'card', int(output_card.attrib['number']),
-                                                  server_iteration, iec60870_5_config)
+                server_output_card = ServerDevice(
+                    name=output_card.text,
+                    element='card',
+                    quantity=int(output_card.attrib['number']),
+                    server_iteration=server_iteration,
+                    file=iec60870_5_config
+                )
                 error_message = server_output_card.create_device()
                 if error_message:
                     messages.error(request, error_message)
                     error_messages += error_message + '\n'
                 flag_output_cards = True
+            # K-bus
             if output_card.attrib['io'] == 'yes':
                 for k in range(int(output_card.attrib['number'])):
                     kbus_ins = BusModule(output_card.text)
                     bus_modules_list.append(kbus_ins)
 
+        # POU device for cards
         if flag_input_cards or flag_output_cards:
-            error_message = pou.create_pous('Cards', 'card', 1, 'DO', server_iteration)
+            error_message = pou.create_pous(
+                device_name='Cards',
+                element='card',
+                quantity=1,
+                operation='DO',
+                server_iteration=server_iteration
+            )
             flag_input_cards = False
             flag_output_cards = False
+            flag_general_cards = True
             if error_message:
                 messages.error(request, error_message)
                 error_messages += error_message + '\n'
 
+        # Devices
         for device in center.iter('device'):
+            # Server
             if device.attrib['server'] == 'yes':
-                server_device = ServerDevice(device.text, 'device', int(device.attrib['number']), server_iteration,
-                                             iec60870_5_config)
+                server_device = ServerDevice(
+                    name=device.text,
+                    element='device',
+                    quantity=int(device.attrib['number']),
+                    server_iteration=server_iteration,
+                    file=iec60870_5_config
+                )
                 error_message = server_device.create_device()
                 if error_message:
                     messages.error(request, error_message)
                     error_messages += error_message + '\n'
+            # Client
             # if device.attrib['client'] == 'yes':
             # GESTIONAR EL CLIENTE
-            pou.create_pous(device.text, 'device', int(device.attrib['number']), device.attrib['operation'],
-                            server_iteration)
+            pou.create_pous(
+                device_name=device.text,
+                element='device',
+                quantity=int(device.attrib['number']),
+                operation=device.attrib['operation'],
+                server_iteration=server_iteration
+            )
 
         # Increase server iteration
         server_iteration += 1
@@ -163,10 +196,12 @@ def submit(request):
     # Creating user-prg
     pou.create_user_prg()
     # write k-bus instances
-    assemble_modules(bus_modules_list, k_bus)
+    if flag_general_cards:
+        assemble_modules(bus_modules_list, k_bus)
     # project closing tags
-    project.closing_tags(iec60870_5_config)
+    project.closing_tags()
 
+    # Closing files
     iec60870_5_config.close()
     k_bus.close()
 

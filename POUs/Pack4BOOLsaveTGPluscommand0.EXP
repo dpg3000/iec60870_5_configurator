@@ -1,0 +1,17 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Pack4BOOLsaveTGPluscommand0
+VAR_INPUT
+	xSaveCommand1, xSaveCommand2, xSaveCommand3, xSaveCommand4: BOOL;
+END_VAR
+VAR_OUTPUT
+	aSaves : ARRAY [1..4] OF BOOL;
+END_VAR
+(* @END_DECLARATION := '0' *)
+aSaves[1] := xSaveCommand1;
+aSaves[2] := xSaveCommand2;
+aSaves[3] := xSaveCommand3;
+aSaves[4] := xSaveCommand4;
+END_FUNCTION_BLOCK

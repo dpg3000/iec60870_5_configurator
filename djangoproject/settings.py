@@ -39,12 +39,11 @@ INSTALLED_APPS = [
 
     # third party
 
-    #own
+    # own
     'devs',
     'cards',
     'server_parts',
     'project_parts',
-    'clients',
     'codesys'
 ]
 

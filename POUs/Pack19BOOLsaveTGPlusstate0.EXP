@@ -1,0 +1,32 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Pack19BOOLsaveTGPlusstate0
+VAR_INPUT
+	xSaveState1, xSaveState2, xSaveState3, xSaveState4, xSaveState5, xSaveState6, xSaveState7, xSaveState8, xSaveState9, xSaveState10, xSaveState11, xSaveState12, xSaveState13, xSaveState14, xSaveState15, xSaveState16, xSaveState17, xSaveState18, xSaveState19: BOOL;
+END_VAR
+VAR_OUTPUT
+	aSaves : ARRAY [1..19] OF BOOL;
+END_VAR
+(* @END_DECLARATION := '0' *)
+aSaves[1] := xSaveState1;
+aSaves[2] := xSaveState2;
+aSaves[3] := xSaveState3;
+aSaves[4] := xSaveState4;
+aSaves[5] := xSaveState5;
+aSaves[6] := xSaveState6;
+aSaves[7] := xSaveState7;
+aSaves[8] := xSaveState8;
+aSaves[9] := xSaveState9;
+aSaves[10] := xSaveState10;
+aSaves[11] := xSaveState11;
+aSaves[12] := xSaveState12;
+aSaves[13] := xSaveState13;
+aSaves[14] := xSaveState14;
+aSaves[15] := xSaveState15;
+aSaves[16] := xSaveState16;
+aSaves[17] := xSaveState17;
+aSaves[18] := xSaveState18;
+aSaves[19] := xSaveState19;
+END_FUNCTION_BLOCK

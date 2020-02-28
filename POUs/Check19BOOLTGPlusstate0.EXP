@@ -1,0 +1,29 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Check19BOOLTGPlusstate0
+VAR_INPUT
+	aSignals              : ARRAY [1..19] OF BOOL;
+	xFirstCycle       : BOOL;
+END_VAR
+VAR_OUTPUT
+	aCheckChanges            : ARRAY [1..19] OF BOOL;
+END_VAR
+VAR
+	iN        : INT;
+	aLastValues    : ARRAY [1..19] OF BOOL;
+END_VAR
+(* @END_DECLARATION := '0' *)
+FOR iN := 1 TO 19 BY 1 DO
+        IF xFirstCycle THEN
+               aLastValues[iN] := aSignals[iN];
+        END_IF
+        IF aSignals[iN] <> aLastValues[iN] THEN
+                aCheckChanges[iN] := TRUE;
+        ELSE
+                aCheckChanges[iN] := FALSE;
+        END_IF
+END_FOR
+aLastValues := aSignals;
+END_FUNCTION_BLOCK

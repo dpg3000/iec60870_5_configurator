@@ -54,7 +54,7 @@ def delete_pous():
             print(f"Failed to delete {file_path}. Reason: {e}")
 
 
-def create_pous(device_name, element, device_quantity, operation, server_iteration):
+def create_pous(device_name, element, quantity, operation, server_iteration):
     # Hub device/card
     protocol = ''
     if element == 'device':
@@ -62,7 +62,7 @@ def create_pous(device_name, element, device_quantity, operation, server_iterati
     elif element == 'card':
         protocol = 'IO-Logic'
     else:
-        return f"Error: unknown element in the device/card hub inside create_pous()"
+        return "Error: unknown element in the device/card hub inside create_pous()"
 
     # Main purposes sequence list
     if measurements_list:
@@ -170,7 +170,7 @@ def create_pous(device_name, element, device_quantity, operation, server_iterati
     device_list.append(
         {
             'name':                 device0,
-            'quantity':             device_quantity,
+            'quantity':             quantity,
             'operation':            operation,
             'protocol':             protocol,
             'measurements':         measurements,

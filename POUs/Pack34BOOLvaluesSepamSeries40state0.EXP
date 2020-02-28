@@ -1,0 +1,47 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Pack34BOOLvaluesSepamSeries40state0
+VAR_INPUT
+	xState1, xState2, xState3, xState4, xState5, xState6, xState7, xState8, xState9, xState10, xState11, xState12, xState13, xState14, xState15, xState16, xState17, xState18, xState19, xState20, xState21, xState22, xState23, xState24, xState25, xState26, xState27, xState28, xState29, xState30, xState31, xState32, xState33, xState34: BOOL;
+END_VAR
+VAR_OUTPUT
+	aSignals : ARRAY [1..34] OF BOOL;
+END_VAR
+(* @END_DECLARATION := '0' *)
+aSignals[1] := xState1;
+aSignals[2] := xState2;
+aSignals[3] := xState3;
+aSignals[4] := xState4;
+aSignals[5] := xState5;
+aSignals[6] := xState6;
+aSignals[7] := xState7;
+aSignals[8] := xState8;
+aSignals[9] := xState9;
+aSignals[10] := xState10;
+aSignals[11] := xState11;
+aSignals[12] := xState12;
+aSignals[13] := xState13;
+aSignals[14] := xState14;
+aSignals[15] := xState15;
+aSignals[16] := xState16;
+aSignals[17] := xState17;
+aSignals[18] := xState18;
+aSignals[19] := xState19;
+aSignals[20] := xState20;
+aSignals[21] := xState21;
+aSignals[22] := xState22;
+aSignals[23] := xState23;
+aSignals[24] := xState24;
+aSignals[25] := xState25;
+aSignals[26] := xState26;
+aSignals[27] := xState27;
+aSignals[28] := xState28;
+aSignals[29] := xState29;
+aSignals[30] := xState30;
+aSignals[31] := xState31;
+aSignals[32] := xState32;
+aSignals[33] := xState33;
+aSignals[34] := xState34;
+END_FUNCTION_BLOCK

@@ -8,8 +8,9 @@ class DeviceAdmin(admin.ModelAdmin):
         ("OPERATION", {"fields": ["DO", "SBO"]}),
         ("MONITOR", {"fields": ["MonitorIoa", "MonitorIoaJump", "MonitorObjectList"]}),
         ("CONTROL", {"fields": ["ControlIoa", "ControlIoaJump", "ControlObjectList"]}),
-        ("CLIENT", {"fields": ["ClientObjs", "ClientSignals"]})
     ]
 
 
 admin.site.register(Device, DeviceAdmin)
+
+

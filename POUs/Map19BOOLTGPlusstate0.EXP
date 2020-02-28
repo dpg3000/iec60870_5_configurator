@@ -1,0 +1,79 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Map19BOOLTGPlusstate0
+VAR_INPUT
+	eAction : eActions;
+	eState : eStates;
+	xState1, xState2, xState3, xState4, xState5, xState6, xState7, xState8, xState9, xState10, xState11, xState12, xState13, xState14, xState15, xState16, xState17, xState18, xState19: BOOL;
+	aTriggerChanges1, aTriggerChanges2, aTriggerChanges3, aTriggerChanges4, aTriggerChanges5, aTriggerChanges6, aTriggerChanges7, aTriggerChanges8, aTriggerChanges9, aTriggerChanges10, aTriggerChanges11, aTriggerChanges12, aTriggerChanges13, aTriggerChanges14, aTriggerChanges15, aTriggerChanges16, aTriggerChanges17, aTriggerChanges18, aTriggerChanges19: BOOL;
+	aCheckChanges1, aCheckChanges2, aCheckChanges3, aCheckChanges4, aCheckChanges5, aCheckChanges6, aCheckChanges7, aCheckChanges8, aCheckChanges9, aCheckChanges10, aCheckChanges11, aCheckChanges12, aCheckChanges13, aCheckChanges14, aCheckChanges15, aCheckChanges16, aCheckChanges17, aCheckChanges18, aCheckChanges19: BOOL;
+END_VAR
+VAR_OUTPUT
+	xStateOutput1, xStateOutput2, xStateOutput3, xStateOutput4, xStateOutput5, xStateOutput6, xStateOutput7, xStateOutput8, xStateOutput9, xStateOutput10, xStateOutput11, xStateOutput12, xStateOutput13, xStateOutput14, xStateOutput15, xStateOutput16, xStateOutput17, xStateOutput18, xStateOutput19: BOOL;
+END_VAR
+(* @END_DECLARATION := '0' *)
+IF  (eState = LOCAL OR eState = DEVICE_LOCAL) AND eAction = CONTROL THEN
+	RETURN;
+ELSE
+	IF aTriggerChanges1 OR aCheckChanges1 THEN
+xStateOutput1 := xState1;
+END_IF
+IF aTriggerChanges2 OR aCheckChanges2 THEN
+xStateOutput2 := xState2;
+END_IF
+IF aTriggerChanges3 OR aCheckChanges3 THEN
+xStateOutput3 := xState3;
+END_IF
+IF aTriggerChanges4 OR aCheckChanges4 THEN
+xStateOutput4 := xState4;
+END_IF
+IF aTriggerChanges5 OR aCheckChanges5 THEN
+xStateOutput5 := xState5;
+END_IF
+IF aTriggerChanges6 OR aCheckChanges6 THEN
+xStateOutput6 := xState6;
+END_IF
+IF aTriggerChanges7 OR aCheckChanges7 THEN
+xStateOutput7 := xState7;
+END_IF
+IF aTriggerChanges8 OR aCheckChanges8 THEN
+xStateOutput8 := xState8;
+END_IF
+IF aTriggerChanges9 OR aCheckChanges9 THEN
+xStateOutput9 := xState9;
+END_IF
+IF aTriggerChanges10 OR aCheckChanges10 THEN
+xStateOutput10 := xState10;
+END_IF
+IF aTriggerChanges11 OR aCheckChanges11 THEN
+xStateOutput11 := xState11;
+END_IF
+IF aTriggerChanges12 OR aCheckChanges12 THEN
+xStateOutput12 := xState12;
+END_IF
+IF aTriggerChanges13 OR aCheckChanges13 THEN
+xStateOutput13 := xState13;
+END_IF
+IF aTriggerChanges14 OR aCheckChanges14 THEN
+xStateOutput14 := xState14;
+END_IF
+IF aTriggerChanges15 OR aCheckChanges15 THEN
+xStateOutput15 := xState15;
+END_IF
+IF aTriggerChanges16 OR aCheckChanges16 THEN
+xStateOutput16 := xState16;
+END_IF
+IF aTriggerChanges17 OR aCheckChanges17 THEN
+xStateOutput17 := xState17;
+END_IF
+IF aTriggerChanges18 OR aCheckChanges18 THEN
+xStateOutput18 := xState18;
+END_IF
+IF aTriggerChanges19 OR aCheckChanges19 THEN
+xStateOutput19 := xState19;
+END_IF
+
+END_IF
+END_FUNCTION_BLOCK

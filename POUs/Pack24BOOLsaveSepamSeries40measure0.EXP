@@ -1,0 +1,37 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Pack24BOOLsaveSepamSeries40measure0
+VAR_INPUT
+	xSaveMeasure1, xSaveMeasure2, xSaveMeasure3, xSaveMeasure4, xSaveMeasure5, xSaveMeasure6, xSaveMeasure7, xSaveMeasure8, xSaveMeasure9, xSaveMeasure10, xSaveMeasure11, xSaveMeasure12, xSaveMeasure13, xSaveMeasure14, xSaveMeasure15, xSaveMeasure16, xSaveMeasure17, xSaveMeasure18, xSaveMeasure19, xSaveMeasure20, xSaveMeasure21, xSaveMeasure22, xSaveMeasure23, xSaveMeasure24: BOOL;
+END_VAR
+VAR_OUTPUT
+	aSaves : ARRAY [1..24] OF BOOL;
+END_VAR
+(* @END_DECLARATION := '0' *)
+aSaves[1] := xSaveMeasure1;
+aSaves[2] := xSaveMeasure2;
+aSaves[3] := xSaveMeasure3;
+aSaves[4] := xSaveMeasure4;
+aSaves[5] := xSaveMeasure5;
+aSaves[6] := xSaveMeasure6;
+aSaves[7] := xSaveMeasure7;
+aSaves[8] := xSaveMeasure8;
+aSaves[9] := xSaveMeasure9;
+aSaves[10] := xSaveMeasure10;
+aSaves[11] := xSaveMeasure11;
+aSaves[12] := xSaveMeasure12;
+aSaves[13] := xSaveMeasure13;
+aSaves[14] := xSaveMeasure14;
+aSaves[15] := xSaveMeasure15;
+aSaves[16] := xSaveMeasure16;
+aSaves[17] := xSaveMeasure17;
+aSaves[18] := xSaveMeasure18;
+aSaves[19] := xSaveMeasure19;
+aSaves[20] := xSaveMeasure20;
+aSaves[21] := xSaveMeasure21;
+aSaves[22] := xSaveMeasure22;
+aSaves[23] := xSaveMeasure23;
+aSaves[24] := xSaveMeasure24;
+END_FUNCTION_BLOCK

@@ -1,0 +1,47 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Pack34BYTEtriggerSepamSeries40state0
+VAR_INPUT
+	byRiseState1, byRiseState2, byRiseState3, byRiseState4, byRiseState5, byRiseState6, byRiseState7, byRiseState8, byRiseState9, byRiseState10, byRiseState11, byRiseState12, byRiseState13, byRiseState14, byRiseState15, byRiseState16, byRiseState17, byRiseState18, byRiseState19, byRiseState20, byRiseState21, byRiseState22, byRiseState23, byRiseState24, byRiseState25, byRiseState26, byRiseState27, byRiseState28, byRiseState29, byRiseState30, byRiseState31, byRiseState32, byRiseState33, byRiseState34: BYTE;
+END_VAR
+VAR_OUTPUT
+	aRiseChanges : ARRAY [1..34] OF BYTE;
+END_VAR
+(* @END_DECLARATION := '0' *)
+aRiseChanges[1] := byRiseState1;
+aRiseChanges[2] := byRiseState2;
+aRiseChanges[3] := byRiseState3;
+aRiseChanges[4] := byRiseState4;
+aRiseChanges[5] := byRiseState5;
+aRiseChanges[6] := byRiseState6;
+aRiseChanges[7] := byRiseState7;
+aRiseChanges[8] := byRiseState8;
+aRiseChanges[9] := byRiseState9;
+aRiseChanges[10] := byRiseState10;
+aRiseChanges[11] := byRiseState11;
+aRiseChanges[12] := byRiseState12;
+aRiseChanges[13] := byRiseState13;
+aRiseChanges[14] := byRiseState14;
+aRiseChanges[15] := byRiseState15;
+aRiseChanges[16] := byRiseState16;
+aRiseChanges[17] := byRiseState17;
+aRiseChanges[18] := byRiseState18;
+aRiseChanges[19] := byRiseState19;
+aRiseChanges[20] := byRiseState20;
+aRiseChanges[21] := byRiseState21;
+aRiseChanges[22] := byRiseState22;
+aRiseChanges[23] := byRiseState23;
+aRiseChanges[24] := byRiseState24;
+aRiseChanges[25] := byRiseState25;
+aRiseChanges[26] := byRiseState26;
+aRiseChanges[27] := byRiseState27;
+aRiseChanges[28] := byRiseState28;
+aRiseChanges[29] := byRiseState29;
+aRiseChanges[30] := byRiseState30;
+aRiseChanges[31] := byRiseState31;
+aRiseChanges[32] := byRiseState32;
+aRiseChanges[33] := byRiseState33;
+aRiseChanges[34] := byRiseState34;
+END_FUNCTION_BLOCK
