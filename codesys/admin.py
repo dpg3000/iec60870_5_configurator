@@ -11,7 +11,16 @@ class UserPrgAdmin(admin.ModelAdmin):
                              ("ProgramHeader", "ProgramEndTag")]}),
         ("VARIABLE DECLARATION", {"fields": [("FirstCycle", "FirstCycleDataType", "FirstCycleInitVal"),
                                              ("MaskLocRem", "MaskLocRemDataType"),
-                                             ("StateLocRem", "StateLocRemDataType")]})
+                                             ("StateLocRem", "StateLocRemDataType"),
+                                             ("DummyMeasure", "DummyMeasureDataType"),
+                                             ("DummyMeasureOutput", "DummyMeasureOutputDataType"),
+                                             ("DummyState", "DummyStateDataType"),
+                                             ("DummyStateOutput", "DummyStateOutputDataType"),
+                                             ("DummyCommand", "DummyCommandDataType"),
+                                             ("DummyCommandOutput", "DummyCommandOutputDataType"),
+                                             ("DummyStatus", "DummyStatusDataType"),
+                                             ("DummySelect", "DummySelectDataType"),
+                                             ("DummyExecute", "DummyExecuteDataType")]})
     ]
 
 

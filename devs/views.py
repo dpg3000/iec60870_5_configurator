@@ -194,7 +194,7 @@ def submit(request):
         center_ins.closing_tags()
 
     # Creating user-prg
-    pou.create_user_prg()
+    pou.create_user_prg(server_iteration)
     # write k-bus instances
     if flag_general_cards:
         assemble_modules(bus_modules_list, k_bus)

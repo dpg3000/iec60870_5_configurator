@@ -58,3 +58,12 @@ def variable_to_declaration(signal, size, data_type):
 
     return input_str
 
+
+def dummy_to_declaration(signal, dev, size, data_type):
+    input_str = [f"{signal}_{dev}_{i + 1}, " for i in range(size)]
+    input_str = ''.join(input_str)
+    input_str = input_str[:-2]
+    input_str += ": " + data_type.upper() + ";"
+
+    return input_str
+

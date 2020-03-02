@@ -198,7 +198,7 @@ def create_pous(device_name, element, quantity, operation, server_iteration):
     return False
 
 
-def create_user_prg():
+def create_user_prg(server_iteration):
     # Obtaining the total number of devices
     total_devices = 1
     for device in device_list:
@@ -211,7 +211,7 @@ def create_user_prg():
     check = check_loc_rem_model.check_loc_rem(total_devices, path)
 
     # user_prg
-    user_prg_model.user_prg(device_list, total_devices, pack, check, path)
+    user_prg_model.user_prg(device_list, total_devices, pack, check, server_iteration, path)
 
     # clearing device list
     device_list.clear()

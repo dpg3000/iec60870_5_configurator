@@ -40,5 +40,3 @@ pou.rise_model = models.RiseModel(pou.rtu_model, models.rise_version)
 pou.save_model = models.SaveModel(pou.rtu_model, models.save_version)
 pou.sbo_model = models.SboModel(pou.rtu_model, models.sbo_version)
 pou.handler_model = models.HandlerModel(pou.rtu_model, models.handler_version)
-
-

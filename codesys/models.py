@@ -1,6 +1,6 @@
 from django.db import models
 import copy
-from support_functions import variable_to_declaration
+from support_functions import variable_to_declaration, dummy_to_declaration
 from server_parts.models import Obj35mMeTe
 import pou
 import re
@@ -42,6 +42,18 @@ class FBDTemplate(models.Model):
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(FBDTemplate, self).save()
         pou.fbd_model = FunctionBlockDiagramModel()
+        pou.user_prg_model = UserPrgModel(pou.fbd_model, user_prg_version)
+        pou.pack_loc_rem_model = PackLocRemModel(pou.user_prg_model, pack_loc_rem_version)
+        pou.check_loc_rem_model = CheckLocRemModel(pou.user_prg_model, check_loc_rem_version)
+        pou.device_model = DeviceModel(pou.user_prg_model, device_version)
+        pou.rtu_model = RtuModel(pou.device_model, rtu_version)
+        pou.pack_model = PackModel(pou.rtu_model, pack_version)
+        pou.check_model = CheckModel(pou.rtu_model, check_version)
+        pou.map_model = MapModel(pou.rtu_model, map_version)
+        pou.rise_model = RiseModel(pou.rtu_model, rise_version)
+        pou.save_model = SaveModel(pou.rtu_model, save_version)
+        pou.sbo_model = SboModel(pou.rtu_model, sbo_version)
+        pou.handler_model = HandlerModel(pou.rtu_model, handler_version)
 
     class Meta:
         verbose_name_plural = "fbd_template"
@@ -58,10 +70,39 @@ class UserPrg(models.Model):
     MaskLocRemDataType = models.CharField(max_length=255, default="")
     StateLocRem = models.CharField(max_length=255, default="")
     StateLocRemDataType = models.CharField(max_length=255, default="")
+    DummyMeasure = models.CharField(max_length=255, default="")
+    DummyMeasureDataType = models.CharField(max_length=255, default="")
+    DummyMeasureOutput = models.CharField(max_length=255, default="")
+    DummyMeasureOutputDataType = models.CharField(max_length=255, default="")
+    DummyState = models.CharField(max_length=255, default="")
+    DummyStateDataType = models.CharField(max_length=255, default="")
+    DummyStateOutput = models.CharField(max_length=255, default="")
+    DummyStateOutputDataType = models.CharField(max_length=255, default="")
+    DummyCommand = models.CharField(max_length=255, default="")
+    DummyCommandDataType = models.CharField(max_length=255, default="")
+    DummyCommandOutput = models.CharField(max_length=255, default="")
+    DummyCommandOutputDataType = models.CharField(max_length=255, default="")
+    DummyStatus = models.CharField(max_length=255, default="")
+    DummyStatusDataType = models.CharField(max_length=255, default="")
+    DummySelect = models.CharField(max_length=255, default="")
+    DummySelectDataType = models.CharField(max_length=255, default="")
+    DummyExecute = models.CharField(max_length=255, default="")
+    DummyExecuteDataType = models.CharField(max_length=255, default="")
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(UserPrg, self).save()
         pou.user_prg_model = UserPrgModel(pou.fbd_model, user_prg_version)
+        pou.pack_loc_rem_model = PackLocRemModel(pou.user_prg_model, pack_loc_rem_version)
+        pou.check_loc_rem_model = CheckLocRemModel(pou.user_prg_model, check_loc_rem_version)
+        pou.device_model = DeviceModel(pou.user_prg_model, device_version)
+        pou.rtu_model = RtuModel(pou.device_model, rtu_version)
+        pou.pack_model = PackModel(pou.rtu_model, pack_version)
+        pou.check_model = CheckModel(pou.rtu_model, check_version)
+        pou.map_model = MapModel(pou.rtu_model, map_version)
+        pou.rise_model = RiseModel(pou.rtu_model, rise_version)
+        pou.save_model = SaveModel(pou.rtu_model, save_version)
+        pou.sbo_model = SboModel(pou.rtu_model, sbo_version)
+        pou.handler_model = HandlerModel(pou.rtu_model, handler_version)
 
     def __str__(self):
         return self.Version
@@ -150,6 +191,14 @@ class Device(models.Model):
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(Device, self).save()
         pou.device_model = DeviceModel(pou.user_prg_model, device_version)
+        pou.rtu_model = RtuModel(pou.device_model, rtu_version)
+        pou.pack_model = PackModel(pou.rtu_model, pack_version)
+        pou.check_model = CheckModel(pou.rtu_model, check_version)
+        pou.map_model = MapModel(pou.rtu_model, map_version)
+        pou.rise_model = RiseModel(pou.rtu_model, rise_version)
+        pou.save_model = SaveModel(pou.rtu_model, save_version)
+        pou.sbo_model = SboModel(pou.rtu_model, sbo_version)
+        pou.handler_model = HandlerModel(pou.rtu_model, handler_version)
 
     def __str__(self):
         return self.Version
@@ -180,6 +229,13 @@ class Rtu(models.Model):
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super(Rtu, self).save()
         pou.rtu_model = RtuModel(pou.device_model, rtu_version)
+        pou.pack_model = PackModel(pou.rtu_model, pack_version)
+        pou.check_model = CheckModel(pou.rtu_model, check_version)
+        pou.map_model = MapModel(pou.rtu_model, map_version)
+        pou.rise_model = RiseModel(pou.rtu_model, rise_version)
+        pou.save_model = SaveModel(pou.rtu_model, save_version)
+        pou.sbo_model = SboModel(pou.rtu_model, sbo_version)
+        pou.handler_model = HandlerModel(pou.rtu_model, handler_version)
 
     def __str__(self):
         return self.Version
@@ -380,8 +436,27 @@ class UserPrgModel(FunctionBlockDiagramModel):
         self.mask_loc_rem_data_type = self.user_prg_model.MaskLocRemDataType
         self.state_loc_rem = self.user_prg_model.StateLocRem
         self.state_loc_rem_data_type = self.user_prg_model.StateLocRemDataType
+        self.dummy_measure = self.user_prg_model.DummyMeasure
+        self.dummy_measure_data_type = self.user_prg_model.DummyMeasureDataType
+        self.dummy_measure_output = self.user_prg_model.DummyMeasureOutput
+        self.dummy_measure_output_data_type = self.user_prg_model.DummyMeasureOutputDataType
+        self.dummy_state = self.user_prg_model.DummyState
+        self.dummy_state_data_type = self.user_prg_model.DummyStateDataType
+        self.dummy_state_output = self.user_prg_model.DummyStateOutput
+        self.dummy_state_output_data_type = self.user_prg_model.DummyStateOutputDataType
+        self.dummy_command = self.user_prg_model.DummyCommand
+        self.dummy_command_data_type = self.user_prg_model.DummyCommandDataType
+        self.dummy_command_output = self.user_prg_model.DummyCommandOutput
+        self.dummy_command_output_data_type = self.user_prg_model.DummyCommandOutputDataType
+        self.dummy_status = self.user_prg_model.DummyStatus
+        self.dummy_status_data_type = self.user_prg_model.DummyStatusDataType
+        self.dummy_select = self.user_prg_model.DummySelect
+        self.dummy_select_data_type = self.user_prg_model.DummySelectDataType
+        self.dummy_execute = self.user_prg_model.DummyExecute
+        self.dummy_execute_data_type = self.user_prg_model.DummyExecuteDataType
+        self.dev_iteration = 0
 
-    def user_prg(self, device_list, num_objects, pack_loc_rem, check_loc_rem, path):
+    def user_prg(self, device_list, num_objects, pack_loc_rem, check_loc_rem, server_iteration, path):
         # Instance data
         pou_name = "USER_PRG"
 
@@ -393,7 +468,62 @@ class UserPrgModel(FunctionBlockDiagramModel):
         internal_str = ''
         internal_str += f"{self.first_cycle}    : {self.first_cycle_data_type} := {self.first_cycle_init_val};" + '\n\t'
         internal_str += f"{self.mask_loc_rem}   : ARRAY [1..{num_objects}] OF {self.mask_loc_rem_data_type};" + '\n\t'
-        internal_str += f"{self.state_loc_rem}  : ARRAY [1..{num_objects}] OF {self.state_loc_rem_data_type};" + '\n\t'
+        internal_str += f"{self.state_loc_rem}  : ARRAY [1..{num_objects - 1}] OF {self.state_loc_rem_data_type};"
+        internal_str += '\n\t'
+
+        # Internal dummies
+        for device in device_list:
+            for k in range(device['quantity']):
+                internal_str += f"(*{device['name']}_{k}*)" + '\n\t'
+                # Measurements
+                if device['measurements']:
+                    internal_str += dummy_to_declaration(
+                        signal=f"{self.dummy_measure}_{device['name']}",
+                        dev=self.dev_iteration,
+                        size=len(device['measurements'][k]),
+                        data_type=self.dummy_measure_data_type
+                    ) + '\n\t'
+                # States
+                if device['states']:
+                    internal_str += dummy_to_declaration(
+                        signal=f"{self.dummy_state}_{device['name']}",
+                        dev=self.dev_iteration,
+                        size=len(device['states'][k]),
+                        data_type=self.dummy_state_data_type
+                    ) + '\n\t'
+                # Commands
+                if device['commands']:
+                    internal_str += dummy_to_declaration(
+                        signal=f"{self.dummy_command_output}_{device['name']}",
+                        dev=self.dev_iteration,
+                        size=len(device['commands'][k]),
+                        data_type=self.dummy_command_output_data_type
+                    ) + '\n\t'
+                    # SBO | DO
+                    if device['operation'] == 'SBO':
+                        # Status
+                        internal_str += dummy_to_declaration(
+                            signal=f"{self.dummy_status}_{device['name']}",
+                            dev=self.dev_iteration,
+                            size=int(len(device['commands'][k]) / 2),
+                            data_type=self.dummy_status_data_type
+                        ) + '\n\t'
+                        # Select
+                        internal_str += dummy_to_declaration(
+                            signal=f"{self.dummy_select}_{device['name']}",
+                            dev=self.dev_iteration,
+                            size=int(len(device['commands'][k]) / 2),
+                            data_type=self.dummy_select_data_type
+                        ) + '\n\t'
+                        # Execute
+                        internal_str += dummy_to_declaration(
+                            signal=f"{self.dummy_execute}_{device['name']}",
+                            dev=self.dev_iteration,
+                            size=int(len(device['commands'][k]) / 2),
+                            data_type=self.dummy_execute_data_type
+                        ) + '\n\t'
+                self.dev_iteration += 1
+        self.dev_iteration = 0
 
         # instances
         internal_str += f"inst0{pack_loc_rem}   : {pack_loc_rem};" + '\n\t'
@@ -424,7 +554,7 @@ class UserPrgModel(FunctionBlockDiagramModel):
 
         # Devices
         for device in device_list:
-            self._device_fbd(device, user_prg_object)
+            self._device_fbd(device, server_iteration, user_prg_object)
 
         # First Cycle clearing
         self._assign(self.first_cycle, "FALSE", user_prg_object)
@@ -435,12 +565,19 @@ class UserPrgModel(FunctionBlockDiagramModel):
         # Closing file
         user_prg_object.close()
 
+        # clearing device iterations
+        self.dev_iteration = 0
+
     def _pack_loc_rem_fbd(self, instance, num_objects, file):
         # Inputs
         ####################################################################
 
         # Input header
-        fbd_str = self.function_block_input_header.format(instance=f"inst0{instance}", size=str(num_objects)) + '\n'
+        fbd_str = self.function_block_input_header.format(
+            title='',
+            instance=f"inst0{instance}",
+            size=str(num_objects)
+        ) + '\n'
 
         # Input unit
         for i in range(num_objects):
@@ -466,7 +603,7 @@ class UserPrgModel(FunctionBlockDiagramModel):
         ####################################################################
 
         # Input header
-        fbd_str = self.function_block_input_header.format(instance=f"inst0{instance}", size="1") + '\n'
+        fbd_str = self.function_block_input_header.format(title='', instance=f"inst0{instance}", size="1") + '\n'
 
         # Input unit
         fbd_str += self.input_unit.format(signal=self.mask_loc_rem) + '\n'
@@ -486,7 +623,7 @@ class UserPrgModel(FunctionBlockDiagramModel):
         # Writing the fbd
         file.write(fbd_str)
 
-    def _device_fbd(self, device, file):
+    def _device_fbd(self, device, server_iteration, file):
         for i in range(device['quantity']):
             # Inputs
             ####################################################################
@@ -508,6 +645,7 @@ class UserPrgModel(FunctionBlockDiagramModel):
 
             # Input header
             fbd_str = self.function_block_input_header.format(
+                title=f"Server_{server_iteration - 1}_{device['name']}_{i}",
                 instance=f"inst{i}{device['name']}",
                 size=total_inputs
             ) + '\n'
@@ -518,15 +656,17 @@ class UserPrgModel(FunctionBlockDiagramModel):
             fbd_str += self.input_unit.format(signal=self.first_cycle) + '\n'
             fbd_str += self.input_unit.format(signal=str(i)) + '\n'
             fbd_str += self.input_unit.format(signal=f"'{device['protocol']}'") + '\n'
-            fbd_str += self.input_unit.format(signal="_EMPTY") + '\n'
+            fbd_str += self.input_unit.format(signal=f"eState[{self.dev_iteration + 1}]") + '\n'
 
             ####################################################################
 
             # Measurements
             if device['measurements']:
                 # signals
-                for measurement in device['measurements'][i]:
-                    fbd_str += self.input_unit.format(signal="_EMPTY") + '\n'
+                for count in range(len(device['measurements'][i])):
+                    fbd_str += self.input_unit.format(
+                        signal=f"{self.dummy_measure}_{device['name']}_{self.dev_iteration}_{count + 1}"
+                    ) + '\n'
 
                 # saves
                 for save in device['measurements'][i]:
@@ -541,8 +681,10 @@ class UserPrgModel(FunctionBlockDiagramModel):
             # States
             if device['states']:
                 # signals
-                for state in device['states'][i]:
-                    fbd_str += self.input_unit.format(signal="_EMPTY") + '\n'
+                for count in range(len(device['states'][i])):
+                    fbd_str += self.input_unit.format(
+                        signal=f"{self.dummy_state}_{device['name']}_{self.dev_iteration}_{count + 1}"
+                    ) + '\n'
 
                 # saves
                 for save in device['states'][i]:
@@ -553,7 +695,7 @@ class UserPrgModel(FunctionBlockDiagramModel):
                     fbd_str += self.input_unit.format(signal=f"'{name}'") + '\n'
 
                 # rises
-                for rise in device['states_names'][i]:
+                for count in range(len(device['states'][i])):
                     fbd_str += self.input_unit.format(signal="_EMPTY") + '\n'
 
             ####################################################################
@@ -579,7 +721,9 @@ class UserPrgModel(FunctionBlockDiagramModel):
                 # status
                 if device['operation'] == 'SBO':
                     for k in range(int(len(device['commands'][i]) / 2)):
-                        fbd_str += self.input_unit.format(signal="_EMPTY") + '\n'
+                        fbd_str += self.input_unit.format(
+                            signal=f"{self.dummy_status}_{device['name']}_{self.dev_iteration}_{k + 1}"
+                        ) + '\n'
 
             # Outputs
             ####################################################################
@@ -625,20 +769,28 @@ class UserPrgModel(FunctionBlockDiagramModel):
             # Commands
             if device['commands']:
                 if device['measurements'] or device['states']:
-                    for command in device['commands'][i]:
-                        fbd_str += self.output_unit.format(signal="_EMPTY") + '\n'
+                    for k in range(len(device['commands'][i])):
+                        fbd_str += self.output_unit.format(
+                            signal=f"{self.dummy_command_output}_{device['name']}_{self.dev_iteration}_{k + 1}"
+                        ) + '\n'
                 else:
                     for k in range(len(device['commands'][i]) - 1):
-                        fbd_str += self.output_unit.format(signal="_EMPTY") + '\n'
+                        fbd_str += self.output_unit.format(
+                            signal=f"{self.dummy_command_output}_{device['name']}_{self.dev_iteration}_{k + 2}"
+                        ) + '\n'
 
                 if device['operation'] == 'SBO':
                     # select
                     for k in range(int(len(device['commands'][i]) / 2)):
-                        fbd_str += self.output_unit.format(signal="_EMPTY") + '\n'
+                        fbd_str += self.output_unit.format(
+                            signal=f"{self.dummy_select}_{device['name']}_{self.dev_iteration}_{k + 1}"
+                        ) + '\n'
 
                     # execute
                     for k in range(int(len(device['commands'][i]) / 2)):
-                        fbd_str += self.output_unit.format(signal="_EMPTY") + '\n'
+                        fbd_str += self.output_unit.format(
+                            signal=f"{self.dummy_execute}_{device['name']}_{self.dev_iteration}_{k + 1}"
+                        ) + '\n'
 
             ####################################################################
 
@@ -651,7 +803,12 @@ class UserPrgModel(FunctionBlockDiagramModel):
             elif device['states']:
                 fbd_str += self.output_unit.format(signal=device['states'][i][0]) + '\n'
             elif device['commands']:
-                fbd_str += self.output_unit.format(signal="_EMPTY") + '\n'
+                fbd_str += self.output_unit.format(
+                    signal=f"{self.dummy_command_output}_{device['name']}_{self.dev_iteration}_1"
+                ) + '\n'
+
+            # Update device
+            self.dev_iteration += 1
 
             # Writing the fbd
             file.write(fbd_str)
@@ -761,7 +918,7 @@ class CheckLocRemModel(UserPrgModel):
         input_str = f"{self.mask_loc_rem} : ARRAY [1..{num_objects}] OF {self.mask_loc_rem_data_type};" + '\n\t'
 
         # Outputs
-        output_str = f"{self.state_loc_rem} : ARRAY [1..{num_objects}] OF {self.state_loc_rem_data_type};" + '\n\t'
+        output_str = f"{self.state_loc_rem} : ARRAY [1..{num_objects - 1}] OF {self.state_loc_rem_data_type};" + '\n\t'
 
         # Internals
         internal_str = f"{self.iterator} : {self.iterator_data_type};" + '\n'
@@ -777,7 +934,7 @@ class CheckLocRemModel(UserPrgModel):
         # Code construction
         code = self.st.format(
             mask_0=self.mask_loc_rem,
-            iterator_0=self.iterator,   size_0=num_objects,
+            iterator_0=self.iterator,   size_0=num_objects - 1,
             state_0=self.state_loc_rem, iterator_1=self.iterator,
             iterator_2=self.iterator,   size_1=num_objects,
             mask_1=self.mask_loc_rem,   iterator_3=self.iterator,
@@ -1035,7 +1192,11 @@ class DeviceModel(UserPrgModel):
                 num_inputs = (4 * num_objects) + 5
 
         # Input header
-        fbd_str = self.function_block_input_header.format(instance=f"inst0{instance}", size=str(num_inputs)) + '\n'
+        fbd_str = self.function_block_input_header.format(
+            title='',
+            instance=f"inst0{instance}",
+            size=str(num_inputs)
+        ) + '\n'
 
         # Inputs
         # header
@@ -1342,7 +1503,11 @@ class RtuModel(DeviceModel):
         ####################################################################
 
         # Input header
-        fbd_str = self.function_block_input_header.format(instance=f"inst0{instance}", size=str(num_objects)) + '\n'
+        fbd_str = self.function_block_input_header.format(
+            title='',
+            instance=f"inst0{instance}",
+            size=str(num_objects)
+        ) + '\n'
 
         # Input unit
         for i in range(num_objects):
@@ -1368,7 +1533,7 @@ class RtuModel(DeviceModel):
         ####################################################################
 
         # Input header
-        fbd_str = self.function_block_input_header.format(instance=f"inst0{instance}", size="1") + '\n'
+        fbd_str = self.function_block_input_header.format(title='', instance=f"inst0{instance}", size="1") + '\n'
 
         # Input unit
         fbd_str += self.input_unit.format(signal=self.rise_changes) + '\n'
@@ -1393,7 +1558,7 @@ class RtuModel(DeviceModel):
         ####################################################################
 
         # Input header
-        fbd_str = self.function_block_input_header.format(instance=f"inst0{instance}", size="2") + '\n'
+        fbd_str = self.function_block_input_header.format(title='', instance=f"inst0{instance}", size="2") + '\n'
 
         # Input unit
         fbd_str += self.input_unit.format(signal=self.signals) + '\n'
@@ -1430,7 +1595,7 @@ class RtuModel(DeviceModel):
             inputs = (3 * num_objects) + 2
 
         # Input header
-        fbd_str = self.function_block_input_header.format(instance=f"inst0{instance}", size=inputs) + '\n'
+        fbd_str = self.function_block_input_header.format(title='', instance=f"inst0{instance}", size=inputs) + '\n'
 
         # Input unit
         fbd_str += self.input_unit.format(signal=self.action) + '\n'
@@ -1501,6 +1666,7 @@ class RtuModel(DeviceModel):
 
         # Input header
         fbd_str = self.function_block_input_header.format(
+            title='',
             instance=f"inst0{instance}",
             size=str(num_objects + int(num_objects / 2) + 1)
         ) + '\n'
