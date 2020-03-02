@@ -1,0 +1,32 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/SGL_Sismored\/Sismored 4.0\/New_telemetry_model' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTIONBLOCK Check5LocalRemote
+VAR_INPUT
+	aMaskLocalRemote : ARRAY [1..5] OF BOOL;
+	
+END_VAR
+VAR_OUTPUT
+	eState : ARRAY [1..4] OF eStates;
+	
+END_VAR
+VAR
+	iN : INT;
+
+END_VAR
+(* @END_DECLARATION := '0' *)
+IF NOT(aMaskLocalRemote[1]) THEN
+	FOR iN := 1 TO 4 BY 1 DO
+		eState[iN] := LOCAL;
+	END_FOR
+ELSE
+	FOR iN := 2 TO 5 BY 1 DO
+		IF aMaskLocalRemote[iN] = FALSE THEN
+			eState[iN - 1] := DEVICE_LOCAL;
+		ELSE
+			eState[iN - 1] := REMOTE;
+		END_IF
+	END_FOR
+END_IF
+END_FUNCTION_BLOCK
